@@ -1,0 +1,23 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>TopDownShooter.Engine.UnitTests</name>
+    </assembly>
+    <members>
+        <member name="T:TopDownShooter.Engine.UnitTests.AnimationTests">
+            <summary>
+            Contains unit tests for the <see cref="T:TopDownShooter.Engine.Animation" /> class.
+            </summary>
+        </member>
+        <member name="M:TopDownShooter.Engine.UnitTests.AnimationTests.DrawsInSpriteBatchWhenDrawIsCalled">
+            <summary>
+            Tests whether the animation is drawn in the sprite batch when draw is called.
+            </summary>
+        </member>
+        <member name="M:TopDownShooter.Engine.UnitTests.AnimationTests.UpdatesFrameIndexWhenUpdateIsCalledAndIsAnimating">
+            <summary>
+            Tests whether the frame index gets updated when the update method is called.
+            </summary>
+        </member>
+    </members>
+</doc>

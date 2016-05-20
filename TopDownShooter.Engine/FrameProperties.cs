@@ -1,4 +1,10 @@
-﻿namespace TopDownShooter.Engine
+﻿// --------------------------------------------------------------------------------------------------------------------
+// <copyright file="FrameProperties.cs" company="PlaceholderCompany">
+// Copyright (c) PlaceholderCompany. All rights reserved.
+// </copyright>
+// --------------------------------------------------------------------------------------------------------------------
+
+namespace TopDownShooter.Engine
 {
     using System;
 
@@ -8,7 +14,7 @@
     public struct FrameProperties
     {
         /// <summary>
-        /// Initializes a new instance of the <see cref="FrameProperties" /> class.
+        /// Initializes a new instance of the <see cref="FrameProperties"/> struct.
         /// </summary>
         /// <param name="width">The width of a frame.</param>
         /// <param name="height">The height of a frame.</param>

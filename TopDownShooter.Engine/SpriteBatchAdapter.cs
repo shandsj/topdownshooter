@@ -1,4 +1,10 @@
-﻿namespace TopDownShooter.Engine
+﻿// --------------------------------------------------------------------------------------------------------------------
+// <copyright file="SpriteBatchAdapter.cs" company="PlaceholderCompany">
+// Copyright (c) PlaceholderCompany. All rights reserved.
+// </copyright>
+// --------------------------------------------------------------------------------------------------------------------
+
+namespace TopDownShooter.Engine
 {
     using Microsoft.Xna.Framework;
     using Microsoft.Xna.Framework.Graphics;
@@ -64,6 +70,13 @@
             this.spriteBatch.Draw(texture, position, color);
         }
 
+        /// <summary>
+        /// Draws a string of text in the current batch.
+        /// </summary>
+        /// <param name="font">The <see cref="SpriteFont"/> to use.</param>
+        /// <param name="text">The text to render.</param>
+        /// <param name="position">The position to render at.</param>
+        /// <param name="color">The color to render the text.</param>
         public void DrawString(SpriteFont font, string text, Vector2 position, Color color)
         {
             this.spriteBatch.DrawString(font, text, position, color);

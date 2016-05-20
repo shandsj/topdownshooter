@@ -1,11 +1,18 @@
-﻿namespace TopDownShooter.Engine
+﻿// <copyright file="Animation.cs" company="PlaceholderCompany">
+// Copyright (c) PlaceholderCompany. All rights reserved.
+// </copyright>
+
+namespace TopDownShooter.Engine
 {
     using System;
     using Microsoft.Xna.Framework;
     using Microsoft.Xna.Framework.Content;
     using Microsoft.Xna.Framework.Graphics;
 
-    public class Animation 
+    /// <summary>
+    /// Defines an animation class.
+    /// </summary>
+    public class Animation
     {
         /// <summary>
         /// The asset name used to load content.
@@ -16,11 +23,6 @@
         /// The current duration of the current frame.
         /// </summary>
         private TimeSpan duration;
-
-        /// <summary>
-        /// Gets the current frame index.
-        /// </summary>
-        public int FrameIndex { get; private set; }
 
         /// <summary>
         /// The texture that contains the frames.
@@ -40,14 +42,14 @@
         }
 
         /// <summary>
+        /// Gets the current frame index.
+        /// </summary>
+        public int FrameIndex { get; private set; }
+
+        /// <summary>
         /// Gets the <see cref="FrameProperties" />  for this <see cref="Animation" />.
         /// </summary>
         public FrameProperties FrameProperties { get; }
-
-        /// <summary>
-        /// Gets or sets the position of this animation.
-        /// </summary>
-        public Vector2 Position { get; set; }
 
         /// <summary>
         /// Gets or sets a value indicating whether the <see cref="Animation" /> is animating.
@@ -58,6 +60,11 @@
         /// Gets or sets a value indicating whether to loop the <see cref="Animation    " />.
         /// </summary>
         public bool IsLooping { get; set; }
+
+        /// <summary>
+        /// Gets or sets the position of this animation.
+        /// </summary>
+        public Vector2 Position { get; set; }
 
         /// <summary>
         /// Gets or sets the rotation for this <see cref="Animation" />.
@@ -145,7 +152,7 @@
         }
 
         /// <summary>
-        /// Updates the state of this <see cref="Animation"/>.
+        /// Updates the state of this <see cref="Animation" />.
         /// </summary>
         /// <param name="gameTime">
         /// The game time.

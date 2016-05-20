@@ -1,14 +1,19 @@
-﻿using System;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+﻿// --------------------------------------------------------------------------------------------------------------------
+// <copyright file="AnimationTests.cs" company="PlaceholderCompany">
+// Copyright (c) PlaceholderCompany. All rights reserved.
+// </copyright>
+// --------------------------------------------------------------------------------------------------------------------
 
 namespace TopDownShooter.Engine.UnitTests
 {
+    using System;
+    using Microsoft.VisualStudio.TestTools.UnitTesting;
     using Microsoft.Xna.Framework;
     using Microsoft.Xna.Framework.Graphics;
     using TopDownShooter.Engine.Fakes;
 
     /// <summary>
-    /// Contains unit tests for the <see cref="Animation"/> class.
+    /// Contains unit tests for the <see cref="Animation" /> class.
     /// </summary>
     [TestClass]
     public class AnimationTests
@@ -20,7 +25,7 @@ namespace TopDownShooter.Engine.UnitTests
         public void DrawsInSpriteBatchWhenDrawIsCalled()
         {
             bool wasDrawCalled = false;
-            var spriteBatch = new StubISpriteBatchAdapter()
+            var spriteBatch = new StubISpriteBatchAdapter
             {
                 DrawTexture2DVector2NullableOfRectangleColorSingleVector2SingleSpriteEffectsSingle =
                     (texture, position, sourceRectange, color, rotation, origin, scale, effects, layerDepth) =>
