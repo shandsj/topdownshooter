@@ -15,6 +15,9 @@ namespace TopDownShooter
         GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;
 
+        private InputHerder m_InputHerder;
+
+        private Player m_SimplePlayer;
         private Animation animation;
 
         public Game1()
@@ -29,11 +32,16 @@ namespace TopDownShooter
         /// related content.  Calling base.Initialize will enumerate through any components
         /// and initialize them as well.
         /// </summary>
-        protected override void Initialize()
-        {
+        protected override void Initialize() {
             // TODO: Add your initialization logic here
+
+            m_InputHerder = new InputHerder(Keyboard.GetState(), Mouse.GetState(), GamePad.GetState(PlayerIndex.One));
+
             this.animation = new Animation("hoodieguy", new FrameProperties(76, 140, TimeSpan.FromSeconds(.1), 2)) { IsLooping = true };
-            this.animation.Initialize();
+
+            m_SimplePlayer = new Player();
+            m_SimplePlayer.Initialize(animation, new Vector2(this.GraphicsDevice.Viewport.Width / 2f, this.GraphicsDevice.Viewport.Height / 2f));
+            m_SimplePlayer.IsMoving = true;
 
             base.Initialize();
         }
@@ -50,7 +58,6 @@ namespace TopDownShooter
             // TODO: use this.Content to load your game content here
             this.animation.LoadContent(this.Content);
         }
-        
 
         /// <summary>
         /// UnloadContent will be called once per game and is the place to unload
@@ -69,13 +76,16 @@ namespace TopDownShooter
         /// <param name="gameTime">Provides a snapshot of timing values.</param>
         protected override void Update(GameTime gameTime)
         {
-            if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape))
+            m_InputHerder.Update(Keyboard.GetState(), Mouse.GetState(), GamePad.GetState(PlayerIndex.One));
+            if (m_InputHerder.ShouldQuit())
                 Exit();
 
+            m_SimplePlayer.Update(gameTime);
+
             // TODO: Add your update logic here
-            this.animation.Position = new Vector2(this.GraphicsDevice.Viewport.Width / 2f, this.GraphicsDevice.Viewport.Height / 2f);
-            this.animation.IsAnimating = true;
-            this.animation.Update(gameTime);
+            // this.animation.Position = new Vector2(this.GraphicsDevice.Viewport.Width / 2f, this.GraphicsDevice.Viewport.Height / 2f);
+            // this.animation.IsAnimating = true;
+            // this.animation.Update(gameTime);
 
             base.Update(gameTime);
         }
@@ -91,6 +101,7 @@ namespace TopDownShooter
             this.spriteBatch.Begin();
 
             // TODO: Add your drawing code here
+            m_SimplePlayer.Draw(spriteBatch, gameTime);
             this.animation.Draw(this.spriteBatch, gameTime);
 
             this.spriteBatch.End();
