@@ -1,0 +1,44 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>TopDownShooter.Engine.Fakes</name>
+    </assembly>
+    <members>
+        <member name="T:TopDownShooter.Engine.Fakes.StubISpriteBatchAdapter">
+            <summary>Stub type of TopDownShooter.Engine.ISpriteBatchAdapter</summary>
+        </member>
+        <member name="M:TopDownShooter.Engine.Fakes.StubISpriteBatchAdapter.#ctor">
+            <summary>Initializes a new instance of type StubISpriteBatchAdapter</summary>
+        </member>
+        <member name="F:TopDownShooter.Engine.Fakes.StubISpriteBatchAdapter.BeginSpriteSortModeBlendStateSamplerStateDepthStencilStateRasterizerStateEffectNullableOfMatrix">
+            <summary>Sets the stub of ISpriteBatchAdapter.Begin(SpriteSortMode sortMode, BlendState blendState, SamplerState samplerState, DepthStencilState depthStencilState, RasterizerState rasterizerState, Effect effect, Nullable`1&lt;Matrix&gt; transformMatrix)</summary>
+        </member>
+        <member name="F:TopDownShooter.Engine.Fakes.StubISpriteBatchAdapter.DrawStringSpriteFontStringVector2Color">
+            <summary>Sets the stub of ISpriteBatchAdapter.DrawString(SpriteFont font, String text, Vector2 position, Color color)</summary>
+        </member>
+        <member name="F:TopDownShooter.Engine.Fakes.StubISpriteBatchAdapter.DrawTexture2DVector2Color">
+            <summary>Sets the stub of ISpriteBatchAdapter.Draw(Texture2D texture, Vector2 position, Color color)</summary>
+        </member>
+        <member name="F:TopDownShooter.Engine.Fakes.StubISpriteBatchAdapter.DrawTexture2DVector2NullableOfRectangleColorSingleVector2SingleSpriteEffectsSingle">
+            <summary>Sets the stub of ISpriteBatchAdapter.Draw(Texture2D texture, Vector2 position, Nullable`1&lt;Rectangle&gt; sourceRectangle, Color color, Single rotation, Vector2 origin, Single scale, SpriteEffects effects, Single layerDepth)</summary>
+        </member>
+        <member name="F:TopDownShooter.Engine.Fakes.StubISpriteBatchAdapter.End">
+            <summary>Sets the stub of ISpriteBatchAdapter.End()</summary>
+        </member>
+        <member name="M:TopDownShooter.Engine.Fakes.StubISpriteBatchAdapter.TopDownShooter#Engine#ISpriteBatchAdapter#Begin(Microsoft.Xna.Framework.Graphics.SpriteSortMode,Microsoft.Xna.Framework.Graphics.BlendState,Microsoft.Xna.Framework.Graphics.SamplerState,Microsoft.Xna.Framework.Graphics.DepthStencilState,Microsoft.Xna.Framework.Graphics.RasterizerState,Microsoft.Xna.Framework.Graphics.Effect,System.Nullable{Microsoft.Xna.Framework.Matrix})">
+            <summary>Sets the stub of ISpriteBatchAdapter.Begin(SpriteSortMode sortMode, BlendState blendState, SamplerState samplerState, DepthStencilState depthStencilState, RasterizerState rasterizerState, Effect effect, Nullable`1&lt;Matrix&gt; transformMatrix)</summary>
+        </member>
+        <member name="M:TopDownShooter.Engine.Fakes.StubISpriteBatchAdapter.TopDownShooter#Engine#ISpriteBatchAdapter#Draw(Microsoft.Xna.Framework.Graphics.Texture2D,Microsoft.Xna.Framework.Vector2,Microsoft.Xna.Framework.Color)">
+            <summary>Sets the stub of ISpriteBatchAdapter.Draw(Texture2D texture, Vector2 position, Color color)</summary>
+        </member>
+        <member name="M:TopDownShooter.Engine.Fakes.StubISpriteBatchAdapter.TopDownShooter#Engine#ISpriteBatchAdapter#Draw(Microsoft.Xna.Framework.Graphics.Texture2D,Microsoft.Xna.Framework.Vector2,System.Nullable{Microsoft.Xna.Framework.Rectangle},Microsoft.Xna.Framework.Color,System.Single,Microsoft.Xna.Framework.Vector2,System.Single,Microsoft.Xna.Framework.Graphics.SpriteEffects,System.Single)">
+            <summary>Sets the stub of ISpriteBatchAdapter.Draw(Texture2D texture, Vector2 position, Nullable`1&lt;Rectangle&gt; sourceRectangle, Color color, Single rotation, Vector2 origin, Single scale, SpriteEffects effects, Single layerDepth)</summary>
+        </member>
+        <member name="M:TopDownShooter.Engine.Fakes.StubISpriteBatchAdapter.TopDownShooter#Engine#ISpriteBatchAdapter#DrawString(Microsoft.Xna.Framework.Graphics.SpriteFont,System.String,Microsoft.Xna.Framework.Vector2,Microsoft.Xna.Framework.Color)">
+            <summary>Sets the stub of ISpriteBatchAdapter.DrawString(SpriteFont font, String text, Vector2 position, Color color)</summary>
+        </member>
+        <member name="M:TopDownShooter.Engine.Fakes.StubISpriteBatchAdapter.TopDownShooter#Engine#ISpriteBatchAdapter#End">
+            <summary>Sets the stub of ISpriteBatchAdapter.End()</summary>
+        </member>
+    </members>
+</doc>

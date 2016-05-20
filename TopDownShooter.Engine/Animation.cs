@@ -18,9 +18,9 @@
         private TimeSpan duration;
 
         /// <summary>
-        /// The current frame index.
+        /// Gets the current frame index.
         /// </summary>
-        private int frameIndex;
+        public int FrameIndex { get; private set; }
 
         /// <summary>
         /// The texture that contains the frames.
@@ -78,15 +78,15 @@
         /// Draws this <see cref="Animation" />.
         /// </summary>
         /// <param name="spriteBatch">
-        /// The <see cref="SpriteBatch" />.
+        /// The <see cref="ISpriteBatchAdapter" />.
         /// </param>
         /// <param name="gameTime">
         /// The game time.
         /// </param>
-        public void Draw(SpriteBatch spriteBatch, GameTime gameTime)
+        public void Draw(ISpriteBatchAdapter spriteBatch, GameTime gameTime)
         {
             // Calculate the source rectangle of the current frame.
-            var source = new Rectangle(this.frameIndex * this.FrameProperties.Width, 0, this.FrameProperties.Width, this.FrameProperties.Height);
+            var source = new Rectangle(this.FrameIndex * this.FrameProperties.Width, 0, this.FrameProperties.Width, this.FrameProperties.Height);
 
             //// Calculate position and origin to draw in the center of the screen
             // Vector2 position = new Vector2(game.Window.ClientBounds.Width / 2,
@@ -132,7 +132,7 @@
         /// </summary>
         public void Reset()
         {
-            this.frameIndex = 0;
+            this.FrameIndex = 0;
             this.duration = TimeSpan.FromSeconds(0);
         }
 
@@ -158,13 +158,13 @@
             }
 
             this.duration += gameTime.ElapsedGameTime;
-            while (this.duration > this.FrameProperties.Duration)
+            while (this.duration >= this.FrameProperties.Duration)
             {
                 // Play the next frame in the SpriteSheet
-                this.frameIndex++;
-                if (this.IsLooping && this.frameIndex > this.FrameProperties.Count)
+                this.FrameIndex++;
+                if (this.IsLooping && this.FrameIndex > this.FrameProperties.Count)
                 {
-                    this.frameIndex = 0;
+                    this.FrameIndex = 0;
                 }
 
                 // reset elapsed time
