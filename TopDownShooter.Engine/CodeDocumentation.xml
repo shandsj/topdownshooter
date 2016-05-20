@@ -117,6 +117,44 @@
             The game time.
             </param>
         </member>
+        <member name="T:TopDownShooter.Engine.Camera">
+            <summary>
+            The camera.
+            </summary>
+        </member>
+        <member name="M:TopDownShooter.Engine.Camera.#ctor(Microsoft.Xna.Framework.Graphics.Viewport)">
+            <summary>
+            Initializes a new instance of the <see cref="T:TopDownShooter.Engine.Camera" /> class.
+            </summary>
+            <param name="viewport">
+            The viewport.
+            </param>
+        </member>
+        <member name="P:TopDownShooter.Engine.Camera.Bounds">
+            <summary>
+            Gets or sets the bounds.
+            </summary>
+        </member>
+        <member name="P:TopDownShooter.Engine.Camera.Position">
+            <summary>
+            Gets or sets the position.
+            </summary>
+        </member>
+        <member name="P:TopDownShooter.Engine.Camera.Rotation">
+            <summary>
+            Gets or sets the rotation.
+            </summary>
+        </member>
+        <member name="P:TopDownShooter.Engine.Camera.TransformMatrix">
+            <summary>
+            Gets the transform matrix.
+            </summary>
+        </member>
+        <member name="P:TopDownShooter.Engine.Camera.Zoom">
+            <summary>
+            Gets or sets the zoom.
+            </summary>
+        </member>
         <member name="T:TopDownShooter.Engine.FrameProperties">
             <summary>
             Defines a structure for the frame properties of an <see cref="T:TopDownShooter.Engine.Animation" />.
@@ -149,6 +187,36 @@
         <member name="P:TopDownShooter.Engine.FrameProperties.Width">
             <summary>
             Gets the width of a frame.
+            </summary>
+        </member>
+        <member name="T:TopDownShooter.Engine.ICamera">
+            <summary>
+            Defines an interface for a camera.
+            </summary>
+        </member>
+        <member name="P:TopDownShooter.Engine.ICamera.Bounds">
+            <summary>
+            Gets or sets the bounds.
+            </summary>
+        </member>
+        <member name="P:TopDownShooter.Engine.ICamera.Position">
+            <summary>
+            Gets or sets the position.
+            </summary>
+        </member>
+        <member name="P:TopDownShooter.Engine.ICamera.Rotation">
+            <summary>
+            Gets or sets the rotation.
+            </summary>
+        </member>
+        <member name="P:TopDownShooter.Engine.ICamera.TransformMatrix">
+            <summary>
+            Gets the transform matrix.
+            </summary>
+        </member>
+        <member name="P:TopDownShooter.Engine.ICamera.Zoom">
+            <summary>
+            Gets or sets the zoom.
             </summary>
         </member>
         <member name="T:TopDownShooter.Engine.ISpriteBatchAdapter">

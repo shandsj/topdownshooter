@@ -19,5 +19,15 @@
             Tests whether the frame index gets updated when the update method is called.
             </summary>
         </member>
+        <member name="T:TopDownShooter.Engine.UnitTests.CameraTests">
+            <summary>
+            Contains unit tests for the <see cref="T:TopDownShooter.Engine.Camera"/> class.
+            </summary>
+        </member>
+        <member name="M:TopDownShooter.Engine.UnitTests.CameraTests.CalculatesTransformMatrix">
+            <summary>
+            Tests that the transform matrix is calculated.
+            </summary>
+        </member>
     </members>
 </doc>

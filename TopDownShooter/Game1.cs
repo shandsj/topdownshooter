@@ -15,14 +15,25 @@ namespace TopDownShooter
     /// </summary>
     public class Game1 : Game
     {
+        /// <summary>
+        /// A simple test animation
+        /// </summary>
         private Animation animation;
 
+        private ICamera camera;
+
+        /// <summary>
+        /// The <see cref="GraphicsDeviceManager"/>.
+        /// </summary>
         private GraphicsDeviceManager graphics;
 
         private InputHerder m_InputHerder;
 
         private Player m_SimplePlayer;
 
+        /// <summary>
+        /// The default <see cref="ISpriteBatchAdapter"/>.
+        /// </summary>
         private ISpriteBatchAdapter spriteBatch;
 
         /// <summary>
@@ -42,7 +53,7 @@ namespace TopDownShooter
         {
             this.GraphicsDevice.Clear(Color.CornflowerBlue);
 
-            this.spriteBatch.Begin();
+            this.spriteBatch.Begin(transformMatrix: this.camera.TransformMatrix);
 
             // TODO: Add your drawing code here
             this.m_SimplePlayer.Draw(this.spriteBatch, gameTime);
@@ -61,13 +72,14 @@ namespace TopDownShooter
         /// </summary>
         protected override void Initialize()
         {
-            // TODO: Add your initialization logic here
+            this.camera = new Camera(this.GraphicsDevice.Viewport);
+
             this.m_InputHerder = new InputHerder(Keyboard.GetState(), Mouse.GetState(), GamePad.GetState(PlayerIndex.One));
 
             this.animation = new Animation("hoodieguy", new FrameProperties(76, 140, TimeSpan.FromSeconds(.1), 2)) { IsLooping = true };
 
             this.m_SimplePlayer = new Player();
-            this.m_SimplePlayer.Initialize(this.animation, new Vector2(this.GraphicsDevice.Viewport.Width / 2f, this.GraphicsDevice.Viewport.Height / 2f));
+            this.m_SimplePlayer.Initialize(this.animation, new Vector2(60, 50)); // World Coordinates
             this.m_SimplePlayer.IsMoving = true;
 
             base.Initialize();

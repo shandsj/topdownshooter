@@ -9,6 +9,21 @@
             This is the main type for your game.
             </summary>
         </member>
+        <member name="F:TopDownShooter.Game1.animation">
+            <summary>
+            A simple test animation
+            </summary>
+        </member>
+        <member name="F:TopDownShooter.Game1.graphics">
+            <summary>
+            The <see cref="T:Microsoft.Xna.Framework.GraphicsDeviceManager"/>.
+            </summary>
+        </member>
+        <member name="F:TopDownShooter.Game1.spriteBatch">
+            <summary>
+            The default <see cref="T:TopDownShooter.Engine.ISpriteBatchAdapter"/>.
+            </summary>
+        </member>
         <member name="M:TopDownShooter.Game1.#ctor">
             <summary>
             Initializes a new instance of the <see cref="T:TopDownShooter.Game1"/> class.
