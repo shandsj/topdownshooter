@@ -4,6 +4,9 @@ using Microsoft.Xna.Framework.Input;
 
 namespace TopDownShooter
 {
+    using System;
+    using TopDownShooter.Engine;
+
     /// <summary>
     /// This is the main type for your game.
     /// </summary>
@@ -11,6 +14,8 @@ namespace TopDownShooter
     {
         GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;
+
+        private Animation animation;
 
         public Game1()
         {
@@ -27,6 +32,8 @@ namespace TopDownShooter
         protected override void Initialize()
         {
             // TODO: Add your initialization logic here
+            this.animation = new Animation("hoodieguy", new FrameProperties(76, 140, TimeSpan.FromSeconds(.1), 2)) { IsLooping = true };
+            this.animation.Initialize();
 
             base.Initialize();
         }
@@ -41,7 +48,9 @@ namespace TopDownShooter
             spriteBatch = new SpriteBatch(GraphicsDevice);
 
             // TODO: use this.Content to load your game content here
+            this.animation.LoadContent(this.Content);
         }
+        
 
         /// <summary>
         /// UnloadContent will be called once per game and is the place to unload
@@ -50,6 +59,7 @@ namespace TopDownShooter
         protected override void UnloadContent()
         {
             // TODO: Unload any non ContentManager content here
+            this.animation.UnloadContent(this.Content);
         }
 
         /// <summary>
@@ -63,6 +73,9 @@ namespace TopDownShooter
                 Exit();
 
             // TODO: Add your update logic here
+            this.animation.Position = new Vector2(this.GraphicsDevice.Viewport.Width / 2f, this.GraphicsDevice.Viewport.Height / 2f);
+            this.animation.IsAnimating = true;
+            this.animation.Update(gameTime);
 
             base.Update(gameTime);
         }
@@ -75,7 +88,12 @@ namespace TopDownShooter
         {
             GraphicsDevice.Clear(Color.CornflowerBlue);
 
+            this.spriteBatch.Begin();
+
             // TODO: Add your drawing code here
+            this.animation.Draw(this.spriteBatch, gameTime);
+
+            this.spriteBatch.End();
 
             base.Draw(gameTime);
         }
