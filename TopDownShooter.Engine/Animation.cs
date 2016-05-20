@@ -78,12 +78,12 @@
         /// Draws this <see cref="Animation" />.
         /// </summary>
         /// <param name="spriteBatch">
-        /// The <see cref="SpriteBatch" />.
+        /// The <see cref="ISpriteBatchAdapter" />.
         /// </param>
         /// <param name="gameTime">
         /// The game time.
         /// </param>
-        public void Draw(SpriteBatch spriteBatch, GameTime gameTime)
+        public void Draw(ISpriteBatchAdapter spriteBatch, GameTime gameTime)
         {
             // Calculate the source rectangle of the current frame.
             var source = new Rectangle(this.FrameIndex * this.FrameProperties.Width, 0, this.FrameProperties.Width, this.FrameProperties.Height);

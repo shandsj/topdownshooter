@@ -4,6 +4,8 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 namespace TopDownShooter.Engine.UnitTests
 {
     using Microsoft.Xna.Framework;
+    using Microsoft.Xna.Framework.Graphics;
+    using TopDownShooter.Engine.Fakes;
 
     /// <summary>
     /// Contains unit tests for the <see cref="Animation"/> class.
@@ -11,6 +13,41 @@ namespace TopDownShooter.Engine.UnitTests
     [TestClass]
     public class AnimationTests
     {
+        /// <summary>
+        /// Tests whether the animation is drawn in the sprite batch when draw is called.
+        /// </summary>
+        [TestMethod]
+        public void DrawsInSpriteBatchWhenDrawIsCalled()
+        {
+            bool wasDrawCalled = false;
+            var spriteBatch = new StubISpriteBatchAdapter()
+            {
+                DrawTexture2DVector2NullableOfRectangleColorSingleVector2SingleSpriteEffectsSingle =
+                    (texture, position, sourceRectange, color, rotation, origin, scale, effects, layerDepth) =>
+                        {
+                            wasDrawCalled = true;
+                            Assert.AreEqual(new Vector2(42, 42), position);
+                            Assert.AreEqual(new Rectangle(0, 0, 10, 10), sourceRectange);
+                            Assert.AreEqual(Color.White, color);
+                            Assert.AreEqual(42, rotation);
+                            Assert.AreEqual(new Vector2(5, 5), origin);
+                            Assert.AreEqual(1, scale);
+                            Assert.AreEqual(SpriteEffects.FlipVertically, effects);
+                            Assert.AreEqual(0, layerDepth);
+                        }
+            };
+
+            var uut = new Animation("test", new FrameProperties(10, 10, TimeSpan.FromSeconds(1), 5))
+            {
+                Position = new Vector2(42, 42),
+                Rotation = 42,
+                SpriteEffect = SpriteEffects.FlipVertically
+            };
+
+            uut.Draw(spriteBatch, new GameTime());
+            Assert.IsTrue(wasDrawCalled);
+        }
+
         /// <summary>
         /// Tests whether the frame index gets updated when the update method is called.
         /// </summary>

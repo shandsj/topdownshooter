@@ -65,7 +65,9 @@
   <ItemGroup>
     <Compile Include="Animation.cs" />
     <Compile Include="FrameProperties.cs" />
+    <Compile Include="ISpriteBatchAdapter.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="SpriteBatchAdapter.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

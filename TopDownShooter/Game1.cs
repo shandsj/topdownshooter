@@ -13,8 +13,15 @@ namespace TopDownShooter
     public class Game1 : Game
     {
         GraphicsDeviceManager graphics;
-        SpriteBatch spriteBatch;
 
+        /// <summary>
+        /// The <see cref="ISpriteBatchAdapter"/>.
+        /// </summary>
+        private ISpriteBatchAdapter spriteBatch;
+
+        /// <summary>
+        /// A sample <see cref="Animation"/>.
+        /// </summary>
         private Animation animation;
 
         public Game1()
@@ -45,7 +52,7 @@ namespace TopDownShooter
         protected override void LoadContent()
         {
             // Create a new SpriteBatch, which can be used to draw textures.
-            spriteBatch = new SpriteBatch(GraphicsDevice);
+            this.spriteBatch = new SpriteBatchAdapter(new SpriteBatch(this.GraphicsDevice));
 
             // TODO: use this.Content to load your game content here
             this.animation.LoadContent(this.Content);
