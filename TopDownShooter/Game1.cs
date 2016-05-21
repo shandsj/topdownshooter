@@ -1,6 +1,8 @@
-﻿// <copyright file="Game1.cs" company="PlaceholderCompany">
+﻿// --------------------------------------------------------------------------------------------------------------------
+// <copyright file="Game1.cs" company="PlaceholderCompany">
 // Copyright (c) PlaceholderCompany. All rights reserved.
 // </copyright>
+// --------------------------------------------------------------------------------------------------------------------
 
 namespace TopDownShooter
 {
@@ -8,6 +10,7 @@ namespace TopDownShooter
     using Microsoft.Xna.Framework;
     using Microsoft.Xna.Framework.Graphics;
     using Microsoft.Xna.Framework.Input;
+    using TiledSharp;
     using TopDownShooter.Engine;
 
     /// <summary>
@@ -20,24 +23,37 @@ namespace TopDownShooter
         /// </summary>
         private Animation animation;
 
+        /// <summary>
+        /// The <see cref="ICamera"/>.
+        /// </summary>
         private ICamera camera;
 
         /// <summary>
-        /// The <see cref="GraphicsDeviceManager"/>.
+        /// The <see cref="IContentManagerAdapter" />.
+        /// </summary>
+        private IContentManagerAdapter contentManager;
+
+        /// <summary>
+        /// The <see cref="GraphicsDeviceManager" />.
         /// </summary>
         private GraphicsDeviceManager graphics;
+
+        /// <summary>
+        /// The <see cref="Level" />.
+        /// </summary>
+        private Level level;
 
         private InputHerder m_InputHerder;
 
         private Player m_SimplePlayer;
 
         /// <summary>
-        /// The default <see cref="ISpriteBatchAdapter"/>.
+        /// The default <see cref="ISpriteBatchAdapter" />.
         /// </summary>
         private ISpriteBatchAdapter spriteBatch;
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="Game1"/> class.
+        /// Initializes a new instance of the <see cref="Game1" /> class.
         /// </summary>
         public Game1()
         {
@@ -54,6 +70,8 @@ namespace TopDownShooter
             this.GraphicsDevice.Clear(Color.CornflowerBlue);
 
             this.spriteBatch.Begin(transformMatrix: this.camera.TransformMatrix);
+
+            this.level.Draw(this.spriteBatch, gameTime);
 
             // TODO: Add your drawing code here
             this.m_SimplePlayer.Draw(this.spriteBatch, gameTime);
@@ -73,13 +91,14 @@ namespace TopDownShooter
         protected override void Initialize()
         {
             this.camera = new Camera(this.GraphicsDevice.Viewport);
+            this.level = new Level(new TmxMap("Content/TmxFiles/DefaultLevel.tmx"));
 
             this.m_InputHerder = new InputHerder(Keyboard.GetState(), Mouse.GetState(), GamePad.GetState(PlayerIndex.One));
 
             this.animation = new Animation("hoodieguy", new FrameProperties(76, 140, TimeSpan.FromSeconds(.1), 2)) { IsLooping = true };
 
             this.m_SimplePlayer = new Player();
-            this.m_SimplePlayer.Initialize(this.animation, new Vector2(60, 50)); // World Coordinates
+            this.m_SimplePlayer.Initialize(this.animation, new Vector2(1600, 1600)); // World Coordinates
             this.m_SimplePlayer.IsMoving = true;
 
             base.Initialize();
@@ -93,6 +112,9 @@ namespace TopDownShooter
         {
             // Create a new SpriteBatch, which can be used to draw textures.
             this.spriteBatch = new SpriteBatchAdapter(new SpriteBatch(this.GraphicsDevice));
+            this.contentManager = new ContentManagerAdapter(this.Content);
+
+            this.level.LoadContent(this.contentManager);
 
             // TODO: use this.Content to load your game content here
             this.animation.LoadContent(this.Content);
@@ -122,6 +144,7 @@ namespace TopDownShooter
             }
 
             this.m_SimplePlayer.Update(gameTime);
+            this.camera.Position = this.m_SimplePlayer.Position;
 
             // TODO: Add your update logic here
             // this.animation.Position = new Vector2(this.GraphicsDevice.Viewport.Width / 2f, this.GraphicsDevice.Viewport.Height / 2f);
