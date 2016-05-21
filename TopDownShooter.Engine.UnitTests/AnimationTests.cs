@@ -10,7 +10,7 @@ namespace TopDownShooter.Engine.UnitTests
     using Microsoft.VisualStudio.TestTools.UnitTesting;
     using Microsoft.Xna.Framework;
     using Microsoft.Xna.Framework.Graphics;
-    using TopDownShooter.Engine.Fakes;
+    using Moq;
 
     /// <summary>
     /// Contains unit tests for the <see cref="Animation" /> class.
@@ -25,22 +25,29 @@ namespace TopDownShooter.Engine.UnitTests
         public void DrawsInSpriteBatchWhenDrawIsCalled()
         {
             bool wasDrawCalled = false;
-            var spriteBatch = new StubISpriteBatchAdapter
-            {
-                DrawTexture2DVector2NullableOfRectangleColorSingleVector2SingleSpriteEffectsSingle =
-                    (texture, position, sourceRectange, color, rotation, origin, scale, effects, layerDepth) =>
-                        {
-                            wasDrawCalled = true;
-                            Assert.AreEqual(new Vector2(42, 42), position);
-                            Assert.AreEqual(new Rectangle(0, 0, 10, 10), sourceRectange);
-                            Assert.AreEqual(Color.White, color);
-                            Assert.AreEqual(42, rotation);
-                            Assert.AreEqual(new Vector2(5, 5), origin);
-                            Assert.AreEqual(1, scale);
-                            Assert.AreEqual(SpriteEffects.FlipVertically, effects);
-                            Assert.AreEqual(0, layerDepth);
-                        }
-            };
+            var spriteBatch = new Mock<ISpriteBatchAdapter>();
+
+            // Setup our draw method to take any parameters
+            // after the method has been executed, call the
+            // Callback method associated with it.
+
+            // Note that the Callback method is superfluous for
+            // this particular case as we are just using it to
+            // verify a method was called. The Verify() call below
+            // ensures that the method was called. It is just an example
+            // on how to execute code after a Mock method has been
+            // called.
+            spriteBatch.Setup(method => method.Draw(
+                It.IsAny<Texture2D>(),
+                It.IsAny<Vector2>(),
+                It.IsAny<Rectangle?>(),
+                It.IsAny<Color>(),
+                It.IsAny<float>(),
+                It.IsAny<Vector2>(),
+                It.IsAny<float>(),
+                It.IsAny<SpriteEffects>(),
+                It.IsAny<float>()))
+            .Callback(() => wasDrawCalled = true);
 
             var uut = new Animation("test", new FrameProperties(10, 10, TimeSpan.FromSeconds(1), 5))
             {
@@ -49,7 +56,23 @@ namespace TopDownShooter.Engine.UnitTests
                 SpriteEffect = SpriteEffects.FlipVertically
             };
 
-            uut.Draw(spriteBatch, new GameTime());
+            // Do the thing!
+            uut.Draw(spriteBatch.Object, new GameTime());
+
+            // Verify all our parameters as we expected them to be passed
+            // through to the draw method.
+            spriteBatch.Verify(method => method.Draw(
+                It.IsAny<Texture2D>(),
+                It.Is<Vector2>(pos => pos.Equals(new Vector2(42, 42))),
+                It.Is<Rectangle?>(rect => rect.Value.Equals(new Rectangle(0, 0, 10, 10))),
+                It.Is<Color>(color => color.Equals(Color.White)),
+                It.Is<float>(rotation => rotation == 42),
+                It.Is<Vector2>(origin => origin.Equals(new Vector2(5, 5))),
+                It.Is<float>(scale => scale == 1),
+                It.Is<SpriteEffects>(sp => sp == SpriteEffects.FlipVertically),
+                It.Is<float>(layerDepth => layerDepth == 0)));
+
+            // Verify our method was called.
             Assert.IsTrue(wasDrawCalled);
         }
 
