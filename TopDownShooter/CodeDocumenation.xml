@@ -77,68 +77,64 @@
             </summary>
             <param name="gameTime">Provides a snapshot of timing values.</param>
         </member>
-        <member name="T:TopDownShooter.InputHerder">
+        <member name="T:TopDownShooter.HumanInputController">
             <summary>
             Herds Inputs...
             </summary>
         </member>
-        <member name="M:TopDownShooter.InputHerder.#ctor(Microsoft.Xna.Framework.Input.KeyboardState,Microsoft.Xna.Framework.Input.MouseState,Microsoft.Xna.Framework.Input.GamePadState)">
+        <member name="M:TopDownShooter.HumanInputController.#ctor">
             <summary>
-            Initializes a new instance of the <see cref="T:TopDownShooter.InputHerder"/> class.
-            Creates a new <see cref="T:TopDownShooter.InputHerder" /> that can be used to have a simple Composite for managing
+            Initializes a new instance of the <see cref="T:TopDownShooter.HumanInputController"/> class.
+            Creates a new <see cref="T:TopDownShooter.HumanInputController" /> that can be used to have a simple Composite for managing
             inputs among multiple devices.
             </summary>
-            <param name="initialKeyboardState"></param>
-            <param name="initialMouseState"></param>
-            <param name="initialGamePadState"></param>
         </member>
-        <member name="M:TopDownShooter.InputHerder.MoveDown">
+        <member name="M:TopDownShooter.HumanInputController.MoveDown">
             <summary>
             Gets whether or not a up move was requested.
             </summary>
-            <returns></returns>
+            <returns>True to move down.</returns>
         </member>
-        <member name="M:TopDownShooter.InputHerder.MoveLeft">
+        <member name="M:TopDownShooter.HumanInputController.MoveLeft">
             <summary>
             Gets whether or not a left move was requested.
             </summary>
-            <returns></returns>
+            <returns>True to move left.</returns>
         </member>
-        <member name="M:TopDownShooter.InputHerder.MoveRight">
+        <member name="M:TopDownShooter.HumanInputController.MoveRight">
             <summary>
             Gets whether or not a right move was requested.
             </summary>
-            <returns></returns>
+            <returns>True to move right.</returns>
         </member>
-        <member name="M:TopDownShooter.InputHerder.MoveUp">
+        <member name="M:TopDownShooter.HumanInputController.MoveUp">
             <summary>
             Gets whether or not a up move was requested.
             </summary>
-            <returns></returns>
+            <returns>True to move up.</returns>
         </member>
-        <member name="M:TopDownShooter.InputHerder.ShouldQuit">
+        <member name="M:TopDownShooter.HumanInputController.Update(Microsoft.Xna.Framework.GameTime)">
             <summary>
-            Gets whether a quit input command has been issued.
+            Updates based on the current gametime.
             </summary>
-            <returns></returns>
-        </member>
-        <member name="M:TopDownShooter.InputHerder.Update(Microsoft.Xna.Framework.Input.KeyboardState,Microsoft.Xna.Framework.Input.MouseState,Microsoft.Xna.Framework.Input.GamePadState)">
-            <summary>
-            Updates the current state for all the inputs.
-            </summary>
-            <param name="newKeyboardState"></param>
-            <param name="newMouseState"></param>
-            <param name="newGamePadState"></param>
+            <param name="gameTime">The current gametime.</param>
         </member>
         <member name="T:TopDownShooter.Player">
             <summary>
             Simple player class.
             </summary>
         </member>
-        <member name="F:TopDownShooter.Player.m_PlayerSpeed">
+        <member name="F:TopDownShooter.Player.playerSpeed">
             <summary>
             Fixed speed for now.
             </summary>
+        </member>
+        <member name="M:TopDownShooter.Player.#ctor(TopDownShooter.Engine.IInputController)">
+            <summary>
+            Initializes a new instance of the <see cref="T:TopDownShooter.Player"/> class.
+            </summary>
+            <param name="inputController">The <see cref="T:TopDownShooter.Engine.IInputController"/> that
+            controls this player</param>
         </member>
         <member name="P:TopDownShooter.Player.Height">
             <summary>
@@ -147,13 +143,13 @@
         </member>
         <member name="P:TopDownShooter.Player.IsMoving">
             <summary>
-            Simple indicator used to toggle when to start/stop
+            Gets or sets a value indicating whether simple indicator used to toggle when to start/stop
             the animation.
             </summary>
         </member>
         <member name="P:TopDownShooter.Player.PlayerAnimation">
             <summary>
-            Gets the <see cref="T:TopDownShooter.Engine.Animation" /> associated with this <see cref="T:TopDownShooter.Player" />
+            Gets or sets gets the <see cref="T:TopDownShooter.Engine.Animation" /> associated with this <see cref="T:TopDownShooter.Player" />
             </summary>
         </member>
         <member name="P:TopDownShooter.Player.PlayerSpeed">
@@ -164,7 +160,7 @@
         </member>
         <member name="P:TopDownShooter.Player.Position">
             <summary>
-            Gets or sets the current <see cref="T:Microsoft.Xna.Framework.Vector2" /> position.
+            Gets gets or sets the current <see cref="T:Microsoft.Xna.Framework.Vector2" /> position.
             </summary>
         </member>
         <member name="P:TopDownShooter.Player.Width">
@@ -190,6 +186,8 @@
             related content.  Calling base.Initialize will enumerate through any components
             and initialize them as well.
             </summary>
+            <param name="playerAnimation">Animation that contains the different animations for this <see cref="T:TopDownShooter.Player"/></param>
+            <param name="initialPosition">Initial starting position for this <see cref="T:TopDownShooter.Player"/></param>
         </member>
         <member name="M:TopDownShooter.Player.Update(Microsoft.Xna.Framework.GameTime)">
             <summary>

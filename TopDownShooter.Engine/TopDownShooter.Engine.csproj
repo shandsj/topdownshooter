@@ -75,10 +75,12 @@
     <Compile Include="FrameProperties.cs" />
     <Compile Include="ICamera.cs" />
     <Compile Include="IContentManagerAdapter.cs" />
+    <Compile Include="IInputController.cs" />
     <Compile Include="ISpriteBatchAdapter.cs" />
     <Compile Include="ITile.cs" />
     <Compile Include="Level.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="SimpleAiInputController.cs" />
     <Compile Include="SpriteBatchAdapter.cs" />
     <Compile Include="Tile.cs" />
     <Compile Include="TileInteractionType.cs" />

@@ -17,7 +17,20 @@ namespace TopDownShooter
         /// <summary>
         /// Fixed speed for now.
         /// </summary>
-        private readonly float m_PlayerSpeed = 8f;
+        private readonly float playerSpeed = 8f;
+        private readonly IInputController inputController;
+
+        private Vector2 currentPosition;
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="Player"/> class.
+        /// </summary>
+        /// <param name="inputController">The <see cref="IInputController"/> that
+        /// controls this player</param>
+        public Player(IInputController inputController)
+        {
+            this.inputController = inputController;
+        }
 
         /// <summary>
         /// Gets the current height.
@@ -31,7 +44,7 @@ namespace TopDownShooter
         }
 
         /// <summary>
-        /// Simple indicator used to toggle when to start/stop
+        /// Gets or sets a value indicating whether simple indicator used to toggle when to start/stop
         /// the animation.
         /// </summary>
         public bool IsMoving
@@ -51,7 +64,7 @@ namespace TopDownShooter
         }
 
         /// <summary>
-        /// Gets the <see cref="Animation" /> associated with this <see cref="Player" />
+        /// Gets or sets gets the <see cref="Animation" /> associated with this <see cref="Player" />
         /// </summary>
         public Animation PlayerAnimation { get; set; }
 
@@ -63,14 +76,17 @@ namespace TopDownShooter
         {
             get
             {
-                return this.m_PlayerSpeed;
+                return this.playerSpeed;
             }
         }
 
         /// <summary>
-        /// Gets or sets the current <see cref="Vector2" /> position.
+        /// Gets gets or sets the current <see cref="Vector2" /> position.
         /// </summary>
-        public Vector2 Position { get; set; }
+        public Vector2 Position
+        {
+            get { return this.currentPosition; }
+        }
 
         /// <summary>
         /// Gets the current Width.
@@ -106,13 +122,15 @@ namespace TopDownShooter
         /// related content.  Calling base.Initialize will enumerate through any components
         /// and initialize them as well.
         /// </summary>
+        /// <param name="playerAnimation">Animation that contains the different animations for this <see cref="Player"/></param>
+        /// <param name="initialPosition">Initial starting position for this <see cref="Player"/></param>
         public void Initialize(Animation playerAnimation, Vector2 initialPosition)
         {
             Contract.Assert(playerAnimation != null);
             Contract.Assert(initialPosition != null);
 
             this.PlayerAnimation = playerAnimation;
-            this.Position = initialPosition;
+            this.currentPosition = initialPosition;
         }
 
         /// <summary>
@@ -122,7 +140,27 @@ namespace TopDownShooter
         /// <param name="gameTime">Provides a snapshot of timing values.</param>
         public void Update(GameTime gameTime)
         {
-            this.PlayerAnimation.Position = this.Position;
+            if (this.inputController.MoveLeft())
+            {
+                this.currentPosition.X -= this.playerSpeed;
+            }
+
+            if (this.inputController.MoveRight())
+            {
+                this.currentPosition.X += this.playerSpeed;
+            }
+
+            if (this.inputController.MoveUp())
+            {
+                this.currentPosition.Y -= this.playerSpeed;
+            }
+
+            if (this.inputController.MoveDown())
+            {
+                this.currentPosition.Y += this.playerSpeed;
+            }
+
+            this.PlayerAnimation.Position = this.currentPosition;
             this.PlayerAnimation.Update(gameTime);
         }
     }
