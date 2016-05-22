@@ -34,7 +34,7 @@
             Class for testing the <see cref="T:TopDownShooter.Engine.SimpleAiInputControllerComponent"/>
             </summary>
         </member>
-        <member name="M:TopDownShooter.Engine.UnitTests.SimpleAiInputControllerComponentTests.AffectGameObjectPostionWhenDrawIsCalled">
+        <member name="M:TopDownShooter.Engine.UnitTests.SimpleAiInputControllerComponentTests.AffectsGameObjectPostionWhenDrawIsCalled">
             <summary>
             Tests whether the animation is drawn in the sprite batch when draw is called.
             </summary>

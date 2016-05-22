@@ -42,10 +42,10 @@ namespace TopDownShooter.Engine.UnitTests
             inputController.Draw(gameObject.Object, spriteBatch.Object, new GameTime());
 
             // Position is checked twice, once for x, once for y
-            Assert.Equals(positionCheckCounts, 2);
+            Assert.AreEqual(positionCheckCounts, 2);
 
             // Position is only set once
-            Assert.Equals(positionSetCounts, 1);
+            Assert.AreEqual(positionSetCounts, 1);
         }
 
         /// <summary>
