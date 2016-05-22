@@ -29,7 +29,6 @@ namespace TopDownShooter.Engine
         /// Initializes a new instance of the <see cref="SimpleAiInputControllerComponent"/> class.
         /// </summary>
         public SimpleAiInputControllerComponent()
-            : base()
         {
             this.random = new Random((int)DateTime.Now.Ticks);
             this.Initalize();

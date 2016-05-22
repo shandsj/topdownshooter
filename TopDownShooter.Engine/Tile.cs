@@ -12,11 +12,16 @@ namespace TopDownShooter.Engine
     /// <summary>
     /// Defines a tile.
     /// </summary>
-    public class Tile : ITile
+    public class Tile : GameObject, ITile
     {
+        private ColliderComponentBase colliderComponent;
+        private ICollisionSystem collisionSystem;
+
         /// <summary>
         /// Initializes a new instance of the <see cref="Tile" /> class.
         /// </summary>
+        /// <param name="id">The game object identifier.</param>
+        /// <param name="collisionSystem">The <see cref="ICollisionSystem"/>.</param>
         /// <param name="tileInteractionType">The <see cref="TileInteractionType" />.</param>
         /// <param name="texture">The <see cref="Texture2D" />.</param>
         /// <param name="position">The position of the tile.</param>
@@ -24,8 +29,10 @@ namespace TopDownShooter.Engine
         /// <param name="width">The width of the tile.</param>
         /// <param name="height">The height of the tile.</param>
         /// <param name="texturePosition">The texture's position in the tile set.</param>
-        public Tile(TileInteractionType tileInteractionType, Texture2D texture, Vector2 position, Point tileCoordinates, int width, int height, Vector2 texturePosition)
+        public Tile(int id, ICollisionSystem collisionSystem, TileInteractionType tileInteractionType, Texture2D texture, Vector2 position, Point tileCoordinates, int width, int height, Vector2 texturePosition)
+            : base(id)
         {
+            this.collisionSystem = collisionSystem;
             this.Texture = texture;
             this.Position = position;
             this.TileCoordinates = tileCoordinates;
@@ -33,6 +40,12 @@ namespace TopDownShooter.Engine
             this.Height = height;
             this.TexturePosition = texturePosition;
             this.TileInteractionType = tileInteractionType;
+
+            if (tileInteractionType == TileInteractionType.Blocking)
+            {
+                this.colliderComponent = new SimpleColliderComponent(this.Id, collisionSystem);
+                this.collisionSystem.Register(this.Id, this, this.colliderComponent);
+            }
         }
 
         /// <summary>
@@ -61,14 +74,9 @@ namespace TopDownShooter.Engine
         public int Width { get; }
 
         /// <summary>
-        /// Gets the bounding box.
+        /// Gets the bounds of the game object.
         /// </summary>
-        public Rectangle BoundingBox => new Rectangle((int)this.Position.X, (int)this.Position.Y, this.Width, this.Height);
-
-        /// <summary>
-        /// Gets the position of the tile.
-        /// </summary>
-        public Vector2 Position { get; }
+        public override Rectangle Bounds => new Rectangle((int)this.Position.X, (int)this.Position.Y, this.Width, this.Height);
 
         /// <summary>
         /// Gets the <see cref="TileInteractionType" />.
@@ -84,7 +92,7 @@ namespace TopDownShooter.Engine
         /// <param name="gameTime">
         /// The game time.
         /// </param>
-        public void Draw(ISpriteBatchAdapter spriteBatch, GameTime gameTime)
+        public override void Draw(ISpriteBatchAdapter spriteBatch, GameTime gameTime)
         {
             spriteBatch.Draw(
                 this.Texture,
@@ -98,6 +106,7 @@ namespace TopDownShooter.Engine
                 0.0f);
 
             ////spriteBatch.DrawString(this.tileCoordinateTexture, string.Format("{0},{1}", this.TileCoordinates.X, this.TileCoordinates.Y), this.Position, Color.Green);
+            base.Draw(spriteBatch, gameTime);
         }
     }
 }

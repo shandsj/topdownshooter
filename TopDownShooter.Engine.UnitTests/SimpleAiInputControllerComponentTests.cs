@@ -19,33 +19,23 @@ namespace TopDownShooter.Engine.UnitTests
         /// Tests whether the animation is drawn in the sprite batch when draw is called.
         /// </summary>
         [TestMethod]
-        public void AffectsGameObjectPostionWhenDrawIsCalled()
+        public void AffectsGameObjectVelocityWhenUpdateIsCalled()
         {
-            var spriteBatch = new Mock<ISpriteBatchAdapter>();
-
-            int positionCheckCounts = 0;
-            int positionSetCounts = 0;
+            int velocitySetCounts = 0;
 
             var gameObject = new Mock<IGameObject>();
-            gameObject.SetupGet(property => property.Velocity).Returns(new Vector2(8, 8));
-            gameObject.SetupGet(property => property.Position).Returns(new Vector2(64, 64)).Callback(() =>
-            {
-                positionCheckCounts++;
-            });
             gameObject.SetupSet(property => property.Position = It.IsAny<Vector2>()).Callback(() =>
             {
-                positionSetCounts++;
+                velocitySetCounts++;
             });
 
             var inputController = new SimpleAiInputControllerComponent();
 
-            inputController.Draw(gameObject.Object, spriteBatch.Object, new GameTime());
+            inputController.Update(gameObject.Object, new GameTime());
 
-            // Position is checked twice, once for x, once for y
-            Assert.AreEqual(positionCheckCounts, 2);
-
-            // Position is only set once
-            Assert.AreEqual(positionSetCounts, 1);
+            // Velocity is only set once
+            Assert.AreEqual(velocitySetCounts, 1);
+            Assert.Fail("Need to update this unit test and inject AI values");
         }
 
         /// <summary>

@@ -11,5 +11,13 @@ namespace TopDownShooter.Engine.UnitTests
     /// </summary>
     public class TestGameObject : GameObject
     {
+        /// <summary>
+        /// Initializes a new instance of the <see cref="TestGameObject"/> class.
+        /// </summary>
+        /// <param name="id">The game object identifier.</param>
+        public TestGameObject(int id)
+            : base(id)
+        {
+        }
     }
 }

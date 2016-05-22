@@ -23,7 +23,7 @@ namespace TopDownShooter.Engine.UnitTests
         [TestMethod]
         public void DelegatesDrawCallsToComponents()
         {
-            var uut = new TestGameObject();
+            var uut = new TestGameObject(1);
             var spriteBatch = new Mock<ISpriteBatchAdapter>().Object;
             var gameTime = new GameTime(TimeSpan.FromSeconds(42), TimeSpan.FromSeconds(5));
 
@@ -64,7 +64,7 @@ namespace TopDownShooter.Engine.UnitTests
                     Assert.AreSame(conentManager, cm);
                 });
 
-            var uut = new TestGameObject();
+            var uut = new TestGameObject(1);
             uut.Components.Add(component.Object);
             uut.UnloadContent(conentManager);
 
@@ -88,7 +88,7 @@ namespace TopDownShooter.Engine.UnitTests
                         Assert.AreSame(conentManager, cm);
                     });
 
-            var uut = new TestGameObject();
+            var uut = new TestGameObject(1);
             uut.Components.Add(component.Object);
             uut.LoadContent(conentManager);
 
@@ -101,7 +101,7 @@ namespace TopDownShooter.Engine.UnitTests
         [TestMethod]
         public void DelegatesUpdateCallsToComponents()
         {
-            var uut = new TestGameObject();
+            var uut = new TestGameObject(1);
             var gameTime = new GameTime(TimeSpan.FromSeconds(42), TimeSpan.FromSeconds(5));
 
             bool wasMethodCalled = false;

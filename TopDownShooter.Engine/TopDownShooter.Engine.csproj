@@ -71,6 +71,7 @@
   <ItemGroup>
     <Compile Include="AnimationComponent.cs" />
     <Compile Include="Camera.cs" />
+    <Compile Include="CollisionSystem.cs" />
     <Compile Include="ContentManagerAdapter.cs" />
     <Compile Include="IComponent.cs" />
     <Compile Include="FrameProperties.cs" />
@@ -78,13 +79,18 @@
     <Compile Include="ICamera.cs" />
     <Compile Include="IContentManagerAdapter.cs" />
     <Compile Include="IGameObject.cs" />
+    <Compile Include="ICollisionSystem.cs" />
     <Compile Include="IInputController.cs" />
     <Compile Include="InputControllerComponentBase.cs" />
     <Compile Include="ISpriteBatchAdapter.cs" />
     <Compile Include="ITile.cs" />
     <Compile Include="Level.cs" />
+    <Compile Include="MovementComponent.cs" />
+    <Compile Include="PlayerColliderComponent.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ColliderComponentBase.cs" />
     <Compile Include="SimpleAiInputControllerComponent.cs" />
+    <Compile Include="SimpleColliderComponent.cs" />
     <Compile Include="SpriteBatchAdapter.cs" />
     <Compile Include="Tile.cs" />
     <Compile Include="TileInteractionType.cs" />

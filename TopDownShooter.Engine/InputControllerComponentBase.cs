@@ -18,6 +18,7 @@ namespace TopDownShooter.Engine
     {
         // To detect redundant calls
         private bool disposedValue = false;
+        private float speed = 8f;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="InputControllerComponentBase"/> class.
@@ -41,6 +42,30 @@ namespace TopDownShooter.Engine
         /// <param name="time">The game time.</param>
         public virtual void Update(IGameObject gameObject, GameTime time)
         {
+            float x = 0;
+            float y = 0;
+
+            if (this.MoveLeft())
+            {
+                x = -this.speed;
+            }
+
+            if (this.MoveRight())
+            {
+                x = this.speed;
+            }
+
+            if (this.MoveUp())
+            {
+                y = -this.speed;
+            }
+
+            if (this.MoveDown())
+            {
+                y = this.speed;
+            }
+
+            gameObject.Velocity = new Vector2(x, y);
         }
 
         /// <summary>
@@ -51,30 +76,6 @@ namespace TopDownShooter.Engine
         /// <param name="time">The game time.</param>
         public void Draw(IGameObject gameObject, ISpriteBatchAdapter spriteBatch, GameTime time)
         {
-            float x = gameObject.Position.X;
-            float y = gameObject.Position.Y;
-
-            if (this.MoveLeft())
-            {
-                x -= gameObject.Velocity.X;
-            }
-
-            if (this.MoveRight())
-            {
-                x += gameObject.Velocity.X;
-            }
-
-            if (this.MoveUp())
-            {
-                y -= gameObject.Velocity.Y;
-            }
-
-            if (this.MoveDown())
-            {
-                y += gameObject.Velocity.Y;
-            }
-
-            gameObject.Position = new Vector2(x, y);
         }
 
         /// <summary>

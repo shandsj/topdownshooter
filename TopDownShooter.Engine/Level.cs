@@ -16,7 +16,7 @@ namespace TopDownShooter.Engine
     /// <summary>
     /// Defines a level.
     /// </summary>
-    public class Level
+    public class Level : GameObject
     {
         /// <summary>
         /// The <see cref="TiledSharp.TmxMap" />.
@@ -27,15 +27,20 @@ namespace TopDownShooter.Engine
         /// The collection of tiles, mapped from tile coordinates.
         /// </summary>
         private readonly Dictionary<Point, Tile> tiles = new Dictionary<Point, Tile>();
+        private readonly ICollisionSystem collisionSystem;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="Level" /> class.
         /// </summary>
+        /// <param name="collisionSystem">The <see cref="ICollisionSystem"/>.</param>
         /// <param name="map">
         /// The <see cref="TmxMap" /> used to generate the level.
         /// </param>
-        public Level(TmxMap map)
+        /// <param name="id">The game object identifier</param>
+        public Level(int id, ICollisionSystem collisionSystem, TmxMap map)
+            : base(id)
         {
+            this.collisionSystem = collisionSystem;
             this.map = map;
         }
 
@@ -45,20 +50,18 @@ namespace TopDownShooter.Engine
         public IEnumerable<Tile> Tiles => this.tiles.Values.AsEnumerable();
 
         /// <summary>
-        /// The draw.
+        /// Draws the game object with the specified sprite batch adapter and game time.
         /// </summary>
-        /// <param name="spriteBatch">
-        /// The sprite batch.
-        /// </param>
-        /// <param name="gameTime">
-        /// The game time.
-        /// </param>
-        public void Draw(ISpriteBatchAdapter spriteBatch, GameTime gameTime)
+        /// <param name="spriteBatch">The sprite batch adapter.</param>
+        /// <param name="gameTime">The game time.</param>
+        public override void Draw(ISpriteBatchAdapter spriteBatch, GameTime gameTime)
         {
             foreach (var tile in this.Tiles)
             {
                 tile.Draw(spriteBatch, gameTime);
             }
+
+            base.Draw(spriteBatch, gameTime);
         }
 
         /// <summary>
@@ -74,19 +77,17 @@ namespace TopDownShooter.Engine
         }
 
         /// <summary>
-        /// The load content.
+        /// Loads the content from the specified content manager adapter.
         /// </summary>
-        /// <param name="content">
-        /// The content.
-        /// </param>
-        public void LoadContent(IContentManagerAdapter content)
+        /// <param name="contentManager">The content manager adapter.</param>
+        public override void LoadContent(IContentManagerAdapter contentManager)
         {
             var textures = new Dictionary<TmxTileset, Texture2D>();
 
             // Grab the first tileset.
             foreach (var tileSet in this.map.Tilesets)
             {
-                var texture = content.Load<Texture2D>("Tilesets/" + tileSet.Name);
+                var texture = contentManager.Load<Texture2D>("Tilesets/" + tileSet.Name);
                 if (!tileSet.Columns.HasValue)
                 {
                     throw new InvalidOperationException("Need to specifiy column in tile set.");
@@ -101,30 +102,7 @@ namespace TopDownShooter.Engine
                 this.ImportLayer(layer, textures);
             }
 
-            ////foreach (var tile in this.Tiles)
-            ////{
-            ////    // Since tiles are created in the LoadContent() function, we have to initialize them here.
-            ////    tile.Initialize(this.world);
-            ////    tile.LoadContent(content);
-            ////}
-        }
-
-        /// <summary>
-        /// Unloads the content of this <see cref="Level" />.
-        /// </summary>
-        /// <param name="content">The <see cref="IContentManagerAdapter" />.</param>
-        public void UnloadContent(IContentManagerAdapter content)
-        {
-        }
-
-        /// <summary>
-        /// Updates the state of this <see cref="Level" />.
-        /// </summary>
-        /// <param name="gameTime">
-        /// The game time.
-        /// </param>
-        public void Update(GameTime gameTime)
-        {
+            base.LoadContent(contentManager);
         }
 
         /// <summary>
@@ -185,6 +163,8 @@ namespace TopDownShooter.Engine
                 var tileInteractionType = isBlocking ? TileInteractionType.Blocking : TileInteractionType.NonBlocking;
 
                 var myTile = new Tile(
+                    CollisionSystem.NextGameObjectId++,
+                    this.collisionSystem,
                     tileInteractionType,
                     texture,
                     new Vector2(tile.X * tileSet.TileWidth, tile.Y * tileSet.TileHeight),

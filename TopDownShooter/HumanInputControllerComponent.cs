@@ -28,7 +28,6 @@ namespace TopDownShooter
         /// inputs among multiple devices.
         /// </summary>
         public HumanInputControllerComponent()
-            : base()
         {
         }
 
@@ -122,6 +121,8 @@ namespace TopDownShooter
             this.currentMouseState = Mouse.GetState();
             this.currentKeyboardState = Keyboard.GetState();
             this.currentGamePadState = GamePad.GetState(PlayerIndex.One);
+
+            base.Update(gameObject, time);
         }
     }
 }

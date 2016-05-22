@@ -146,6 +146,44 @@
             Gets or sets the zoom.
             </summary>
         </member>
+        <member name="T:TopDownShooter.Engine.CollisionSystem">
+            <summary>
+            Defines a system to handle collisions.
+            </summary>
+        </member>
+        <member name="P:TopDownShooter.Engine.CollisionSystem.NextGameObjectId">
+            <summary>
+            Gets or sets the next available game object identifier.
+            </summary>
+            TODO: refactor this and put it somewhere else.
+        </member>
+        <member name="M:TopDownShooter.Engine.CollisionSystem.CheckCollisions(TopDownShooter.Engine.ColliderComponentBase)">
+            <summary>
+            Checks the collisions for the specified <see cref="T:TopDownShooter.Engine.ColliderComponentBase" />.
+            </summary>
+            <param name="collider">The rigid body.</param>
+        </member>
+        <member name="M:TopDownShooter.Engine.CollisionSystem.GetGameObject(System.Int32)">
+            <summary>
+            Gets the <see cref="T:TopDownShooter.Engine.IGameObject" /> with the specified identifer.
+            </summary>
+            <param name="id">Game object identifier.</param>
+            <returns>The <see cref="T:TopDownShooter.Engine.IGameObject" />.</returns>
+        </member>
+        <member name="M:TopDownShooter.Engine.CollisionSystem.Register(System.Int32,TopDownShooter.Engine.IGameObject,TopDownShooter.Engine.ColliderComponentBase)">
+            <summary>
+            Registers the specifieid <see cref="T:TopDownShooter.Engine.IGameObject" /> and <see cref="T:TopDownShooter.Engine.ColliderComponentBase" /> with the specified identifier.
+            </summary>
+            <param name="id">The identifier of the game object.</param>
+            <param name="gameObject">The game object.</param>
+            <param name="collider">The collider component.</param>
+        </member>
+        <member name="M:TopDownShooter.Engine.CollisionSystem.Unregister(System.Int32)">
+            <summary>
+            Unregisters the game object and collider with the specified identifier.
+            </summary>
+            <param name="id">The identifier of the game object.</param>
+        </member>
         <member name="T:TopDownShooter.Engine.ContentManagerAdapter">
             <summary>
             Defines an adapter for the <see cref="T:Microsoft.Xna.Framework.Content.ContentManager" /> class.
@@ -243,14 +281,25 @@
             Defines an entity.
             </summary>
         </member>
-        <member name="M:TopDownShooter.Engine.GameObject.#ctor">
+        <member name="M:TopDownShooter.Engine.GameObject.#ctor(System.Int32)">
             <summary>
             Initializes a new instance of the <see cref="T:TopDownShooter.Engine.GameObject" /> class.
+            </summary>
+            <param name="id">The game object identifier.</param>
+        </member>
+        <member name="P:TopDownShooter.Engine.GameObject.Bounds">
+            <summary>
+            Gets the bounds of the game object.
             </summary>
         </member>
         <member name="P:TopDownShooter.Engine.GameObject.Components">
             <summary>
             Gets the collection of components.
+            </summary>
+        </member>
+        <member name="P:TopDownShooter.Engine.GameObject.Id">
+            <summary>
+            Gets the identifier for this game object.
             </summary>
         </member>
         <member name="P:TopDownShooter.Engine.GameObject.Position">
@@ -261,6 +310,18 @@
         <member name="P:TopDownShooter.Engine.GameObject.Velocity">
             <summary>
             Gets or sets the velocity of the entity.
+            </summary>
+        </member>
+        <member name="M:TopDownShooter.Engine.GameObject.Draw(TopDownShooter.Engine.ISpriteBatchAdapter,Microsoft.Xna.Framework.GameTime)">
+            <summary>
+            Draws the game object with the specified sprite batch adapter and game time.
+            </summary>
+            <param name="spriteBatch">The sprite batch adapter.</param>
+            <param name="gameTime">The game time.</param>
+        </member>
+        <member name="M:TopDownShooter.Engine.GameObject.Initialize">
+            <summary>
+            Initializes the game object.
             </summary>
         </member>
         <member name="M:TopDownShooter.Engine.GameObject.LoadContent(TopDownShooter.Engine.IContentManagerAdapter)">
@@ -274,13 +335,6 @@
             Unloads the content from the specified content manager adapter.
             </summary>
             <param name="contentManager">The content manager adapter.</param>
-        </member>
-        <member name="M:TopDownShooter.Engine.GameObject.Draw(TopDownShooter.Engine.ISpriteBatchAdapter,Microsoft.Xna.Framework.GameTime)">
-            <summary>
-            Draws the game object with the specified sprite batch adapter and game time.
-            </summary>
-            <param name="spriteBatch">The sprite batch adapter.</param>
-            <param name="gameTime">The game time.</param>
         </member>
         <member name="M:TopDownShooter.Engine.GameObject.Update(Microsoft.Xna.Framework.GameTime)">
             <summary>
@@ -351,6 +405,16 @@
             Gets the collection of components.
             </summary>
         </member>
+        <member name="P:TopDownShooter.Engine.IGameObject.Bounds">
+            <summary>
+            Gets the bounds of the game object.
+            </summary>
+        </member>
+        <member name="P:TopDownShooter.Engine.IGameObject.Id">
+            <summary>
+            Gets the identifier for this game object.
+            </summary>
+        </member>
         <member name="M:TopDownShooter.Engine.IGameObject.Update(Microsoft.Xna.Framework.GameTime)">
             <summary>
             Updates the game object with the specified game time.
@@ -375,6 +439,43 @@
             Unloads the content from the specified content manager adapter.
             </summary>
             <param name="contentManager">The content manager adapter.</param>
+        </member>
+        <member name="M:TopDownShooter.Engine.IGameObject.Initialize">
+            <summary>
+            Initializes the game object.
+            </summary>
+        </member>
+        <member name="T:TopDownShooter.Engine.ICollisionSystem">
+            <summary>
+            Defines an interface for providing game object lookups.
+            </summary>
+        </member>
+        <member name="M:TopDownShooter.Engine.ICollisionSystem.GetGameObject(System.Int32)">
+            <summary>
+            Gets the <see cref="T:TopDownShooter.Engine.IGameObject" /> with the specified identifer.
+            </summary>
+            <param name="id">Game object identifier.</param>
+            <returns>The <see cref="T:TopDownShooter.Engine.IGameObject" />.</returns>
+        </member>
+        <member name="M:TopDownShooter.Engine.ICollisionSystem.CheckCollisions(TopDownShooter.Engine.ColliderComponentBase)">
+            <summary>
+            Checks the collisions for the specified <see cref="T:TopDownShooter.Engine.ColliderComponentBase" />.
+            </summary>
+            <param name="collider">The rigid body.</param>
+        </member>
+        <member name="M:TopDownShooter.Engine.ICollisionSystem.Register(System.Int32,TopDownShooter.Engine.IGameObject,TopDownShooter.Engine.ColliderComponentBase)">
+            <summary>
+            Registers the specifieid <see cref="T:TopDownShooter.Engine.IGameObject" /> and <see cref="T:TopDownShooter.Engine.ColliderComponentBase" /> with the specified identifier.
+            </summary>
+            <param name="id">The identifier of the game object.</param>
+            <param name="gameObject">The game object.</param>
+            <param name="collider">The collider component.</param>
+        </member>
+        <member name="M:TopDownShooter.Engine.ICollisionSystem.Unregister(System.Int32)">
+            <summary>
+            Unregisters the game object and collider with the specified identifier.
+            </summary>
+            <param name="id">The identifier of the game object.</param>
         </member>
         <member name="T:TopDownShooter.Engine.IInputController">
             <summary>
@@ -599,13 +700,15 @@
             The collection of tiles, mapped from tile coordinates.
             </summary>
         </member>
-        <member name="M:TopDownShooter.Engine.Level.#ctor(TiledSharp.TmxMap)">
+        <member name="M:TopDownShooter.Engine.Level.#ctor(System.Int32,TopDownShooter.Engine.ICollisionSystem,TiledSharp.TmxMap)">
             <summary>
             Initializes a new instance of the <see cref="T:TopDownShooter.Engine.Level" /> class.
             </summary>
+            <param name="collisionSystem">The <see cref="T:TopDownShooter.Engine.ICollisionSystem"/>.</param>
             <param name="map">
             The <see cref="T:TiledSharp.TmxMap" /> used to generate the level.
             </param>
+            <param name="id">The game object identifier</param>
         </member>
         <member name="P:TopDownShooter.Engine.Level.Tiles">
             <summary>
@@ -614,14 +717,10 @@
         </member>
         <member name="M:TopDownShooter.Engine.Level.Draw(TopDownShooter.Engine.ISpriteBatchAdapter,Microsoft.Xna.Framework.GameTime)">
             <summary>
-            The draw.
+            Draws the game object with the specified sprite batch adapter and game time.
             </summary>
-            <param name="spriteBatch">
-            The sprite batch.
-            </param>
-            <param name="gameTime">
-            The game time.
-            </param>
+            <param name="spriteBatch">The sprite batch adapter.</param>
+            <param name="gameTime">The game time.</param>
         </member>
         <member name="M:TopDownShooter.Engine.Level.GetTile(Microsoft.Xna.Framework.Point)">
             <summary>
@@ -632,25 +731,9 @@
         </member>
         <member name="M:TopDownShooter.Engine.Level.LoadContent(TopDownShooter.Engine.IContentManagerAdapter)">
             <summary>
-            The load content.
+            Loads the content from the specified content manager adapter.
             </summary>
-            <param name="content">
-            The content.
-            </param>
-        </member>
-        <member name="M:TopDownShooter.Engine.Level.UnloadContent(TopDownShooter.Engine.IContentManagerAdapter)">
-            <summary>
-            Unloads the content of this <see cref="T:TopDownShooter.Engine.Level" />.
-            </summary>
-            <param name="content">The <see cref="T:TopDownShooter.Engine.IContentManagerAdapter" />.</param>
-        </member>
-        <member name="M:TopDownShooter.Engine.Level.Update(Microsoft.Xna.Framework.GameTime)">
-            <summary>
-            Updates the state of this <see cref="T:TopDownShooter.Engine.Level" />.
-            </summary>
-            <param name="gameTime">
-            The game time.
-            </param>
+            <param name="contentManager">The content manager adapter.</param>
         </member>
         <member name="M:TopDownShooter.Engine.Level.ImportLayer(TiledSharp.TmxLayer,System.Collections.Generic.Dictionary{TiledSharp.TmxTileset,Microsoft.Xna.Framework.Graphics.Texture2D})">
             <summary>
@@ -658,6 +741,119 @@
             </summary>
             <param name="layer">The <see cref="T:TiledSharp.TmxLayer" /> to import from.</param>
             <param name="textures">The textures map that contains <see cref="T:TiledSharp.TmxTileset" /> to <see cref="T:Microsoft.Xna.Framework.Graphics.Texture2D" /> mappings.</param>
+        </member>
+        <member name="T:TopDownShooter.Engine.MovementComponent">
+            <summary>
+            Defines a movement component that applies velocity to a position.
+            </summary>
+        </member>
+        <member name="M:TopDownShooter.Engine.MovementComponent.Draw(TopDownShooter.Engine.IGameObject,TopDownShooter.Engine.ISpriteBatchAdapter,Microsoft.Xna.Framework.GameTime)">
+            <summary>
+            Draws the component with the specified game object and game time.
+            </summary>
+            <param name="gameObject">The game object.</param>
+            <param name="spriteBatch">The sprite batch adapter.</param>
+            <param name="time">The game time.</param>
+        </member>
+        <member name="M:TopDownShooter.Engine.MovementComponent.LoadContent(TopDownShooter.Engine.IContentManagerAdapter)">
+            <summary>
+            Loads the content from the specified content manager adapter.
+            </summary>
+            <param name="contentManager">The content manager adapter.</param>
+        </member>
+        <member name="M:TopDownShooter.Engine.MovementComponent.UnloadContent(TopDownShooter.Engine.IContentManagerAdapter)">
+            <summary>
+            Unloads the content from the specified content manager adapter.
+            </summary>
+            <param name="contentManager">The content manager adapter.</param>
+        </member>
+        <member name="M:TopDownShooter.Engine.MovementComponent.Update(TopDownShooter.Engine.IGameObject,Microsoft.Xna.Framework.GameTime)">
+            <summary>
+            Updates the component with the specified game object and game time.
+            </summary>
+            <param name="gameObject">The game object to update.</param>
+            <param name="time">The game time.</param>
+        </member>
+        <member name="T:TopDownShooter.Engine.PlayerColliderComponent">
+            <summary>
+            Defines a collider component for player objects.
+            </summary>
+        </member>
+        <member name="M:TopDownShooter.Engine.PlayerColliderComponent.#ctor(System.Int32,TopDownShooter.Engine.ICollisionSystem)">
+            <summary>
+            Initializes a new instance of the <see cref="T:TopDownShooter.Engine.PlayerColliderComponent" /> class.
+            </summary>
+            <param name="gameObjectId">The parent game object identifier.</param>
+            <param name="collisionSystem">The <see cref="T:TopDownShooter.Engine.ICollisionSystem" />.</param>
+        </member>
+        <member name="M:TopDownShooter.Engine.PlayerColliderComponent.Collide(TopDownShooter.Engine.ColliderComponentBase)">
+            <summary>
+            Performs a collision with the specified <see cref="T:TopDownShooter.Engine.ColliderComponentBase" />.
+            </summary>
+            <param name="other">The other collider component.</param>
+        </member>
+        <member name="M:TopDownShooter.Engine.PlayerColliderComponent.Update(TopDownShooter.Engine.IGameObject,Microsoft.Xna.Framework.GameTime)">
+            <summary>
+            Updates the component with the specified game object and game time.
+            </summary>
+            <param name="gameObject">The game object to update.</param>
+            <param name="time">The game time.</param>
+        </member>
+        <member name="T:TopDownShooter.Engine.ColliderComponentBase">
+            <summary>
+            Defines a rigid body component that will respond to collisions with other rigid bodies.
+            </summary>
+        </member>
+        <member name="M:TopDownShooter.Engine.ColliderComponentBase.#ctor(System.Int32)">
+            <summary>
+            Initializes a new instance of the <see cref="T:TopDownShooter.Engine.ColliderComponentBase" /> class.
+            </summary>
+            <param name="gameObjectId">The parent game object identifier.</param>
+        </member>
+        <member name="P:TopDownShooter.Engine.ColliderComponentBase.GameObjectId">
+            <summary>
+            Gets the parent game object identifer.
+            </summary>
+        </member>
+        <member name="M:TopDownShooter.Engine.ColliderComponentBase.Draw(TopDownShooter.Engine.IGameObject,TopDownShooter.Engine.ISpriteBatchAdapter,Microsoft.Xna.Framework.GameTime)">
+            <summary>
+            Draws the component with the specified game object and game time.
+            </summary>
+            <param name="gameObject">The game object.</param>
+            <param name="spriteBatch">The sprite batch adapter.</param>
+            <param name="time">The game time.</param>
+        </member>
+        <member name="M:TopDownShooter.Engine.ColliderComponentBase.LoadContent(TopDownShooter.Engine.IContentManagerAdapter)">
+            <summary>
+            Loads the content from the specified content manager adapter.
+            </summary>
+            <param name="contentManager">The content manager adapter.</param>
+        </member>
+        <member name="M:TopDownShooter.Engine.ColliderComponentBase.UnloadContent(TopDownShooter.Engine.IContentManagerAdapter)">
+            <summary>
+            Unloads the content from the specified content manager adapter.
+            </summary>
+            <param name="contentManager">The content manager adapter.</param>
+        </member>
+        <member name="M:TopDownShooter.Engine.ColliderComponentBase.Update(TopDownShooter.Engine.IGameObject,Microsoft.Xna.Framework.GameTime)">
+            <summary>
+            Updates the component with the specified game object and game time.
+            </summary>
+            <param name="gameObject">The game object to update.</param>
+            <param name="time">The game time.</param>
+        </member>
+        <member name="M:TopDownShooter.Engine.ColliderComponentBase.Collide(TopDownShooter.Engine.ColliderComponentBase)">
+            <summary>
+            Performs a collision with the specified <see cref="T:TopDownShooter.Engine.ColliderComponentBase" />.
+            </summary>
+            <param name="other">The other collider component.</param>
+        </member>
+        <member name="M:TopDownShooter.Engine.ColliderComponentBase.IsCollision(TopDownShooter.Engine.ColliderComponentBase)">
+            <summary>
+            Determines a collision occured with the specified <see cref="T:TopDownShooter.Engine.ColliderComponentBase" />.
+            </summary>
+            <param name="other">The rigid body to check for a collision.</param>
+            <returns>TTrue if a collision occured, false otherwise.</returns>
         </member>
         <member name="T:TopDownShooter.Engine.SimpleAiInputControllerComponent">
             <summary>
@@ -713,6 +909,36 @@
             Sleeps a random amount of time between 0 and 1.5 seconds.
             </summary>
             <remarks>No one will get passed this sweet ai!</remarks>
+        </member>
+        <member name="T:TopDownShooter.Engine.SimpleColliderComponent">
+            <summary>
+            Provides a simple collider component that does bounds checking for collision detection.
+            </summary>
+        </member>
+        <member name="M:TopDownShooter.Engine.SimpleColliderComponent.#ctor(System.Int32,TopDownShooter.Engine.ICollisionSystem)">
+            <summary>
+            Initializes a new instance of the <see cref="T:TopDownShooter.Engine.SimpleColliderComponent" /> class.
+            </summary>
+            <param name="gameObjectId">The parent game object identifier.</param>
+            <param name="collisionSystem">The <see cref="T:TopDownShooter.Engine.ICollisionSystem" />.</param>
+        </member>
+        <member name="P:TopDownShooter.Engine.SimpleColliderComponent.CollisionSystem">
+            <summary>
+            Gets the <see cref="T:TopDownShooter.Engine.ICollisionSystem" />.
+            </summary>
+        </member>
+        <member name="M:TopDownShooter.Engine.SimpleColliderComponent.Collide(TopDownShooter.Engine.ColliderComponentBase)">
+            <summary>
+            Performs a collision with the specified <see cref="T:TopDownShooter.Engine.ColliderComponentBase" />.
+            </summary>
+            <param name="other">The other collider component.</param>
+        </member>
+        <member name="M:TopDownShooter.Engine.SimpleColliderComponent.IsCollision(TopDownShooter.Engine.ColliderComponentBase)">
+            <summary>
+            Determines a collision occured with the specified <see cref="T:TopDownShooter.Engine.ColliderComponentBase" />.
+            </summary>
+            <param name="other">The rigid body to check for a collision.</param>
+            <returns>TTrue if a collision occured, false otherwise.</returns>
         </member>
         <member name="T:TopDownShooter.Engine.SpriteBatchAdapter">
             <summary>
@@ -799,10 +1025,12 @@
             Defines a tile.
             </summary>
         </member>
-        <member name="M:TopDownShooter.Engine.Tile.#ctor(TopDownShooter.Engine.TileInteractionType,Microsoft.Xna.Framework.Graphics.Texture2D,Microsoft.Xna.Framework.Vector2,Microsoft.Xna.Framework.Point,System.Int32,System.Int32,Microsoft.Xna.Framework.Vector2)">
+        <member name="M:TopDownShooter.Engine.Tile.#ctor(System.Int32,TopDownShooter.Engine.ICollisionSystem,TopDownShooter.Engine.TileInteractionType,Microsoft.Xna.Framework.Graphics.Texture2D,Microsoft.Xna.Framework.Vector2,Microsoft.Xna.Framework.Point,System.Int32,System.Int32,Microsoft.Xna.Framework.Vector2)">
             <summary>
             Initializes a new instance of the <see cref="T:TopDownShooter.Engine.Tile" /> class.
             </summary>
+            <param name="id">The game object identifier.</param>
+            <param name="collisionSystem">The <see cref="T:TopDownShooter.Engine.ICollisionSystem"/>.</param>
             <param name="tileInteractionType">The <see cref="P:TopDownShooter.Engine.Tile.TileInteractionType" />.</param>
             <param name="texture">The <see cref="T:Microsoft.Xna.Framework.Graphics.Texture2D" />.</param>
             <param name="position">The position of the tile.</param>
@@ -836,14 +1064,9 @@
             Gets the width.
             </summary>
         </member>
-        <member name="P:TopDownShooter.Engine.Tile.BoundingBox">
+        <member name="P:TopDownShooter.Engine.Tile.Bounds">
             <summary>
-            Gets the bounding box.
-            </summary>
-        </member>
-        <member name="P:TopDownShooter.Engine.Tile.Position">
-            <summary>
-            Gets the position of the tile.
+            Gets the bounds of the game object.
             </summary>
         </member>
         <member name="P:TopDownShooter.Engine.Tile.TileInteractionType">

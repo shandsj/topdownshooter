@@ -30,6 +30,16 @@ namespace TopDownShooter.Engine
         IList<IComponent> Components { get; }
 
         /// <summary>
+        /// Gets the bounds of the game object.
+        /// </summary>
+        Rectangle Bounds { get; }
+
+        /// <summary>
+        /// Gets the identifier for this game object.
+        /// </summary>
+        int Id { get; }
+
+        /// <summary>
         /// Updates the game object with the specified game time.
         /// </summary>
         /// <param name="gameTime">The game time.</param>
@@ -53,5 +63,10 @@ namespace TopDownShooter.Engine
         /// </summary>
         /// <param name="contentManager">The content manager adapter.</param>
         void UnloadContent(IContentManagerAdapter contentManager);
+
+        /// <summary>
+        /// Initializes the game object.
+        /// </summary>
+        void Initialize();
     }
 }

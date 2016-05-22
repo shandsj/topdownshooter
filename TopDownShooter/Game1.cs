@@ -38,7 +38,7 @@ namespace TopDownShooter
         /// The <see cref="Level" />.
         /// </summary>
         private Level level;
-
+        private ICollisionSystem collisionSystem;
         private Player focusedPlayer;
         private List<Player> players;
 
@@ -54,6 +54,7 @@ namespace TopDownShooter
         {
             this.graphics = new GraphicsDeviceManager(this);
             this.Content.RootDirectory = "Content";
+            this.collisionSystem = new CollisionSystem();
         }
 
         /// <summary>
@@ -85,34 +86,48 @@ namespace TopDownShooter
             this.players = new List<Player>();
 
             this.camera = new Camera(this.GraphicsDevice.Viewport) { Zoom = .5f };
-            this.level = new Level(new TmxMap("Content/TmxFiles/DefaultLevel.tmx"));
+            this.level = new Level(CollisionSystem.NextGameObjectId++, this.collisionSystem, new TmxMap("Content/TmxFiles/DefaultLevel.tmx"));
 
 #pragma warning disable SA1118 // Parameter must not span multiple lines
+            var focusedPlayerId = CollisionSystem.NextGameObjectId++;
+            var animationComponent = new AnimationComponent("hoodieguy", new FrameProperties(76, 140, TimeSpan.FromSeconds(.1), 2)) { IsLooping = true, IsAnimating = true };
+            var colliderComponent = new PlayerColliderComponent(focusedPlayerId, this.collisionSystem);
             this.focusedPlayer = new Player(
+                focusedPlayerId,
                 new Vector2(1600, 1600),
+                this.collisionSystem,
+                animationComponent,
+                colliderComponent,
                 new IComponent[]
                 {
-                    new AnimationComponent("hoodieguy", new FrameProperties(76, 140, TimeSpan.FromSeconds(.1), 2)) { IsLooping = true, IsAnimating = true },
+                    // Order matters for calls to update and draw
                     new HumanInputControllerComponent(),
+                    colliderComponent,
+                    new MovementComponent(),
+                    animationComponent
                 });
-            this.focusedPlayer.Velocity = new Vector2(8, 8);
 
             this.players.Add(this.focusedPlayer);
 
-            for (int i = 0; i < 3; i++)
-            {
-                var player = new Player(
-                new Vector2(1600, 1600),
-                new IComponent[]
-                {
-                    new AnimationComponent("hoodieguy", new FrameProperties(76, 140, TimeSpan.FromSeconds(.1), 2)) { IsLooping = true, IsAnimating = true },
-                    new SimpleAiInputControllerComponent(),
-                });
-                player.Velocity = new Vector2(8, 8);
+            // TODO: Uncomment when wall collision logic is finished
+            ////for (int i = 0; i < 3; i++)
+            ////{
+            ////    var id = CollisionSystem.NextGameObjectId++;
+            ////    var player = new Player(
+            ////        id,
+            ////        new Vector2(1600, 1600),
+            ////        new IComponent[]
+            ////        {
+            ////            new AnimationComponent("hoodieguy", new FrameProperties(76, 140, TimeSpan.FromSeconds(.1), 2)) { IsLooping = true, IsAnimating = true },
+            ////            new SimpleAiInputControllerComponent(),
+            ////            new PlayerColliderComponent(id, this.collisionSystem),
+            ////            new MovementComponent()
+            ////        });
 
-                this.players.Add(player);
-            }
+            ////    this.players.Add(player);
+            ////}
 #pragma warning restore SA1118
+
             base.Initialize();
         }
 

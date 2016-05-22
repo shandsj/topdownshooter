@@ -120,13 +120,21 @@
             Simple player class.
             </summary>
         </member>
-        <member name="M:TopDownShooter.Player.#ctor(Microsoft.Xna.Framework.Vector2,System.Collections.Generic.IEnumerable{TopDownShooter.Engine.IComponent})">
+        <member name="M:TopDownShooter.Player.#ctor(System.Int32,Microsoft.Xna.Framework.Vector2,TopDownShooter.Engine.ICollisionSystem,TopDownShooter.Engine.AnimationComponent,TopDownShooter.Engine.ColliderComponentBase,System.Collections.Generic.IEnumerable{TopDownShooter.Engine.IComponent})">
             <summary>
-            Initializes a new instance of the <see cref="T:TopDownShooter.Player"/> class.
+            Initializes a new instance of the <see cref="T:TopDownShooter.Player" /> class.
             </summary>
+            <param name="id">The game object identifier.</param>
             <param name="position">The position of the player.</param>
+            <param name="collisionSystem">The <see cref="T:TopDownShooter.Engine.ICollisionSystem" />.</param>
+            <param name="animationComponent">The <see cref="T:TopDownShooter.Engine.AnimationComponent" />.</param>
+            <param name="colliderComponent">The <see cref="T:TopDownShooter.Engine.ColliderComponentBase" />.</param>
             <param name="components">A collection of components.</param>
-            <remarks>Internal for unit testing.</remarks>
+        </member>
+        <member name="P:TopDownShooter.Player.Bounds">
+            <summary>
+            Gets the bounds of the game object.
+            </summary>
         </member>
         <member name="T:TopDownShooter.Program">
             <summary>

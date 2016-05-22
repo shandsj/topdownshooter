@@ -59,12 +59,18 @@
             Defines a test game object.
             </summary>
         </member>
+        <member name="M:TopDownShooter.Engine.UnitTests.TestGameObject.#ctor(System.Int32)">
+            <summary>
+            Initializes a new instance of the <see cref="T:TopDownShooter.Engine.UnitTests.TestGameObject"/> class.
+            </summary>
+            <param name="id">The game object identifier.</param>
+        </member>
         <member name="T:TopDownShooter.Engine.UnitTests.SimpleAiInputControllerComponentTests">
             <summary>
             Class for testing the <see cref="T:TopDownShooter.Engine.SimpleAiInputControllerComponent"/>
             </summary>
         </member>
-        <member name="M:TopDownShooter.Engine.UnitTests.SimpleAiInputControllerComponentTests.AffectsGameObjectPostionWhenDrawIsCalled">
+        <member name="M:TopDownShooter.Engine.UnitTests.SimpleAiInputControllerComponentTests.AffectsGameObjectVelocityWhenUpdateIsCalled">
             <summary>
             Tests whether the animation is drawn in the sprite batch when draw is called.
             </summary>
