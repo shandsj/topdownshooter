@@ -16,7 +16,9 @@ namespace TopDownShooter
     public class Player : GameObject
     {
         private readonly AnimationComponent animationComponent;
+
         private readonly ColliderComponentBase colliderComponent;
+
         private readonly ICollisionSystem collisionSystem;
 
         /// <summary>
@@ -44,8 +46,13 @@ namespace TopDownShooter
         }
 
         /// <summary>
-        /// Gets the bounds of the game object.
+        /// Gets the width of the game object.
         /// </summary>
-        public override Rectangle Bounds => new Rectangle((int)this.Position.X, (int)this.Position.Y, this.animationComponent.FrameProperties.Width, this.animationComponent.FrameProperties.Height);
+        public override int Width => this.animationComponent.FrameProperties.Width;
+
+        /// <summary>
+        /// Gets the height of the game object.
+        /// </summary>
+        public override int Height => this.animationComponent.FrameProperties.Height;
     }
 }

@@ -20,6 +20,26 @@ namespace TopDownShooter.Engine
         Vector2 Position { get; set; }
 
         /// <summary>
+        /// Gets the projected position, based off the <see cref="Position"/> and the <see cref="Velocity"/>.
+        /// </summary>
+        Vector2 ProjectedPosition { get; }
+
+        /// <summary>
+        /// Gets the projected bounds, based off the <see cref="Position"/> and the <see cref="Velocity"/>.
+        /// </summary>
+        Rectangle ProjectedBounds { get; }
+
+        /// <summary>
+        /// Gets the width of the game object.
+        /// </summary>
+        int Width { get; }
+
+        /// <summary>
+        /// Gets the height of the game object.
+        /// </summary>
+        int Height { get; }
+
+        /// <summary>
         /// Gets or sets the velocity of the game object.
         /// </summary>
         Vector2 Velocity { get; set; }

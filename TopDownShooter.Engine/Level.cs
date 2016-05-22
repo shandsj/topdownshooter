@@ -50,6 +50,16 @@ namespace TopDownShooter.Engine
         public IEnumerable<Tile> Tiles => this.tiles.Values.AsEnumerable();
 
         /// <summary>
+        /// Gets the width of the game object.
+        /// </summary>
+        public override int Width { get; }
+
+        /// <summary>
+        /// Gets the height of the game object.
+        /// </summary>
+        public override int Height { get; }
+
+        /// <summary>
         /// Draws the game object with the specified sprite batch adapter and game time.
         /// </summary>
         /// <param name="spriteBatch">The sprite batch adapter.</param>

@@ -307,6 +307,26 @@
             Gets or sets the position of the entity.
             </summary>
         </member>
+        <member name="P:TopDownShooter.Engine.GameObject.ProjectedPosition">
+            <summary>
+            Gets the projected position, based off the <see cref="P:TopDownShooter.Engine.IGameObject.Position"/> and the <see cref="P:TopDownShooter.Engine.IGameObject.Velocity"/>.
+            </summary>
+        </member>
+        <member name="P:TopDownShooter.Engine.GameObject.ProjectedBounds">
+            <summary>
+            Gets the projected bounds, based off the <see cref="P:TopDownShooter.Engine.IGameObject.Position"/> and the <see cref="P:TopDownShooter.Engine.IGameObject.Velocity"/>.
+            </summary>
+        </member>
+        <member name="P:TopDownShooter.Engine.GameObject.Width">
+            <summary>
+            Gets the width of the game object.
+            </summary>
+        </member>
+        <member name="P:TopDownShooter.Engine.GameObject.Height">
+            <summary>
+            Gets the height of the game object.
+            </summary>
+        </member>
         <member name="P:TopDownShooter.Engine.GameObject.Velocity">
             <summary>
             Gets or sets the velocity of the entity.
@@ -393,6 +413,26 @@
         <member name="P:TopDownShooter.Engine.IGameObject.Position">
             <summary>
             Gets or sets the position of the game object.
+            </summary>
+        </member>
+        <member name="P:TopDownShooter.Engine.IGameObject.ProjectedPosition">
+            <summary>
+            Gets the projected position, based off the <see cref="P:TopDownShooter.Engine.IGameObject.Position"/> and the <see cref="P:TopDownShooter.Engine.IGameObject.Velocity"/>.
+            </summary>
+        </member>
+        <member name="P:TopDownShooter.Engine.IGameObject.ProjectedBounds">
+            <summary>
+            Gets the projected bounds, based off the <see cref="P:TopDownShooter.Engine.IGameObject.Position"/> and the <see cref="P:TopDownShooter.Engine.IGameObject.Velocity"/>.
+            </summary>
+        </member>
+        <member name="P:TopDownShooter.Engine.IGameObject.Width">
+            <summary>
+            Gets the width of the game object.
+            </summary>
+        </member>
+        <member name="P:TopDownShooter.Engine.IGameObject.Height">
+            <summary>
+            Gets the height of the game object.
             </summary>
         </member>
         <member name="P:TopDownShooter.Engine.IGameObject.Velocity">
@@ -713,6 +753,16 @@
         <member name="P:TopDownShooter.Engine.Level.Tiles">
             <summary>
             Gets the collection of <see cref="T:TopDownShooter.Engine.Tile" /> objects.
+            </summary>
+        </member>
+        <member name="P:TopDownShooter.Engine.Level.Width">
+            <summary>
+            Gets the width of the game object.
+            </summary>
+        </member>
+        <member name="P:TopDownShooter.Engine.Level.Height">
+            <summary>
+            Gets the height of the game object.
             </summary>
         </member>
         <member name="M:TopDownShooter.Engine.Level.Draw(TopDownShooter.Engine.ISpriteBatchAdapter,Microsoft.Xna.Framework.GameTime)">
@@ -1062,11 +1112,6 @@
         <member name="P:TopDownShooter.Engine.Tile.Width">
             <summary>
             Gets the width.
-            </summary>
-        </member>
-        <member name="P:TopDownShooter.Engine.Tile.Bounds">
-            <summary>
-            Gets the bounds of the game object.
             </summary>
         </member>
         <member name="P:TopDownShooter.Engine.Tile.TileInteractionType">

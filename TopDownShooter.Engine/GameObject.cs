@@ -27,7 +27,7 @@ namespace TopDownShooter.Engine
         /// <summary>
         /// Gets the bounds of the game object.
         /// </summary>
-        public virtual Rectangle Bounds { get; }
+        public virtual Rectangle Bounds => new Rectangle((int)this.Position.X, (int)this.Position.Y, this.Width, this.Height);
 
         /// <summary>
         /// Gets the collection of components.
@@ -43,6 +43,26 @@ namespace TopDownShooter.Engine
         /// Gets or sets the position of the entity.
         /// </summary>
         public Vector2 Position { get; set; }
+
+        /// <summary>
+        /// Gets the projected position, based off the <see cref="IGameObject.Position"/> and the <see cref="IGameObject.Velocity"/>.
+        /// </summary>
+        public virtual Vector2 ProjectedPosition => this.Position + this.Velocity;
+
+        /// <summary>
+        /// Gets the projected bounds, based off the <see cref="IGameObject.Position"/> and the <see cref="IGameObject.Velocity"/>.
+        /// </summary>
+        public virtual Rectangle ProjectedBounds => new Rectangle((int)this.ProjectedPosition.X, (int)this.ProjectedPosition.Y, this.Width, this.Height);
+
+        /// <summary>
+        /// Gets the width of the game object.
+        /// </summary>
+        public abstract int Width { get; }
+
+        /// <summary>
+        /// Gets the height of the game object.
+        /// </summary>
+        public abstract int Height { get; }
 
         /// <summary>
         /// Gets or sets the velocity of the entity.

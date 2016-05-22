@@ -47,7 +47,7 @@ namespace TopDownShooter.Engine
 
             if (gameObject != null && otherGameObject != null && gameObject != other)
             {
-                return otherGameObject.Bounds.Intersects(gameObject.Bounds);
+                return otherGameObject.ProjectedBounds.Intersects(gameObject.ProjectedBounds);
             }
 
             return false;

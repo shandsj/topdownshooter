@@ -51,7 +51,7 @@ namespace TopDownShooter.Engine
         /// <summary>
         /// Gets the height.
         /// </summary>
-        public int Height { get; }
+        public override int Height { get; }
 
         /// <summary>
         /// Gets the texture
@@ -71,12 +71,7 @@ namespace TopDownShooter.Engine
         /// <summary>
         /// Gets the width.
         /// </summary>
-        public int Width { get; }
-
-        /// <summary>
-        /// Gets the bounds of the game object.
-        /// </summary>
-        public override Rectangle Bounds => new Rectangle((int)this.Position.X, (int)this.Position.Y, this.Width, this.Height);
+        public override int Width { get; }
 
         /// <summary>
         /// Gets the <see cref="TileInteractionType" />.

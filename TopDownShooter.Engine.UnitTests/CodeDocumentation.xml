@@ -65,6 +65,16 @@
             </summary>
             <param name="id">The game object identifier.</param>
         </member>
+        <member name="P:TopDownShooter.Engine.UnitTests.TestGameObject.Width">
+            <summary>
+            Gets the width of the game object.
+            </summary>
+        </member>
+        <member name="P:TopDownShooter.Engine.UnitTests.TestGameObject.Height">
+            <summary>
+            Gets the height of the game object.
+            </summary>
+        </member>
         <member name="T:TopDownShooter.Engine.UnitTests.SimpleAiInputControllerComponentTests">
             <summary>
             Class for testing the <see cref="T:TopDownShooter.Engine.SimpleAiInputControllerComponent"/>

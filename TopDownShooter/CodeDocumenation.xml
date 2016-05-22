@@ -131,9 +131,14 @@
             <param name="colliderComponent">The <see cref="T:TopDownShooter.Engine.ColliderComponentBase" />.</param>
             <param name="components">A collection of components.</param>
         </member>
-        <member name="P:TopDownShooter.Player.Bounds">
+        <member name="P:TopDownShooter.Player.Width">
             <summary>
-            Gets the bounds of the game object.
+            Gets the width of the game object.
+            </summary>
+        </member>
+        <member name="P:TopDownShooter.Player.Height">
+            <summary>
+            Gets the height of the game object.
             </summary>
         </member>
         <member name="T:TopDownShooter.Program">

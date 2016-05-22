@@ -19,5 +19,15 @@ namespace TopDownShooter.Engine.UnitTests
             : base(id)
         {
         }
+
+        /// <summary>
+        /// Gets the width of the game object.
+        /// </summary>
+        public override int Width { get; }
+
+        /// <summary>
+        /// Gets the height of the game object.
+        /// </summary>
+        public override int Height { get; }
     }
 }
