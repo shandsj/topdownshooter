@@ -405,12 +405,87 @@
             </summary>
             <returns>True to move up.</returns>
         </member>
-        <member name="M:TopDownShooter.Engine.IInputController.Update(Microsoft.Xna.Framework.GameTime)">
+        <member name="T:TopDownShooter.Engine.InputControllerComponentBase">
             <summary>
-            Updates based on the current gametime.
+            Base implementation for an <see cref="T:TopDownShooter.Engine.IInputController"/>
             </summary>
-            <param name="gameTime">The current <see cref="T:Microsoft.Xna.Framework.GameTime"/></param>
-            <remarks>Don't even know if GameTime is needed...</remarks>
+        </member>
+        <member name="M:TopDownShooter.Engine.InputControllerComponentBase.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:TopDownShooter.Engine.InputControllerComponentBase"/> class.
+            </summary>
+        </member>
+        <member name="M:TopDownShooter.Engine.InputControllerComponentBase.Finalize">
+            <summary>
+            Finalizes an instance of the <see cref="T:TopDownShooter.Engine.InputControllerComponentBase"/> class.
+            </summary>
+        </member>
+        <member name="M:TopDownShooter.Engine.InputControllerComponentBase.Update(TopDownShooter.Engine.IGameObject,Microsoft.Xna.Framework.GameTime)">
+            <summary>
+            Updates the component with the specified game object and game time.
+            </summary>
+            <param name="gameObject">The game object to update.</param>
+            <param name="time">The game time.</param>
+        </member>
+        <member name="M:TopDownShooter.Engine.InputControllerComponentBase.Draw(TopDownShooter.Engine.IGameObject,TopDownShooter.Engine.ISpriteBatchAdapter,Microsoft.Xna.Framework.GameTime)">
+            <summary>
+            Draws the component with the specified game object and game time.
+            </summary>
+            <param name="gameObject">The game object.</param>
+            <param name="spriteBatch">The sprite batch adapter.</param>
+            <param name="time">The game time.</param>
+        </member>
+        <member name="M:TopDownShooter.Engine.InputControllerComponentBase.LoadContent(TopDownShooter.Engine.IContentManagerAdapter)">
+            <summary>
+            Loads the content from the specified content manager adapter.
+            </summary>
+            <param name="contentManager">The content manager adapter.</param>
+        </member>
+        <member name="M:TopDownShooter.Engine.InputControllerComponentBase.UnloadContent(TopDownShooter.Engine.IContentManagerAdapter)">
+            <summary>
+            Unloads the content from the specified content manager adapter.
+            </summary>
+            <param name="contentManager">The content manager adapter.</param>
+        </member>
+        <member name="M:TopDownShooter.Engine.InputControllerComponentBase.MoveDown">
+            <summary>
+            Gets whether or not a up move was requested.
+            </summary>
+            <returns>True to move down.</returns>
+        </member>
+        <member name="M:TopDownShooter.Engine.InputControllerComponentBase.MoveLeft">
+            <summary>
+            Gets whether or not a left move was requested.
+            </summary>
+            <returns>True to move left.</returns>
+        </member>
+        <member name="M:TopDownShooter.Engine.InputControllerComponentBase.MoveRight">
+            <summary>
+            Gets whether or not a right move was requested.
+            </summary>
+            <returns>True to move right.</returns>
+        </member>
+        <member name="M:TopDownShooter.Engine.InputControllerComponentBase.MoveUp">
+            <summary>
+            Gets whether or not a up move was requested.
+            </summary>
+            <returns>True to move up.</returns>
+        </member>
+        <member name="M:TopDownShooter.Engine.InputControllerComponentBase.Dispose">
+            <summary>
+            Cleans up any resources used during the execution of this class
+            </summary>
+        </member>
+        <member name="M:TopDownShooter.Engine.InputControllerComponentBase.Dispose(System.Boolean)">
+            <summary>
+            Cleans up any resources used during the execution of this class
+            </summary>
+            <param name="disposing">Disposing or not?</param>
+        </member>
+        <member name="M:TopDownShooter.Engine.InputControllerComponentBase.ManagedDispose">
+            <summary>
+            Cleans up any managed resources during disposal
+            </summary>
         </member>
         <member name="T:TopDownShooter.Engine.ISpriteBatchAdapter">
             <summary>
@@ -584,68 +659,56 @@
             <param name="layer">The <see cref="T:TiledSharp.TmxLayer" /> to import from.</param>
             <param name="textures">The textures map that contains <see cref="T:TiledSharp.TmxTileset" /> to <see cref="T:Microsoft.Xna.Framework.Graphics.Texture2D" /> mappings.</param>
         </member>
-        <member name="T:TopDownShooter.Engine.SimpleAiInputController">
+        <member name="T:TopDownShooter.Engine.SimpleAiInputControllerComponent">
             <summary>
             Controller for controlling a simple AI.
             </summary>
         </member>
-        <member name="M:TopDownShooter.Engine.SimpleAiInputController.#ctor">
+        <member name="M:TopDownShooter.Engine.SimpleAiInputControllerComponent.#ctor">
             <summary>
-            Initializes a new instance of the <see cref="T:TopDownShooter.Engine.SimpleAiInputController"/> class.
+            Initializes a new instance of the <see cref="T:TopDownShooter.Engine.SimpleAiInputControllerComponent"/> class.
             </summary>
         </member>
-        <member name="M:TopDownShooter.Engine.SimpleAiInputController.Finalize">
+        <member name="M:TopDownShooter.Engine.SimpleAiInputControllerComponent.Finalize">
             <summary>
-            Finalizes an instance of the <see cref="T:TopDownShooter.Engine.SimpleAiInputController"/> class.
+            Finalizes an instance of the <see cref="T:TopDownShooter.Engine.SimpleAiInputControllerComponent"/> class.
             </summary>
         </member>
-        <member name="M:TopDownShooter.Engine.SimpleAiInputController.MoveDown">
+        <member name="M:TopDownShooter.Engine.SimpleAiInputControllerComponent.MoveDown">
             <summary>
             Gets whether or not a up move was requested.
             </summary>
             <returns>True to move down.</returns>
         </member>
-        <member name="M:TopDownShooter.Engine.SimpleAiInputController.MoveLeft">
+        <member name="M:TopDownShooter.Engine.SimpleAiInputControllerComponent.MoveLeft">
             <summary>
             Gets whether or not a left move was requested.
             </summary>
             <returns>True to move left.</returns>
         </member>
-        <member name="M:TopDownShooter.Engine.SimpleAiInputController.MoveRight">
+        <member name="M:TopDownShooter.Engine.SimpleAiInputControllerComponent.MoveRight">
             <summary>
             Gets whether or not a right move was requested.
             </summary>
             <returns>True to move right.</returns>
         </member>
-        <member name="M:TopDownShooter.Engine.SimpleAiInputController.MoveUp">
+        <member name="M:TopDownShooter.Engine.SimpleAiInputControllerComponent.MoveUp">
             <summary>
             Gets whether or not a up move was requested.
             </summary>
             <returns>True to move up.</returns>
         </member>
-        <member name="M:TopDownShooter.Engine.SimpleAiInputController.Update(Microsoft.Xna.Framework.GameTime)">
-            <summary>
-            Updates based on the current gametime.
-            </summary>
-            <param name="gameTime">The current <see cref="T:Microsoft.Xna.Framework.GameTime"/></param>
-        </member>
-        <member name="M:TopDownShooter.Engine.SimpleAiInputController.Dispose">
-            <summary>
-            This code added to correctly implement the disposable pattern.
-            </summary>
-        </member>
-        <member name="M:TopDownShooter.Engine.SimpleAiInputController.Dispose(System.Boolean)">
+        <member name="M:TopDownShooter.Engine.SimpleAiInputControllerComponent.ManagedDispose">
             <summary>
             Cleans up any resources allocated during execution
             </summary>
-            <param name="disposing">Gets whether this object is disposing</param>
         </member>
-        <member name="M:TopDownShooter.Engine.SimpleAiInputController.Initalize">
+        <member name="M:TopDownShooter.Engine.SimpleAiInputControllerComponent.Initalize">
             <summary>
             Initalizes our tasks for movement changes
             </summary>
         </member>
-        <member name="M:TopDownShooter.Engine.SimpleAiInputController.SleepRandomly">
+        <member name="M:TopDownShooter.Engine.SimpleAiInputControllerComponent.SleepRandomly">
             <summary>
             Sleeps a random amount of time between 0 and 1.5 seconds.
             </summary>

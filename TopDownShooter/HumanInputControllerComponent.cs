@@ -1,5 +1,5 @@
 ﻿// --------------------------------------------------------------------------------------------------------------------
-// <copyright file="HumanInputController.cs" company="PlaceholderCompany">
+// <copyright file="HumanInputControllerComponent.cs" company="PlaceholderCompany">
 // Copyright (c) PlaceholderCompany. All rights reserved.
 // </copyright>
 // --------------------------------------------------------------------------------------------------------------------
@@ -13,7 +13,7 @@ namespace TopDownShooter
     /// <summary>
     /// Herds Inputs...
     /// </summary>
-    public class HumanInputController : IInputController
+    public class HumanInputControllerComponent : InputControllerComponentBase
     {
         private KeyboardState previousKeyboardState;
         private KeyboardState currentKeyboardState;
@@ -23,11 +23,12 @@ namespace TopDownShooter
         private GamePadState currentGamePadState;
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="HumanInputController"/> class.
-        /// Creates a new <see cref="HumanInputController" /> that can be used to have a simple Composite for managing
+        /// Initializes a new instance of the <see cref="HumanInputControllerComponent"/> class.
+        /// Creates a new <see cref="HumanInputControllerComponent" /> that can be used to have a simple Composite for managing
         /// inputs among multiple devices.
         /// </summary>
-        public HumanInputController()
+        public HumanInputControllerComponent()
+            : base()
         {
         }
 
@@ -35,7 +36,7 @@ namespace TopDownShooter
         /// Gets whether or not a up move was requested.
         /// </summary>
         /// <returns>True to move down.</returns>
-        public bool MoveDown()
+        public override bool MoveDown()
         {
             var result = false;
 
@@ -54,7 +55,7 @@ namespace TopDownShooter
         /// Gets whether or not a left move was requested.
         /// </summary>
         /// <returns>True to move left.</returns>
-        public bool MoveLeft()
+        public override bool MoveLeft()
         {
             var result = false;
 
@@ -73,7 +74,7 @@ namespace TopDownShooter
         /// Gets whether or not a right move was requested.
         /// </summary>
         /// <returns>True to move right.</returns>
-        public bool MoveRight()
+        public override bool MoveRight()
         {
             var result = false;
 
@@ -92,7 +93,7 @@ namespace TopDownShooter
         /// Gets whether or not a up move was requested.
         /// </summary>
         /// <returns>True to move up.</returns>
-        public bool MoveUp()
+        public override bool MoveUp()
         {
             var result = false;
 
@@ -108,10 +109,11 @@ namespace TopDownShooter
         }
 
         /// <summary>
-        /// Updates based on the current gametime.
+        /// Updates the component with the specified game object and game time.
         /// </summary>
-        /// <param name="gameTime">The current gametime.</param>
-        public void Update(GameTime gameTime)
+        /// <param name="gameObject">The game object to update.</param>
+        /// <param name="time">The game time.</param>
+        public override void Update(IGameObject gameObject, GameTime time)
         {
             this.previousMouseState = this.currentMouseState;
             this.previousKeyboardState = this.currentKeyboardState;
