@@ -29,5 +29,35 @@
             Tests that the transform matrix is calculated.
             </summary>
         </member>
+        <member name="T:TopDownShooter.Engine.UnitTests.GameObjectTests">
+            <summary>
+            Contains unit tests for the <see cref="T:TopDownShooter.Engine.GameObject" /> class.
+            </summary>
+        </member>
+        <member name="M:TopDownShooter.Engine.UnitTests.GameObjectTests.DelegatesDrawCallsToComponents">
+            <summary>
+            Tests that the game object delegates draw calls to a component.
+            </summary>
+        </member>
+        <member name="M:TopDownShooter.Engine.UnitTests.GameObjectTests.DelegatesUnloadContentCallsToComponents">
+            <summary>
+            Tests that the game object delegates unload content calls to a component.
+            </summary>
+        </member>
+        <member name="M:TopDownShooter.Engine.UnitTests.GameObjectTests.DelegatesLoadContentCallsToComponents">
+            <summary>
+            Tests that the game object delegates load content calls to a component.
+            </summary>
+        </member>
+        <member name="M:TopDownShooter.Engine.UnitTests.GameObjectTests.DelegatesUpdateCallsToComponents">
+            <summary>
+            Tests that the game object delegates update calls to a component.
+            </summary>
+        </member>
+        <member name="T:TopDownShooter.Engine.UnitTests.TestGameObject">
+            <summary>
+            Defines a test game object.
+            </summary>
+        </member>
     </members>
 </doc>
