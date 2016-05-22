@@ -7,6 +7,7 @@
 namespace TopDownShooter
 {
     using System;
+    using System.Collections.Generic;
     using Microsoft.Xna.Framework;
     using Microsoft.Xna.Framework.Graphics;
     using Microsoft.Xna.Framework.Input;
@@ -38,9 +39,8 @@ namespace TopDownShooter
         /// </summary>
         private Level level;
 
-        private IInputController inputController;
-
-        private Player simplePlayer;
+        private Player focusedPlayer;
+        private List<Player> players;
 
         /// <summary>
         /// The default <see cref="ISpriteBatchAdapter" />.
@@ -66,7 +66,9 @@ namespace TopDownShooter
 
             this.spriteBatch.Begin(transformMatrix: this.camera.TransformMatrix);
             this.level.Draw(this.spriteBatch, gameTime);
-            this.simplePlayer.Draw(this.spriteBatch, gameTime);
+
+            this.players.ForEach(o => o.Draw(this.spriteBatch, gameTime));
+
             this.spriteBatch.End();
 
             base.Draw(gameTime);
@@ -80,13 +82,37 @@ namespace TopDownShooter
         /// </summary>
         protected override void Initialize()
         {
-            this.camera = new Camera(this.GraphicsDevice.Viewport);
+            this.players = new List<Player>();
+
+            this.camera = new Camera(this.GraphicsDevice.Viewport) { Zoom = .5f };
             this.level = new Level(new TmxMap("Content/TmxFiles/DefaultLevel.tmx"));
 
-        this.inputController = new SimpleAiInputController();
+#pragma warning disable SA1118 // Parameter must not span multiple lines
+            this.focusedPlayer = new Player(
+                new Vector2(1600, 1600),
+                new IComponent[]
+                {
+                    new AnimationComponent("hoodieguy", new FrameProperties(76, 140, TimeSpan.FromSeconds(.1), 2)) { IsLooping = true, IsAnimating = true },
+                    new HumanInputControllerComponent(),
+                });
+            this.focusedPlayer.Velocity = new Vector2(8, 8);
 
-            this.simplePlayer = new Player(this.inputController);
+            this.players.Add(this.focusedPlayer);
 
+            for (int i = 0; i < 3; i++)
+            {
+                var player = new Player(
+                new Vector2(1600, 1600),
+                new IComponent[]
+                {
+                    new AnimationComponent("hoodieguy", new FrameProperties(76, 140, TimeSpan.FromSeconds(.1), 2)) { IsLooping = true, IsAnimating = true },
+                    new SimpleAiInputControllerComponent(),
+                });
+                player.Velocity = new Vector2(8, 8);
+
+                this.players.Add(player);
+            }
+#pragma warning restore SA1118
             base.Initialize();
         }
 
@@ -101,7 +127,7 @@ namespace TopDownShooter
             this.contentManager = new ContentManagerAdapter(this.Content);
 
             this.level.LoadContent(this.contentManager);
-            this.simplePlayer.LoadContent(this.contentManager);
+            this.players.ForEach(o => o.LoadContent(this.contentManager));
         }
 
         /// <summary>
@@ -111,7 +137,7 @@ namespace TopDownShooter
         protected override void UnloadContent()
         {
             this.level.UnloadContent(this.contentManager);
-            this.simplePlayer.LoadContent(this.contentManager);
+            this.players.ForEach(o => o.UnloadContent(this.contentManager));
         }
 
         /// <summary>
@@ -129,9 +155,8 @@ namespace TopDownShooter
                 this.Exit();
             }
 
-            this.inputController.Update(gameTime);
-            this.simplePlayer.Update(gameTime);
-            this.camera.Position = this.simplePlayer.Position;
+            this.players.ForEach(o => o.Update(gameTime));
+            this.camera.Position = this.focusedPlayer.Position;
 
             base.Update(gameTime);
         }

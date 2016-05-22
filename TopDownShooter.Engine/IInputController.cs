@@ -39,12 +39,5 @@ namespace TopDownShooter.Engine
         /// </summary>
         /// <returns>True to move up.</returns>
         bool MoveUp();
-
-        /// <summary>
-        /// Updates based on the current gametime.
-        /// </summary>
-        /// <param name="gameTime">The current <see cref="GameTime"/></param>
-        /// <remarks>Don't even know if GameTime is needed...</remarks>
-        void Update(GameTime gameTime);
     }
 }

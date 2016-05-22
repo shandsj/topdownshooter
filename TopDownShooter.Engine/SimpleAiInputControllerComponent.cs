@@ -1,4 +1,4 @@
-﻿// <copyright file="SimpleAiInputController.cs" company="PlaceholderCompany">
+﻿// <copyright file="SimpleAiInputControllerComponent.cs" company="PlaceholderCompany">
 // Copyright (c) PlaceholderCompany. All rights reserved.
 // </copyright>
 
@@ -14,7 +14,7 @@ namespace TopDownShooter.Engine
     /// <summary>
     /// Controller for controlling a simple AI.
     /// </summary>
-    public class SimpleAiInputController : IInputController, IDisposable
+    public class SimpleAiInputControllerComponent : InputControllerComponentBase
     {
         private bool moveLeft;
         private bool moveRight;
@@ -22,23 +22,23 @@ namespace TopDownShooter.Engine
         private bool moveDown;
 
         private Random random;
-        private bool disposedValue = false; // To detect redundant calls
 
         private List<Task> taskList;
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="SimpleAiInputController"/> class.
+        /// Initializes a new instance of the <see cref="SimpleAiInputControllerComponent"/> class.
         /// </summary>
-        public SimpleAiInputController()
+        public SimpleAiInputControllerComponent()
+            : base()
         {
             this.random = new Random((int)DateTime.Now.Ticks);
             this.Initalize();
         }
 
         /// <summary>
-        /// Finalizes an instance of the <see cref="SimpleAiInputController"/> class.
+        /// Finalizes an instance of the <see cref="SimpleAiInputControllerComponent"/> class.
         /// </summary>
-        ~SimpleAiInputController()
+        ~SimpleAiInputControllerComponent()
         {
             // Do not change this code. Put cleanup code in Dispose(bool disposing) above.
             this.Dispose(false);
@@ -48,7 +48,7 @@ namespace TopDownShooter.Engine
         /// Gets whether or not a up move was requested.
         /// </summary>
         /// <returns>True to move down.</returns>
-        public bool MoveDown()
+        public override bool MoveDown()
         {
             return this.moveDown;
         }
@@ -57,7 +57,7 @@ namespace TopDownShooter.Engine
         /// Gets whether or not a left move was requested.
         /// </summary>
         /// <returns>True to move left.</returns>
-        public bool MoveLeft()
+        public override bool MoveLeft()
         {
             return this.moveLeft;
         }
@@ -66,7 +66,7 @@ namespace TopDownShooter.Engine
         /// Gets whether or not a right move was requested.
         /// </summary>
         /// <returns>True to move right.</returns>
-        public bool MoveRight()
+        public override bool MoveRight()
         {
             return this.moveRight;
         }
@@ -75,45 +75,18 @@ namespace TopDownShooter.Engine
         /// Gets whether or not a up move was requested.
         /// </summary>
         /// <returns>True to move up.</returns>
-        public bool MoveUp()
+        public override bool MoveUp()
         {
             return this.moveUp;
         }
 
         /// <summary>
-        /// Updates based on the current gametime.
-        /// </summary>
-        /// <param name="gameTime">The current <see cref="GameTime"/></param>
-        public void Update(GameTime gameTime)
-        {
-        }
-
-        /// <summary>
-        /// This code added to correctly implement the disposable pattern.
-        /// </summary>
-        public void Dispose()
-        {
-            // Do not change this code. Put cleanup code in Dispose(bool disposing) above.
-            this.Dispose(true);
-            GC.SuppressFinalize(this);
-        }
-
-        /// <summary>
         /// Cleans up any resources allocated during execution
         /// </summary>
-        /// <param name="disposing">Gets whether this object is disposing</param>
-        protected virtual void Dispose(bool disposing)
+        protected override void ManagedDispose()
         {
-            if (!this.disposedValue)
-            {
-                if (disposing)
-                {
-                    this.taskList.ForEach(o => o.Dispose());
-                    this.taskList.Clear();
-                }
-
-                this.disposedValue = true;
-            }
+            this.taskList.ForEach(o => o.Dispose());
+            this.taskList.Clear();
         }
 
         /// <summary>
