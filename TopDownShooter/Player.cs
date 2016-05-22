@@ -22,6 +22,7 @@ namespace TopDownShooter
         /// <summary>
         /// Initializes a new instance of the <see cref="Player"/> class.
         /// </summary>
+        /// <param name="inputController">The input controller.</param>
         public Player(IInputController inputController)
 #pragma warning disable SA1118 // Parameter must not span multiple lines
             : this(new Vector2(1600, 1600), new[]

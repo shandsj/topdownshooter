@@ -123,6 +123,7 @@
             <summary>
             Initializes a new instance of the <see cref="T:TopDownShooter.Player"/> class.
             </summary>
+            <param name="inputController">The input controller.</param>
         </member>
         <member name="M:TopDownShooter.Player.#ctor(Microsoft.Xna.Framework.Vector2,System.Collections.Generic.IEnumerable{TopDownShooter.Engine.IComponent})">
             <summary>

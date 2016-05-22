@@ -1,5 +1,5 @@
 ﻿// --------------------------------------------------------------------------------------------------------------------
-// <copyright file="AnimationTests.cs" company="PlaceholderCompany">
+// <copyright file="AnimationComponentTests.cs" company="PlaceholderCompany">
 // Copyright (c) PlaceholderCompany. All rights reserved.
 // </copyright>
 // --------------------------------------------------------------------------------------------------------------------
