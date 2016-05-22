@@ -4,85 +4,69 @@
         <name>TopDownShooter.Engine</name>
     </assembly>
     <members>
-        <member name="T:TopDownShooter.Engine.Animation">
+        <member name="T:TopDownShooter.Engine.AnimationComponent">
             <summary>
             Defines an animation class.
             </summary>
         </member>
-        <member name="F:TopDownShooter.Engine.Animation.assetName">
+        <member name="F:TopDownShooter.Engine.AnimationComponent.assetName">
             <summary>
             The asset name used to load content.
             </summary>
         </member>
-        <member name="F:TopDownShooter.Engine.Animation.duration">
+        <member name="F:TopDownShooter.Engine.AnimationComponent.duration">
             <summary>
             The current duration of the current frame.
             </summary>
         </member>
-        <member name="F:TopDownShooter.Engine.Animation.texture">
+        <member name="F:TopDownShooter.Engine.AnimationComponent.texture">
             <summary>
             The texture that contains the frames.
             </summary>
         </member>
-        <member name="M:TopDownShooter.Engine.Animation.#ctor(System.String,TopDownShooter.Engine.FrameProperties)">
+        <member name="M:TopDownShooter.Engine.AnimationComponent.#ctor(System.String,TopDownShooter.Engine.FrameProperties)">
             <summary>
-            Initializes a new instance of the <see cref="T:TopDownShooter.Engine.Animation" /> class.
+            Initializes a new instance of the <see cref="T:TopDownShooter.Engine.AnimationComponent" /> class.
             </summary>
             <param name="assetName">The asset name used to load content.</param>
-            <param name="frameProperties">The <see cref="P:TopDownShooter.Engine.Animation.FrameProperties" /> for this <see cref="T:TopDownShooter.Engine.Animation" />.</param>
+            <param name="frameProperties">The <see cref="P:TopDownShooter.Engine.AnimationComponent.FrameProperties" /> for this <see cref="T:TopDownShooter.Engine.AnimationComponent" />.</param>
         </member>
-        <member name="P:TopDownShooter.Engine.Animation.FrameIndex">
+        <member name="P:TopDownShooter.Engine.AnimationComponent.FrameIndex">
             <summary>
             Gets the current frame index.
             </summary>
         </member>
-        <member name="P:TopDownShooter.Engine.Animation.FrameProperties">
+        <member name="P:TopDownShooter.Engine.AnimationComponent.FrameProperties">
             <summary>
-            Gets the <see cref="P:TopDownShooter.Engine.Animation.FrameProperties" />  for this <see cref="T:TopDownShooter.Engine.Animation" />.
+            Gets the <see cref="P:TopDownShooter.Engine.AnimationComponent.FrameProperties" />  for this <see cref="T:TopDownShooter.Engine.AnimationComponent" />.
             </summary>
         </member>
-        <member name="P:TopDownShooter.Engine.Animation.IsAnimating">
+        <member name="P:TopDownShooter.Engine.AnimationComponent.IsAnimating">
             <summary>
-            Gets or sets a value indicating whether the <see cref="T:TopDownShooter.Engine.Animation" /> is animating.
+            Gets or sets a value indicating whether the <see cref="T:TopDownShooter.Engine.AnimationComponent" /> is animating.
             </summary>
         </member>
-        <member name="P:TopDownShooter.Engine.Animation.IsLooping">
+        <member name="P:TopDownShooter.Engine.AnimationComponent.IsLooping">
             <summary>
-            Gets or sets a value indicating whether to loop the <see cref="T:TopDownShooter.Engine.Animation" />.
+            Gets or sets a value indicating whether to loop the <see cref="T:TopDownShooter.Engine.AnimationComponent" />.
             </summary>
         </member>
-        <member name="P:TopDownShooter.Engine.Animation.Position">
+        <member name="P:TopDownShooter.Engine.AnimationComponent.Rotation">
             <summary>
-            Gets or sets the position of this animation.
+            Gets or sets the rotation for this <see cref="T:TopDownShooter.Engine.AnimationComponent" />.
             </summary>
         </member>
-        <member name="P:TopDownShooter.Engine.Animation.Rotation">
+        <member name="P:TopDownShooter.Engine.AnimationComponent.Scale">
             <summary>
-            Gets or sets the rotation for this <see cref="T:TopDownShooter.Engine.Animation" />.
+            Gets or sets the scale for this <see cref="T:TopDownShooter.Engine.AnimationComponent" />.
             </summary>
         </member>
-        <member name="P:TopDownShooter.Engine.Animation.Scale">
+        <member name="P:TopDownShooter.Engine.AnimationComponent.SpriteEffect">
             <summary>
-            Gets or sets the scale for this <see cref="T:TopDownShooter.Engine.Animation" />.
+            Gets or sets the <see cref="T:Microsoft.Xna.Framework.Graphics.SpriteEffects" /> for this <see cref="T:TopDownShooter.Engine.AnimationComponent" />.
             </summary>
         </member>
-        <member name="P:TopDownShooter.Engine.Animation.SpriteEffect">
-            <summary>
-            Gets or sets the <see cref="T:Microsoft.Xna.Framework.Graphics.SpriteEffects" /> for this <see cref="T:TopDownShooter.Engine.Animation" />.
-            </summary>
-        </member>
-        <member name="M:TopDownShooter.Engine.Animation.Draw(TopDownShooter.Engine.ISpriteBatchAdapter,Microsoft.Xna.Framework.GameTime)">
-            <summary>
-            Draws this <see cref="T:TopDownShooter.Engine.Animation" />.
-            </summary>
-            <param name="spriteBatch">
-            The <see cref="T:TopDownShooter.Engine.ISpriteBatchAdapter" />.
-            </param>
-            <param name="gameTime">
-            The game time.
-            </param>
-        </member>
-        <member name="M:TopDownShooter.Engine.Animation.Initialize">
+        <member name="M:TopDownShooter.Engine.AnimationComponent.Initialize">
             <summary>
             Allows the game to perform any initialization it needs to before starting to run.
             This is where it can query for any required services and load any non-graphic
@@ -90,32 +74,39 @@
             and initialize them as well.
             </summary>
         </member>
-        <member name="M:TopDownShooter.Engine.Animation.LoadContent(Microsoft.Xna.Framework.Content.ContentManager)">
+        <member name="M:TopDownShooter.Engine.AnimationComponent.LoadContent(TopDownShooter.Engine.IContentManagerAdapter)">
             <summary>
-            Loads the content of this <see cref="T:TopDownShooter.Engine.Animation" />.
+            Loads the content of this <see cref="T:TopDownShooter.Engine.AnimationComponent" />.
             </summary>
-            <param name="content">
-            The <see cref="T:Microsoft.Xna.Framework.Content.ContentManager" />.
+            <param name="contentManager">
+            The <see cref="T:TopDownShooter.Engine.IContentManagerAdapter" />.
             </param>
         </member>
-        <member name="M:TopDownShooter.Engine.Animation.Reset">
+        <member name="M:TopDownShooter.Engine.AnimationComponent.Reset">
             <summary>
-            Resets the <see cref="T:TopDownShooter.Engine.Animation" />.
+            Resets the <see cref="T:TopDownShooter.Engine.AnimationComponent" />.
             </summary>
         </member>
-        <member name="M:TopDownShooter.Engine.Animation.UnloadContent(Microsoft.Xna.Framework.Content.ContentManager)">
+        <member name="M:TopDownShooter.Engine.AnimationComponent.UnloadContent(TopDownShooter.Engine.IContentManagerAdapter)">
             <summary>
-            Unloads the content of this <see cref="T:TopDownShooter.Engine.Animation" />.
+            Unloads the content of this <see cref="T:TopDownShooter.Engine.AnimationComponent" />.
             </summary>
-            <param name="content">The <see cref="T:Microsoft.Xna.Framework.Content.ContentManager" />.</param>
+            <param name="contentManager">The <see cref="T:TopDownShooter.Engine.IContentManagerAdapter" />.</param>
         </member>
-        <member name="M:TopDownShooter.Engine.Animation.Update(Microsoft.Xna.Framework.GameTime)">
+        <member name="M:TopDownShooter.Engine.AnimationComponent.Update(TopDownShooter.Engine.IGameObject,Microsoft.Xna.Framework.GameTime)">
             <summary>
-            Updates the state of this <see cref="T:TopDownShooter.Engine.Animation" />.
+            Updates the component with the specified game object and game time.
             </summary>
-            <param name="gameTime">
-            The game time.
-            </param>
+            <param name="gameObject">The game object to update.</param>
+            <param name="time">The game time.</param>
+        </member>
+        <member name="M:TopDownShooter.Engine.AnimationComponent.Draw(TopDownShooter.Engine.IGameObject,TopDownShooter.Engine.ISpriteBatchAdapter,Microsoft.Xna.Framework.GameTime)">
+            <summary>
+            Draws the component with the specified game object and game time.
+            </summary>
+            <param name="gameObject">The game object.</param>
+            <param name="spriteBatch">The sprite batch adapter.</param>
+            <param name="time">The game time.</param>
         </member>
         <member name="T:TopDownShooter.Engine.Camera">
             <summary>
@@ -181,9 +172,41 @@
             <param name="assetName">The asset name.</param>
             <returns>The loaded asset.</returns>
         </member>
+        <member name="T:TopDownShooter.Engine.IComponent">
+            <summary>
+            Defines an interface for components.
+            </summary>
+        </member>
+        <member name="M:TopDownShooter.Engine.IComponent.Update(TopDownShooter.Engine.IGameObject,Microsoft.Xna.Framework.GameTime)">
+            <summary>
+            Updates the component with the specified game object and game time.
+            </summary>
+            <param name="gameObject">The game object to update.</param>
+            <param name="time">The game time.</param>
+        </member>
+        <member name="M:TopDownShooter.Engine.IComponent.Draw(TopDownShooter.Engine.IGameObject,TopDownShooter.Engine.ISpriteBatchAdapter,Microsoft.Xna.Framework.GameTime)">
+            <summary>
+            Draws the component with the specified game object and game time.
+            </summary>
+            <param name="gameObject">The game object.</param>
+            <param name="spriteBatch">The sprite batch adapter.</param>
+            <param name="time">The game time.</param>
+        </member>
+        <member name="M:TopDownShooter.Engine.IComponent.LoadContent(TopDownShooter.Engine.IContentManagerAdapter)">
+            <summary>
+            Loads the content from the specified content manager adapter.
+            </summary>
+            <param name="contentManager">The content manager adapter.</param>
+        </member>
+        <member name="M:TopDownShooter.Engine.IComponent.UnloadContent(TopDownShooter.Engine.IContentManagerAdapter)">
+            <summary>
+            Unloads the content from the specified content manager adapter.
+            </summary>
+            <param name="contentManager">The content manager adapter.</param>
+        </member>
         <member name="T:TopDownShooter.Engine.FrameProperties">
             <summary>
-            Defines a structure for the frame properties of an <see cref="T:TopDownShooter.Engine.Animation" />.
+            Defines a structure for the frame properties of an <see cref="T:TopDownShooter.Engine.AnimationComponent" />.
             </summary>
         </member>
         <member name="M:TopDownShooter.Engine.FrameProperties.#ctor(System.Int32,System.Int32,System.TimeSpan,System.Int32)">
@@ -193,11 +216,11 @@
             <param name="width">The width of a frame.</param>
             <param name="height">The height of a frame.</param>
             <param name="duration">The duration of a frame.</param>
-            <param name="count">The number of frames in an <see cref="T:TopDownShooter.Engine.Animation" />.</param>
+            <param name="count">The number of frames in an <see cref="T:TopDownShooter.Engine.AnimationComponent" />.</param>
         </member>
         <member name="P:TopDownShooter.Engine.FrameProperties.Count">
             <summary>
-            Gets the number of frames in an <see cref="T:TopDownShooter.Engine.Animation" />.
+            Gets the number of frames in an <see cref="T:TopDownShooter.Engine.AnimationComponent" />.
             </summary>
         </member>
         <member name="P:TopDownShooter.Engine.FrameProperties.Duration">
@@ -214,6 +237,56 @@
             <summary>
             Gets the width of a frame.
             </summary>
+        </member>
+        <member name="T:TopDownShooter.Engine.GameObject">
+            <summary>
+            Defines an entity.
+            </summary>
+        </member>
+        <member name="M:TopDownShooter.Engine.GameObject.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:TopDownShooter.Engine.GameObject" /> class.
+            </summary>
+        </member>
+        <member name="P:TopDownShooter.Engine.GameObject.Components">
+            <summary>
+            Gets the collection of components.
+            </summary>
+        </member>
+        <member name="P:TopDownShooter.Engine.GameObject.Position">
+            <summary>
+            Gets or sets the position of the entity.
+            </summary>
+        </member>
+        <member name="P:TopDownShooter.Engine.GameObject.Velocity">
+            <summary>
+            Gets or sets the velocity of the entity.
+            </summary>
+        </member>
+        <member name="M:TopDownShooter.Engine.GameObject.LoadContent(TopDownShooter.Engine.IContentManagerAdapter)">
+            <summary>
+            Loads the content from the specified content manager adapter.
+            </summary>
+            <param name="contentManager">The content manager adapter.</param>
+        </member>
+        <member name="M:TopDownShooter.Engine.GameObject.UnloadContent(TopDownShooter.Engine.IContentManagerAdapter)">
+            <summary>
+            Unloads the content from the specified content manager adapter.
+            </summary>
+            <param name="contentManager">The content manager adapter.</param>
+        </member>
+        <member name="M:TopDownShooter.Engine.GameObject.Draw(TopDownShooter.Engine.ISpriteBatchAdapter,Microsoft.Xna.Framework.GameTime)">
+            <summary>
+            Draws the game object with the specified sprite batch adapter and game time.
+            </summary>
+            <param name="spriteBatch">The sprite batch adapter.</param>
+            <param name="gameTime">The game time.</param>
+        </member>
+        <member name="M:TopDownShooter.Engine.GameObject.Update(Microsoft.Xna.Framework.GameTime)">
+            <summary>
+            Updates the game object with the specified game time.
+            </summary>
+            <param name="gameTime">The game time.</param>
         </member>
         <member name="T:TopDownShooter.Engine.ICamera">
             <summary>
@@ -257,6 +330,51 @@
             <typeparam name="T">The type of the asset to load.</typeparam>
             <param name="assetName">The asset name.</param>
             <returns>The loaded asset.</returns>
+        </member>
+        <member name="T:TopDownShooter.Engine.IGameObject">
+            <summary>
+            Defines an interface for a game object.
+            </summary>
+        </member>
+        <member name="P:TopDownShooter.Engine.IGameObject.Position">
+            <summary>
+            Gets or sets the position of the game object.
+            </summary>
+        </member>
+        <member name="P:TopDownShooter.Engine.IGameObject.Velocity">
+            <summary>
+            Gets or sets the velocity of the game object.
+            </summary>
+        </member>
+        <member name="P:TopDownShooter.Engine.IGameObject.Components">
+            <summary>
+            Gets the collection of components.
+            </summary>
+        </member>
+        <member name="M:TopDownShooter.Engine.IGameObject.Update(Microsoft.Xna.Framework.GameTime)">
+            <summary>
+            Updates the game object with the specified game time.
+            </summary>
+            <param name="gameTime">The game time.</param>
+        </member>
+        <member name="M:TopDownShooter.Engine.IGameObject.Draw(TopDownShooter.Engine.ISpriteBatchAdapter,Microsoft.Xna.Framework.GameTime)">
+            <summary>
+            Draws the game object with the specified sprite batch adapter and game time.
+            </summary>
+            <param name="spriteBatch">The sprite batch adapter.</param>
+            <param name="gameTime">The game time.</param>
+        </member>
+        <member name="M:TopDownShooter.Engine.IGameObject.LoadContent(TopDownShooter.Engine.IContentManagerAdapter)">
+            <summary>
+            Loads the content from the specified content manager adapter.
+            </summary>
+            <param name="contentManager">The content manager adapter.</param>
+        </member>
+        <member name="M:TopDownShooter.Engine.IGameObject.UnloadContent(TopDownShooter.Engine.IContentManagerAdapter)">
+            <summary>
+            Unloads the content from the specified content manager adapter.
+            </summary>
+            <param name="contentManager">The content manager adapter.</param>
         </member>
         <member name="T:TopDownShooter.Engine.ISpriteBatchAdapter">
             <summary>

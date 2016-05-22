@@ -9,7 +9,7 @@ namespace TopDownShooter.Engine
     using System;
 
     /// <summary>
-    /// Defines a structure for the frame properties of an <see cref="Animation" />.
+    /// Defines a structure for the frame properties of an <see cref="AnimationComponent" />.
     /// </summary>
     public struct FrameProperties
     {
@@ -19,7 +19,7 @@ namespace TopDownShooter.Engine
         /// <param name="width">The width of a frame.</param>
         /// <param name="height">The height of a frame.</param>
         /// <param name="duration">The duration of a frame.</param>
-        /// <param name="count">The number of frames in an <see cref="Animation" />.</param>
+        /// <param name="count">The number of frames in an <see cref="AnimationComponent" />.</param>
         public FrameProperties(int width, int height, TimeSpan duration, int count)
             : this()
         {
@@ -30,7 +30,7 @@ namespace TopDownShooter.Engine
         }
 
         /// <summary>
-        /// Gets the number of frames in an <see cref="Animation" />.
+        /// Gets the number of frames in an <see cref="AnimationComponent" />.
         /// </summary>
         public int Count { get; private set; }
 

@@ -69,12 +69,15 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Animation.cs" />
+    <Compile Include="AnimationComponent.cs" />
     <Compile Include="Camera.cs" />
     <Compile Include="ContentManagerAdapter.cs" />
+    <Compile Include="IComponent.cs" />
     <Compile Include="FrameProperties.cs" />
+    <Compile Include="GameObject.cs" />
     <Compile Include="ICamera.cs" />
     <Compile Include="IContentManagerAdapter.cs" />
+    <Compile Include="IGameObject.cs" />
     <Compile Include="ISpriteBatchAdapter.cs" />
     <Compile Include="ITile.cs" />
     <Compile Include="Level.cs" />

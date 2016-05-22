@@ -19,11 +19,6 @@ namespace TopDownShooter
     public class Game1 : Game
     {
         /// <summary>
-        /// A simple test animation
-        /// </summary>
-        private Animation animation;
-
-        /// <summary>
         /// The <see cref="ICamera"/>.
         /// </summary>
         private ICamera camera;
@@ -75,7 +70,6 @@ namespace TopDownShooter
 
             // TODO: Add your drawing code here
             this.m_SimplePlayer.Draw(this.spriteBatch, gameTime);
-            this.animation.Draw(this.spriteBatch, gameTime);
 
             this.spriteBatch.End();
 
@@ -95,11 +89,7 @@ namespace TopDownShooter
 
             this.m_InputHerder = new InputHerder(Keyboard.GetState(), Mouse.GetState(), GamePad.GetState(PlayerIndex.One));
 
-            this.animation = new Animation("hoodieguy", new FrameProperties(76, 140, TimeSpan.FromSeconds(.1), 2)) { IsLooping = true };
-
             this.m_SimplePlayer = new Player();
-            this.m_SimplePlayer.Initialize(this.animation, new Vector2(1600, 1600)); // World Coordinates
-            this.m_SimplePlayer.IsMoving = true;
 
             base.Initialize();
         }
@@ -117,7 +107,7 @@ namespace TopDownShooter
             this.level.LoadContent(this.contentManager);
 
             // TODO: use this.Content to load your game content here
-            this.animation.LoadContent(this.Content);
+            this.m_SimplePlayer.LoadContent(this.contentManager);
         }
 
         /// <summary>
@@ -127,7 +117,7 @@ namespace TopDownShooter
         protected override void UnloadContent()
         {
             // TODO: Unload any non ContentManager content here
-            this.animation.UnloadContent(this.Content);
+            this.m_SimplePlayer.LoadContent(this.contentManager);
         }
 
         /// <summary>

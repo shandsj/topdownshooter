@@ -13,10 +13,10 @@ namespace TopDownShooter.Engine.UnitTests
     using Moq;
 
     /// <summary>
-    /// Contains unit tests for the <see cref="Animation" /> class.
+    /// Contains unit tests for the <see cref="AnimationComponent" /> class.
     /// </summary>
     [TestClass]
-    public class AnimationTests
+    public class AnimationComponentTests
     {
         /// <summary>
         /// Tests whether the animation is drawn in the sprite batch when draw is called.
@@ -49,15 +49,17 @@ namespace TopDownShooter.Engine.UnitTests
                 It.IsAny<float>()))
             .Callback(() => wasDrawCalled = true);
 
-            var uut = new Animation("test", new FrameProperties(10, 10, TimeSpan.FromSeconds(1), 5))
+            var gameObject = new Mock<IGameObject>();
+            gameObject.SetupGet(property => property.Position).Returns(new Vector2(42, 42));
+
+            var uut = new AnimationComponent("test", new FrameProperties(10, 10, TimeSpan.FromSeconds(1), 5))
             {
-                Position = new Vector2(42, 42),
                 Rotation = 42,
                 SpriteEffect = SpriteEffects.FlipVertically
             };
 
             // Do the thing!
-            uut.Draw(spriteBatch.Object, new GameTime());
+            uut.Draw(gameObject.Object, spriteBatch.Object, new GameTime());
 
             // Verify all our parameters as we expected them to be passed
             // through to the draw method.
@@ -82,21 +84,21 @@ namespace TopDownShooter.Engine.UnitTests
         [TestMethod]
         public void UpdatesFrameIndexWhenUpdateIsCalledAndIsAnimating()
         {
-            var uut = new Animation("test", new FrameProperties(10, 10, TimeSpan.FromSeconds(1), 5)) { IsAnimating = true };
+            var uut = new AnimationComponent("test", new FrameProperties(10, 10, TimeSpan.FromSeconds(1), 5)) { IsAnimating = true };
 
             // We should start out on frame 0.
             Assert.AreEqual(0, uut.FrameIndex);
 
             // After a call to update with elapsed game time of just .5 seconds, we should still be on frame 0.
-            uut.Update(new GameTime(TimeSpan.Zero, TimeSpan.FromSeconds(.5)));
+            uut.Update(new Mock<IGameObject>().Object, new GameTime(TimeSpan.Zero, TimeSpan.FromSeconds(.5)));
             Assert.AreEqual(0, uut.FrameIndex);
 
             // Adding another .5 seconds should move to frame 1.
-            uut.Update(new GameTime(TimeSpan.Zero, TimeSpan.FromSeconds(.5)));
+            uut.Update(new Mock<IGameObject>().Object, new GameTime(TimeSpan.Zero, TimeSpan.FromSeconds(.5)));
             Assert.AreEqual(1, uut.FrameIndex);
 
             // Another 1 second should move to frame 2.
-            uut.Update(new GameTime(TimeSpan.Zero, TimeSpan.FromSeconds(1)));
+            uut.Update(new Mock<IGameObject>().Object, new GameTime(TimeSpan.Zero, TimeSpan.FromSeconds(1)));
             Assert.AreEqual(2, uut.FrameIndex);
         }
     }

@@ -9,11 +9,6 @@
             This is the main type for your game.
             </summary>
         </member>
-        <member name="F:TopDownShooter.Game1.animation">
-            <summary>
-            A simple test animation
-            </summary>
-        </member>
         <member name="F:TopDownShooter.Game1.camera">
             <summary>
             The <see cref="T:TopDownShooter.Engine.ICamera"/>.
@@ -135,68 +130,18 @@
             Simple player class.
             </summary>
         </member>
-        <member name="F:TopDownShooter.Player.m_PlayerSpeed">
+        <member name="M:TopDownShooter.Player.#ctor">
             <summary>
-            Fixed speed for now.
+            Initializes a new instance of the <see cref="T:TopDownShooter.Player"/> class.
             </summary>
         </member>
-        <member name="P:TopDownShooter.Player.Height">
+        <member name="M:TopDownShooter.Player.#ctor(Microsoft.Xna.Framework.Vector2,System.Collections.Generic.IEnumerable{TopDownShooter.Engine.IComponent})">
             <summary>
-            Gets the current height.
+            Initializes a new instance of the <see cref="T:TopDownShooter.Player"/> class.
             </summary>
-        </member>
-        <member name="P:TopDownShooter.Player.IsMoving">
-            <summary>
-            Simple indicator used to toggle when to start/stop
-            the animation.
-            </summary>
-        </member>
-        <member name="P:TopDownShooter.Player.PlayerAnimation">
-            <summary>
-            Gets the <see cref="T:TopDownShooter.Engine.Animation" /> associated with this <see cref="T:TopDownShooter.Player" />
-            </summary>
-        </member>
-        <member name="P:TopDownShooter.Player.PlayerSpeed">
-            <summary>
-            Gets the player speed.
-            </summary>
-            <remarks>Currently fixed.</remarks>
-        </member>
-        <member name="P:TopDownShooter.Player.Position">
-            <summary>
-            Gets or sets the current <see cref="T:Microsoft.Xna.Framework.Vector2" /> position.
-            </summary>
-        </member>
-        <member name="P:TopDownShooter.Player.Width">
-            <summary>
-            Gets the current Width.
-            </summary>
-        </member>
-        <member name="M:TopDownShooter.Player.Draw(TopDownShooter.Engine.ISpriteBatchAdapter,Microsoft.Xna.Framework.GameTime)">
-            <summary>
-            Draws this <see cref="T:TopDownShooter.Engine.Animation" />.
-            </summary>
-            <param name="spriteBatch">
-            The <see cref="T:Microsoft.Xna.Framework.Graphics.SpriteBatch" />.
-            </param>
-            <param name="gameTime">
-            The game time.
-            </param>
-        </member>
-        <member name="M:TopDownShooter.Player.Initialize(TopDownShooter.Engine.Animation,Microsoft.Xna.Framework.Vector2)">
-            <summary>
-            Allows the game to perform any initialization it needs to before starting to run.
-            This is where it can query for any required services and load any non-graphic
-            related content.  Calling base.Initialize will enumerate through any components
-            and initialize them as well.
-            </summary>
-        </member>
-        <member name="M:TopDownShooter.Player.Update(Microsoft.Xna.Framework.GameTime)">
-            <summary>
-            Allows the game to run logic such as updating the world,
-            checking for collisions, gathering input, and playing audio.
-            </summary>
-            <param name="gameTime">Provides a snapshot of timing values.</param>
+            <param name="position">The position of the player.</param>
+            <param name="components">A collection of components.</param>
+            <remarks>Internal for unit testing.</remarks>
         </member>
         <member name="T:TopDownShooter.Program">
             <summary>
