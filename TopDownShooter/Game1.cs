@@ -38,9 +38,9 @@ namespace TopDownShooter
         /// </summary>
         private Level level;
 
-        private InputHerder m_InputHerder;
+        private IInputController inputController;
 
-        private Player m_SimplePlayer;
+        private Player simplePlayer;
 
         /// <summary>
         /// The default <see cref="ISpriteBatchAdapter" />.
@@ -65,12 +65,8 @@ namespace TopDownShooter
             this.GraphicsDevice.Clear(Color.CornflowerBlue);
 
             this.spriteBatch.Begin(transformMatrix: this.camera.TransformMatrix);
-
             this.level.Draw(this.spriteBatch, gameTime);
-
-            // TODO: Add your drawing code here
-            this.m_SimplePlayer.Draw(this.spriteBatch, gameTime);
-
+            this.simplePlayer.Draw(this.spriteBatch, gameTime);
             this.spriteBatch.End();
 
             base.Draw(gameTime);
@@ -87,9 +83,9 @@ namespace TopDownShooter
             this.camera = new Camera(this.GraphicsDevice.Viewport);
             this.level = new Level(new TmxMap("Content/TmxFiles/DefaultLevel.tmx"));
 
-            this.m_InputHerder = new InputHerder(Keyboard.GetState(), Mouse.GetState(), GamePad.GetState(PlayerIndex.One));
+        this.inputController = new SimpleAiInputController();
 
-            this.m_SimplePlayer = new Player();
+            this.simplePlayer = new Player(this.inputController);
 
             base.Initialize();
         }
@@ -105,9 +101,7 @@ namespace TopDownShooter
             this.contentManager = new ContentManagerAdapter(this.Content);
 
             this.level.LoadContent(this.contentManager);
-
-            // TODO: use this.Content to load your game content here
-            this.m_SimplePlayer.LoadContent(this.contentManager);
+            this.simplePlayer.LoadContent(this.contentManager);
         }
 
         /// <summary>
@@ -116,8 +110,8 @@ namespace TopDownShooter
         /// </summary>
         protected override void UnloadContent()
         {
-            // TODO: Unload any non ContentManager content here
-            this.m_SimplePlayer.LoadContent(this.contentManager);
+            this.level.UnloadContent(this.contentManager);
+            this.simplePlayer.LoadContent(this.contentManager);
         }
 
         /// <summary>
@@ -127,19 +121,18 @@ namespace TopDownShooter
         /// <param name="gameTime">Provides a snapshot of timing values.</param>
         protected override void Update(GameTime gameTime)
         {
-            this.m_InputHerder.Update(Keyboard.GetState(), Mouse.GetState(), GamePad.GetState(PlayerIndex.One));
-            if (this.m_InputHerder.ShouldQuit())
+            var keyboardState = Keyboard.GetState();
+            var gamePadState = GamePad.GetState(PlayerIndex.One);
+
+            if (keyboardState.IsKeyDown(Keys.Escape) || gamePadState.Buttons.Back == ButtonState.Pressed)
             {
                 this.Exit();
             }
 
-            this.m_SimplePlayer.Update(gameTime);
-            this.camera.Position = this.m_SimplePlayer.Position;
+            this.inputController.Update(gameTime);
+            this.simplePlayer.Update(gameTime);
+            this.camera.Position = this.simplePlayer.Position;
 
-            // TODO: Add your update logic here
-            // this.animation.Position = new Vector2(this.GraphicsDevice.Viewport.Width / 2f, this.GraphicsDevice.Viewport.Height / 2f);
-            // this.animation.IsAnimating = true;
-            // this.animation.Update(gameTime);
             base.Update(gameTime);
         }
     }

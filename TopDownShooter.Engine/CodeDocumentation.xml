@@ -376,6 +376,42 @@
             </summary>
             <param name="contentManager">The content manager adapter.</param>
         </member>
+        <member name="T:TopDownShooter.Engine.IInputController">
+            <summary>
+            Simple Controller for requesting Movements
+            </summary>
+        </member>
+        <member name="M:TopDownShooter.Engine.IInputController.MoveDown">
+            <summary>
+            Gets whether or not a up move was requested.
+            </summary>
+            <returns>True to move down.</returns>
+        </member>
+        <member name="M:TopDownShooter.Engine.IInputController.MoveLeft">
+            <summary>
+            Gets whether or not a left move was requested.
+            </summary>
+            <returns>True to move left.</returns>
+        </member>
+        <member name="M:TopDownShooter.Engine.IInputController.MoveRight">
+            <summary>
+            Gets whether or not a right move was requested.
+            </summary>
+            <returns>True to move right.</returns>
+        </member>
+        <member name="M:TopDownShooter.Engine.IInputController.MoveUp">
+            <summary>
+            Gets whether or not a up move was requested.
+            </summary>
+            <returns>True to move up.</returns>
+        </member>
+        <member name="M:TopDownShooter.Engine.IInputController.Update(Microsoft.Xna.Framework.GameTime)">
+            <summary>
+            Updates based on the current gametime.
+            </summary>
+            <param name="gameTime">The current <see cref="T:Microsoft.Xna.Framework.GameTime"/></param>
+            <remarks>Don't even know if GameTime is needed...</remarks>
+        </member>
         <member name="T:TopDownShooter.Engine.ISpriteBatchAdapter">
             <summary>
             Defines an interface for adapting <see cref="T:Microsoft.Xna.Framework.Graphics.SpriteBatch" />.
@@ -547,6 +583,73 @@
             </summary>
             <param name="layer">The <see cref="T:TiledSharp.TmxLayer" /> to import from.</param>
             <param name="textures">The textures map that contains <see cref="T:TiledSharp.TmxTileset" /> to <see cref="T:Microsoft.Xna.Framework.Graphics.Texture2D" /> mappings.</param>
+        </member>
+        <member name="T:TopDownShooter.Engine.SimpleAiInputController">
+            <summary>
+            Controller for controlling a simple AI.
+            </summary>
+        </member>
+        <member name="M:TopDownShooter.Engine.SimpleAiInputController.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:TopDownShooter.Engine.SimpleAiInputController"/> class.
+            </summary>
+        </member>
+        <member name="M:TopDownShooter.Engine.SimpleAiInputController.Finalize">
+            <summary>
+            Finalizes an instance of the <see cref="T:TopDownShooter.Engine.SimpleAiInputController"/> class.
+            </summary>
+        </member>
+        <member name="M:TopDownShooter.Engine.SimpleAiInputController.MoveDown">
+            <summary>
+            Gets whether or not a up move was requested.
+            </summary>
+            <returns>True to move down.</returns>
+        </member>
+        <member name="M:TopDownShooter.Engine.SimpleAiInputController.MoveLeft">
+            <summary>
+            Gets whether or not a left move was requested.
+            </summary>
+            <returns>True to move left.</returns>
+        </member>
+        <member name="M:TopDownShooter.Engine.SimpleAiInputController.MoveRight">
+            <summary>
+            Gets whether or not a right move was requested.
+            </summary>
+            <returns>True to move right.</returns>
+        </member>
+        <member name="M:TopDownShooter.Engine.SimpleAiInputController.MoveUp">
+            <summary>
+            Gets whether or not a up move was requested.
+            </summary>
+            <returns>True to move up.</returns>
+        </member>
+        <member name="M:TopDownShooter.Engine.SimpleAiInputController.Update(Microsoft.Xna.Framework.GameTime)">
+            <summary>
+            Updates based on the current gametime.
+            </summary>
+            <param name="gameTime">The current <see cref="T:Microsoft.Xna.Framework.GameTime"/></param>
+        </member>
+        <member name="M:TopDownShooter.Engine.SimpleAiInputController.Dispose">
+            <summary>
+            This code added to correctly implement the disposable pattern.
+            </summary>
+        </member>
+        <member name="M:TopDownShooter.Engine.SimpleAiInputController.Dispose(System.Boolean)">
+            <summary>
+            Cleans up any resources allocated during execution
+            </summary>
+            <param name="disposing">Gets whether this object is disposing</param>
+        </member>
+        <member name="M:TopDownShooter.Engine.SimpleAiInputController.Initalize">
+            <summary>
+            Initalizes our tasks for movement changes
+            </summary>
+        </member>
+        <member name="M:TopDownShooter.Engine.SimpleAiInputController.SleepRandomly">
+            <summary>
+            Sleeps a random amount of time between 0 and 1.5 seconds.
+            </summary>
+            <remarks>No one will get passed this sweet ai!</remarks>
         </member>
         <member name="T:TopDownShooter.Engine.SpriteBatchAdapter">
             <summary>

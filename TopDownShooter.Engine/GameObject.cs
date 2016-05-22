@@ -41,7 +41,7 @@ namespace TopDownShooter.Engine
         /// Loads the content from the specified content manager adapter.
         /// </summary>
         /// <param name="contentManager">The content manager adapter.</param>
-        public void LoadContent(IContentManagerAdapter contentManager)
+        public virtual void LoadContent(IContentManagerAdapter contentManager)
         {
             foreach (var component in this.Components)
             {
@@ -53,7 +53,7 @@ namespace TopDownShooter.Engine
         /// Unloads the content from the specified content manager adapter.
         /// </summary>
         /// <param name="contentManager">The content manager adapter.</param>
-        public void UnloadContent(IContentManagerAdapter contentManager)
+        public virtual void UnloadContent(IContentManagerAdapter contentManager)
         {
             foreach (var component in this.Components)
             {
@@ -66,7 +66,7 @@ namespace TopDownShooter.Engine
         /// </summary>
         /// <param name="spriteBatch">The sprite batch adapter.</param>
         /// <param name="gameTime">The game time.</param>
-        public void Draw(ISpriteBatchAdapter spriteBatch, GameTime gameTime)
+        public virtual void Draw(ISpriteBatchAdapter spriteBatch, GameTime gameTime)
         {
             foreach (var component in this.Components)
             {
@@ -78,7 +78,7 @@ namespace TopDownShooter.Engine
         /// Updates the game object with the specified game time.
         /// </summary>
         /// <param name="gameTime">The game time.</param>
-        public void Update(GameTime gameTime)
+        public virtual void Update(GameTime gameTime)
         {
             foreach (var component in this.Components)
             {

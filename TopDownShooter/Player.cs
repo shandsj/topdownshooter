@@ -16,10 +16,13 @@ namespace TopDownShooter
     /// </summary>
     public class Player : GameObject
     {
+        private readonly float playerSpeed = 8F;
+        private readonly IInputController inputController;
+
         /// <summary>
         /// Initializes a new instance of the <see cref="Player"/> class.
         /// </summary>
-        public Player()
+        public Player(IInputController inputController)
 #pragma warning disable SA1118 // Parameter must not span multiple lines
             : this(new Vector2(1600, 1600), new[]
             {
@@ -27,6 +30,7 @@ namespace TopDownShooter
             })
 #pragma warning restore SA1118 // Parameter must not span multiple lines
         {
+            this.inputController = inputController;
         }
 
         /// <summary>
@@ -43,6 +47,38 @@ namespace TopDownShooter
             {
                 this.Components.Add(component);
             }
+        }
+
+        /// <summary>
+        /// Allows the game to run logic such as updating the world,
+        /// checking for collisions, gathering input, and playing audio.
+        /// </summary>
+        /// <param name="gameTime">Provides a snapshot of timing values.</param>
+        public override void Update(GameTime gameTime)
+        {
+            float x = this.Position.X;
+            float y = this.Position.Y;
+            if (this.inputController.MoveLeft())
+            {
+                x -= this.playerSpeed;
+            }
+
+            if (this.inputController.MoveRight())
+            {
+                x += this.playerSpeed;
+            }
+
+            if (this.inputController.MoveUp())
+            {
+                y -= this.playerSpeed;
+            }
+
+            if (this.inputController.MoveDown())
+            {
+                y += this.playerSpeed;
+            }
+
+            this.Position = new Vector2(x, y);
         }
     }
 }
