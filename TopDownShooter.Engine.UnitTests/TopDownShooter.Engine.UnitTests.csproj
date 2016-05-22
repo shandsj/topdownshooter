@@ -63,6 +63,7 @@
     <Compile Include="AnimationComponentTests.cs" />
     <Compile Include="CameraTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="SimpleAiInputControllerComponentTests.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\TopDownShooter.Engine\TopDownShooter.Engine.csproj">

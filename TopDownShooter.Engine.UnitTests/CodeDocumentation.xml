@@ -29,5 +29,21 @@
             Tests that the transform matrix is calculated.
             </summary>
         </member>
+        <member name="T:TopDownShooter.Engine.UnitTests.SimpleAiInputControllerComponentTests">
+            <summary>
+            Class for testing the <see cref="T:TopDownShooter.Engine.SimpleAiInputControllerComponent"/>
+            </summary>
+        </member>
+        <member name="M:TopDownShooter.Engine.UnitTests.SimpleAiInputControllerComponentTests.AffectGameObjectPostionWhenDrawIsCalled">
+            <summary>
+            Tests whether the animation is drawn in the sprite batch when draw is called.
+            </summary>
+        </member>
+        <member name="M:TopDownShooter.Engine.UnitTests.SimpleAiInputControllerComponentTests.EnsureDrawDoesNotUtilizeSpriteBatch">
+            <summary>
+            The <see cref="T:TopDownShooter.Engine.SimpleAiInputControllerComponent"/> should not utilize the Draw method
+            on the <see cref="T:TopDownShooter.Engine.ISpriteBatchAdapter"/>. It only affects position and velocity.
+            </summary>
+        </member>
     </members>
 </doc>
