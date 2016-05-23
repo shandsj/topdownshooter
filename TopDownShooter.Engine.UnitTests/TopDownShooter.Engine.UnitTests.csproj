@@ -64,6 +64,7 @@
     <Compile Include="CameraTests.cs" />
     <Compile Include="GameObjectTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="SimpleColliderComponentTests.cs" />
     <Compile Include="TestGameObject.cs" />
     <Compile Include="SimpleAiInputControllerComponentTests.cs" />
   </ItemGroup>

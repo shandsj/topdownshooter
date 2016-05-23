@@ -54,6 +54,21 @@
             Tests that the game object delegates update calls to a component.
             </summary>
         </member>
+        <member name="T:TopDownShooter.Engine.UnitTests.SimpleColliderComponentTests">
+            <summary>
+            Contains unit tests for the <see cref="T:TopDownShooter.Engine.SimpleColliderComponent" /> class.
+            </summary>
+        </member>
+        <member name="M:TopDownShooter.Engine.UnitTests.SimpleColliderComponentTests.DoesNotDetectCollisionsWithAnotherColliderComponent">
+            <summary>
+            Tests that a collision is not detected with other collider components.
+            </summary>
+        </member>
+        <member name="M:TopDownShooter.Engine.UnitTests.SimpleColliderComponentTests.DetectsCollisionsWithAnotherColliderComponent">
+            <summary>
+            Tests that a collision is detected with other collider components.
+            </summary>
+        </member>
         <member name="T:TopDownShooter.Engine.UnitTests.TestGameObject">
             <summary>
             Defines a test game object.

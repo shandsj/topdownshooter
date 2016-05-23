@@ -210,6 +210,29 @@
             <param name="assetName">The asset name.</param>
             <returns>The loaded asset.</returns>
         </member>
+        <member name="T:TopDownShooter.Engine.IColliderComponent">
+            <summary>
+            Defines an interface for a collider component.
+            </summary>
+        </member>
+        <member name="P:TopDownShooter.Engine.IColliderComponent.GameObjectId">
+            <summary>
+            Gets the parent game object identifer.
+            </summary>
+        </member>
+        <member name="M:TopDownShooter.Engine.IColliderComponent.Collide(TopDownShooter.Engine.IColliderComponent)">
+            <summary>
+            Performs a collision with the specified <see cref="T:TopDownShooter.Engine.IColliderComponent" />.
+            </summary>
+            <param name="other">The other collider component.</param>
+        </member>
+        <member name="M:TopDownShooter.Engine.IColliderComponent.IsCollision(TopDownShooter.Engine.IColliderComponent)">
+            <summary>
+            Determines a collision occured with the specified <see cref="T:TopDownShooter.Engine.IColliderComponent" />.
+            </summary>
+            <param name="other">The rigid body to check for a collision.</param>
+            <returns>TTrue if a collision occured, false otherwise.</returns>
+        </member>
         <member name="T:TopDownShooter.Engine.IComponent">
             <summary>
             Defines an interface for components.
@@ -836,9 +859,9 @@
             <param name="gameObjectId">The parent game object identifier.</param>
             <param name="collisionSystem">The <see cref="T:TopDownShooter.Engine.ICollisionSystem" />.</param>
         </member>
-        <member name="M:TopDownShooter.Engine.PlayerColliderComponent.Collide(TopDownShooter.Engine.ColliderComponentBase)">
+        <member name="M:TopDownShooter.Engine.PlayerColliderComponent.Collide(TopDownShooter.Engine.IColliderComponent)">
             <summary>
-            Performs a collision with the specified <see cref="T:TopDownShooter.Engine.ColliderComponentBase" />.
+            Performs a collision with the specified <see cref="T:TopDownShooter.Engine.IColliderComponent" />.
             </summary>
             <param name="other">The other collider component.</param>
         </member>
@@ -892,15 +915,15 @@
             <param name="gameObject">The game object to update.</param>
             <param name="time">The game time.</param>
         </member>
-        <member name="M:TopDownShooter.Engine.ColliderComponentBase.Collide(TopDownShooter.Engine.ColliderComponentBase)">
+        <member name="M:TopDownShooter.Engine.ColliderComponentBase.Collide(TopDownShooter.Engine.IColliderComponent)">
             <summary>
-            Performs a collision with the specified <see cref="T:TopDownShooter.Engine.ColliderComponentBase" />.
+            Performs a collision with the specified <see cref="T:TopDownShooter.Engine.IColliderComponent" />.
             </summary>
             <param name="other">The other collider component.</param>
         </member>
-        <member name="M:TopDownShooter.Engine.ColliderComponentBase.IsCollision(TopDownShooter.Engine.ColliderComponentBase)">
+        <member name="M:TopDownShooter.Engine.ColliderComponentBase.IsCollision(TopDownShooter.Engine.IColliderComponent)">
             <summary>
-            Determines a collision occured with the specified <see cref="T:TopDownShooter.Engine.ColliderComponentBase" />.
+            Determines a collision occured with the specified <see cref="T:TopDownShooter.Engine.IColliderComponent" />.
             </summary>
             <param name="other">The rigid body to check for a collision.</param>
             <returns>TTrue if a collision occured, false otherwise.</returns>
@@ -977,15 +1000,15 @@
             Gets the <see cref="T:TopDownShooter.Engine.ICollisionSystem" />.
             </summary>
         </member>
-        <member name="M:TopDownShooter.Engine.SimpleColliderComponent.Collide(TopDownShooter.Engine.ColliderComponentBase)">
+        <member name="M:TopDownShooter.Engine.SimpleColliderComponent.Collide(TopDownShooter.Engine.IColliderComponent)">
             <summary>
-            Performs a collision with the specified <see cref="T:TopDownShooter.Engine.ColliderComponentBase" />.
+            Performs a collision with the specified <see cref="T:TopDownShooter.Engine.IColliderComponent" />.
             </summary>
             <param name="other">The other collider component.</param>
         </member>
-        <member name="M:TopDownShooter.Engine.SimpleColliderComponent.IsCollision(TopDownShooter.Engine.ColliderComponentBase)">
+        <member name="M:TopDownShooter.Engine.SimpleColliderComponent.IsCollision(TopDownShooter.Engine.IColliderComponent)">
             <summary>
-            Determines a collision occured with the specified <see cref="T:TopDownShooter.Engine.ColliderComponentBase" />.
+            Determines a collision occured with the specified <see cref="T:TopDownShooter.Engine.IColliderComponent" />.
             </summary>
             <param name="other">The rigid body to check for a collision.</param>
             <returns>TTrue if a collision occured, false otherwise.</returns>

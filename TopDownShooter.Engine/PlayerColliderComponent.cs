@@ -24,10 +24,10 @@ namespace TopDownShooter.Engine
         }
 
         /// <summary>
-        /// Performs a collision with the specified <see cref="ColliderComponentBase" />.
+        /// Performs a collision with the specified <see cref="IColliderComponent" />.
         /// </summary>
         /// <param name="other">The other collider component.</param>
-        public override void Collide(ColliderComponentBase other)
+        public override void Collide(IColliderComponent other)
         {
             var tile = this.CollisionSystem.GetGameObject(other.GameObjectId) as Tile;
             if (tile != null)
