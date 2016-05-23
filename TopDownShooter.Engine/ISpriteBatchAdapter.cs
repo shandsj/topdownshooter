@@ -13,6 +13,12 @@ namespace TopDownShooter.Engine
     public interface ISpriteBatchAdapter
     {
         /// <summary>
+        /// Gets the <see cref="GraphicsDevice"/> associated with this
+        /// <see cref="SpriteBatchAdapter"/>
+        /// </summary>
+        GraphicsDevice GraphicsDevice { get; }
+
+        /// <summary>
         /// Begins a new sprite and text batch with the specified render state.
         /// </summary>
         /// <param name="sortMode">
@@ -59,6 +65,14 @@ namespace TopDownShooter.Engine
         /// <param name="position">The drawing location on screen.</param>
         /// <param name="color">A color mask.</param>
         void Draw(Texture2D texture, Vector2 position, Color color);
+
+        /// <summary>
+        /// Submit a sprite for drawing in the current batch.
+        /// </summary>
+        /// <param name="texture">A texture.</param>
+        /// <param name="rectangle">The rectangle to use.</param>
+        /// <param name="color">A color mask.</param>
+        void Draw(Texture2D texture, Rectangle rectangle, Color color);
 
         /// <summary>
         /// Draws a string of text in the current batch.

@@ -104,28 +104,32 @@ namespace TopDownShooter
                     new HumanInputControllerComponent(),
                     colliderComponent,
                     new MovementComponent(),
-                    animationComponent
+                    animationComponent,
+                    new DebugComponent(Color.Red, 2)
                 });
 
             this.players.Add(this.focusedPlayer);
 
             // TODO: Uncomment when wall collision logic is finished
-            ////for (int i = 0; i < 3; i++)
-            ////{
-            ////    var id = CollisionSystem.NextGameObjectId++;
-            ////    var player = new Player(
-            ////        id,
-            ////        new Vector2(1600, 1600),
-            ////        new IComponent[]
-            ////        {
-            ////            new AnimationComponent("hoodieguy", new FrameProperties(76, 140, TimeSpan.FromSeconds(.1), 2)) { IsLooping = true, IsAnimating = true },
-            ////            new SimpleAiInputControllerComponent(),
-            ////            new PlayerColliderComponent(id, this.collisionSystem),
-            ////            new MovementComponent()
-            ////        });
+            // for (int i = 0; i < 3; i++)
+            // {
+            //    var id = CollisionSystem.NextGameObjectId++;
+            //    var player = new Player(
+            //        id,
+            //        new Vector2(1600, 1600),
+            //        this.collisionSystem,
+            //        animationComponent,
+            //        colliderComponent,
+            //        new IComponent[]
+            //        {
+            //            new AnimationComponent("hoodieguy", new FrameProperties(76, 140, TimeSpan.FromSeconds(.1), 2)) { IsLooping = true, IsAnimating = true },
+            //            new SimpleAiInputControllerComponent(),
+            //            new PlayerColliderComponent(id, this.collisionSystem),
+            //            new MovementComponent(),
+            //        });
 
-            ////    this.players.Add(player);
-            ////}
+            // this.players.Add(player);
+            // }
 #pragma warning restore SA1118
 
             base.Initialize();

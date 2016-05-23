@@ -46,6 +46,16 @@ namespace TopDownShooter
         }
 
         /// <summary>
+        /// Gets the bounds offset via the size of the <see cref="AnimationComponent.FrameProperties"/>
+        /// </summary>
+        public override Rectangle Bounds => new Rectangle((int)this.Position.X - (int)(this.Width / 2), (int)this.Position.Y - (int)(this.Height / 2), this.Width, this.Height);
+
+        /// <summary>
+        /// Gets the projected bounds, based off the <see cref="IGameObject.Position"/> and the <see cref="IGameObject.Velocity"/>.
+        /// </summary>
+        public override Rectangle ProjectedBounds => new Rectangle((int)this.ProjectedPosition.X - (int)(this.Width / 2), (int)this.ProjectedPosition.Y - (int)(this.Height / 2), this.Width, this.Height);
+
+        /// <summary>
         /// Gets the width of the game object.
         /// </summary>
         public override int Width => this.animationComponent.FrameProperties.Width;
