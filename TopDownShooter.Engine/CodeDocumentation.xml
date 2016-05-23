@@ -157,6 +157,16 @@
             </summary>
             TODO: refactor this and put it somewhere else.
         </member>
+        <member name="P:TopDownShooter.Engine.CollisionSystem.Colliders">
+            <summary>
+            Gets the collection of <see cref="T:TopDownShooter.Engine.IColliderComponent"/> objects registered with this <see cref="T:TopDownShooter.Engine.ICollisionSystem"/>.
+            </summary>
+        </member>
+        <member name="P:TopDownShooter.Engine.CollisionSystem.GameObjects">
+            <summary>
+            Gets the collection of <see cref="T:TopDownShooter.Engine.IGameObject"/> objects registered with this <see cref="T:TopDownShooter.Engine.ICollisionSystem"/>.
+            </summary>
+        </member>
         <member name="M:TopDownShooter.Engine.CollisionSystem.CheckCollisions(TopDownShooter.Engine.IColliderComponent)">
             <summary>
             Checks the collisions for the specified <see cref="T:TopDownShooter.Engine.IColliderComponent" />.
@@ -513,18 +523,28 @@
             Defines an interface for providing game object lookups.
             </summary>
         </member>
-        <member name="M:TopDownShooter.Engine.ICollisionSystem.GetGameObject(System.Int32)">
+        <member name="P:TopDownShooter.Engine.ICollisionSystem.Colliders">
             <summary>
-            Gets the <see cref="T:TopDownShooter.Engine.IGameObject" /> with the specified identifer.
+            Gets the collection of <see cref="T:TopDownShooter.Engine.IColliderComponent" /> objects registered with this <see cref="T:TopDownShooter.Engine.ICollisionSystem" />.
             </summary>
-            <param name="id">Game object identifier.</param>
-            <returns>The <see cref="T:TopDownShooter.Engine.IGameObject" />.</returns>
+        </member>
+        <member name="P:TopDownShooter.Engine.ICollisionSystem.GameObjects">
+            <summary>
+            Gets the collection of <see cref="T:TopDownShooter.Engine.IGameObject" /> objects registered with this <see cref="T:TopDownShooter.Engine.ICollisionSystem" />.
+            </summary>
         </member>
         <member name="M:TopDownShooter.Engine.ICollisionSystem.CheckCollisions(TopDownShooter.Engine.IColliderComponent)">
             <summary>
             Checks the collisions for the specified <see cref="T:TopDownShooter.Engine.IColliderComponent" />.
             </summary>
             <param name="collider">The rigid body.</param>
+        </member>
+        <member name="M:TopDownShooter.Engine.ICollisionSystem.GetGameObject(System.Int32)">
+            <summary>
+            Gets the <see cref="T:TopDownShooter.Engine.IGameObject" /> with the specified identifer.
+            </summary>
+            <param name="id">Game object identifier.</param>
+            <returns>The <see cref="T:TopDownShooter.Engine.IGameObject" />.</returns>
         </member>
         <member name="M:TopDownShooter.Engine.ICollisionSystem.Register(System.Int32,TopDownShooter.Engine.IGameObject,TopDownShooter.Engine.IColliderComponent)">
             <summary>

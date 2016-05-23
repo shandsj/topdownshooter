@@ -7,6 +7,7 @@
 namespace TopDownShooter.Engine
 {
     using System.Collections.Generic;
+    using System.Linq;
 
     /// <summary>
     /// Defines a system to handle collisions.
@@ -26,6 +27,16 @@ namespace TopDownShooter.Engine
         /// </summary>
         /// TODO: refactor this and put it somewhere else.
         public static int NextGameObjectId { get; set; }
+
+        /// <summary>
+        /// Gets the collection of <see cref="IColliderComponent"/> objects registered with this <see cref="ICollisionSystem"/>.
+        /// </summary>
+        public IEnumerable<IColliderComponent> Colliders => this.colliders.Values.ToArray();
+
+        /// <summary>
+        /// Gets the collection of <see cref="IGameObject"/> objects registered with this <see cref="ICollisionSystem"/>.
+        /// </summary>
+        public IEnumerable<IGameObject> GameObjects => this.gameObjects.Values.ToArray();
 
         /// <summary>
         /// Checks the collisions for the specified <see cref="IColliderComponent" />.

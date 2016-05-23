@@ -62,6 +62,7 @@
   <ItemGroup>
     <Compile Include="AnimationComponentTests.cs" />
     <Compile Include="CameraTests.cs" />
+    <Compile Include="CollisionSystemTests.cs" />
     <Compile Include="GameObjectTests.cs" />
     <Compile Include="PlayerColliderComponentTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

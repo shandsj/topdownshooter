@@ -29,6 +29,21 @@
             Tests that the transform matrix is calculated.
             </summary>
         </member>
+        <member name="T:TopDownShooter.Engine.UnitTests.CollisionSystemTests">
+            <summary>
+            Contains unit tests for the <see cref="T:TopDownShooter.Engine.CollisionSystem" /> class.
+            </summary>
+        </member>
+        <member name="M:TopDownShooter.Engine.UnitTests.CollisionSystemTests.CanGetGameObjects">
+            <summary>
+            Tests that game objects can be retrieved with their identifier.
+            </summary>
+        </member>
+        <member name="M:TopDownShooter.Engine.UnitTests.CollisionSystemTests.RegistersAndUnregistersGameObjectsAndColliderComponents">
+            <summary>
+            Tests that game objects and collider components can be registered and unregistered.
+            </summary>
+        </member>
         <member name="T:TopDownShooter.Engine.UnitTests.GameObjectTests">
             <summary>
             Contains unit tests for the <see cref="T:TopDownShooter.Engine.GameObject" /> class.
