@@ -17,6 +17,30 @@ namespace TopDownShooter.Engine.UnitTests
     public class CollisionSystemTests
     {
         /// <summary>
+        /// Tests that a collider is notified when a collision is detected.
+        /// </summary>
+        [TestMethod]
+        public void CallsCollideWhenACollisionIsDetected()
+        {
+            var other = new Mock<IColliderComponent>();
+
+            bool wasCollideCalled = false;
+            var collider = new Mock<IColliderComponent>();
+            collider.Setup(c => c.IsCollision(It.IsAny<IColliderComponent>())).Returns(true);
+            collider.Setup(c => c.Collide(It.IsAny<IColliderComponent>())).Callback<IColliderComponent>(c =>
+                {
+                    wasCollideCalled = true;
+                    Assert.AreEqual(other.Object, c);
+                });
+
+            var uut = new CollisionSystem();
+            uut.Register(42, new Mock<IGameObject>().Object, other.Object);
+            uut.CheckCollisions(collider.Object);
+
+            Assert.IsTrue(wasCollideCalled);
+        }
+
+        /// <summary>
         /// Tests that game objects can be retrieved with their identifier.
         /// </summary>
         [TestMethod]

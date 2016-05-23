@@ -34,6 +34,11 @@
             Contains unit tests for the <see cref="T:TopDownShooter.Engine.CollisionSystem" /> class.
             </summary>
         </member>
+        <member name="M:TopDownShooter.Engine.UnitTests.CollisionSystemTests.CallsCollideWhenACollisionIsDetected">
+            <summary>
+            Tests that a collider is notified when a collision is detected.
+            </summary>
+        </member>
         <member name="M:TopDownShooter.Engine.UnitTests.CollisionSystemTests.CanGetGameObjects">
             <summary>
             Tests that game objects can be retrieved with their identifier.
