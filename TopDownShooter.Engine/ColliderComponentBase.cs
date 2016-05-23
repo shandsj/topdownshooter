@@ -11,7 +11,7 @@ namespace TopDownShooter.Engine
     /// <summary>
     /// Defines a rigid body component that will respond to collisions with other rigid bodies.
     /// </summary>
-    public abstract class ColliderComponentBase : IComponent
+    public abstract class ColliderComponentBase : IColliderComponent
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="ColliderComponentBase" /> class.
@@ -63,16 +63,16 @@ namespace TopDownShooter.Engine
         }
 
         /// <summary>
-        /// Performs a collision with the specified <see cref="ColliderComponentBase" />.
+        /// Performs a collision with the specified <see cref="IColliderComponent" />.
         /// </summary>
         /// <param name="other">The other collider component.</param>
-        public abstract void Collide(ColliderComponentBase other);
+        public abstract void Collide(IColliderComponent other);
 
         /// <summary>
-        /// Determines a collision occured with the specified <see cref="ColliderComponentBase" />.
+        /// Determines a collision occured with the specified <see cref="IColliderComponent" />.
         /// </summary>
         /// <param name="other">The rigid body to check for a collision.</param>
         /// <returns>TTrue if a collision occured, false otherwise.</returns>
-        public abstract bool IsCollision(ColliderComponentBase other);
+        public abstract bool IsCollision(IColliderComponent other);
     }
 }

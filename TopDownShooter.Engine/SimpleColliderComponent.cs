@@ -28,19 +28,19 @@ namespace TopDownShooter.Engine
         protected ICollisionSystem CollisionSystem { get; }
 
         /// <summary>
-        /// Performs a collision with the specified <see cref="ColliderComponentBase" />.
+        /// Performs a collision with the specified <see cref="IColliderComponent" />.
         /// </summary>
         /// <param name="other">The other collider component.</param>
-        public override void Collide(ColliderComponentBase other)
+        public override void Collide(IColliderComponent other)
         {
         }
 
         /// <summary>
-        /// Determines a collision occured with the specified <see cref="ColliderComponentBase" />.
+        /// Determines a collision occured with the specified <see cref="IColliderComponent" />.
         /// </summary>
         /// <param name="other">The rigid body to check for a collision.</param>
         /// <returns>TTrue if a collision occured, false otherwise.</returns>
-        public override bool IsCollision(ColliderComponentBase other)
+        public override bool IsCollision(IColliderComponent other)
         {
             var otherGameObject = this.CollisionSystem.GetGameObject(other.GameObjectId);
             var gameObject = this.CollisionSystem.GetGameObject(this.GameObjectId);

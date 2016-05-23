@@ -10,17 +10,12 @@ namespace TopDownShooter.Engine
     /// <summary>
     /// Defines an inteface for a tile.
     /// </summary>
-    public interface ITile
+    public interface ITile : IGameObject
     {
         /// <summary>
         /// Gets the tile's position in tile coordinates.
         /// </summary>
         Point TileCoordinates { get; }
-
-        /// <summary>
-        /// Gets the height.
-        /// </summary>
-        int Height { get; }
 
         /// <summary>
         /// Gets the texture
@@ -31,10 +26,5 @@ namespace TopDownShooter.Engine
         /// Gets the position of the tile in the tileset.
         /// </summary>
         Vector2 TexturePosition { get; }
-
-        /// <summary>
-        /// Gets the width.
-        /// </summary>
-        int Width { get; }
     }
 }

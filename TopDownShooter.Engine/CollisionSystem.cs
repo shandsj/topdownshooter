@@ -13,7 +13,7 @@ namespace TopDownShooter.Engine
     /// </summary>
     public class CollisionSystem : ICollisionSystem
     {
-        private readonly Dictionary<int, ColliderComponentBase> colliders = new Dictionary<int, ColliderComponentBase>();
+        private readonly Dictionary<int, IColliderComponent> colliders = new Dictionary<int, IColliderComponent>();
         private readonly Dictionary<int, IGameObject> gameObjects = new Dictionary<int, IGameObject>();
 
         static CollisionSystem()
@@ -28,10 +28,10 @@ namespace TopDownShooter.Engine
         public static int NextGameObjectId { get; set; }
 
         /// <summary>
-        /// Checks the collisions for the specified <see cref="ColliderComponentBase" />.
+        /// Checks the collisions for the specified <see cref="IColliderComponent" />.
         /// </summary>
         /// <param name="collider">The rigid body.</param>
-        public void CheckCollisions(ColliderComponentBase collider)
+        public void CheckCollisions(IColliderComponent collider)
         {
             foreach (var other in this.colliders.Values)
             {
@@ -59,12 +59,12 @@ namespace TopDownShooter.Engine
         }
 
         /// <summary>
-        /// Registers the specifieid <see cref="IGameObject" /> and <see cref="ColliderComponentBase" /> with the specified identifier.
+        /// Registers the specifieid <see cref="IGameObject" /> and <see cref="IColliderComponent" /> with the specified identifier.
         /// </summary>
         /// <param name="id">The identifier of the game object.</param>
         /// <param name="gameObject">The game object.</param>
         /// <param name="collider">The collider component.</param>
-        public void Register(int id, IGameObject gameObject, ColliderComponentBase collider)
+        public void Register(int id, IGameObject gameObject, IColliderComponent collider)
         {
             this.gameObjects[id] = gameObject;
             this.colliders[id] = collider;
