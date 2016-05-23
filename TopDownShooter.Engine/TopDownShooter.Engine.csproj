@@ -73,6 +73,7 @@
     <Compile Include="Camera.cs" />
     <Compile Include="CollisionSystem.cs" />
     <Compile Include="ContentManagerAdapter.cs" />
+    <Compile Include="DebugComponent.cs" />
     <Compile Include="IComponent.cs" />
     <Compile Include="FrameProperties.cs" />
     <Compile Include="GameObject.cs" />

@@ -210,6 +210,53 @@
             <param name="assetName">The asset name.</param>
             <returns>The loaded asset.</returns>
         </member>
+        <member name="T:TopDownShooter.Engine.DebugComponent">
+            <summary>
+             Primitive Debug Component, uses the <see cref="P:TopDownShooter.Engine.GameObject.Bounds"/> to place a hollow <see cref="T:Microsoft.Xna.Framework.Rectangle"/>
+             around it.
+            </summary>
+        </member>
+        <member name="M:TopDownShooter.Engine.DebugComponent.#ctor(Microsoft.Xna.Framework.Color,System.Int32)">
+            <summary>
+            Initializes a new instance of the <see cref="T:TopDownShooter.Engine.DebugComponent"/> class.
+            </summary>
+            <param name="color">Border color for the bounding box around a given <see cref="T:TopDownShooter.Engine.GameObject"/></param>
+            <param name="borderThickness">The thickness for the rectangluar border for a given <see cref="T:TopDownShooter.Engine.GameObject"/></param>
+        </member>
+        <member name="M:TopDownShooter.Engine.DebugComponent.Draw(TopDownShooter.Engine.IGameObject,TopDownShooter.Engine.ISpriteBatchAdapter,Microsoft.Xna.Framework.GameTime)">
+            <summary>
+            Draws the component with the specified game object and game time.
+            </summary>
+            <param name="gameObject">The game object.</param>
+            <param name="spriteBatch">The sprite batch adapter.</param>
+            <param name="time">The game time.</param>
+        </member>
+        <member name="M:TopDownShooter.Engine.DebugComponent.LoadContent(TopDownShooter.Engine.IContentManagerAdapter)">
+            <summary>
+            Loads the content from the specified content manager adapter.
+            </summary>
+            <param name="contentManager">The content manager adapter.</param>
+        </member>
+        <member name="M:TopDownShooter.Engine.DebugComponent.UnloadContent(TopDownShooter.Engine.IContentManagerAdapter)">
+            <summary>
+            Unloads the content from the specified content manager adapter.
+            </summary>
+            <param name="contentManager">The content manager adapter.</param>
+        </member>
+        <member name="M:TopDownShooter.Engine.DebugComponent.Update(TopDownShooter.Engine.IGameObject,Microsoft.Xna.Framework.GameTime)">
+            <summary>
+            Updates the component with the specified game object and game time.
+            </summary>
+            <param name="gameObject">The game object to update.</param>
+            <param name="time">The game time.</param>
+        </member>
+        <member name="M:TopDownShooter.Engine.DebugComponent.DrawRectangle(TopDownShooter.Engine.ISpriteBatchAdapter,Microsoft.Xna.Framework.Rectangle)">
+            <summary>
+            Draws a hollow rectangle around a provided <see cref="T:Microsoft.Xna.Framework.Rectangle"/>
+            </summary>
+            <param name="spriteBatch">The sprite batch adapter.</param>
+            <param name="area">Area to wrap with a border</param>
+        </member>
         <member name="T:TopDownShooter.Engine.IComponent">
             <summary>
             Defines an interface for components.
@@ -633,6 +680,12 @@
             Defines an interface for adapting <see cref="T:Microsoft.Xna.Framework.Graphics.SpriteBatch" />.
             </summary>
         </member>
+        <member name="P:TopDownShooter.Engine.ISpriteBatchAdapter.GraphicsDevice">
+            <summary>
+            Gets the <see cref="P:TopDownShooter.Engine.ISpriteBatchAdapter.GraphicsDevice"/> associated with this
+            <see cref="T:TopDownShooter.Engine.SpriteBatchAdapter"/>
+            </summary>
+        </member>
         <member name="M:TopDownShooter.Engine.ISpriteBatchAdapter.Begin(Microsoft.Xna.Framework.Graphics.SpriteSortMode,Microsoft.Xna.Framework.Graphics.BlendState,Microsoft.Xna.Framework.Graphics.SamplerState,Microsoft.Xna.Framework.Graphics.DepthStencilState,Microsoft.Xna.Framework.Graphics.RasterizerState,Microsoft.Xna.Framework.Graphics.Effect,System.Nullable{Microsoft.Xna.Framework.Matrix})">
             <summary>
             Begins a new sprite and text batch with the specified render state.
@@ -679,6 +732,14 @@
             </summary>
             <param name="texture">A texture.</param>
             <param name="position">The drawing location on screen.</param>
+            <param name="color">A color mask.</param>
+        </member>
+        <member name="M:TopDownShooter.Engine.ISpriteBatchAdapter.Draw(Microsoft.Xna.Framework.Graphics.Texture2D,Microsoft.Xna.Framework.Rectangle,Microsoft.Xna.Framework.Color)">
+            <summary>
+            Submit a sprite for drawing in the current batch.
+            </summary>
+            <param name="texture">A texture.</param>
+            <param name="rectangle">The rectangle to use.</param>
             <param name="color">A color mask.</param>
         </member>
         <member name="M:TopDownShooter.Engine.ISpriteBatchAdapter.DrawString(Microsoft.Xna.Framework.Graphics.SpriteFont,System.String,Microsoft.Xna.Framework.Vector2,Microsoft.Xna.Framework.Color)">
@@ -1008,6 +1069,12 @@
             The sprite batch being adapted.
             </param>
         </member>
+        <member name="P:TopDownShooter.Engine.SpriteBatchAdapter.GraphicsDevice">
+            <summary>
+            Gets the <see cref="P:TopDownShooter.Engine.SpriteBatchAdapter.GraphicsDevice"/> associated with this
+            <see cref="T:TopDownShooter.Engine.SpriteBatchAdapter"/>
+            </summary>
+        </member>
         <member name="M:TopDownShooter.Engine.SpriteBatchAdapter.Begin(Microsoft.Xna.Framework.Graphics.SpriteSortMode,Microsoft.Xna.Framework.Graphics.BlendState,Microsoft.Xna.Framework.Graphics.SamplerState,Microsoft.Xna.Framework.Graphics.DepthStencilState,Microsoft.Xna.Framework.Graphics.RasterizerState,Microsoft.Xna.Framework.Graphics.Effect,System.Nullable{Microsoft.Xna.Framework.Matrix})">
             <summary>
             Begins a new sprite and text batch with the specified render state.
@@ -1040,6 +1107,14 @@
             </summary>
             <param name="texture">A texture.</param>
             <param name="position">The drawing location on screen.</param>
+            <param name="color">A color mask.</param>
+        </member>
+        <member name="M:TopDownShooter.Engine.SpriteBatchAdapter.Draw(Microsoft.Xna.Framework.Graphics.Texture2D,Microsoft.Xna.Framework.Rectangle,Microsoft.Xna.Framework.Color)">
+            <summary>
+            Submit a sprite for drawing in the current batch.
+            </summary>
+            <param name="texture">A texture.</param>
+            <param name="rectangle">The rectangle to use.</param>
             <param name="color">A color mask.</param>
         </member>
         <member name="M:TopDownShooter.Engine.SpriteBatchAdapter.DrawString(Microsoft.Xna.Framework.Graphics.SpriteFont,System.String,Microsoft.Xna.Framework.Vector2,Microsoft.Xna.Framework.Color)">

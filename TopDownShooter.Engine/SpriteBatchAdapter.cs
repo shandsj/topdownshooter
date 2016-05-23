@@ -31,6 +31,18 @@ namespace TopDownShooter.Engine
         }
 
         /// <summary>
+        /// Gets the <see cref="GraphicsDevice"/> associated with this
+        /// <see cref="SpriteBatchAdapter"/>
+        /// </summary>
+        public GraphicsDevice GraphicsDevice
+        {
+            get
+            {
+                return this.spriteBatch.GraphicsDevice;
+            }
+        }
+
+        /// <summary>
         /// Begins a new sprite and text batch with the specified render state.
         /// </summary>
         /// <param name="sortMode">
@@ -68,6 +80,17 @@ namespace TopDownShooter.Engine
         public void Draw(Texture2D texture, Vector2 position, Color color)
         {
             this.spriteBatch.Draw(texture, position, color);
+        }
+
+        /// <summary>
+        /// Submit a sprite for drawing in the current batch.
+        /// </summary>
+        /// <param name="texture">A texture.</param>
+        /// <param name="rectangle">The rectangle to use.</param>
+        /// <param name="color">A color mask.</param>
+        public void Draw(Texture2D texture, Rectangle rectangle, Color color)
+        {
+            this.spriteBatch.Draw(texture, rectangle, color);
         }
 
         /// <summary>
