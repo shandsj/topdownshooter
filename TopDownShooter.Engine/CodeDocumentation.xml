@@ -157,9 +157,9 @@
             </summary>
             TODO: refactor this and put it somewhere else.
         </member>
-        <member name="M:TopDownShooter.Engine.CollisionSystem.CheckCollisions(TopDownShooter.Engine.ColliderComponentBase)">
+        <member name="M:TopDownShooter.Engine.CollisionSystem.CheckCollisions(TopDownShooter.Engine.IColliderComponent)">
             <summary>
-            Checks the collisions for the specified <see cref="T:TopDownShooter.Engine.ColliderComponentBase" />.
+            Checks the collisions for the specified <see cref="T:TopDownShooter.Engine.IColliderComponent" />.
             </summary>
             <param name="collider">The rigid body.</param>
         </member>
@@ -170,9 +170,9 @@
             <param name="id">Game object identifier.</param>
             <returns>The <see cref="T:TopDownShooter.Engine.IGameObject" />.</returns>
         </member>
-        <member name="M:TopDownShooter.Engine.CollisionSystem.Register(System.Int32,TopDownShooter.Engine.IGameObject,TopDownShooter.Engine.ColliderComponentBase)">
+        <member name="M:TopDownShooter.Engine.CollisionSystem.Register(System.Int32,TopDownShooter.Engine.IGameObject,TopDownShooter.Engine.IColliderComponent)">
             <summary>
-            Registers the specifieid <see cref="T:TopDownShooter.Engine.IGameObject" /> and <see cref="T:TopDownShooter.Engine.ColliderComponentBase" /> with the specified identifier.
+            Registers the specifieid <see cref="T:TopDownShooter.Engine.IGameObject" /> and <see cref="T:TopDownShooter.Engine.IColliderComponent" /> with the specified identifier.
             </summary>
             <param name="id">The identifier of the game object.</param>
             <param name="gameObject">The game object.</param>
@@ -520,15 +520,15 @@
             <param name="id">Game object identifier.</param>
             <returns>The <see cref="T:TopDownShooter.Engine.IGameObject" />.</returns>
         </member>
-        <member name="M:TopDownShooter.Engine.ICollisionSystem.CheckCollisions(TopDownShooter.Engine.ColliderComponentBase)">
+        <member name="M:TopDownShooter.Engine.ICollisionSystem.CheckCollisions(TopDownShooter.Engine.IColliderComponent)">
             <summary>
-            Checks the collisions for the specified <see cref="T:TopDownShooter.Engine.ColliderComponentBase" />.
+            Checks the collisions for the specified <see cref="T:TopDownShooter.Engine.IColliderComponent" />.
             </summary>
             <param name="collider">The rigid body.</param>
         </member>
-        <member name="M:TopDownShooter.Engine.ICollisionSystem.Register(System.Int32,TopDownShooter.Engine.IGameObject,TopDownShooter.Engine.ColliderComponentBase)">
+        <member name="M:TopDownShooter.Engine.ICollisionSystem.Register(System.Int32,TopDownShooter.Engine.IGameObject,TopDownShooter.Engine.IColliderComponent)">
             <summary>
-            Registers the specifieid <see cref="T:TopDownShooter.Engine.IGameObject" /> and <see cref="T:TopDownShooter.Engine.ColliderComponentBase" /> with the specified identifier.
+            Registers the specifieid <see cref="T:TopDownShooter.Engine.IGameObject" /> and <see cref="T:TopDownShooter.Engine.IColliderComponent" /> with the specified identifier.
             </summary>
             <param name="id">The identifier of the game object.</param>
             <param name="gameObject">The game object.</param>
@@ -728,11 +728,6 @@
             Gets the tile's position in tile coordinates.
             </summary>
         </member>
-        <member name="P:TopDownShooter.Engine.ITile.Height">
-            <summary>
-            Gets the height.
-            </summary>
-        </member>
         <member name="P:TopDownShooter.Engine.ITile.Texture">
             <summary>
             Gets the texture
@@ -741,11 +736,6 @@
         <member name="P:TopDownShooter.Engine.ITile.TexturePosition">
             <summary>
             Gets the position of the tile in the tileset.
-            </summary>
-        </member>
-        <member name="P:TopDownShooter.Engine.ITile.Width">
-            <summary>
-            Gets the width.
             </summary>
         </member>
         <member name="T:TopDownShooter.Engine.Level">

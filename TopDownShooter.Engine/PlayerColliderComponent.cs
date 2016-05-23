@@ -29,7 +29,7 @@ namespace TopDownShooter.Engine
         /// <param name="other">The other collider component.</param>
         public override void Collide(IColliderComponent other)
         {
-            var tile = this.CollisionSystem.GetGameObject(other.GameObjectId) as Tile;
+            var tile = this.CollisionSystem.GetGameObject(other.GameObjectId) as ITile;
             if (tile != null)
             {
                 var gameObject = this.CollisionSystem.GetGameObject(this.GameObjectId);

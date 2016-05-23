@@ -54,6 +54,21 @@
             Tests that the game object delegates update calls to a component.
             </summary>
         </member>
+        <member name="T:TopDownShooter.Engine.UnitTests.PlayerColliderComponentTests">
+            <summary>
+            Contains unit tests for the <see cref="T:TopDownShooter.Engine.PlayerColliderComponent" /> class.
+            </summary>
+        </member>
+        <member name="M:TopDownShooter.Engine.UnitTests.PlayerColliderComponentTests.ModifiesVelocityWhenCollidingWithATile">
+            <summary>
+            Tests that the velocity on the parent game object is modified when colliding with a tile.
+            </summary>
+        </member>
+        <member name="M:TopDownShooter.Engine.UnitTests.PlayerColliderComponentTests.ChecksForCollisionsWhenUpdatedAndGameObjectHasNonZeroVelocity">
+            <summary>
+            Tests that collisions are check when the component is updated and the parent game object has a non-zero velocity.
+            </summary>
+        </member>
         <member name="T:TopDownShooter.Engine.UnitTests.SimpleColliderComponentTests">
             <summary>
             Contains unit tests for the <see cref="T:TopDownShooter.Engine.SimpleColliderComponent" /> class.
