@@ -2,14 +2,11 @@
 // Copyright (c) PlaceholderCompany. All rights reserved.
 // </copyright>
 
-namespace TopDownShooter.Engine
+namespace TopDownShooter.Engine.Controllers
 {
     using System;
     using System.Collections.Generic;
-    using System.Linq;
-    using System.Text;
     using System.Threading.Tasks;
-    using Microsoft.Xna.Framework;
 
     /// <summary>
     /// Controller for controlling a simple AI.

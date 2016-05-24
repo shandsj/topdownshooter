@@ -7,6 +7,7 @@
 namespace TopDownShooter.Engine
 {
     using Microsoft.Xna.Framework;
+    using TopDownShooter.Engine.Adapters;
 
     /// <summary>
     /// Defines a movement component that applies velocity to a position.

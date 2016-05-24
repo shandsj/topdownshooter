@@ -4,7 +4,7 @@
 // </copyright>
 // --------------------------------------------------------------------------------------------------------------------
 
-namespace TopDownShooter.Engine
+namespace TopDownShooter.Engine.Collisions
 {
     using System.Collections.Generic;
 

@@ -8,6 +8,7 @@ namespace TopDownShooter.Engine
 {
     using System.Collections.Generic;
     using Microsoft.Xna.Framework;
+    using TopDownShooter.Engine.Adapters;
 
     /// <summary>
     /// Defines an entity.

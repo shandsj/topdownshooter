@@ -4,10 +4,13 @@
 // </copyright>
 // --------------------------------------------------------------------------------------------------------------------
 
-namespace TopDownShooter.Engine
+namespace TopDownShooter.Engine.Projectiles
 {
+    using System;
     using System.Collections.Generic;
     using Microsoft.Xna.Framework;
+    using TopDownShooter.Engine.Adapters;
+    using TopDownShooter.Engine.Collisions;
 
     /// <summary>
     /// Defines a component for generating bullet projectiles.
@@ -18,9 +21,13 @@ namespace TopDownShooter.Engine
 
         private readonly ICollisionSystem collisionSystem;
 
+        private readonly TimeSpan cooldownTime = TimeSpan.FromSeconds(.5);
+
         private readonly IGameObjectFactory factory;
 
         private IContentManagerAdapter contentManager;
+
+        private DateTime lastFireTime = DateTime.Now;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="BulletProjectileGeneratorComponent" /> class.
@@ -73,13 +80,15 @@ namespace TopDownShooter.Engine
         public void ReceiveMessage(IGameObject gameObject, object message)
         {
             var messageType = (MessageType)message;
-            if (messageType == MessageType.Fire)
+            if (messageType == MessageType.Fire && DateTime.Now - this.lastFireTime > this.cooldownTime)
             {
-                var bullet = this.factory.CreateBulletProjectile(CollisionSystem.NextGameObjectId++, gameObject.Position, new Vector2(0, 1), this.collisionSystem);
+                var bullet = this.factory.CreateBulletProjectile(CollisionSystem.NextGameObjectId++, gameObject.Position, gameObject.Velocity, this.collisionSystem);
                 bullet.Initialize();
                 bullet.LoadContent(this.contentManager);
 
                 this.bullets.Add(bullet);
+
+                this.lastFireTime = DateTime.Now;
             }
         }
 

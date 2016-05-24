@@ -4,7 +4,7 @@
 // </copyright>
 // --------------------------------------------------------------------------------------------------------------------
 
-namespace TopDownShooter.Engine
+namespace TopDownShooter.Engine.Collisions
 {
     /// <summary>
     /// Provides a simple collider component that does bounds checking for collision detection.

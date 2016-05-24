@@ -4,8 +4,10 @@
 // </copyright>
 // --------------------------------------------------------------------------------------------------------------------
 
-namespace TopDownShooter.Engine
+namespace TopDownShooter.Engine.Projectiles
 {
+    using TopDownShooter.Engine.Collisions;
+
     /// <summary>
     /// Defines a collider component for the bullet projectile.
     /// </summary>

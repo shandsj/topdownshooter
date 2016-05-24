@@ -69,52 +69,52 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Adapters\ContentManagerAdapter.cs" />
+    <Compile Include="Adapters\IContentManagerAdapter.cs" />
+    <Compile Include="Adapters\ISpriteBatchAdapter.cs" />
+    <Compile Include="Adapters\SpriteBatchAdapter.cs" />
     <Compile Include="AnimationComponent.cs" />
-    <Compile Include="BulletProjectile.cs" />
-    <Compile Include="BulletProjectileColliderComponent.cs" />
-    <Compile Include="BulletProjectileGeneratorComponent.cs" />
     <Compile Include="Camera.cs" />
-    <Compile Include="CollisionSystem.cs" />
-    <Compile Include="ContentManagerAdapter.cs" />
+    <Compile Include="Collisions\ColliderComponentBase.cs" />
+    <Compile Include="Collisions\CollisionSystem.cs" />
+    <Compile Include="Collisions\IColliderComponent.cs" />
+    <Compile Include="Collisions\ICollisionSystem.cs" />
+    <Compile Include="Collisions\SimpleColliderComponent.cs" />
+    <Compile Include="Controllers\HumanInputControllerComponent.cs" />
+    <Compile Include="Controllers\IInputController.cs" />
+    <Compile Include="Controllers\InputControllerComponentBase.cs" />
+    <Compile Include="Controllers\SimpleAiInputControllerComponent.cs" />
     <Compile Include="DebugComponent.cs" />
     <Compile Include="GameObjectFactory.cs" />
-    <Compile Include="HumanInputControllerComponent.cs" />
-    <Compile Include="IColliderComponent.cs" />
     <Compile Include="IComponent.cs" />
     <Compile Include="FrameProperties.cs" />
     <Compile Include="GameObject.cs" />
     <Compile Include="ICamera.cs" />
-    <Compile Include="IContentManagerAdapter.cs" />
     <Compile Include="IGameObject.cs" />
-    <Compile Include="ICollisionSystem.cs" />
     <Compile Include="IGameObjectFactory.cs" />
-    <Compile Include="IInputController.cs" />
-    <Compile Include="InputControllerComponentBase.cs" />
-    <Compile Include="ISpriteBatchAdapter.cs" />
-    <Compile Include="ITile.cs" />
-    <Compile Include="Level.cs" />
+    <Compile Include="Levels\ITile.cs" />
+    <Compile Include="Levels\Level.cs" />
+    <Compile Include="Levels\Tile.cs" />
+    <Compile Include="Levels\TileInteractionType.cs" />
     <Compile Include="MessageType.cs" />
     <Compile Include="MovementComponent.cs" />
     <Compile Include="Player.cs" />
     <Compile Include="PlayerColliderComponent.cs" />
+    <Compile Include="Projectiles\BulletProjectile.cs" />
+    <Compile Include="Projectiles\BulletProjectileColliderComponent.cs" />
+    <Compile Include="Projectiles\BulletProjectileGeneratorComponent.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="ColliderComponentBase.cs" />
-    <Compile Include="SimpleAiInputControllerComponent.cs" />
-    <Compile Include="SimpleColliderComponent.cs" />
-    <Compile Include="SpriteBatchAdapter.cs" />
-    <Compile Include="Tile.cs" />
-    <Compile Include="TileInteractionType.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
     <None Include="stylecop.json" />
-    <None Include="stylecop1.json" />
   </ItemGroup>
   <ItemGroup>
     <Analyzer Include="..\packages\StyleCop.Analyzers.1.0.0\analyzers\dotnet\cs\Newtonsoft.Json.dll" />
     <Analyzer Include="..\packages\StyleCop.Analyzers.1.0.0\analyzers\dotnet\cs\StyleCop.Analyzers.CodeFixes.dll" />
     <Analyzer Include="..\packages\StyleCop.Analyzers.1.0.0\analyzers\dotnet\cs\StyleCop.Analyzers.dll" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

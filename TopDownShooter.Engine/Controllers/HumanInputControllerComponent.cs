@@ -4,7 +4,7 @@
 // </copyright>
 // --------------------------------------------------------------------------------------------------------------------
 
-namespace TopDownShooter.Engine
+namespace TopDownShooter.Engine.Controllers
 {
     using Microsoft.Xna.Framework;
     using Microsoft.Xna.Framework.Input;

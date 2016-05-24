@@ -4,7 +4,7 @@
 // </copyright>
 // --------------------------------------------------------------------------------------------------------------------
 
-namespace TopDownShooter.Engine
+namespace TopDownShooter.Engine.Adapters
 {
     using Microsoft.Xna.Framework;
     using Microsoft.Xna.Framework.Graphics;

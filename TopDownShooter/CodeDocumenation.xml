@@ -16,7 +16,7 @@
         </member>
         <member name="F:TopDownShooter.Game1.contentManager">
             <summary>
-            The <see cref="T:TopDownShooter.Engine.IContentManagerAdapter" />.
+            The <see cref="T:TopDownShooter.Engine.Adapters.IContentManagerAdapter" />.
             </summary>
         </member>
         <member name="F:TopDownShooter.Game1.graphics">
@@ -26,12 +26,12 @@
         </member>
         <member name="F:TopDownShooter.Game1.level">
             <summary>
-            The <see cref="T:TopDownShooter.Engine.Level" />.
+            The <see cref="T:TopDownShooter.Engine.Levels.Level" />.
             </summary>
         </member>
         <member name="F:TopDownShooter.Game1.spriteBatch">
             <summary>
-            The default <see cref="T:TopDownShooter.Engine.ISpriteBatchAdapter" />.
+            The default <see cref="T:TopDownShooter.Engine.Adapters.ISpriteBatchAdapter" />.
             </summary>
         </member>
         <member name="M:TopDownShooter.Game1.#ctor">

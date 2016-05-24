@@ -11,6 +11,7 @@ namespace TopDownShooter.Engine
     using System.Threading.Tasks;
     using Microsoft.Xna.Framework;
     using Microsoft.Xna.Framework.Graphics;
+    using TopDownShooter.Engine.Adapters;
 
     /// <summary>
     ///  Primitive Debug Component, uses the <see cref="GameObject.Bounds"/> to place a hollow <see cref="Rectangle"/>

@@ -4,11 +4,12 @@
 // </copyright>
 // --------------------------------------------------------------------------------------------------------------------
 
-namespace TopDownShooter.Engine.UnitTests
+namespace TopDownShooter.Engine.UnitTests.Collisions
 {
     using System.Linq;
     using Microsoft.VisualStudio.TestTools.UnitTesting;
     using Moq;
+    using TopDownShooter.Engine.Collisions;
 
     /// <summary>
     /// Contains unit tests for the <see cref="CollisionSystem" /> class.

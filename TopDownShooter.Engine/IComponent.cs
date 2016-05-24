@@ -7,6 +7,7 @@
 namespace TopDownShooter.Engine
 {
     using Microsoft.Xna.Framework;
+    using TopDownShooter.Engine.Adapters;
 
     /// <summary>
     /// Defines an interface for components.

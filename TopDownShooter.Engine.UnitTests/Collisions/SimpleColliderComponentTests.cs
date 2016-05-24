@@ -4,11 +4,12 @@
 // </copyright>
 // --------------------------------------------------------------------------------------------------------------------
 
-namespace TopDownShooter.Engine.UnitTests
+namespace TopDownShooter.Engine.UnitTests.Collisions
 {
     using Microsoft.VisualStudio.TestTools.UnitTesting;
     using Microsoft.Xna.Framework;
     using Moq;
+    using TopDownShooter.Engine.Collisions;
 
     /// <summary>
     /// Contains unit tests for the <see cref="SimpleColliderComponent" /> class.
