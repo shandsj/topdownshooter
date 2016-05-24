@@ -4,9 +4,8 @@
 // </copyright>
 // --------------------------------------------------------------------------------------------------------------------
 
-namespace TopDownShooter
+namespace TopDownShooter.Engine
 {
-    using Engine;
     using Microsoft.Xna.Framework;
     using Microsoft.Xna.Framework.Input;
 
@@ -29,6 +28,15 @@ namespace TopDownShooter
         /// </summary>
         public HumanInputControllerComponent()
         {
+        }
+
+        /// <summary>
+        /// Gets a value indicating whether a fire was requested.
+        /// </summary>
+        /// <returns>True if the action was requested; false otherwise.</returns>
+        public override bool Fire()
+        {
+            return this.currentMouseState.LeftButton == ButtonState.Pressed;
         }
 
         /// <summary>

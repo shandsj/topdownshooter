@@ -19,9 +19,19 @@ namespace TopDownShooter.Engine
         /// </summary>
         /// <param name="id">The game object identifier.</param>
         protected GameObject(int id)
+            : this(id, new IComponent[0])
+        {
+        }
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="GameObject" /> class.
+        /// </summary>
+        /// <param name="id">The game object identifier.</param>
+        /// <param name="components">The collection of components.</param>
+        protected GameObject(int id, IEnumerable<IComponent> components)
         {
             this.Id = id;
-            this.Components = new List<IComponent>();
+            this.Components = new List<IComponent>(components);
         }
 
         /// <summary>
@@ -110,6 +120,18 @@ namespace TopDownShooter.Engine
             foreach (var component in this.Components)
             {
                 component.UnloadContent(contentManager);
+            }
+        }
+
+        /// <summary>
+        /// Broadcasts a message to all components.
+        /// </summary>
+        /// <param name="message">The message to broadcast.</param>
+        public void BroadcastMessage(object message)
+        {
+            foreach (var component in this.Components)
+            {
+                component.ReceiveMessage(this, message);
             }
         }
 

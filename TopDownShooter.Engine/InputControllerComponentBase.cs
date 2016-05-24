@@ -36,12 +36,26 @@ namespace TopDownShooter.Engine
         }
 
         /// <summary>
+        /// Receives a message.
+        /// </summary>
+        /// <param name="gameObject">The game object.</param>
+        /// <param name="message">The message object.</param>
+        public void ReceiveMessage(IGameObject gameObject, object message)
+        {
+        }
+
+        /// <summary>
         /// Updates the component with the specified game object and game time.
         /// </summary>
         /// <param name="gameObject">The game object to update.</param>
         /// <param name="time">The game time.</param>
         public virtual void Update(IGameObject gameObject, GameTime time)
         {
+            if (this.Fire())
+            {
+                gameObject.BroadcastMessage(MessageType.Fire);
+            }
+
             float x = 0;
             float y = 0;
 
@@ -93,6 +107,12 @@ namespace TopDownShooter.Engine
         public virtual void UnloadContent(IContentManagerAdapter contentManager)
         {
         }
+
+        /// <summary>
+        /// Gets a value indicating whether a fire was requested.
+        /// </summary>
+        /// <returns>True if the action was requested; false otherwise.</returns>
+        public abstract bool Fire();
 
         /// <summary>
         /// Gets whether or not a up move was requested.

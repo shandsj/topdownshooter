@@ -90,21 +90,17 @@ namespace TopDownShooter
 
 #pragma warning disable SA1118 // Parameter must not span multiple lines
             var focusedPlayerId = CollisionSystem.NextGameObjectId++;
-            var animationComponent = new AnimationComponent("hoodieguy", new FrameProperties(76, 140, TimeSpan.FromSeconds(.1), 2)) { IsLooping = true, IsAnimating = true };
-            var colliderComponent = new PlayerColliderComponent(focusedPlayerId, this.collisionSystem);
             this.focusedPlayer = new Player(
                 focusedPlayerId,
                 new Vector2(1600, 1600),
                 this.collisionSystem,
-                animationComponent,
-                colliderComponent,
                 new IComponent[]
                 {
                     // Order matters for calls to update and draw
                     new HumanInputControllerComponent(),
-                    colliderComponent,
+                    new PlayerColliderComponent(focusedPlayerId, this.collisionSystem),
                     new MovementComponent(),
-                    animationComponent,
+                    new AnimationComponent("hoodieguy", new FrameProperties(76, 140, TimeSpan.FromSeconds(.1), 2)) { IsLooping = true, IsAnimating = true },
                     new DebugComponent(Color.Red, 2)
                 });
 

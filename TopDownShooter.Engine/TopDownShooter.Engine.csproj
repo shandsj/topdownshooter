@@ -70,10 +70,15 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AnimationComponent.cs" />
+    <Compile Include="BulletProjectile.cs" />
+    <Compile Include="BulletProjectileColliderComponent.cs" />
+    <Compile Include="BulletProjectileGeneratorComponent.cs" />
     <Compile Include="Camera.cs" />
     <Compile Include="CollisionSystem.cs" />
     <Compile Include="ContentManagerAdapter.cs" />
     <Compile Include="DebugComponent.cs" />
+    <Compile Include="GameObjectFactory.cs" />
+    <Compile Include="HumanInputControllerComponent.cs" />
     <Compile Include="IColliderComponent.cs" />
     <Compile Include="IComponent.cs" />
     <Compile Include="FrameProperties.cs" />
@@ -82,12 +87,15 @@
     <Compile Include="IContentManagerAdapter.cs" />
     <Compile Include="IGameObject.cs" />
     <Compile Include="ICollisionSystem.cs" />
+    <Compile Include="IGameObjectFactory.cs" />
     <Compile Include="IInputController.cs" />
     <Compile Include="InputControllerComponentBase.cs" />
     <Compile Include="ISpriteBatchAdapter.cs" />
     <Compile Include="ITile.cs" />
     <Compile Include="Level.cs" />
+    <Compile Include="MessageType.cs" />
     <Compile Include="MovementComponent.cs" />
+    <Compile Include="Player.cs" />
     <Compile Include="PlayerColliderComponent.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ColliderComponentBase.cs" />
@@ -100,6 +108,7 @@
   <ItemGroup>
     <None Include="packages.config" />
     <None Include="stylecop.json" />
+    <None Include="stylecop1.json" />
   </ItemGroup>
   <ItemGroup>
     <Analyzer Include="..\packages\StyleCop.Analyzers.1.0.0\analyzers\dotnet\cs\Newtonsoft.Json.dll" />

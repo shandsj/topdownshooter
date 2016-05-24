@@ -60,6 +60,12 @@ namespace TopDownShooter.Engine
         int Id { get; }
 
         /// <summary>
+        /// Broadcasts a message to all components.
+        /// </summary>
+        /// <param name="message">The message to broadcast.</param>
+        void BroadcastMessage(object message);
+
+        /// <summary>
         /// Updates the game object with the specified game time.
         /// </summary>
         /// <param name="gameTime">The game time.</param>

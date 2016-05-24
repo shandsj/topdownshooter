@@ -21,6 +21,8 @@ namespace TopDownShooter.Engine
         private bool moveUp;
         private bool moveDown;
 
+        private bool fire;
+
         private Random random;
 
         private List<Task> taskList;
@@ -41,6 +43,15 @@ namespace TopDownShooter.Engine
         {
             // Do not change this code. Put cleanup code in Dispose(bool disposing) above.
             this.Dispose(false);
+        }
+
+        /// <summary>
+        /// Gets a value indicating whether a fire was requested.
+        /// </summary>
+        /// <returns>True if the action was requested; false otherwise.</returns>
+        public override bool Fire()
+        {
+            return this.fire;
         }
 
         /// <summary>
@@ -97,64 +108,78 @@ namespace TopDownShooter.Engine
             this.taskList.AddRange(new Task[]
             {
                 Task.Factory.StartNew(() =>
-                {
-                    while (true)
                     {
-                        if (this.moveDown == true)
+                        while (true)
                         {
-                            continue;
+                            if (this.moveDown == true)
+                            {
+                                continue;
+                            }
+
+                            this.SleepRandomly();
+
+                            this.moveUp = !this.moveUp;
                         }
-
-                        this.SleepRandomly();
-
-                        this.moveUp = !this.moveUp;
-                    }
-                }),
+                    }),
 
                 Task.Factory.StartNew(() =>
-                {
-                    while (true)
                     {
-                        if (this.moveUp == true)
+                        while (true)
                         {
-                            continue;
+                            if (this.moveUp == true)
+                            {
+                                continue;
+                            }
+
+                            this.SleepRandomly();
+
+                            this.moveDown = !this.moveDown;
                         }
-
-                        this.SleepRandomly();
-
-                        this.moveDown = !this.moveDown;
-                    }
-                }),
+                    }),
 
                 Task.Factory.StartNew(() =>
-                {
-                    while (true)
                     {
-                        if (this.moveRight == true)
+                        while (true)
                         {
-                            continue;
+                            if (this.moveRight == true)
+                            {
+                                continue;
+                            }
+
+                            this.SleepRandomly();
+
+                            this.moveLeft = !this.moveLeft;
                         }
-
-                        this.SleepRandomly();
-
-                        this.moveLeft = !this.moveLeft;
-                    }
-                }),
+                    }),
 
                 Task.Factory.StartNew(() =>
-                {
-                    while (true)
                     {
-                        if (this.moveLeft == true)
+                        while (true)
                         {
-                            continue;
+                            if (this.moveLeft == true)
+                            {
+                                continue;
+                            }
+
+                            this.SleepRandomly();
+
+                            this.moveRight = !this.moveRight;
                         }
+                    }),
+                Task.Factory.StartNew(() =>
+                    {
+                        while (true)
+                        {
+                            if (this.fire == true)
+                            {
+                                continue;
+                            }
 
-                        this.SleepRandomly();
+                            this.SleepRandomly();
 
-                        this.moveRight = !this.moveRight;
-                    }
-                }),
+                            this.fire = !this.fire;
+                        }
+                    }),
             });
         }
 

@@ -14,6 +14,13 @@ namespace TopDownShooter.Engine
     public interface IComponent
     {
         /// <summary>
+        /// Receives a message.
+        /// </summary>
+        /// <param name="gameObject">The game object.</param>
+        /// <param name="message">The message object.</param>
+        void ReceiveMessage(IGameObject gameObject, object message);
+
+        /// <summary>
         /// Updates the component with the specified game object and game time.
         /// </summary>
         /// <param name="gameObject">The game object to update.</param>

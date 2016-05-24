@@ -17,6 +17,12 @@ namespace TopDownShooter.Engine
     public interface IInputController
     {
         /// <summary>
+        /// Gets a value indicating whether a fire was requested.
+        /// </summary>
+        /// <returns>True if the action was requested; false otherwise.</returns>
+        bool Fire();
+
+        /// <summary>
         /// Gets whether or not a up move was requested.
         /// </summary>
         /// <returns>True to move down.</returns>
