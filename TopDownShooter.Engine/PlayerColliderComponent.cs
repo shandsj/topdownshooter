@@ -29,8 +29,7 @@ namespace TopDownShooter.Engine
         /// <param name="other">The other collider component.</param>
         public override void Collide(IColliderComponent other)
         {
-            var tile = this.CollisionSystem.GetGameObject(other.GameObjectId) as ITile;
-            if (tile != null)
+            if (this.IsCollision(other))
             {
                 var gameObject = this.CollisionSystem.GetGameObject(this.GameObjectId);
                 gameObject.Velocity = new Vector2(0, 0); // TODO: modify velocity correctly based on location of collided object

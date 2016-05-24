@@ -28,9 +28,9 @@ namespace TopDownShooter.Engine
         public override void Collide(IColliderComponent other)
         {
             var player = this.CollisionSystem.GetGameObject(other.GameObjectId) as Player;
-            if (player != null)
+            if (player != null && player.Health > 0)
             {
-                // TODO kill player
+                player.Health--;
             }
 
             base.Collide(other);

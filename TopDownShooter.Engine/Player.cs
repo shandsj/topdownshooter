@@ -31,6 +31,8 @@ namespace TopDownShooter.Engine
         public Player(int id, Vector2 position, ICollisionSystem collisionSystem, IEnumerable<IComponent> components)
             : base(id, components)
         {
+            this.Health = 1;
+
             this.Position = position;
             this.collisionSystem = collisionSystem;
             this.animationComponent = this.Components.OfType<AnimationComponent>().FirstOrDefault();
@@ -38,6 +40,16 @@ namespace TopDownShooter.Engine
 
             this.collisionSystem.Register(id, this, this.colliderComponent);
         }
+
+        /// <summary>
+        /// Gets or sets the name
+        /// </summary>
+        public string Name { get; set; }
+
+        /// <summary>
+        /// Gets or sets the name
+        /// </summary>
+        public int Health { get; set; }
 
         /// <summary>
         /// Gets the bounds offset via the size of the <see cref="AnimationComponent.FrameProperties"/>

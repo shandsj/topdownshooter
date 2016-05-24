@@ -1204,6 +1204,16 @@
             <param name="collisionSystem">The <see cref="T:TopDownShooter.Engine.ICollisionSystem" />.</param>
             <param name="components">A collection of components.</param>
         </member>
+        <member name="P:TopDownShooter.Engine.Player.Name">
+            <summary>
+            Gets or sets the name
+            </summary>
+        </member>
+        <member name="P:TopDownShooter.Engine.Player.Health">
+            <summary>
+            Gets or sets the name
+            </summary>
+        </member>
         <member name="P:TopDownShooter.Engine.Player.Bounds">
             <summary>
             Gets the bounds offset via the size of the <see cref="P:TopDownShooter.Engine.AnimationComponent.FrameProperties"/>
