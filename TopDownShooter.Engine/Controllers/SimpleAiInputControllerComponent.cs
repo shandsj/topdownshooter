@@ -167,11 +167,6 @@ namespace TopDownShooter.Engine.Controllers
                     {
                         while (true)
                         {
-                            if (this.fire == true)
-                            {
-                                continue;
-                            }
-
                             this.SleepRandomly();
 
                             this.fire = !this.fire;

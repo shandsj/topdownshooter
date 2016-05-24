@@ -44,17 +44,10 @@ namespace TopDownShooter.Engine.Collisions
         /// <param name="collider">The rigid body.</param>
         public void CheckCollisions(IColliderComponent collider)
         {
-            // Don't check collisions for a collider and itself.
-            var otherColliders = this.colliders.Values.Where(o => o != collider);
-
-            foreach (var other in otherColliders)
+            foreach (var other in this.Colliders)
             {
-                if (collider.IsCollision(other))
+                if (other != collider && collider.IsCollision(other))
                 {
-                    // Not sure if this is fully right, but a player was only colliding
-                    // with the bullet, not the other way around. This meant the BullectColliderComponent's
-                    // Collide method was never being called.
-                    other.Collide(collider);
                     collider.Collide(other);
                 }
             }

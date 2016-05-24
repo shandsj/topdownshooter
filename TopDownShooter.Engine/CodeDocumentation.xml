@@ -1530,6 +1530,13 @@
             </summary>
             <param name="other">The other collider component.</param>
         </member>
+        <member name="M:TopDownShooter.Engine.Projectiles.BulletProjectileColliderComponent.Update(TopDownShooter.Engine.IGameObject,Microsoft.Xna.Framework.GameTime)">
+            <summary>
+            Updates the component with the specified game object and game time.
+            </summary>
+            <param name="gameObject">The game object to update.</param>
+            <param name="time">The game time.</param>
+        </member>
         <member name="T:TopDownShooter.Engine.Projectiles.BulletProjectileGeneratorComponent">
             <summary>
             Defines a component for generating bullet projectiles.
