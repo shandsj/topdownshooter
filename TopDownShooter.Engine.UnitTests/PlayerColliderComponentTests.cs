@@ -9,6 +9,8 @@ namespace TopDownShooter.Engine.UnitTests
     using Microsoft.VisualStudio.TestTools.UnitTesting;
     using Microsoft.Xna.Framework;
     using Moq;
+    using TopDownShooter.Engine.Collisions;
+    using TopDownShooter.Engine.Levels;
 
     /// <summary>
     /// Contains unit tests for the <see cref="PlayerColliderComponent" /> class.

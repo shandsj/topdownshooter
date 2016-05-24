@@ -1,14 +1,15 @@
-﻿// --------------------------------------------------------------------------------------------------------------------
+// --------------------------------------------------------------------------------------------------------------------
 // <copyright file="BulletProjectile.cs" company="PlaceholderCompany">
 // Copyright (c) PlaceholderCompany. All rights reserved.
 // </copyright>
 // --------------------------------------------------------------------------------------------------------------------
 
-namespace TopDownShooter.Engine
+namespace TopDownShooter.Engine.Projectiles
 {
     using System.Collections.Generic;
     using System.Linq;
     using Microsoft.Xna.Framework;
+    using TopDownShooter.Engine.Collisions;
 
     /// <summary>
     /// Defines a bullet projectile game object.
@@ -19,7 +20,7 @@ namespace TopDownShooter.Engine
 
         private readonly ICollisionSystem collisionSystem;
 
-        private readonly float speed = 20f;
+        private readonly float speed = 50f;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="BulletProjectile" /> class.
@@ -35,6 +36,7 @@ namespace TopDownShooter.Engine
             this.Position = position;
             this.collisionSystem = collisionSystem;
 
+            direction.Normalize();
             this.Velocity = direction * this.speed;
 
             this.colliderComponent = this.Components.OfType<IColliderComponent>().FirstOrDefault();

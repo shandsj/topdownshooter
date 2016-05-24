@@ -29,24 +29,55 @@
             Tests that the transform matrix is calculated.
             </summary>
         </member>
-        <member name="T:TopDownShooter.Engine.UnitTests.CollisionSystemTests">
+        <member name="T:TopDownShooter.Engine.UnitTests.Collisions.CollisionSystemTests">
             <summary>
-            Contains unit tests for the <see cref="T:TopDownShooter.Engine.CollisionSystem" /> class.
+            Contains unit tests for the <see cref="T:TopDownShooter.Engine.Collisions.CollisionSystem" /> class.
             </summary>
         </member>
-        <member name="M:TopDownShooter.Engine.UnitTests.CollisionSystemTests.CallsCollideWhenACollisionIsDetected">
+        <member name="M:TopDownShooter.Engine.UnitTests.Collisions.CollisionSystemTests.CallsCollideWhenACollisionIsDetected">
             <summary>
             Tests that a collider is notified when a collision is detected.
             </summary>
         </member>
-        <member name="M:TopDownShooter.Engine.UnitTests.CollisionSystemTests.CanGetGameObjects">
+        <member name="M:TopDownShooter.Engine.UnitTests.Collisions.CollisionSystemTests.CanGetGameObjects">
             <summary>
             Tests that game objects can be retrieved with their identifier.
             </summary>
         </member>
-        <member name="M:TopDownShooter.Engine.UnitTests.CollisionSystemTests.RegistersAndUnregistersGameObjectsAndColliderComponents">
+        <member name="M:TopDownShooter.Engine.UnitTests.Collisions.CollisionSystemTests.RegistersAndUnregistersGameObjectsAndColliderComponents">
             <summary>
             Tests that game objects and collider components can be registered and unregistered.
+            </summary>
+        </member>
+        <member name="T:TopDownShooter.Engine.UnitTests.Collisions.SimpleColliderComponentTests">
+            <summary>
+            Contains unit tests for the <see cref="T:TopDownShooter.Engine.Collisions.SimpleColliderComponent" /> class.
+            </summary>
+        </member>
+        <member name="M:TopDownShooter.Engine.UnitTests.Collisions.SimpleColliderComponentTests.DoesNotDetectCollisionsWithAnotherColliderComponent">
+            <summary>
+            Tests that a collision is not detected with other collider components.
+            </summary>
+        </member>
+        <member name="M:TopDownShooter.Engine.UnitTests.Collisions.SimpleColliderComponentTests.DetectsCollisionsWithAnotherColliderComponent">
+            <summary>
+            Tests that a collision is detected with other collider components.
+            </summary>
+        </member>
+        <member name="T:TopDownShooter.Engine.UnitTests.Controllers.SimpleAiInputControllerComponentTests">
+            <summary>
+            Class for testing the <see cref="T:TopDownShooter.Engine.Controllers.SimpleAiInputControllerComponent"/>
+            </summary>
+        </member>
+        <member name="M:TopDownShooter.Engine.UnitTests.Controllers.SimpleAiInputControllerComponentTests.AffectsGameObjectVelocityWhenUpdateIsCalled">
+            <summary>
+            Tests whether the animation is drawn in the sprite batch when draw is called.
+            </summary>
+        </member>
+        <member name="M:TopDownShooter.Engine.UnitTests.Controllers.SimpleAiInputControllerComponentTests.EnsureDrawDoesNotUtilizeSpriteBatch">
+            <summary>
+            The <see cref="T:TopDownShooter.Engine.Controllers.SimpleAiInputControllerComponent"/> should not utilize the Draw method
+            on the <see cref="T:TopDownShooter.Engine.Adapters.ISpriteBatchAdapter"/>. It only affects position and velocity.
             </summary>
         </member>
         <member name="T:TopDownShooter.Engine.UnitTests.GameObjectTests">
@@ -89,21 +120,6 @@
             Tests that collisions are check when the component is updated and the parent game object has a non-zero velocity.
             </summary>
         </member>
-        <member name="T:TopDownShooter.Engine.UnitTests.SimpleColliderComponentTests">
-            <summary>
-            Contains unit tests for the <see cref="T:TopDownShooter.Engine.SimpleColliderComponent" /> class.
-            </summary>
-        </member>
-        <member name="M:TopDownShooter.Engine.UnitTests.SimpleColliderComponentTests.DoesNotDetectCollisionsWithAnotherColliderComponent">
-            <summary>
-            Tests that a collision is not detected with other collider components.
-            </summary>
-        </member>
-        <member name="M:TopDownShooter.Engine.UnitTests.SimpleColliderComponentTests.DetectsCollisionsWithAnotherColliderComponent">
-            <summary>
-            Tests that a collision is detected with other collider components.
-            </summary>
-        </member>
         <member name="T:TopDownShooter.Engine.UnitTests.TestGameObject">
             <summary>
             Defines a test game object.
@@ -123,22 +139,6 @@
         <member name="P:TopDownShooter.Engine.UnitTests.TestGameObject.Height">
             <summary>
             Gets the height of the game object.
-            </summary>
-        </member>
-        <member name="T:TopDownShooter.Engine.UnitTests.SimpleAiInputControllerComponentTests">
-            <summary>
-            Class for testing the <see cref="T:TopDownShooter.Engine.SimpleAiInputControllerComponent"/>
-            </summary>
-        </member>
-        <member name="M:TopDownShooter.Engine.UnitTests.SimpleAiInputControllerComponentTests.AffectsGameObjectVelocityWhenUpdateIsCalled">
-            <summary>
-            Tests whether the animation is drawn in the sprite batch when draw is called.
-            </summary>
-        </member>
-        <member name="M:TopDownShooter.Engine.UnitTests.SimpleAiInputControllerComponentTests.EnsureDrawDoesNotUtilizeSpriteBatch">
-            <summary>
-            The <see cref="T:TopDownShooter.Engine.SimpleAiInputControllerComponent"/> should not utilize the Draw method
-            on the <see cref="T:TopDownShooter.Engine.ISpriteBatchAdapter"/>. It only affects position and velocity.
             </summary>
         </member>
     </members>

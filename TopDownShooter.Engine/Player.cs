@@ -9,6 +9,7 @@ namespace TopDownShooter.Engine
     using System.Collections.Generic;
     using System.Linq;
     using Microsoft.Xna.Framework;
+    using TopDownShooter.Engine.Collisions;
 
     /// <summary>
     /// Simple player class.

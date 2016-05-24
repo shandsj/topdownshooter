@@ -2,12 +2,14 @@
 // Copyright (c) PlaceholderCompany. All rights reserved.
 // </copyright>
 
-namespace TopDownShooter.Engine.UnitTests
+namespace TopDownShooter.Engine.UnitTests.Controllers
 {
     using Microsoft.VisualStudio.TestTools.UnitTesting;
     using Microsoft.Xna.Framework;
     using Microsoft.Xna.Framework.Graphics;
     using Moq;
+    using TopDownShooter.Engine.Adapters;
+    using TopDownShooter.Engine.Controllers;
 
     /// <summary>
     /// Class for testing the <see cref="SimpleAiInputControllerComponent"/>

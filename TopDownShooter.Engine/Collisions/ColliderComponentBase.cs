@@ -4,9 +4,10 @@
 // </copyright>
 // --------------------------------------------------------------------------------------------------------------------
 
-namespace TopDownShooter.Engine
+namespace TopDownShooter.Engine.Collisions
 {
     using Microsoft.Xna.Framework;
+    using TopDownShooter.Engine.Adapters;
 
     /// <summary>
     /// Defines a rigid body component that will respond to collisions with other rigid bodies.

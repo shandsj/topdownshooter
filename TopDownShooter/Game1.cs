@@ -13,6 +13,11 @@ namespace TopDownShooter
     using Microsoft.Xna.Framework.Input;
     using TiledSharp;
     using TopDownShooter.Engine;
+    using TopDownShooter.Engine.Adapters;
+    using TopDownShooter.Engine.Collisions;
+    using TopDownShooter.Engine.Controllers;
+    using TopDownShooter.Engine.Levels;
+    using TopDownShooter.Engine.Projectiles;
 
     /// <summary>
     /// This is the main type for your game.
@@ -98,6 +103,7 @@ namespace TopDownShooter
                 {
                     // Order matters for calls to update and draw
                     new HumanInputControllerComponent(),
+                    new BulletProjectileGeneratorComponent(this.collisionSystem),
                     new PlayerColliderComponent(focusedPlayerId, this.collisionSystem),
                     new MovementComponent(),
                     new AnimationComponent("hoodieguy", new FrameProperties(76, 140, TimeSpan.FromSeconds(.1), 2)) { IsLooping = true, IsAnimating = true },

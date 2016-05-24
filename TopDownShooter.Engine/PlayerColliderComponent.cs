@@ -7,6 +7,8 @@
 namespace TopDownShooter.Engine
 {
     using Microsoft.Xna.Framework;
+    using TopDownShooter.Engine.Collisions;
+    using TopDownShooter.Engine.Levels;
 
     /// <summary>
     /// Defines a collider component for player objects.

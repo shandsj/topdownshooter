@@ -4,7 +4,7 @@
 // </copyright>
 // --------------------------------------------------------------------------------------------------------------------
 
-namespace TopDownShooter.Engine
+namespace TopDownShooter.Engine.Levels
 {
     using System;
     using System.Collections.Generic;
@@ -12,6 +12,8 @@ namespace TopDownShooter.Engine
     using Microsoft.Xna.Framework;
     using Microsoft.Xna.Framework.Graphics;
     using TiledSharp;
+    using TopDownShooter.Engine.Adapters;
+    using TopDownShooter.Engine.Collisions;
 
     /// <summary>
     /// Defines a level.

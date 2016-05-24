@@ -11,6 +11,7 @@ namespace TopDownShooter.Engine.UnitTests
     using Microsoft.Xna.Framework;
     using Microsoft.Xna.Framework.Graphics;
     using Moq;
+    using TopDownShooter.Engine.Adapters;
 
     /// <summary>
     /// Contains unit tests for the <see cref="AnimationComponent" /> class.

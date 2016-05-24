@@ -3,7 +3,7 @@
 // Copyright (c) PlaceholderCompany. All rights reserved.
 // </copyright>
 // --------------------------------------------------------------------------------------------------------------------
-namespace TopDownShooter.Engine
+namespace TopDownShooter.Engine.Adapters
 {
     using Microsoft.Xna.Framework.Content;
 
