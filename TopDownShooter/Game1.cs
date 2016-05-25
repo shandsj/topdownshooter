@@ -132,7 +132,7 @@ namespace TopDownShooter
                     new AnimationComponent("hoodieguy", new FrameProperties(76, 140, TimeSpan.FromSeconds(.1), 2)) { IsLooping = true, IsAnimating = true },
 
                     // They were pooping them every where!
-                    // new BulletProjectileGeneratorComponent(this.collisionSystem),
+                    new BulletProjectileGeneratorComponent(this.collisionSystem),
                     new DebugComponent(Color.Blue, 2)
                     });
                 player.Name = $"Ai Player {id}";
