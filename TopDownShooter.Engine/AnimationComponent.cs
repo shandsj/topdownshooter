@@ -121,8 +121,6 @@ namespace TopDownShooter.Engine
         {
         }
 
-        private Guid guid = Guid.NewGuid();
-
         /// <summary>
         /// Updates the component with the specified game object and game time.
         /// </summary>
@@ -148,8 +146,6 @@ namespace TopDownShooter.Engine
                 this.lastFrameIndexChangeTime = time.TotalGameTime;
             }
         }
-
-
 
         /// <summary>
         /// Draws the component with the specified game object and game time.

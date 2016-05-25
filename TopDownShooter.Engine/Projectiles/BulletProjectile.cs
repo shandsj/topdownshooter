@@ -28,9 +28,10 @@ namespace TopDownShooter.Engine.Projectiles
         /// <param name="id">The game object identifier.</param>
         /// <param name="collisionSystem">The <see cref="ICollisionSystem" />.</param>
         /// <param name="components">The collection of components.</param>
+        /// <param name="parentId">The parent game object identifier.</param>
         /// <param name="position">The position of the game object.</param>
         /// <param name="direction">The direction of the bullet projectile, as a unit vector.</param>
-        public BulletProjectile(int id, Vector2 position, Vector2 direction, ICollisionSystem collisionSystem, IEnumerable<IComponent> components)
+        public BulletProjectile(int id, int parentId, Vector2 position, Vector2 direction, ICollisionSystem collisionSystem, IEnumerable<IComponent> components)
             : base(id, components)
         {
             this.Position = position;

@@ -10,7 +10,7 @@ namespace TopDownShooter.Engine
     using System.Collections.Generic;
     using System.Linq;
     using Microsoft.Xna.Framework;
-    using Adapters;
+    using TopDownShooter.Engine.Adapters;
     using TopDownShooter.Engine.Collisions;
 
     /// <summary>
@@ -18,13 +18,15 @@ namespace TopDownShooter.Engine
     /// </summary>
     public class Player : GameObject
     {
-        private AnimationComponent animationComponent;
-
         private readonly IColliderComponent colliderComponent;
 
         private readonly ICollisionSystem collisionSystem;
 
+        private AnimationComponent animationComponent;
+
         private IContentManagerAdapter contentManager;
+
+        private bool hasCreatedDeathAnimation;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="Player" /> class.
@@ -47,6 +49,36 @@ namespace TopDownShooter.Engine
         }
 
         /// <summary>
+        /// Gets the bounds offset via the size of the <see cref="AnimationComponent.FrameProperties" />
+        /// </summary>
+        public override Rectangle Bounds => new Rectangle((int)this.Position.X - (this.Width / 2), (int)this.Position.Y - (this.Height / 2), this.Width, this.Height);
+
+        /// <summary>
+        /// Gets or sets the name
+        /// </summary>
+        public int Health { get; set; }
+
+        /// <summary>
+        /// Gets the height of the game object.
+        /// </summary>
+        public override int Height => this.animationComponent.FrameProperties.Height;
+
+        /// <summary>
+        /// Gets or sets the name
+        /// </summary>
+        public string Name { get; set; }
+
+        /// <summary>
+        /// Gets the projected bounds, based off the <see cref="IGameObject.Position" /> and the <see cref="IGameObject.Velocity" />.
+        /// </summary>
+        public override Rectangle ProjectedBounds => new Rectangle((int)this.ProjectedPosition.X - (this.Width / 2), (int)this.ProjectedPosition.Y - (this.Height / 2), this.Width, this.Height);
+
+        /// <summary>
+        /// Gets the width of the game object.
+        /// </summary>
+        public override int Width => this.animationComponent.FrameProperties.Width;
+
+        /// <summary>
         /// Loads the content from the specified content manager adapter.
         /// </summary>
         /// <param name="contentManager">The content manager adapter.</param>
@@ -56,8 +88,6 @@ namespace TopDownShooter.Engine
 
             this.contentManager = contentManager;
         }
-
-        private bool hasCreatedDeathAnimation = false;
 
         /// <summary>
         /// Updates the game object with the specified game time.
@@ -78,35 +108,5 @@ namespace TopDownShooter.Engine
                 this.Components.Add(this.animationComponent);
             }
         }
-
-        /// <summary>
-        /// Gets or sets the name
-        /// </summary>
-        public string Name { get; set; }
-
-        /// <summary>
-        /// Gets or sets the name
-        /// </summary>
-        public int Health { get; set; }
-
-        /// <summary>
-        /// Gets the bounds offset via the size of the <see cref="AnimationComponent.FrameProperties"/>
-        /// </summary>
-        public override Rectangle Bounds => new Rectangle((int)this.Position.X - (int)(this.Width / 2), (int)this.Position.Y - (int)(this.Height / 2), this.Width, this.Height);
-
-        /// <summary>
-        /// Gets the projected bounds, based off the <see cref="IGameObject.Position"/> and the <see cref="IGameObject.Velocity"/>.
-        /// </summary>
-        public override Rectangle ProjectedBounds => new Rectangle((int)this.ProjectedPosition.X - (int)(this.Width / 2), (int)this.ProjectedPosition.Y - (int)(this.Height / 2), this.Width, this.Height);
-
-        /// <summary>
-        /// Gets the width of the game object.
-        /// </summary>
-        public override int Width => this.animationComponent.FrameProperties.Width;
-
-        /// <summary>
-        /// Gets the height of the game object.
-        /// </summary>
-        public override int Height => this.animationComponent.FrameProperties.Height;
     }
 }

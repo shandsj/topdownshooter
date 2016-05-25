@@ -82,7 +82,7 @@ namespace TopDownShooter.Engine.Projectiles
             var messageType = (MessageType)message;
             if (messageType == MessageType.Fire && DateTime.Now - this.lastFireTime > this.cooldownTime)
             {
-                var bullet = this.factory.CreateBulletProjectile(CollisionSystem.NextGameObjectId++, gameObject.Position, gameObject.Velocity, this.collisionSystem);
+                var bullet = this.factory.CreateBulletProjectile(CollisionSystem.NextGameObjectId++, gameObject.Id, gameObject.Position, gameObject.Velocity, this.collisionSystem);
                 bullet.Initialize();
                 bullet.LoadContent(this.contentManager);
 
