@@ -20,10 +20,7 @@ namespace TopDownShooter.Engine
         /// </summary>
         private readonly string assetName;
 
-        /// <summary>
-        /// The current duration of the current frame.
-        /// </summary>
-        private TimeSpan duration;
+        private TimeSpan lastFrameIndexChangeTime = TimeSpan.Zero;
 
         /// <summary>
         /// The texture that contains the frames.
@@ -104,7 +101,7 @@ namespace TopDownShooter.Engine
         public void Reset()
         {
             this.FrameIndex = 0;
-            this.duration = TimeSpan.FromSeconds(0);
+            this.lastFrameIndexChangeTime = TimeSpan.Zero;
         }
 
         /// <summary>
@@ -124,6 +121,8 @@ namespace TopDownShooter.Engine
         {
         }
 
+        private Guid guid = Guid.NewGuid();
+
         /// <summary>
         /// Updates the component with the specified game object and game time.
         /// </summary>
@@ -136,8 +135,7 @@ namespace TopDownShooter.Engine
                 return;
             }
 
-            this.duration += time.ElapsedGameTime;
-            while (this.duration >= this.FrameProperties.Duration)
+            if (time.TotalGameTime - this.lastFrameIndexChangeTime > this.FrameProperties.Duration)
             {
                 // Play the next frame in the SpriteSheet
                 this.FrameIndex++;
@@ -147,9 +145,11 @@ namespace TopDownShooter.Engine
                 }
 
                 // reset elapsed time
-                this.duration = TimeSpan.FromSeconds(0);
+                this.lastFrameIndexChangeTime = time.TotalGameTime;
             }
         }
+
+
 
         /// <summary>
         /// Draws the component with the specified game object and game time.

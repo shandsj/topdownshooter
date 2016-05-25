@@ -116,7 +116,7 @@ namespace TopDownShooter
             int spawn = 1600;
 
             // TODO: Uncomment when wall collision logic is finished
-            for (int i = 0; i < 3; i++)
+            for (int i = 0; i < 5; i++)
             {
                 spawn -= 200;
                 var id = CollisionSystem.NextGameObjectId++;
@@ -126,14 +126,14 @@ namespace TopDownShooter
                     this.collisionSystem,
                     new IComponent[]
                     {
-                    new SimpleAiInputControllerComponent(),
-                    new PlayerColliderComponent(id, this.collisionSystem),
-                    new MovementComponent(),
-                    new AnimationComponent("hoodieguy", new FrameProperties(76, 140, TimeSpan.FromSeconds(.1), 2)) { IsLooping = true, IsAnimating = true },
+                        new SimpleAiInputControllerComponent(),
+                        new PlayerColliderComponent(id, this.collisionSystem),
+                        new MovementComponent(),
+                        new AnimationComponent("hoodieguy", new FrameProperties(76, 140, TimeSpan.FromSeconds(.1), 2)) { IsLooping = true, IsAnimating = true },
 
-                    // They were pooping them every where!
-                    new BulletProjectileGeneratorComponent(this.collisionSystem),
-                    new DebugComponent(Color.Blue, 2)
+                        // They were pooping them every where!
+                        new BulletProjectileGeneratorComponent(this.collisionSystem),
+                        new DebugComponent(Color.Blue, 2)
                     });
                 player.Name = $"Ai Player {id}";
                 this.players.Add(player);

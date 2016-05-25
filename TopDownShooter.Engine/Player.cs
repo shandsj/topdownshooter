@@ -6,9 +6,11 @@
 
 namespace TopDownShooter.Engine
 {
+    using System;
     using System.Collections.Generic;
     using System.Linq;
     using Microsoft.Xna.Framework;
+    using Adapters;
     using TopDownShooter.Engine.Collisions;
 
     /// <summary>
@@ -16,11 +18,13 @@ namespace TopDownShooter.Engine
     /// </summary>
     public class Player : GameObject
     {
-        private readonly AnimationComponent animationComponent;
+        private AnimationComponent animationComponent;
 
         private readonly IColliderComponent colliderComponent;
 
         private readonly ICollisionSystem collisionSystem;
+
+        private IContentManagerAdapter contentManager;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="Player" /> class.
@@ -40,6 +44,39 @@ namespace TopDownShooter.Engine
             this.colliderComponent = this.Components.OfType<IColliderComponent>().FirstOrDefault();
 
             this.collisionSystem.Register(id, this, this.colliderComponent);
+        }
+
+        /// <summary>
+        /// Loads the content from the specified content manager adapter.
+        /// </summary>
+        /// <param name="contentManager">The content manager adapter.</param>
+        public override void LoadContent(IContentManagerAdapter contentManager)
+        {
+            base.LoadContent(contentManager);
+
+            this.contentManager = contentManager;
+        }
+
+        private bool hasCreatedDeathAnimation = false;
+
+        /// <summary>
+        /// Updates the game object with the specified game time.
+        /// </summary>
+        /// <param name="gameTime">The game time.</param>
+        public override void Update(GameTime gameTime)
+        {
+            base.Update(gameTime);
+
+            if (this.Health == 0 && !this.hasCreatedDeathAnimation)
+            {
+                this.hasCreatedDeathAnimation = true;
+                this.Components.Clear();
+
+                this.animationComponent = new AnimationComponent("hoodieguyOnFire", new FrameProperties(76, 140, TimeSpan.FromSeconds(.1), 2)) { IsLooping = true, IsAnimating = true };
+                this.animationComponent.Initialize();
+                this.animationComponent.LoadContent(this.contentManager);
+                this.Components.Add(this.animationComponent);
+            }
         }
 
         /// <summary>

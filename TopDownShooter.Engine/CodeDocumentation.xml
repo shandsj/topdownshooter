@@ -228,11 +228,6 @@
             The asset name used to load content.
             </summary>
         </member>
-        <member name="F:TopDownShooter.Engine.AnimationComponent.duration">
-            <summary>
-            The current duration of the current frame.
-            </summary>
-        </member>
         <member name="F:TopDownShooter.Engine.AnimationComponent.texture">
             <summary>
             The texture that contains the frames.
@@ -1431,6 +1426,18 @@
             <param name="position">The position of the player.</param>
             <param name="collisionSystem">The <see cref="T:TopDownShooter.Engine.Collisions.ICollisionSystem" />.</param>
             <param name="components">A collection of components.</param>
+        </member>
+        <member name="M:TopDownShooter.Engine.Player.LoadContent(TopDownShooter.Engine.Adapters.IContentManagerAdapter)">
+            <summary>
+            Loads the content from the specified content manager adapter.
+            </summary>
+            <param name="contentManager">The content manager adapter.</param>
+        </member>
+        <member name="M:TopDownShooter.Engine.Player.Update(Microsoft.Xna.Framework.GameTime)">
+            <summary>
+            Updates the game object with the specified game time.
+            </summary>
+            <param name="gameTime">The game time.</param>
         </member>
         <member name="P:TopDownShooter.Engine.Player.Name">
             <summary>
