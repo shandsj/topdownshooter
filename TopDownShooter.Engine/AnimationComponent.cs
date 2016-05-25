@@ -1,19 +1,20 @@
-﻿// <copyright file="AnimationComponent.cs" company="PlaceholderCompany">
+﻿// --------------------------------------------------------------------------------------------------------------------
+// <copyright file="AnimationComponent.cs" company="PlaceholderCompany">
 // Copyright (c) PlaceholderCompany. All rights reserved.
 // </copyright>
+// --------------------------------------------------------------------------------------------------------------------
 
 namespace TopDownShooter.Engine
 {
     using System;
     using Microsoft.Xna.Framework;
-    using Microsoft.Xna.Framework.Content;
     using Microsoft.Xna.Framework.Graphics;
     using TopDownShooter.Engine.Adapters;
 
     /// <summary>
     /// Defines an animation class.
     /// </summary>
-    public class AnimationComponent : IComponent
+    public class AnimationComponent : IAnimationComponent
     {
         /// <summary>
         /// The asset name used to load content.
@@ -30,10 +31,12 @@ namespace TopDownShooter.Engine
         /// <summary>
         /// Initializes a new instance of the <see cref="AnimationComponent" /> class.
         /// </summary>
+        /// <param name="label">The label of the animation.</param>
         /// <param name="assetName">The asset name used to load content.</param>
         /// <param name="frameProperties">The <see cref="FrameProperties" /> for this <see cref="AnimationComponent" />.</param>
-        public AnimationComponent(string assetName, FrameProperties frameProperties)
+        public AnimationComponent(string label, string assetName, FrameProperties frameProperties)
         {
+            this.Label = label;
             this.assetName = assetName;
             this.FrameProperties = frameProperties;
             this.Scale = 1f;
@@ -60,6 +63,16 @@ namespace TopDownShooter.Engine
         public bool IsLooping { get; set; }
 
         /// <summary>
+        /// Gets or sets a value indicating whether to render this animation component.
+        /// </summary>
+        public bool IsRendered { get; set; }
+
+        /// <summary>
+        /// Gets the label of the animation.
+        /// </summary>
+        public string Label { get; }
+
+        /// <summary>
         /// Gets or sets the rotation for this <see cref="AnimationComponent" />.
         /// </summary>
         public float Rotation { get; set; }
@@ -73,6 +86,40 @@ namespace TopDownShooter.Engine
         /// Gets or sets the <see cref="SpriteEffects" /> for this <see cref="AnimationComponent" />.
         /// </summary>
         public SpriteEffects SpriteEffect { get; set; }
+
+        /// <summary>
+        /// Draws the component with the specified game object and game time.
+        /// </summary>
+        /// <param name="gameObject">The game object.</param>
+        /// <param name="spriteBatch">The sprite batch adapter.</param>
+        /// <param name="time">The game time.</param>
+        public void Draw(IGameObject gameObject, ISpriteBatchAdapter spriteBatch, GameTime time)
+        {
+            if (!this.IsRendered)
+            {
+                return;
+            }
+
+            // Calculate the source rectangle of the current frame.
+            var source = new Rectangle(this.FrameIndex * this.FrameProperties.Width, 0, this.FrameProperties.Width, this.FrameProperties.Height);
+
+            //// Calculate position and origin to draw in the center of the screen
+            // Vector2 position = new Vector2(game.Window.ClientBounds.Width / 2,
+            // game.Window.ClientBounds.Height / 2);
+            Vector2 origin = new Vector2(this.FrameProperties.Width / 2.0f, this.FrameProperties.Height / 2.0f);
+
+            // Draw the current frame.
+            spriteBatch.Draw(
+                this.texture,
+                gameObject.Position,
+                source,
+                Color.White,
+                this.Rotation,
+                origin,
+                this.Scale,
+                this.SpriteEffect,
+                0.0f);
+        }
 
         /// <summary>
         /// Allows the game to perform any initialization it needs to before starting to run.
@@ -96,6 +143,15 @@ namespace TopDownShooter.Engine
         }
 
         /// <summary>
+        /// Receives a message.
+        /// </summary>
+        /// <param name="gameObject">The game object.</param>
+        /// <param name="message">The message object.</param>
+        public void ReceiveMessage(IGameObject gameObject, object message)
+        {
+        }
+
+        /// <summary>
         /// Resets the <see cref="AnimationComponent" />.
         /// </summary>
         public void Reset()
@@ -113,15 +169,6 @@ namespace TopDownShooter.Engine
         }
 
         /// <summary>
-        /// Receives a message.
-        /// </summary>
-        /// <param name="gameObject">The game object.</param>
-        /// <param name="message">The message object.</param>
-        public void ReceiveMessage(IGameObject gameObject, object message)
-        {
-        }
-
-        /// <summary>
         /// Updates the component with the specified game object and game time.
         /// </summary>
         /// <param name="gameObject">The game object to update.</param>
@@ -133,7 +180,7 @@ namespace TopDownShooter.Engine
                 return;
             }
 
-            if (time.TotalGameTime - this.lastFrameIndexChangeTime > this.FrameProperties.Duration)
+            if (time.TotalGameTime - this.lastFrameIndexChangeTime >= this.FrameProperties.Duration)
             {
                 // Play the next frame in the SpriteSheet
                 this.FrameIndex++;
@@ -145,35 +192,6 @@ namespace TopDownShooter.Engine
                 // reset elapsed time
                 this.lastFrameIndexChangeTime = time.TotalGameTime;
             }
-        }
-
-        /// <summary>
-        /// Draws the component with the specified game object and game time.
-        /// </summary>
-        /// <param name="gameObject">The game object.</param>
-        /// <param name="spriteBatch">The sprite batch adapter.</param>
-        /// <param name="time">The game time.</param>
-        public void Draw(IGameObject gameObject, ISpriteBatchAdapter spriteBatch, GameTime time)
-        {
-            // Calculate the source rectangle of the current frame.
-            var source = new Rectangle(this.FrameIndex * this.FrameProperties.Width, 0, this.FrameProperties.Width, this.FrameProperties.Height);
-
-            //// Calculate position and origin to draw in the center of the screen
-            // Vector2 position = new Vector2(game.Window.ClientBounds.Width / 2,
-            // game.Window.ClientBounds.Height / 2);
-            Vector2 origin = new Vector2(this.FrameProperties.Width / 2.0f, this.FrameProperties.Height / 2.0f);
-
-            // Draw the current frame.
-            spriteBatch.Draw(
-                this.texture,
-                gameObject.Position,
-                source,
-                Color.White,
-                this.Rotation,
-                origin,
-                this.Scale,
-                this.SpriteEffect,
-                0.0f);
         }
     }
 }

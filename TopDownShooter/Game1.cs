@@ -106,10 +106,12 @@ namespace TopDownShooter
                     new BulletProjectileGeneratorComponent(this.collisionSystem),
                     new PlayerColliderComponent(focusedPlayerId, this.collisionSystem),
                     new MovementComponent(),
-                    new AnimationComponent("hoodieguy", new FrameProperties(76, 140, TimeSpan.FromSeconds(.1), 2)) { IsLooping = true, IsAnimating = true },
+                    new AnimationComponent("Walk", "hoodieguy", new FrameProperties(76, 140, TimeSpan.FromSeconds(.1), 2)) { IsLooping = true, IsAnimating = true, IsRendered = true },
+                    new AnimationComponent("Death", "hoodieguyOnFire", new FrameProperties(76, 140, TimeSpan.FromSeconds(.1), 2)) { IsLooping = true },
                     new BulletProjectileGeneratorComponent(this.collisionSystem),
                     new DebugComponent(Color.Red, 2)
                 });
+
             this.focusedPlayer.Name = $"Player {focusedPlayerId}";
             this.players.Add(this.focusedPlayer);
 
@@ -129,7 +131,8 @@ namespace TopDownShooter
                         new SimpleAiInputControllerComponent(),
                         new PlayerColliderComponent(id, this.collisionSystem),
                         new MovementComponent(),
-                        new AnimationComponent("hoodieguy", new FrameProperties(76, 140, TimeSpan.FromSeconds(.1), 2)) { IsLooping = true, IsAnimating = true },
+                        new AnimationComponent("Walk", "hoodieguy", new FrameProperties(76, 140, TimeSpan.FromSeconds(.1), 2)) { IsLooping = true, IsAnimating = true, IsRendered = true },
+                        new AnimationComponent("Death", "hoodieguyOnFire", new FrameProperties(76, 140, TimeSpan.FromSeconds(.1), 2)) { IsLooping = true },
 
                         // They were pooping them every where!
                         new BulletProjectileGeneratorComponent(this.collisionSystem),

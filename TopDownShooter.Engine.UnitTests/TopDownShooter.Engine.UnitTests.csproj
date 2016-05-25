@@ -67,6 +67,7 @@
     <Compile Include="Controllers\SimpleAiInputControllerComponentTests.cs" />
     <Compile Include="GameObjectTests.cs" />
     <Compile Include="PlayerColliderComponentTests.cs" />
+    <Compile Include="PlayerTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="TestGameObject.cs" />
   </ItemGroup>

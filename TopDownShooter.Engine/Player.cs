@@ -22,9 +22,8 @@ namespace TopDownShooter.Engine
 
         private readonly ICollisionSystem collisionSystem;
 
-        private AnimationComponent animationComponent;
-
-        private IContentManagerAdapter contentManager;
+        private IAnimationComponent walkAnimationComponent;
+        private IAnimationComponent deathAnimationComponent;
 
         private bool hasCreatedDeathAnimation;
 
@@ -42,7 +41,8 @@ namespace TopDownShooter.Engine
 
             this.Position = position;
             this.collisionSystem = collisionSystem;
-            this.animationComponent = this.Components.OfType<AnimationComponent>().FirstOrDefault();
+            this.walkAnimationComponent = this.Components.OfType<IAnimationComponent>().FirstOrDefault((a) => a.Label == "Walk");
+            this.deathAnimationComponent = this.Components.OfType<IAnimationComponent>().FirstOrDefault((a) => a.Label == "Death");
             this.colliderComponent = this.Components.OfType<IColliderComponent>().FirstOrDefault();
 
             this.collisionSystem.Register(id, this, this.colliderComponent);
@@ -61,7 +61,7 @@ namespace TopDownShooter.Engine
         /// <summary>
         /// Gets the height of the game object.
         /// </summary>
-        public override int Height => this.animationComponent.FrameProperties.Height;
+        public override int Height => this.walkAnimationComponent.FrameProperties.Height;
 
         /// <summary>
         /// Gets or sets the name
@@ -76,18 +76,7 @@ namespace TopDownShooter.Engine
         /// <summary>
         /// Gets the width of the game object.
         /// </summary>
-        public override int Width => this.animationComponent.FrameProperties.Width;
-
-        /// <summary>
-        /// Loads the content from the specified content manager adapter.
-        /// </summary>
-        /// <param name="contentManager">The content manager adapter.</param>
-        public override void LoadContent(IContentManagerAdapter contentManager)
-        {
-            base.LoadContent(contentManager);
-
-            this.contentManager = contentManager;
-        }
+        public override int Width => this.walkAnimationComponent.FrameProperties.Width;
 
         /// <summary>
         /// Updates the game object with the specified game time.
@@ -100,12 +89,10 @@ namespace TopDownShooter.Engine
             if (this.Health == 0 && !this.hasCreatedDeathAnimation)
             {
                 this.hasCreatedDeathAnimation = true;
+                this.deathAnimationComponent.IsAnimating = true;
+                this.deathAnimationComponent.IsRendered = true;
                 this.Components.Clear();
-
-                this.animationComponent = new AnimationComponent("hoodieguyOnFire", new FrameProperties(76, 140, TimeSpan.FromSeconds(.1), 2)) { IsLooping = true, IsAnimating = true };
-                this.animationComponent.Initialize();
-                this.animationComponent.LoadContent(this.contentManager);
-                this.Components.Add(this.animationComponent);
+                this.Components.Add(this.deathAnimationComponent);
             }
         }
     }

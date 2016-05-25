@@ -7,16 +7,14 @@ namespace TopDownShooter.Engine.Controllers
     using System;
     using System.Collections.Generic;
     using System.Threading.Tasks;
+    using Microsoft.Xna.Framework;
 
     /// <summary>
     /// Controller for controlling a simple AI.
     /// </summary>
     public class SimpleAiInputControllerComponent : InputControllerComponentBase
     {
-        private bool moveLeft;
-        private bool moveRight;
-        private bool moveUp;
-        private bool moveDown;
+        private Vector2 direction;
 
         private bool fire;
 
@@ -57,7 +55,7 @@ namespace TopDownShooter.Engine.Controllers
         /// <returns>True to move down.</returns>
         public override bool MoveDown()
         {
-            return this.moveDown;
+            return this.direction.Y > 0;
         }
 
         /// <summary>
@@ -66,7 +64,7 @@ namespace TopDownShooter.Engine.Controllers
         /// <returns>True to move left.</returns>
         public override bool MoveLeft()
         {
-            return this.moveLeft;
+            return this.direction.X < 0;
         }
 
         /// <summary>
@@ -75,7 +73,7 @@ namespace TopDownShooter.Engine.Controllers
         /// <returns>True to move right.</returns>
         public override bool MoveRight()
         {
-            return this.moveRight;
+            return this.direction.X > 0;
         }
 
         /// <summary>
@@ -84,7 +82,7 @@ namespace TopDownShooter.Engine.Controllers
         /// <returns>True to move up.</returns>
         public override bool MoveUp()
         {
-            return this.moveUp;
+            return this.direction.Y < 0;
         }
 
         /// <summary>
@@ -108,59 +106,8 @@ namespace TopDownShooter.Engine.Controllers
                     {
                         while (true)
                         {
-                            if (this.moveDown == true)
-                            {
-                                continue;
-                            }
-
                             this.SleepRandomly();
-
-                            this.moveUp = !this.moveUp;
-                        }
-                    }),
-
-                Task.Factory.StartNew(() =>
-                    {
-                        while (true)
-                        {
-                            if (this.moveUp == true)
-                            {
-                                continue;
-                            }
-
-                            this.SleepRandomly();
-
-                            this.moveDown = !this.moveDown;
-                        }
-                    }),
-
-                Task.Factory.StartNew(() =>
-                    {
-                        while (true)
-                        {
-                            if (this.moveRight == true)
-                            {
-                                continue;
-                            }
-
-                            this.SleepRandomly();
-
-                            this.moveLeft = !this.moveLeft;
-                        }
-                    }),
-
-                Task.Factory.StartNew(() =>
-                    {
-                        while (true)
-                        {
-                            if (this.moveLeft == true)
-                            {
-                                continue;
-                            }
-
-                            this.SleepRandomly();
-
-                            this.moveRight = !this.moveRight;
+                            this.direction = new Vector2(this.random.Next(-1, 2), this.random.Next(-1, 2));
                         }
                     }),
                 Task.Factory.StartNew(() =>

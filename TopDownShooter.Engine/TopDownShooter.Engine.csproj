@@ -86,6 +86,7 @@
     <Compile Include="Controllers\SimpleAiInputControllerComponent.cs" />
     <Compile Include="DebugComponent.cs" />
     <Compile Include="GameObjectFactory.cs" />
+    <Compile Include="IAnimationComponent.cs" />
     <Compile Include="IComponent.cs" />
     <Compile Include="FrameProperties.cs" />
     <Compile Include="GameObject.cs" />

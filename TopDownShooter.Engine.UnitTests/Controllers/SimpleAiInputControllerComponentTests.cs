@@ -26,7 +26,7 @@ namespace TopDownShooter.Engine.UnitTests.Controllers
             int velocitySetCounts = 0;
 
             var gameObject = new Mock<IGameObject>();
-            gameObject.SetupSet(property => property.Position = It.IsAny<Vector2>()).Callback(() =>
+            gameObject.SetupSet(property => property.Velocity = It.IsAny<Vector2>()).Callback(() =>
             {
                 velocitySetCounts++;
             });
@@ -37,7 +37,6 @@ namespace TopDownShooter.Engine.UnitTests.Controllers
 
             // Velocity is only set once
             Assert.AreEqual(velocitySetCounts, 1);
-            Assert.Fail("Need to update this unit test and inject AI values");
         }
 
         /// <summary>

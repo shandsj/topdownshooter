@@ -120,6 +120,16 @@
             Tests that collisions are check when the component is updated and the parent game object has a non-zero velocity.
             </summary>
         </member>
+        <member name="T:TopDownShooter.Engine.UnitTests.PlayerTests">
+            <summary>
+            Contains unit tests for the <see cref="T:TopDownShooter.Engine.Player"/> class.
+            </summary>
+        </member>
+        <member name="M:TopDownShooter.Engine.UnitTests.PlayerTests.AnimatesAndRendersDeathAnimationWhenHealthReachesZero">
+            <summary>
+            Tests that the death animation is setup correctly when the player health is at zero.
+            </summary>
+        </member>
         <member name="T:TopDownShooter.Engine.UnitTests.TestGameObject">
             <summary>
             Defines a test game object.
