@@ -59,7 +59,7 @@ namespace TopDownShooter.Engine.Collisions
         /// </summary>
         /// <param name="gameObject">The game object.</param>
         /// <param name="message">The message object.</param>
-        public void ReceiveMessage(IGameObject gameObject, object message)
+        public void ReceiveMessage(IGameObject gameObject, ComponentMessage message)
         {
         }
 

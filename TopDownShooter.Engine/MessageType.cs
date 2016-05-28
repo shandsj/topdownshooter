@@ -14,6 +14,12 @@ namespace TopDownShooter.Engine
         /// <summary>
         /// The fire message type.
         /// </summary>
-        Fire
+        Fire,
+
+        /// <summary>
+        /// Represents a change in movement
+        /// </summary>
+        /// <remarks>Details will be a velocity vector?</remarks>
+        Movement
     }
 }

@@ -310,7 +310,7 @@
             The <see cref="T:TopDownShooter.Engine.Adapters.IContentManagerAdapter" />.
             </param>
         </member>
-        <member name="M:TopDownShooter.Engine.AnimationComponent.ReceiveMessage(TopDownShooter.Engine.IGameObject,System.Object)">
+        <member name="M:TopDownShooter.Engine.AnimationComponent.ReceiveMessage(TopDownShooter.Engine.IGameObject,TopDownShooter.Engine.ComponentMessage)">
             <summary>
             Receives a message.
             </summary>
@@ -334,6 +334,82 @@
             </summary>
             <param name="gameObject">The game object to update.</param>
             <param name="time">The game time.</param>
+        </member>
+        <member name="T:TopDownShooter.Engine.AnimationComponentManager">
+            <summary>
+            Implementation for the <see cref="T:TopDownShooter.Engine.IAnimationComponentManager"/>
+            </summary>
+        </member>
+        <member name="M:TopDownShooter.Engine.AnimationComponentManager.#ctor(System.Collections.Generic.IEnumerable{TopDownShooter.Engine.IAnimationComponent})">
+            <summary>
+            Initializes a new instance of the <see cref="T:TopDownShooter.Engine.AnimationComponentManager"/> class.
+            </summary>
+            <param name="animationComponents">The collection of <see cref="T:TopDownShooter.Engine.IAnimationComponent"/>
+            for this manager to manage</param>
+        </member>
+        <member name="M:TopDownShooter.Engine.AnimationComponentManager.#ctor(TopDownShooter.Engine.IAnimationComponent[])">
+            <summary>
+            Initializes a new instance of the <see cref="T:TopDownShooter.Engine.AnimationComponentManager"/> class.
+            </summary>
+            <param name="animationComponents">The collection of <see cref="T:TopDownShooter.Engine.IAnimationComponent"/>
+            for this manager to manage</param>
+        </member>
+        <member name="P:TopDownShooter.Engine.AnimationComponentManager.FrameProperties">
+            <summary>
+            Gets the current animations <see cref="P:TopDownShooter.Engine.AnimationComponentManager.FrameProperties"/>
+            </summary>
+        </member>
+        <member name="M:TopDownShooter.Engine.AnimationComponentManager.Draw(TopDownShooter.Engine.IGameObject,TopDownShooter.Engine.Adapters.ISpriteBatchAdapter,Microsoft.Xna.Framework.GameTime)">
+            <summary>
+            Draws the component with the specified game object and game time.
+            </summary>
+            <param name="gameObject">The game object.</param>
+            <param name="spriteBatch">The sprite batch adapter.</param>
+            <param name="time">The game time.</param>
+        </member>
+        <member name="M:TopDownShooter.Engine.AnimationComponentManager.LoadContent(TopDownShooter.Engine.Adapters.IContentManagerAdapter)">
+            <summary>
+            Loads the content from the specified content manager adapter.
+            </summary>
+            <param name="contentManager">The content manager adapter.</param>
+        </member>
+        <member name="M:TopDownShooter.Engine.AnimationComponentManager.Play(System.String,System.Boolean)">
+            <summary>
+            Plays an animation with the given <paramref name="animationLabel"/>
+            </summary>
+            <param name="animationLabel">Labeled animation to play.</param>
+            <param name="isLooping">Toggles whether this animation will play in loop mode</param>
+        </member>
+        <member name="M:TopDownShooter.Engine.AnimationComponentManager.ReceiveMessage(TopDownShooter.Engine.IGameObject,TopDownShooter.Engine.ComponentMessage)">
+            <summary>
+            Receives a message.
+            </summary>
+            <param name="gameObject">The game object.</param>
+            <param name="message">The message object.</param>
+        </member>
+        <member name="M:TopDownShooter.Engine.AnimationComponentManager.Stop">
+            <summary>
+            Stops the currently playing animation.
+            </summary>
+        </member>
+        <member name="M:TopDownShooter.Engine.AnimationComponentManager.UnloadContent(TopDownShooter.Engine.Adapters.IContentManagerAdapter)">
+            <summary>
+            Unloads the content from the specified content manager adapter.
+            </summary>
+            <param name="contentManager">The content manager adapter.</param>
+        </member>
+        <member name="M:TopDownShooter.Engine.AnimationComponentManager.Update(TopDownShooter.Engine.IGameObject,Microsoft.Xna.Framework.GameTime)">
+            <summary>
+            Updates the component with the specified game object and game time.
+            </summary>
+            <param name="gameObject">The game object to update.</param>
+            <param name="time">The game time.</param>
+        </member>
+        <member name="M:TopDownShooter.Engine.AnimationComponentManager.StopAndUnloadCurrentAnimation">
+            <summary>
+            Helper method to stop and unload the current animation
+            that is loaded.
+            </summary>
         </member>
         <member name="T:TopDownShooter.Engine.Camera">
             <summary>
@@ -409,7 +485,7 @@
             </summary>
             <param name="contentManager">The content manager adapter.</param>
         </member>
-        <member name="M:TopDownShooter.Engine.Collisions.ColliderComponentBase.ReceiveMessage(TopDownShooter.Engine.IGameObject,System.Object)">
+        <member name="M:TopDownShooter.Engine.Collisions.ColliderComponentBase.ReceiveMessage(TopDownShooter.Engine.IGameObject,TopDownShooter.Engine.ComponentMessage)">
             <summary>
             Receives a message.
             </summary>
@@ -579,6 +655,30 @@
             <param name="other">The rigid body to check for a collision.</param>
             <returns>TTrue if a collision occured, false otherwise.</returns>
         </member>
+        <member name="T:TopDownShooter.Engine.ComponentMessage">
+            <summary>
+            Message object that can detail what type of message it is
+            and provide further optional details.
+            </summary>
+        </member>
+        <member name="M:TopDownShooter.Engine.ComponentMessage.#ctor(TopDownShooter.Engine.MessageType,System.Object)">
+            <summary>
+            Initializes a new instance of the <see cref="T:TopDownShooter.Engine.ComponentMessage"/> class.
+            </summary>
+            <param name="messageType">Message Type</param>
+            <param name="messageDetails">Optional message details</param>
+        </member>
+        <member name="P:TopDownShooter.Engine.ComponentMessage.MessageType">
+            <summary>
+            Gets the MessageType
+            </summary>
+        </member>
+        <member name="P:TopDownShooter.Engine.ComponentMessage.MessageDetails">
+            <summary>
+            Gets the optional details object that can
+            be used to detail more about the message.
+            </summary>
+        </member>
         <member name="T:TopDownShooter.Engine.Controllers.HumanInputControllerComponent">
             <summary>
             Herds Inputs...
@@ -678,7 +778,7 @@
             Finalizes an instance of the <see cref="T:TopDownShooter.Engine.Controllers.InputControllerComponentBase"/> class.
             </summary>
         </member>
-        <member name="M:TopDownShooter.Engine.Controllers.InputControllerComponentBase.ReceiveMessage(TopDownShooter.Engine.IGameObject,System.Object)">
+        <member name="M:TopDownShooter.Engine.Controllers.InputControllerComponentBase.ReceiveMessage(TopDownShooter.Engine.IGameObject,TopDownShooter.Engine.ComponentMessage)">
             <summary>
             Receives a message.
             </summary>
@@ -852,7 +952,7 @@
             </summary>
             <param name="contentManager">The content manager adapter.</param>
         </member>
-        <member name="M:TopDownShooter.Engine.DebugComponent.ReceiveMessage(TopDownShooter.Engine.IGameObject,System.Object)">
+        <member name="M:TopDownShooter.Engine.DebugComponent.ReceiveMessage(TopDownShooter.Engine.IGameObject,TopDownShooter.Engine.ComponentMessage)">
             <summary>
             Receives a message.
             </summary>
@@ -872,6 +972,19 @@
             </summary>
             <param name="spriteBatch">The sprite batch adapter.</param>
             <param name="area">Area to wrap with a border</param>
+        </member>
+        <member name="T:TopDownShooter.Engine.Extensions">
+            <summary>
+            Container for extension methods
+            </summary>
+        </member>
+        <member name="M:TopDownShooter.Engine.Extensions.RemoveAll``1(System.Collections.Generic.IList{``0},System.Func{``0,System.Boolean})">
+            <summary>
+            Remove all items from this enumerable that match the given <paramref name="predicate"/>.
+            </summary>
+            <typeparam name="TType">Type of enumerable</typeparam>
+            <param name="list">Enumerable reference</param>
+            <param name="predicate">Remove all that match this predicate</param>
         </member>
         <member name="T:TopDownShooter.Engine.GameObjectFactory">
             <summary>
@@ -964,12 +1077,34 @@
             Resets the <see cref="T:TopDownShooter.Engine.AnimationComponent" />.
             </summary>
         </member>
+        <member name="T:TopDownShooter.Engine.IAnimationComponentManager">
+            <summary>
+            Interface for managing a collection of <see cref="T:TopDownShooter.Engine.IAnimationComponent"/>
+            </summary>
+        </member>
+        <member name="P:TopDownShooter.Engine.IAnimationComponentManager.FrameProperties">
+            <summary>
+            Gets the <see cref="P:TopDownShooter.Engine.IAnimationComponentManager.FrameProperties"/> for the current animation
+            </summary>
+        </member>
+        <member name="M:TopDownShooter.Engine.IAnimationComponentManager.Play(System.String,System.Boolean)">
+            <summary>
+            Plays an animation with the given <paramref name="animationLabel"/>
+            </summary>
+            <param name="animationLabel">Labeled animation to play.</param>
+            <param name="isLooping">Toggles whether this animation will play in loop mode</param>
+        </member>
+        <member name="M:TopDownShooter.Engine.IAnimationComponentManager.Stop">
+            <summary>
+            Stops the currently playing animation.
+            </summary>
+        </member>
         <member name="T:TopDownShooter.Engine.IComponent">
             <summary>
             Defines an interface for components.
             </summary>
         </member>
-        <member name="M:TopDownShooter.Engine.IComponent.ReceiveMessage(TopDownShooter.Engine.IGameObject,System.Object)">
+        <member name="M:TopDownShooter.Engine.IComponent.ReceiveMessage(TopDownShooter.Engine.IGameObject,TopDownShooter.Engine.ComponentMessage)">
             <summary>
             Receives a message.
             </summary>
@@ -1124,7 +1259,7 @@
             </summary>
             <param name="contentManager">The content manager adapter.</param>
         </member>
-        <member name="M:TopDownShooter.Engine.GameObject.BroadcastMessage(System.Object)">
+        <member name="M:TopDownShooter.Engine.GameObject.BroadcastMessage(TopDownShooter.Engine.ComponentMessage)">
             <summary>
             Broadcasts a message to all components.
             </summary>
@@ -1216,7 +1351,7 @@
             Gets the identifier for this game object.
             </summary>
         </member>
-        <member name="M:TopDownShooter.Engine.IGameObject.BroadcastMessage(System.Object)">
+        <member name="M:TopDownShooter.Engine.IGameObject.BroadcastMessage(TopDownShooter.Engine.ComponentMessage)">
             <summary>
             Broadcasts a message to all components.
             </summary>
@@ -1452,6 +1587,12 @@
             The fire message type.
             </summary>
         </member>
+        <member name="F:TopDownShooter.Engine.MessageType.Movement">
+            <summary>
+            Represents a change in movement
+            </summary>
+            <remarks>Details will be a velocity vector?</remarks>
+        </member>
         <member name="T:TopDownShooter.Engine.MovementComponent">
             <summary>
             Defines a movement component that applies velocity to a position.
@@ -1477,7 +1618,7 @@
             </summary>
             <param name="contentManager">The content manager adapter.</param>
         </member>
-        <member name="M:TopDownShooter.Engine.MovementComponent.ReceiveMessage(TopDownShooter.Engine.IGameObject,System.Object)">
+        <member name="M:TopDownShooter.Engine.MovementComponent.ReceiveMessage(TopDownShooter.Engine.IGameObject,TopDownShooter.Engine.ComponentMessage)">
             <summary>
             Receives a message.
             </summary>
@@ -1650,7 +1791,7 @@
             </summary>
             <param name="contentManager">The content manager adapter.</param>
         </member>
-        <member name="M:TopDownShooter.Engine.Projectiles.BulletProjectileGeneratorComponent.ReceiveMessage(TopDownShooter.Engine.IGameObject,System.Object)">
+        <member name="M:TopDownShooter.Engine.Projectiles.BulletProjectileGeneratorComponent.ReceiveMessage(TopDownShooter.Engine.IGameObject,TopDownShooter.Engine.ComponentMessage)">
             <summary>
             Receives a message.
             </summary>

@@ -77,10 +77,9 @@ namespace TopDownShooter.Engine.Projectiles
         /// </summary>
         /// <param name="gameObject">The game object.</param>
         /// <param name="message">The message object.</param>
-        public void ReceiveMessage(IGameObject gameObject, object message)
+        public void ReceiveMessage(IGameObject gameObject, ComponentMessage message)
         {
-            var messageType = (MessageType)message;
-            if (messageType == MessageType.Fire && DateTime.Now - this.lastFireTime > this.cooldownTime)
+            if (message.MessageType == MessageType.Fire && DateTime.Now - this.lastFireTime > this.cooldownTime)
             {
                 var bullet = this.factory.CreateBulletProjectile(CollisionSystem.NextGameObjectId++, gameObject.Id, gameObject.Position, gameObject.Velocity, this.collisionSystem);
                 bullet.Initialize();

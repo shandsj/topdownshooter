@@ -128,7 +128,7 @@ namespace TopDownShooter.Engine
         /// Broadcasts a message to all components.
         /// </summary>
         /// <param name="message">The message to broadcast.</param>
-        public void BroadcastMessage(object message)
+        public void BroadcastMessage(ComponentMessage message)
         {
             foreach (var component in this.Components)
             {
