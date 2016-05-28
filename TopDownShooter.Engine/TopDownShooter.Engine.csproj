@@ -102,7 +102,6 @@
     <Compile Include="Levels\Tile.cs" />
     <Compile Include="Levels\TileInteractionType.cs" />
     <Compile Include="MessageType.cs" />
-    <Compile Include="MovementComponent.cs" />
     <Compile Include="Player.cs" />
     <Compile Include="PlayerColliderComponent.cs" />
     <Compile Include="Projectiles\BulletProjectile.cs" />

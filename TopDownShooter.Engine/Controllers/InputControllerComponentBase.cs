@@ -98,6 +98,16 @@ namespace TopDownShooter.Engine.Controllers
         }
 
         /// <summary>
+        /// Initializes the component.
+        /// </summary>
+        public abstract void Initialize();
+
+        /// <summary>
+        /// Destroys the component.
+        /// </summary>
+        public abstract void Destroy();
+
+        /// <summary>
         /// Unloads the content from the specified content manager adapter.
         /// </summary>
         /// <param name="contentManager">The content manager adapter.</param>

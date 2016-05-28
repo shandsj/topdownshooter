@@ -21,8 +21,6 @@ namespace TopDownShooter.Engine
         private IAnimationComponent currentAnimationComponent;
         private Dictionary<string, IAnimationComponent> animationComponents;
 
-        private IContentManagerAdapter contentManager;
-
         /// <summary>
         /// Initializes a new instance of the <see cref="AnimationComponentManager"/> class.
         /// </summary>
@@ -30,6 +28,7 @@ namespace TopDownShooter.Engine
         /// for this manager to manage</param>
         public AnimationComponentManager(IEnumerable<IAnimationComponent> animationComponents)
         {
+            // TODO: Move to initialize?
             this.animationComponents = new Dictionary<string, IAnimationComponent>();
             foreach (var component in animationComponents)
             {
@@ -75,12 +74,31 @@ namespace TopDownShooter.Engine
         /// <param name="contentManager">The content manager adapter.</param>
         public void LoadContent(IContentManagerAdapter contentManager)
         {
-            this.contentManager = contentManager;
-
-            if (this.currentAnimationComponent != null)
+            foreach (var component in this.animationComponents.Values)
             {
-                this.currentAnimationComponent.LoadContent(this.contentManager);
+                component.LoadContent(contentManager);
             }
+        }
+
+        /// <summary>
+        /// Initializes the component.
+        /// </summary>
+        public void Initialize()
+        {
+        }
+
+        /// <summary>
+        /// Destroys the component.
+        /// </summary>
+        public void Destroy()
+        {
+            foreach (var component in this.animationComponents.Values)
+            {
+                component.Destroy();
+            }
+
+            this.animationComponents.Clear();
+            this.currentAnimationComponent = null;
         }
 
         /// <summary>
@@ -97,7 +115,6 @@ namespace TopDownShooter.Engine
                 // Do we want to gracefully handle a key not found? Or just let it
                 // throw and have the dev deal with it.
                 this.currentAnimationComponent = this.animationComponents[animationLabel];
-                this.LoadContent(this.contentManager);
             }
 
             this.currentAnimationComponent.IsAnimating = true;
@@ -123,28 +140,13 @@ namespace TopDownShooter.Engine
         }
 
         /// <summary>
-        /// Unloads the content from the specified content manager adapter.
-        /// </summary>
-        /// <param name="contentManager">The content manager adapter.</param>
-        public void UnloadContent(IContentManagerAdapter contentManager)
-        {
-            if (this.currentAnimationComponent != null)
-            {
-                this.currentAnimationComponent.UnloadContent(contentManager);
-            }
-        }
-
-        /// <summary>
         /// Updates the component with the specified game object and game time.
         /// </summary>
         /// <param name="gameObject">The game object to update.</param>
         /// <param name="time">The game time.</param>
         public void Update(IGameObject gameObject, GameTime time)
         {
-            if (this.currentAnimationComponent != null)
-            {
-                this.currentAnimationComponent.Update(gameObject, time);
-            }
+            this.currentAnimationComponent?.Update(gameObject, time);
         }
 
         /// <summary>
@@ -158,7 +160,6 @@ namespace TopDownShooter.Engine
                 this.currentAnimationComponent.Reset();
                 this.currentAnimationComponent.IsAnimating = false;
                 this.currentAnimationComponent.IsRendered = false;
-                this.currentAnimationComponent.UnloadContent(this.contentManager);
             }
         }
     }

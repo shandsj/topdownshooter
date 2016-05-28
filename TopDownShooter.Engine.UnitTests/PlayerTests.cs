@@ -24,30 +24,50 @@ namespace TopDownShooter.Engine.UnitTests
         [TestMethod]
         public void AnimatesAndRendersDeathAnimationWhenHealthReachesZero()
         {
-            var walkAnimation = new Mock<IAnimationComponent>();
-            walkAnimation.SetupGet(ac => ac.Label).Returns("Walk");
+            int playMethodCallCount = 0;
+            var animationComponentManager = new Mock<IAnimationComponentManager>();
 
-            bool wasIsAnimatingSet = false;
-            bool wasIsRenderedSet = false;
-            var deathAnimation = new Mock<IAnimationComponent>();
-            deathAnimation.SetupGet(ac => ac.Label).Returns("Death");
-            deathAnimation.SetupSet(ac => ac.IsAnimating = It.IsAny<bool>()).Callback(() => wasIsAnimatingSet = true);
-            deathAnimation.SetupSet(ac => ac.IsRendered = It.IsAny<bool>()).Callback(() => wasIsRenderedSet = true);
+            animationComponentManager.Setup((acm) => acm.Play(It.IsAny<string>(), It.IsAny<bool>())).Callback<string, bool>((s, l) =>
+                {
+                    ++playMethodCallCount;
+                    switch (playMethodCallCount)
+                    {
+                        case 1:
+                            Assert.AreEqual(s, "Walk");
+                            break;
 
-            var uut = new Player(1, new Vector2(42, 42), new Mock<ICollisionSystem>().Object, new[] { walkAnimation.Object, deathAnimation.Object });
+                        case 2:
+                            Assert.AreEqual(s, "Death");
+                            break;
+
+                        default:
+                            Assert.Fail("This should not have been called");
+                            break;
+                    }
+                });
+
+            int stopMethodCallCount = 0;
+            animationComponentManager.Setup(acm => acm.Stop()).Callback(() => stopMethodCallCount++);
+
+            var uut = new Player(1, new Vector2(42, 42), new Mock<ICollisionSystem>().Object, new[] { animationComponentManager.Object });
+            uut.Initialize();
+
             uut.Update(new GameTime());
+            Assert.AreEqual(1, uut.Components.Count);
+            Assert.AreEqual(0, playMethodCallCount);
+            Assert.AreEqual(1, stopMethodCallCount);
 
-            Assert.IsFalse(wasIsRenderedSet);
-            Assert.IsFalse(wasIsAnimatingSet);
-            Assert.AreEqual(2, uut.Components.Count);
+            uut.Velocity = new Vector2(42, 42);
+            uut.Update(new GameTime());
+            Assert.AreEqual(1, uut.Components.Count);
+            Assert.AreEqual(1, playMethodCallCount);
+            Assert.AreEqual(1, stopMethodCallCount);
 
             uut.Health = 0;
             uut.Update(new GameTime());
-
-            Assert.IsTrue(wasIsAnimatingSet);
-            Assert.IsTrue(wasIsRenderedSet);
             Assert.AreEqual(1, uut.Components.Count);
-            Assert.AreSame(deathAnimation.Object, uut.Components.First());
+            Assert.AreEqual(2, playMethodCallCount);
+            Assert.AreEqual(1, stopMethodCallCount);
         }
     }
 }

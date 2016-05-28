@@ -98,6 +98,21 @@ namespace TopDownShooter.Engine
         /// </summary>
         public virtual void Initialize()
         {
+            foreach (var component in this.Components)
+            {
+                component.Initialize();
+            }
+        }
+
+        /// <summary>
+        /// Destroyes the game object.
+        /// </summary>
+        public virtual void Destroy()
+        {
+            foreach (var component in this.Components)
+            {
+                component.Destroy();
+            }
         }
 
         /// <summary>
@@ -109,18 +124,6 @@ namespace TopDownShooter.Engine
             foreach (var component in this.Components)
             {
                 component.LoadContent(contentManager);
-            }
-        }
-
-        /// <summary>
-        /// Unloads the content from the specified content manager adapter.
-        /// </summary>
-        /// <param name="contentManager">The content manager adapter.</param>
-        public virtual void UnloadContent(IContentManagerAdapter contentManager)
-        {
-            foreach (var component in this.Components)
-            {
-                component.UnloadContent(contentManager);
             }
         }
 
@@ -146,6 +149,8 @@ namespace TopDownShooter.Engine
             {
                 component.Update(this, gameTime);
             }
+
+            this.Position += this.Velocity;
         }
     }
 }

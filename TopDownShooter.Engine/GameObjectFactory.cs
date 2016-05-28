@@ -31,7 +31,6 @@ namespace TopDownShooter.Engine
             var components = new IComponent[]
             {
                 new BulletProjectileColliderComponent(id, parentId, collisionSystem),
-                new MovementComponent(),
                 new AnimationComponent("Bullet", "SpriteSheets/BulletProjectile", new FrameProperties(32, 32, TimeSpan.MaxValue, 1)) { IsRendered = true }
             };
 

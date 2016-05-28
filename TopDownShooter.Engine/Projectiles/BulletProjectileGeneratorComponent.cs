@@ -27,6 +27,8 @@ namespace TopDownShooter.Engine.Projectiles
 
         private IContentManagerAdapter contentManager;
 
+        private bool isDestroyed;
+
         private DateTime lastFireTime = DateTime.Now;
 
         /// <summary>
@@ -50,6 +52,21 @@ namespace TopDownShooter.Engine.Projectiles
         }
 
         /// <summary>
+        /// Destroys the component.
+        /// </summary>
+        public void Destroy()
+        {
+            this.isDestroyed = true;
+
+            foreach (var bullet in this.bullets)
+            {
+                bullet.Destroy();
+            }
+
+            this.bullets.Clear();
+        }
+
+        /// <summary>
         /// Draws the component with the specified game object and game time.
         /// </summary>
         /// <param name="gameObject">The game object.</param>
@@ -61,6 +78,13 @@ namespace TopDownShooter.Engine.Projectiles
             {
                 bullet.Draw(spriteBatch, time);
             }
+        }
+
+        /// <summary>
+        /// Initializes the component.
+        /// </summary>
+        public void Initialize()
+        {
         }
 
         /// <summary>
@@ -79,6 +103,11 @@ namespace TopDownShooter.Engine.Projectiles
         /// <param name="message">The message object.</param>
         public void ReceiveMessage(IGameObject gameObject, ComponentMessage message)
         {
+            if (this.isDestroyed)
+            {
+                return;
+            }
+
             if (message.MessageType == MessageType.Fire && DateTime.Now - this.lastFireTime > this.cooldownTime)
             {
                 var bullet = this.factory.CreateBulletProjectile(CollisionSystem.NextGameObjectId++, gameObject.Id, gameObject.Position, gameObject.Velocity, this.collisionSystem);
@@ -89,14 +118,6 @@ namespace TopDownShooter.Engine.Projectiles
 
                 this.lastFireTime = DateTime.Now;
             }
-        }
-
-        /// <summary>
-        /// Unloads the content from the specified content manager adapter.
-        /// </summary>
-        /// <param name="contentManager">The content manager adapter.</param>
-        public void UnloadContent(IContentManagerAdapter contentManager)
-        {
         }
 
         /// <summary>

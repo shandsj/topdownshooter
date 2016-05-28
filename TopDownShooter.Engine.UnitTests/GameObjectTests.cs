@@ -48,29 +48,29 @@ namespace TopDownShooter.Engine.UnitTests
             Assert.IsTrue(wasMethodCalled);
         }
 
-        /// <summary>
-        /// Tests that the game object delegates unload content calls to a component.
-        /// </summary>
-        [TestMethod]
-        public void DelegatesUnloadContentCallsToComponents()
-        {
-            var conentManager = new Mock<IContentManagerAdapter>().Object;
+        /////// <summary>
+        /////// Tests that the game object delegates unload content calls to a component.
+        /////// </summary>
+        ////[TestMethod]
+        ////public void DelegatesUnloadContentCallsToComponents()
+        ////{
+        ////    var conentManager = new Mock<IContentManagerAdapter>().Object;
 
-            bool wasMethodCalled = false;
-            var component = new Mock<IComponent>();
-            component.Setup(method => method.UnloadContent(It.IsAny<IContentManagerAdapter>()))
-                .Callback<IContentManagerAdapter>(cm =>
-                {
-                    wasMethodCalled = true;
-                    Assert.AreSame(conentManager, cm);
-                });
+        ////    bool wasMethodCalled = false;
+        ////    var component = new Mock<IComponent>();
+        ////    component.Setup(method => method.UnloadContent(It.IsAny<IContentManagerAdapter>()))
+        ////        .Callback<IContentManagerAdapter>(cm =>
+        ////        {
+        ////            wasMethodCalled = true;
+        ////            Assert.AreSame(conentManager, cm);
+        ////        });
 
-            var uut = new TestGameObject(1);
-            uut.Components.Add(component.Object);
-            uut.UnloadContent(conentManager);
+        ////    var uut = new TestGameObject(1);
+        ////    uut.Components.Add(component.Object);
+        ////    uut.UnloadContent(conentManager);
 
-            Assert.IsTrue(wasMethodCalled);
-        }
+        ////    Assert.IsTrue(wasMethodCalled);
+        ////}
 
         /// <summary>
         /// Tests that the game object delegates load content calls to a component.

@@ -1,11 +1,14 @@
-﻿// <copyright file="SimpleAiInputControllerComponent.cs" company="PlaceholderCompany">
+﻿// --------------------------------------------------------------------------------------------------------------------
+// <copyright file="SimpleAiInputControllerComponent.cs" company="PlaceholderCompany">
 // Copyright (c) PlaceholderCompany. All rights reserved.
 // </copyright>
+// --------------------------------------------------------------------------------------------------------------------
 
 namespace TopDownShooter.Engine.Controllers
 {
     using System;
     using System.Collections.Generic;
+    using System.Threading;
     using System.Threading.Tasks;
     using Microsoft.Xna.Framework;
 
@@ -18,26 +21,33 @@ namespace TopDownShooter.Engine.Controllers
 
         private bool fire;
 
-        private Random random;
+        private readonly Random random;
 
         private List<Task> taskList;
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="SimpleAiInputControllerComponent"/> class.
+        /// Initializes a new instance of the <see cref="SimpleAiInputControllerComponent" /> class.
         /// </summary>
         public SimpleAiInputControllerComponent()
         {
             this.random = new Random((int)DateTime.Now.Ticks);
-            this.Initalize();
         }
 
         /// <summary>
-        /// Finalizes an instance of the <see cref="SimpleAiInputControllerComponent"/> class.
+        /// Finalizes an instance of the <see cref="SimpleAiInputControllerComponent" /> class.
         /// </summary>
         ~SimpleAiInputControllerComponent()
         {
             // Do not change this code. Put cleanup code in Dispose(bool disposing) above.
             this.Dispose(false);
+        }
+
+        /// <summary>
+        /// Destroys the component.
+        /// </summary>
+        public override void Destroy()
+        {
+            this.Dispose();
         }
 
         /// <summary>
@@ -47,6 +57,34 @@ namespace TopDownShooter.Engine.Controllers
         public override bool Fire()
         {
             return this.fire;
+        }
+
+        /// <summary>
+        /// Initializes the component.
+        /// </summary>
+        public override void Initialize()
+        {
+            this.taskList = new List<Task>();
+            this.taskList.AddRange(new[]
+            {
+                Task.Factory.StartNew(() =>
+                    {
+                        while (true)
+                        {
+                            this.SleepRandomly();
+                            this.direction = new Vector2(this.random.Next(-1, 2), this.random.Next(-1, 2));
+                        }
+                    }),
+                Task.Factory.StartNew(() =>
+                    {
+                        while (true)
+                        {
+                            this.SleepRandomly();
+
+                            this.fire = !this.fire;
+                        }
+                    })
+            });
         }
 
         /// <summary>
@@ -95,41 +133,13 @@ namespace TopDownShooter.Engine.Controllers
         }
 
         /// <summary>
-        /// Initalizes our tasks for movement changes
-        /// </summary>
-        private void Initalize()
-        {
-            this.taskList = new List<Task>();
-            this.taskList.AddRange(new Task[]
-            {
-                Task.Factory.StartNew(() =>
-                    {
-                        while (true)
-                        {
-                            this.SleepRandomly();
-                            this.direction = new Vector2(this.random.Next(-1, 2), this.random.Next(-1, 2));
-                        }
-                    }),
-                Task.Factory.StartNew(() =>
-                    {
-                        while (true)
-                        {
-                            this.SleepRandomly();
-
-                            this.fire = !this.fire;
-                        }
-                    }),
-            });
-        }
-
-        /// <summary>
         /// Sleeps a random amount of time between 0 and 1.5 seconds.
         /// </summary>
         /// <remarks>No one will get passed this sweet ai!</remarks>
         private void SleepRandomly()
         {
             int randomTimer = this.random.Next(0, 1500);
-            System.Threading.Thread.Sleep(randomTimer);
+            Thread.Sleep(randomTimer);
         }
     }
 }

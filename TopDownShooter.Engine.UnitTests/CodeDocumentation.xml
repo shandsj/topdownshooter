@@ -90,11 +90,6 @@
             Tests that the game object delegates draw calls to a component.
             </summary>
         </member>
-        <member name="M:TopDownShooter.Engine.UnitTests.GameObjectTests.DelegatesUnloadContentCallsToComponents">
-            <summary>
-            Tests that the game object delegates unload content calls to a component.
-            </summary>
-        </member>
         <member name="M:TopDownShooter.Engine.UnitTests.GameObjectTests.DelegatesLoadContentCallsToComponents">
             <summary>
             Tests that the game object delegates load content calls to a component.

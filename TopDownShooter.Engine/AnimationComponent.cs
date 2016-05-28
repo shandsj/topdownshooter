@@ -132,6 +132,16 @@ namespace TopDownShooter.Engine
         }
 
         /// <summary>
+        /// Destroys the component.
+        /// </summary>
+        public void Destroy()
+        {
+            this.IsRendered = false;
+            this.IsLooping = false;
+            this.IsAnimating = false;
+        }
+
+        /// <summary>
         /// Loads the content of this <see cref="AnimationComponent" />.
         /// </summary>
         /// <param name="contentManager">
@@ -158,14 +168,6 @@ namespace TopDownShooter.Engine
         {
             this.FrameIndex = 0;
             this.lastFrameIndexChangeTime = TimeSpan.Zero;
-        }
-
-        /// <summary>
-        /// Unloads the content of this <see cref="AnimationComponent" />.
-        /// </summary>
-        /// <param name="contentManager">The <see cref="IContentManagerAdapter" />.</param>
-        public void UnloadContent(IContentManagerAdapter contentManager)
-        {
         }
 
         /// <summary>

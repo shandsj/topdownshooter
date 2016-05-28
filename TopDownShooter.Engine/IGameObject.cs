@@ -86,14 +86,13 @@ namespace TopDownShooter.Engine
         void LoadContent(IContentManagerAdapter contentManager);
 
         /// <summary>
-        /// Unloads the content from the specified content manager adapter.
-        /// </summary>
-        /// <param name="contentManager">The content manager adapter.</param>
-        void UnloadContent(IContentManagerAdapter contentManager);
-
-        /// <summary>
         /// Initializes the game object.
         /// </summary>
         void Initialize();
+
+        /// <summary>
+        /// Destroyes the game object.
+        /// </summary>
+        void Destroy();
     }
 }

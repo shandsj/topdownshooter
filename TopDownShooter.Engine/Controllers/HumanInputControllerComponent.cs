@@ -31,6 +31,20 @@ namespace TopDownShooter.Engine.Controllers
         }
 
         /// <summary>
+        /// Initializes the component.
+        /// </summary>
+        public override void Initialize()
+        {
+        }
+
+        /// <summary>
+        /// Destroys the component.
+        /// </summary>
+        public override void Destroy()
+        {
+        }
+
+        /// <summary>
         /// Gets a value indicating whether a fire was requested.
         /// </summary>
         /// <returns>True if the action was requested; false otherwise.</returns>

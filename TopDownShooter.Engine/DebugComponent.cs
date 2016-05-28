@@ -54,11 +54,18 @@ namespace TopDownShooter.Engine
         }
 
         /// <summary>
-        /// Unloads the content from the specified content manager adapter.
+        /// Initializes the component.
         /// </summary>
-        /// <param name="contentManager">The content manager adapter.</param>
-        public void UnloadContent(IContentManagerAdapter contentManager)
+        public void Initialize()
         {
+        }
+
+        /// <summary>
+        /// Destroys the component.
+        /// </summary>
+        public void Destroy()
+        {
+            this.pointTexture?.Dispose();
         }
 
         /// <summary>

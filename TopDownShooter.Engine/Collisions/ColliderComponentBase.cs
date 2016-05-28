@@ -47,10 +47,16 @@ namespace TopDownShooter.Engine.Collisions
         }
 
         /// <summary>
-        /// Unloads the content from the specified content manager adapter.
+        /// Initializes the component.
         /// </summary>
-        /// <param name="contentManager">The content manager adapter.</param>
-        public virtual void UnloadContent(IContentManagerAdapter contentManager)
+        public virtual void Initialize()
+        {
+        }
+
+        /// <summary>
+        /// Destroys the component.
+        /// </summary>
+        public virtual void Destroy()
         {
         }
 

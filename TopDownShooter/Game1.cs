@@ -105,7 +105,6 @@ namespace TopDownShooter
                     new HumanInputControllerComponent(),
                     new BulletProjectileGeneratorComponent(this.collisionSystem),
                     new PlayerColliderComponent(focusedPlayerId, this.collisionSystem),
-                    new MovementComponent(),
                     new AnimationComponentManager(
                         new AnimationComponent("Walk", "hoodieguy", new FrameProperties(76, 140, TimeSpan.FromSeconds(.1), 2)) { IsLooping = true, IsAnimating = true, IsRendered = true },
                         new AnimationComponent("Death", "hoodieguyOnFire", new FrameProperties(76, 140, TimeSpan.FromSeconds(.1), 2)) { IsLooping = true }),
@@ -130,7 +129,6 @@ namespace TopDownShooter
                     {
                         new SimpleAiInputControllerComponent(),
                         new PlayerColliderComponent(id, this.collisionSystem),
-                        new MovementComponent(),
                         new AnimationComponentManager(
                             new AnimationComponent("Walk", "hoodieguy", new FrameProperties(76, 140, TimeSpan.FromSeconds(.1), 2)) { IsLooping = true, IsAnimating = true, IsRendered = true },
                             new AnimationComponent("Death", "hoodieguyOnFire", new FrameProperties(76, 140, TimeSpan.FromSeconds(.1), 2)) { IsLooping = true }),
@@ -142,6 +140,8 @@ namespace TopDownShooter
                 this.players.Add(player);
             }
 #pragma warning restore SA1118
+
+            this.players.ForEach(player => player.Initialize());
 
             base.Initialize();
         }
@@ -157,7 +157,7 @@ namespace TopDownShooter
             this.contentManager = new ContentManagerAdapter(this.Content);
 
             this.level.LoadContent(this.contentManager);
-            this.players.ForEach(o => o.LoadContent(this.contentManager));
+            this.players.ForEach(player => player.LoadContent(this.contentManager));
         }
 
         /// <summary>
@@ -166,8 +166,7 @@ namespace TopDownShooter
         /// </summary>
         protected override void UnloadContent()
         {
-            this.level.UnloadContent(this.contentManager);
-            this.players.ForEach(o => o.UnloadContent(this.contentManager));
+            this.Content.Unload();
         }
 
         /// <summary>
