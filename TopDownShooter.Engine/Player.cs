@@ -90,6 +90,7 @@ namespace TopDownShooter.Engine
 
             if (this.Health == 0 && !this.hasCreatedDeathAnimation)
             {
+                this.Velocity = new Vector2(0, 0);
                 this.hasCreatedDeathAnimation = true;
                 this.animationComponentManager.Play("Death");
 
