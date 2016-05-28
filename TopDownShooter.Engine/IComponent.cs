@@ -19,7 +19,7 @@ namespace TopDownShooter.Engine
         /// </summary>
         /// <param name="gameObject">The game object.</param>
         /// <param name="message">The message object.</param>
-        void ReceiveMessage(IGameObject gameObject, object message);
+        void ReceiveMessage(IGameObject gameObject, ComponentMessage message);
 
         /// <summary>
         /// Updates the component with the specified game object and game time.

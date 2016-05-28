@@ -37,7 +37,7 @@ namespace TopDownShooter.Engine.Controllers
         /// </summary>
         /// <param name="gameObject">The game object.</param>
         /// <param name="message">The message object.</param>
-        public void ReceiveMessage(IGameObject gameObject, object message)
+        public void ReceiveMessage(IGameObject gameObject, ComponentMessage message)
         {
         }
 
@@ -50,7 +50,7 @@ namespace TopDownShooter.Engine.Controllers
         {
             if (this.Fire())
             {
-                gameObject.BroadcastMessage(MessageType.Fire);
+                gameObject.BroadcastMessage(new ComponentMessage(MessageType.Fire));
             }
 
             float x = 0;

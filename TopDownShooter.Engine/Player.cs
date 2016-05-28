@@ -21,9 +21,7 @@ namespace TopDownShooter.Engine
         private readonly IColliderComponent colliderComponent;
 
         private readonly ICollisionSystem collisionSystem;
-
-        private IAnimationComponent walkAnimationComponent;
-        private IAnimationComponent deathAnimationComponent;
+        private IAnimationComponentManager animationComponentManager;
 
         private bool hasCreatedDeathAnimation;
 
@@ -41,8 +39,7 @@ namespace TopDownShooter.Engine
 
             this.Position = position;
             this.collisionSystem = collisionSystem;
-            this.walkAnimationComponent = this.Components.OfType<IAnimationComponent>().FirstOrDefault((a) => a.Label == "Walk");
-            this.deathAnimationComponent = this.Components.OfType<IAnimationComponent>().FirstOrDefault((a) => a.Label == "Death");
+            this.animationComponentManager = this.Components.OfType<IAnimationComponentManager>().FirstOrDefault();
             this.colliderComponent = this.Components.OfType<IColliderComponent>().FirstOrDefault();
 
             this.collisionSystem.Register(id, this, this.colliderComponent);
@@ -61,7 +58,7 @@ namespace TopDownShooter.Engine
         /// <summary>
         /// Gets the height of the game object.
         /// </summary>
-        public override int Height => this.walkAnimationComponent.FrameProperties.Height;
+        public override int Height => this.animationComponentManager.FrameProperties.Height;
 
         /// <summary>
         /// Gets or sets the name
@@ -76,7 +73,7 @@ namespace TopDownShooter.Engine
         /// <summary>
         /// Gets the width of the game object.
         /// </summary>
-        public override int Width => this.walkAnimationComponent.FrameProperties.Width;
+        public override int Width => this.animationComponentManager.FrameProperties.Width;
 
         /// <summary>
         /// Updates the game object with the specified game time.
@@ -86,13 +83,26 @@ namespace TopDownShooter.Engine
         {
             base.Update(gameTime);
 
+            if (this.hasCreatedDeathAnimation)
+            {
+                return;
+            }
+
             if (this.Health == 0 && !this.hasCreatedDeathAnimation)
             {
                 this.hasCreatedDeathAnimation = true;
-                this.deathAnimationComponent.IsAnimating = true;
-                this.deathAnimationComponent.IsRendered = true;
+                this.animationComponentManager.Play("Death");
+
                 this.Components.Clear();
-                this.Components.Add(this.deathAnimationComponent);
+                this.Components.Add(this.animationComponentManager);
+            }
+            else if (this.Velocity.Equals(Vector2.Zero))
+            {
+                this.animationComponentManager.Stop();
+            }
+            else
+            {
+                this.animationComponentManager.Play("Walk");
             }
         }
     }
