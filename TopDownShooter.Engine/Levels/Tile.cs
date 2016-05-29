@@ -16,14 +16,14 @@ namespace TopDownShooter.Engine.Levels
     /// </summary>
     public class Tile : GameObject, ITile
     {
+        private readonly ICollisionSystem collisionSystem;
         private ColliderComponentBase colliderComponent;
-        private ICollisionSystem collisionSystem;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="Tile" /> class.
         /// </summary>
         /// <param name="id">The game object identifier.</param>
-        /// <param name="collisionSystem">The <see cref="ICollisionSystem"/>.</param>
+        /// <param name="collisionSystem">The <see cref="ICollisionSystem" />.</param>
         /// <param name="tileInteractionType">The <see cref="TileInteractionType" />.</param>
         /// <param name="texture">The <see cref="Texture2D" />.</param>
         /// <param name="position">The position of the tile.</param>
@@ -42,20 +42,6 @@ namespace TopDownShooter.Engine.Levels
             this.Height = height;
             this.TexturePosition = texturePosition;
             this.TileInteractionType = tileInteractionType;
-        }
-
-        /// <summary>
-        /// Initializes the game object.
-        /// </summary>
-        public override void Initialize()
-        {
-            if (this.TileInteractionType == TileInteractionType.Blocking)
-            {
-                this.colliderComponent = new SimpleColliderComponent(this.Id, collisionSystem);
-                this.collisionSystem.Register(this.Id, this, this.colliderComponent);
-            }
-
-            base.Initialize();
         }
 
         /// <summary>
@@ -112,6 +98,20 @@ namespace TopDownShooter.Engine.Levels
 
             ////spriteBatch.DrawString(this.tileCoordinateTexture, string.Format("{0},{1}", this.TileCoordinates.X, this.TileCoordinates.Y), this.Position, Color.Green);
             base.Draw(spriteBatch, gameTime);
+        }
+
+        /// <summary>
+        /// Initializes the game object.
+        /// </summary>
+        public override void Initialize()
+        {
+            if (this.TileInteractionType == TileInteractionType.Blocking)
+            {
+                this.colliderComponent = new SimpleColliderComponent(this.Id, this.collisionSystem);
+                this.collisionSystem.Register(this.Id, this, this.colliderComponent);
+            }
+
+            base.Initialize();
         }
     }
 }

@@ -8,12 +8,14 @@ namespace TopDownShooter.Engine.Controllers
 {
     using Microsoft.Xna.Framework;
     using Microsoft.Xna.Framework.Input;
+    using TopDownShooter.Engine.Adapters;
 
     /// <summary>
     /// Herds Inputs...
     /// </summary>
     public class HumanInputControllerComponent : InputControllerComponentBase
     {
+        private readonly IKeyboardAdapter keyboard;
         private KeyboardState previousKeyboardState;
         private KeyboardState currentKeyboardState;
         private MouseState previousMouseState;
@@ -23,11 +25,22 @@ namespace TopDownShooter.Engine.Controllers
 
         /// <summary>
         /// Initializes a new instance of the <see cref="HumanInputControllerComponent"/> class.
+        /// </summary>
+        public HumanInputControllerComponent()
+            : this(new KeyboardAdapter())
+        {
+        }
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="HumanInputControllerComponent"/> class.
         /// Creates a new <see cref="HumanInputControllerComponent" /> that can be used to have a simple Composite for managing
         /// inputs among multiple devices.
         /// </summary>
-        public HumanInputControllerComponent()
+        /// <param name="keyboard">The <see cref="IKeyboardAdapter"/>.</param>
+        /// <remarks>Internal for unit testing.</remarks>
+        internal HumanInputControllerComponent(IKeyboardAdapter keyboard)
         {
+            this.keyboard = keyboard;
         }
 
         /// <summary>
@@ -141,7 +154,7 @@ namespace TopDownShooter.Engine.Controllers
             this.previousGamePadState = this.currentGamePadState;
 
             this.currentMouseState = Mouse.GetState();
-            this.currentKeyboardState = Keyboard.GetState();
+            this.currentKeyboardState = this.keyboard.GetState();
             this.currentGamePadState = GamePad.GetState(PlayerIndex.One);
 
             base.Update(gameObject, time);

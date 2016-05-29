@@ -66,6 +66,7 @@
     <Compile Include="Collisions\CollisionSystemTests.cs" />
     <Compile Include="Collisions\SimpleColliderComponentTests.cs" />
     <Compile Include="Collisions\TestColliderComponent.cs" />
+    <Compile Include="Controllers\HumanInputControllerComponentTests.cs" />
     <Compile Include="Controllers\SimpleAiInputControllerComponentTests.cs" />
     <Compile Include="GameObjectTests.cs" />
     <Compile Include="Levels\TileTests.cs" />

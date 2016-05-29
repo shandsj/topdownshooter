@@ -99,6 +99,31 @@
             <param name="other">The rigid body to check for a collision.</param>
             <returns>TTrue if a collision occured, false otherwise.</returns>
         </member>
+        <member name="T:TopDownShooter.Engine.UnitTests.Controllers.HumanInputControllerComponentTests">
+            <summary>
+            Contains unit tests for the <see cref="T:TopDownShooter.Engine.Controllers.HumanInputControllerComponent"/> class.
+            </summary>
+        </member>
+        <member name="M:TopDownShooter.Engine.UnitTests.Controllers.HumanInputControllerComponentTests.MovesDownWhenSOrDownKeysAreDown">
+            <summary>
+            Tests that the controller moves down when the down key or S keys are down.
+            </summary>
+        </member>
+        <member name="M:TopDownShooter.Engine.UnitTests.Controllers.HumanInputControllerComponentTests.MovesLeftWhenAOrLeftKeysAreDown">
+            <summary>
+            Tests that the controller moves left when the A key or Left keys are down.
+            </summary>
+        </member>
+        <member name="M:TopDownShooter.Engine.UnitTests.Controllers.HumanInputControllerComponentTests.MovesRightWhenDOrRightKeysAreDown">
+            <summary>
+            Tests that the controller moves right when the right key or D keys are down.
+            </summary>
+        </member>
+        <member name="M:TopDownShooter.Engine.UnitTests.Controllers.HumanInputControllerComponentTests.MovesUpWhenWOrUpKeysAreDown">
+            <summary>
+            Tests that the controller moves up when the up key or W keys are down.
+            </summary>
+        </member>
         <member name="T:TopDownShooter.Engine.UnitTests.Controllers.SimpleAiInputControllerComponentTests">
             <summary>
             Class for testing the <see cref="T:TopDownShooter.Engine.Controllers.SimpleAiInputControllerComponent"/>

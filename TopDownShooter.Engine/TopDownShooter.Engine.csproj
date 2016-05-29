@@ -71,7 +71,9 @@
   <ItemGroup>
     <Compile Include="Adapters\ContentManagerAdapter.cs" />
     <Compile Include="Adapters\IContentManagerAdapter.cs" />
+    <Compile Include="Adapters\IKeyboardAdapter.cs" />
     <Compile Include="Adapters\ISpriteBatchAdapter.cs" />
+    <Compile Include="Adapters\KeyboardAdapter.cs" />
     <Compile Include="Adapters\SpriteBatchAdapter.cs" />
     <Compile Include="AnimationComponent.cs" />
     <Compile Include="AnimationComponentManager.cs" />
