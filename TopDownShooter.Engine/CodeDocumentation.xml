@@ -1475,6 +1475,21 @@
             <param name="components">The collection of components</param>
             <returns>The created bullet projectile.</returns>
         </member>
+        <member name="T:TopDownShooter.Engine.IPlayer">
+            <summary>
+            Defines an interface for a player.
+            </summary>
+        </member>
+        <member name="P:TopDownShooter.Engine.IPlayer.Health">
+            <summary>
+            Gets or sets the name
+            </summary>
+        </member>
+        <member name="P:TopDownShooter.Engine.IPlayer.Name">
+            <summary>
+            Gets or sets the name
+            </summary>
+        </member>
         <member name="T:TopDownShooter.Engine.Levels.ITile">
             <summary>
             Defines an inteface for a tile.

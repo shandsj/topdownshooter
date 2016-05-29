@@ -99,6 +99,7 @@
     <Compile Include="ICamera.cs" />
     <Compile Include="IGameObject.cs" />
     <Compile Include="IGameObjectFactory.cs" />
+    <Compile Include="IPlayer.cs" />
     <Compile Include="Levels\ITile.cs" />
     <Compile Include="Levels\Level.cs" />
     <Compile Include="Levels\Tile.cs" />

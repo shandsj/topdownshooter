@@ -74,6 +74,7 @@
     <Compile Include="Levels\TileTests.cs" />
     <Compile Include="PlayerColliderComponentTests.cs" />
     <Compile Include="PlayerTests.cs" />
+    <Compile Include="Projectiles\BulletProjectileColliderComponentTests.cs" />
     <Compile Include="Projectiles\BulletProjectileTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="TestGameObject.cs" />

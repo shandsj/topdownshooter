@@ -16,7 +16,7 @@ namespace TopDownShooter.Engine
     /// <summary>
     /// Simple player class.
     /// </summary>
-    public class Player : GameObject
+    public class Player : GameObject, IPlayer
     {
         private readonly IColliderComponent colliderComponent;
 

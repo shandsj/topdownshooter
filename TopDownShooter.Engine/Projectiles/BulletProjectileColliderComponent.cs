@@ -36,7 +36,7 @@ namespace TopDownShooter.Engine.Projectiles
         public override void Collide(IColliderComponent other)
         {
             var otherGameObject = this.CollisionSystem.GetGameObject(other.GameObjectId);
-            var player = otherGameObject as Player;
+            var player = otherGameObject as IPlayer;
             if (player != null && player != this.bulletParent && player.Health > 0)
             {
                 player.Health--;

@@ -250,6 +250,21 @@
             Tests that the death animation is setup correctly when the player health is at zero.
             </summary>
         </member>
+        <member name="T:TopDownShooter.Engine.UnitTests.Projectiles.BulletProjectileColliderComponentTests">
+            <summary>
+            Contains unit tests for the <see cref="T:TopDownShooter.Engine.Projectiles.BulletProjectileColliderComponent" /> class.
+            </summary>
+        </member>
+        <member name="M:TopDownShooter.Engine.UnitTests.Projectiles.BulletProjectileColliderComponentTests.DepletesPlayerHealthAndDeregistersFromCollisionSystemWhenCollidingWithPlayer">
+            <summary>
+            Tests that the player health is depleted and the collider is deregistered from the collision system when a player collision occurs.
+            </summary>
+        </member>
+        <member name="M:TopDownShooter.Engine.UnitTests.Projectiles.BulletProjectileColliderComponentTests.UnregistersFromColliderSystemWhenCollidingWithTile">
+            <summary>
+            Tests that the collider unregisters from the collider system when colliding with a tile.
+            </summary>
+        </member>
         <member name="T:TopDownShooter.Engine.UnitTests.Projectiles.BulletProjectileTests">
             <summary>
             Contains unit tests for the <see cref="T:TopDownShooter.Engine.Projectiles.BulletProjectile" /> class.
