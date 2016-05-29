@@ -18,15 +18,22 @@ namespace TopDownShooter.Engine.Collisions
         /// Initializes a new instance of the <see cref="ColliderComponentBase" /> class.
         /// </summary>
         /// <param name="gameObjectId">The parent game object identifier.</param>
-        protected ColliderComponentBase(int gameObjectId)
+        /// <param name="collisionSystem">The <see cref="ICollisionSystem"/>.</param>
+        protected ColliderComponentBase(int gameObjectId, ICollisionSystem collisionSystem)
         {
             this.GameObjectId = gameObjectId;
+            this.CollisionSystem = collisionSystem;
         }
 
         /// <summary>
         /// Gets the parent game object identifer.
         /// </summary>
         public int GameObjectId { get; }
+
+        /// <summary>
+        /// Gets the <see cref="ICollisionSystem" />.
+        /// </summary>
+        protected ICollisionSystem CollisionSystem { get; }
 
         /// <summary>
         /// Draws the component with the specified game object and game time.
@@ -76,6 +83,11 @@ namespace TopDownShooter.Engine.Collisions
         /// <param name="time">The game time.</param>
         public virtual void Update(IGameObject gameObject, GameTime time)
         {
+            // If the entity is moving, check for collision in the collider system.
+            if (gameObject.Velocity.Length() != 0)
+            {
+                this.CollisionSystem.CheckCollisions(this);
+            }
         }
 
         /// <summary>

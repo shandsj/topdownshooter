@@ -457,15 +457,21 @@
             Defines a rigid body component that will respond to collisions with other rigid bodies.
             </summary>
         </member>
-        <member name="M:TopDownShooter.Engine.Collisions.ColliderComponentBase.#ctor(System.Int32)">
+        <member name="M:TopDownShooter.Engine.Collisions.ColliderComponentBase.#ctor(System.Int32,TopDownShooter.Engine.Collisions.ICollisionSystem)">
             <summary>
             Initializes a new instance of the <see cref="T:TopDownShooter.Engine.Collisions.ColliderComponentBase" /> class.
             </summary>
             <param name="gameObjectId">The parent game object identifier.</param>
+            <param name="collisionSystem">The <see cref="T:TopDownShooter.Engine.Collisions.ICollisionSystem"/>.</param>
         </member>
         <member name="P:TopDownShooter.Engine.Collisions.ColliderComponentBase.GameObjectId">
             <summary>
             Gets the parent game object identifer.
+            </summary>
+        </member>
+        <member name="P:TopDownShooter.Engine.Collisions.ColliderComponentBase.CollisionSystem">
+            <summary>
+            Gets the <see cref="T:TopDownShooter.Engine.Collisions.ICollisionSystem" />.
             </summary>
         </member>
         <member name="M:TopDownShooter.Engine.Collisions.ColliderComponentBase.Draw(TopDownShooter.Engine.IGameObject,TopDownShooter.Engine.Adapters.ISpriteBatchAdapter,Microsoft.Xna.Framework.GameTime)">
@@ -643,11 +649,6 @@
             </summary>
             <param name="gameObjectId">The parent game object identifier.</param>
             <param name="collisionSystem">The <see cref="T:TopDownShooter.Engine.Collisions.ICollisionSystem" />.</param>
-        </member>
-        <member name="P:TopDownShooter.Engine.Collisions.SimpleColliderComponent.CollisionSystem">
-            <summary>
-            Gets the <see cref="T:TopDownShooter.Engine.Collisions.ICollisionSystem" />.
-            </summary>
         </member>
         <member name="M:TopDownShooter.Engine.Collisions.SimpleColliderComponent.Collide(TopDownShooter.Engine.Collisions.IColliderComponent)">
             <summary>
@@ -1691,13 +1692,6 @@
             </summary>
             <param name="other">The other collider component.</param>
         </member>
-        <member name="M:TopDownShooter.Engine.PlayerColliderComponent.Update(TopDownShooter.Engine.IGameObject,Microsoft.Xna.Framework.GameTime)">
-            <summary>
-            Updates the component with the specified game object and game time.
-            </summary>
-            <param name="gameObject">The game object to update.</param>
-            <param name="time">The game time.</param>
-        </member>
         <member name="T:TopDownShooter.Engine.Projectiles.BulletProjectile">
             <summary>
             Defines a bullet projectile game object.
@@ -1717,6 +1711,11 @@
         <member name="P:TopDownShooter.Engine.Projectiles.BulletProjectile.Height">
             <summary>
             Gets the height of the game object.
+            </summary>
+        </member>
+        <member name="P:TopDownShooter.Engine.Projectiles.BulletProjectile.Speed">
+            <summary>
+            Gets the speed of the projectile.
             </summary>
         </member>
         <member name="P:TopDownShooter.Engine.Projectiles.BulletProjectile.Width">
@@ -1742,13 +1741,6 @@
             Performs a collision with the specified <see cref="T:TopDownShooter.Engine.Collisions.IColliderComponent" />.
             </summary>
             <param name="other">The other collider component.</param>
-        </member>
-        <member name="M:TopDownShooter.Engine.Projectiles.BulletProjectileColliderComponent.Update(TopDownShooter.Engine.IGameObject,Microsoft.Xna.Framework.GameTime)">
-            <summary>
-            Updates the component with the specified game object and game time.
-            </summary>
-            <param name="gameObject">The game object to update.</param>
-            <param name="time">The game time.</param>
         </member>
         <member name="T:TopDownShooter.Engine.Projectiles.BulletProjectileGeneratorComponent">
             <summary>

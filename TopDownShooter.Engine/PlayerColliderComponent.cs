@@ -34,21 +34,5 @@ namespace TopDownShooter.Engine
             var gameObject = this.CollisionSystem.GetGameObject(this.GameObjectId);
             gameObject.Velocity = new Vector2(0, 0); // TODO: modify velocity correctly based on location of collided object
         }
-
-        /// <summary>
-        /// Updates the component with the specified game object and game time.
-        /// </summary>
-        /// <param name="gameObject">The game object to update.</param>
-        /// <param name="time">The game time.</param>
-        public override void Update(IGameObject gameObject, GameTime time)
-        {
-            // If the entity is moving, check for collision in the collider system.
-            if (gameObject.Velocity.Length() != 0)
-            {
-                this.CollisionSystem.CheckCollisions(this);
-            }
-
-            base.Update(gameObject, time);
-        }
     }
 }

@@ -29,6 +29,16 @@
             Tests that the transform matrix is calculated.
             </summary>
         </member>
+        <member name="T:TopDownShooter.Engine.UnitTests.Collisions.ColliderComponentBaseTests">
+            <summary>
+            Contains unit tests for the <see cref="T:TopDownShooter.Engine.Collisions.ColliderComponentBase" /> class.
+            </summary>
+        </member>
+        <member name="M:TopDownShooter.Engine.UnitTests.Collisions.ColliderComponentBaseTests.ChecksForCollisionsWhenVelocityIsNotZero">
+            <summary>
+            Tests that the base collider component checks for collisions on a moving game object.
+            </summary>
+        </member>
         <member name="T:TopDownShooter.Engine.UnitTests.Collisions.CollisionSystemTests">
             <summary>
             Contains unit tests for the <see cref="T:TopDownShooter.Engine.Collisions.CollisionSystem" /> class.
@@ -63,6 +73,31 @@
             <summary>
             Tests that a collision is detected with other collider components.
             </summary>
+        </member>
+        <member name="T:TopDownShooter.Engine.UnitTests.Collisions.TestColliderComponent">
+            <summary>
+            Defines a test collider component.
+            </summary>
+        </member>
+        <member name="M:TopDownShooter.Engine.UnitTests.Collisions.TestColliderComponent.#ctor(System.Int32,TopDownShooter.Engine.Collisions.ICollisionSystem)">
+            <summary>
+            Initializes a new instance of the <see cref="T:TopDownShooter.Engine.UnitTests.Collisions.TestColliderComponent" /> class.
+            </summary>
+            <param name="gameObjectId">The game object identifier.</param>
+            <param name="collisionSystem">The <see cref="T:TopDownShooter.Engine.Collisions.ICollisionSystem" />.</param>
+        </member>
+        <member name="M:TopDownShooter.Engine.UnitTests.Collisions.TestColliderComponent.Collide(TopDownShooter.Engine.Collisions.IColliderComponent)">
+            <summary>
+            Performs a collision with the specified <see cref="T:TopDownShooter.Engine.Collisions.IColliderComponent" />.
+            </summary>
+            <param name="other">The other collider component.</param>
+        </member>
+        <member name="M:TopDownShooter.Engine.UnitTests.Collisions.TestColliderComponent.IsCollision(TopDownShooter.Engine.Collisions.IColliderComponent)">
+            <summary>
+            Determines a collision occured with the specified <see cref="T:TopDownShooter.Engine.Collisions.IColliderComponent" />.
+            </summary>
+            <param name="other">The rigid body to check for a collision.</param>
+            <returns>TTrue if a collision occured, false otherwise.</returns>
         </member>
         <member name="T:TopDownShooter.Engine.UnitTests.Controllers.SimpleAiInputControllerComponentTests">
             <summary>
@@ -144,6 +179,16 @@
         <member name="P:TopDownShooter.Engine.UnitTests.TestGameObject.Height">
             <summary>
             Gets the height of the game object.
+            </summary>
+        </member>
+        <member name="T:TopDownShooter.Engine.Projectiles.Tests.BulletProjectileTests">
+            <summary>
+            Contains unit tests for the <see cref="T:TopDownShooter.Engine.Projectiles.BulletProjectile"/> class.
+            </summary>
+        </member>
+        <member name="M:TopDownShooter.Engine.Projectiles.Tests.BulletProjectileTests.NormalizesVelocityVectorWhenConstructed">
+            <summary>
+            Tests that the velocity vector is normalized from the direction passed in during construction.
             </summary>
         </member>
     </members>

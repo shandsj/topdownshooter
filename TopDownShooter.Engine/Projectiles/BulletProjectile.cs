@@ -20,8 +20,6 @@ namespace TopDownShooter.Engine.Projectiles
 
         private readonly ICollisionSystem collisionSystem;
 
-        private readonly float speed = 50f;
-
         /// <summary>
         /// Initializes a new instance of the <see cref="BulletProjectile" /> class.
         /// </summary>
@@ -38,7 +36,7 @@ namespace TopDownShooter.Engine.Projectiles
             this.collisionSystem = collisionSystem;
 
             direction.Normalize();
-            this.Velocity = direction * this.speed;
+            this.Velocity = direction * this.Speed;
 
             this.colliderComponent = this.Components.OfType<IColliderComponent>().FirstOrDefault();
             this.collisionSystem.Register(id, this, this.colliderComponent); // TODO: Make sure to unregister and destroy
@@ -48,6 +46,11 @@ namespace TopDownShooter.Engine.Projectiles
         /// Gets the height of the game object.
         /// </summary>
         public override int Height => 32;
+
+        /// <summary>
+        /// Gets the speed of the projectile.
+        /// </summary>
+        public float Speed => 50f;
 
         /// <summary>
         /// Gets the width of the game object.

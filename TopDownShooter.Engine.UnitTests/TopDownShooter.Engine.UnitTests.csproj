@@ -62,12 +62,15 @@
   <ItemGroup>
     <Compile Include="AnimationComponentTests.cs" />
     <Compile Include="CameraTests.cs" />
+    <Compile Include="Collisions\ColliderComponentBaseTests.cs" />
     <Compile Include="Collisions\CollisionSystemTests.cs" />
     <Compile Include="Collisions\SimpleColliderComponentTests.cs" />
+    <Compile Include="Collisions\TestColliderComponent.cs" />
     <Compile Include="Controllers\SimpleAiInputControllerComponentTests.cs" />
     <Compile Include="GameObjectTests.cs" />
     <Compile Include="PlayerColliderComponentTests.cs" />
     <Compile Include="PlayerTests.cs" />
+    <Compile Include="Projectiles\BulletProjectileTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="TestGameObject.cs" />
   </ItemGroup>
