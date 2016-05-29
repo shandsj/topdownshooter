@@ -27,7 +27,7 @@ namespace TopDownShooter.Engine.UnitTests.Projectiles
             bool wasSetHealthCalled = false;
             var player = new Mock<IPlayer>();
             player.SetupGet(p => p.Health).Returns(1);
-            player.SetupSet(p => p.Health).Callback(health =>
+            player.SetupSet(p => p.Health = It.IsAny<int>()).Callback<int>(health =>
                 {
                     wasSetHealthCalled = true;
                     Assert.AreEqual(0, health);

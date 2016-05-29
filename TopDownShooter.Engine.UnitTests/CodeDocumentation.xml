@@ -155,6 +155,11 @@
             Defines a test <see cref="T:TopDownShooter.Engine.Controllers.InputControllerComponentBase" /> class.
             </summary>
         </member>
+        <member name="M:TopDownShooter.Engine.UnitTests.Controllers.TestInputControllerComponent.Destroy">
+            <summary>
+            Destroys the component.
+            </summary>
+        </member>
         <member name="M:TopDownShooter.Engine.UnitTests.Controllers.TestInputControllerComponent.Fire">
             <summary>
             Gets a value indicating whether a fire was requested.

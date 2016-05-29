@@ -13,6 +13,9 @@ namespace TopDownShooter.Engine.UnitTests.Controllers
     /// </summary>
     public class TestInputControllerComponent : InputControllerComponentBase
     {
+        /// <summary>
+        /// Destroys the component.
+        /// </summary>
         public override void Destroy()
         {
         }
