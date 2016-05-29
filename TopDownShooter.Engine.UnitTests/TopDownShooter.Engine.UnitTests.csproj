@@ -68,6 +68,7 @@
     <Compile Include="Collisions\TestColliderComponent.cs" />
     <Compile Include="Controllers\SimpleAiInputControllerComponentTests.cs" />
     <Compile Include="GameObjectTests.cs" />
+    <Compile Include="Levels\TileTests.cs" />
     <Compile Include="PlayerColliderComponentTests.cs" />
     <Compile Include="PlayerTests.cs" />
     <Compile Include="Projectiles\BulletProjectileTests.cs" />

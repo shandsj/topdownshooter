@@ -1,19 +1,19 @@
-﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
-using TopDownShooter.Engine.Projectiles;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿// --------------------------------------------------------------------------------------------------------------------
+// <copyright file="BulletProjectileTests.cs" company="PlaceholderCompany">
+// Copyright (c) PlaceholderCompany. All rights reserved.
+// </copyright>
+// --------------------------------------------------------------------------------------------------------------------
 
-namespace TopDownShooter.Engine.Projectiles.Tests
+namespace TopDownShooter.Engine.UnitTests.Projectiles
 {
+    using Microsoft.VisualStudio.TestTools.UnitTesting;
     using Microsoft.Xna.Framework;
     using Moq;
     using TopDownShooter.Engine.Collisions;
+    using TopDownShooter.Engine.Projectiles;
 
     /// <summary>
-    /// Contains unit tests for the <see cref="BulletProjectile"/> class.
+    /// Contains unit tests for the <see cref="BulletProjectile" /> class.
     /// </summary>
     [TestClass]
     public class BulletProjectileTests
@@ -29,9 +29,5 @@ namespace TopDownShooter.Engine.Projectiles.Tests
             Assert.AreEqual(50f, uut.Speed);
             Assert.AreEqual(new Vector2(0, 50), uut.Velocity);
         }
-
-        
-
-
     }
 }

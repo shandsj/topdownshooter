@@ -185,6 +185,7 @@ namespace TopDownShooter.Engine.Levels
                     tileSet.TileHeight,
                     new Vector2((x - 1) * tileSet.TileWidth, (y - 1) * tileSet.TileHeight));
 
+                myTile.Initialize();
                 this.tiles.Add(new Point(tile.X, tile.Y), myTile);
             }
         }

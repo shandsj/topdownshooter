@@ -42,12 +42,20 @@ namespace TopDownShooter.Engine.Levels
             this.Height = height;
             this.TexturePosition = texturePosition;
             this.TileInteractionType = tileInteractionType;
+        }
 
-            if (tileInteractionType == TileInteractionType.Blocking)
+        /// <summary>
+        /// Initializes the game object.
+        /// </summary>
+        public override void Initialize()
+        {
+            if (this.TileInteractionType == TileInteractionType.Blocking)
             {
                 this.colliderComponent = new SimpleColliderComponent(this.Id, collisionSystem);
                 this.collisionSystem.Register(this.Id, this, this.colliderComponent);
             }
+
+            base.Initialize();
         }
 
         /// <summary>

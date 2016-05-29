@@ -17,11 +17,11 @@ namespace TopDownShooter.Engine.Controllers
     /// </summary>
     public class SimpleAiInputControllerComponent : InputControllerComponentBase
     {
+        private readonly Random random;
+
         private Vector2 direction;
 
         private bool fire;
-
-        private readonly Random random;
 
         private List<Task> taskList;
 

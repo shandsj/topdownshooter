@@ -1552,6 +1552,11 @@
             <param name="height">The height of the tile.</param>
             <param name="texturePosition">The texture's position in the tile set.</param>
         </member>
+        <member name="M:TopDownShooter.Engine.Levels.Tile.Initialize">
+            <summary>
+            Initializes the game object.
+            </summary>
+        </member>
         <member name="P:TopDownShooter.Engine.Levels.Tile.Height">
             <summary>
             Gets the height.

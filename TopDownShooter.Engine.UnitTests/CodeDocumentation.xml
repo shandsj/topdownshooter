@@ -135,6 +135,21 @@
             Tests that the game object delegates update calls to a component.
             </summary>
         </member>
+        <member name="T:TopDownShooter.Engine.UnitTests.Levels.TileTests">
+            <summary>
+            Contains unit tests for the <see cref="T:TopDownShooter.Engine.Levels.Tile" /> class.
+            </summary>
+        </member>
+        <member name="M:TopDownShooter.Engine.UnitTests.Levels.TileTests.RegistersWithCollisionSystemWhenInitializedWithABlockingTileInteractionType">
+            <summary>
+            Tests that the tile registers with the collision system when initialized with a blocking tile interaction type.
+            </summary>
+        </member>
+        <member name="M:TopDownShooter.Engine.UnitTests.Levels.TileTests.DrawsInTheSpriteBatchWhenDrawIsCalled">
+            <summary>
+            Tests that the tile draws in the sprite batch.
+            </summary>
+        </member>
         <member name="T:TopDownShooter.Engine.UnitTests.PlayerColliderComponentTests">
             <summary>
             Contains unit tests for the <see cref="T:TopDownShooter.Engine.PlayerColliderComponent" /> class.
@@ -160,6 +175,16 @@
             Tests that the death animation is setup correctly when the player health is at zero.
             </summary>
         </member>
+        <member name="T:TopDownShooter.Engine.UnitTests.Projectiles.BulletProjectileTests">
+            <summary>
+            Contains unit tests for the <see cref="T:TopDownShooter.Engine.Projectiles.BulletProjectile" /> class.
+            </summary>
+        </member>
+        <member name="M:TopDownShooter.Engine.UnitTests.Projectiles.BulletProjectileTests.NormalizesVelocityVectorWhenConstructed">
+            <summary>
+            Tests that the velocity vector is normalized from the direction passed in during construction.
+            </summary>
+        </member>
         <member name="T:TopDownShooter.Engine.UnitTests.TestGameObject">
             <summary>
             Defines a test game object.
@@ -179,16 +204,6 @@
         <member name="P:TopDownShooter.Engine.UnitTests.TestGameObject.Height">
             <summary>
             Gets the height of the game object.
-            </summary>
-        </member>
-        <member name="T:TopDownShooter.Engine.Projectiles.Tests.BulletProjectileTests">
-            <summary>
-            Contains unit tests for the <see cref="T:TopDownShooter.Engine.Projectiles.BulletProjectile"/> class.
-            </summary>
-        </member>
-        <member name="M:TopDownShooter.Engine.Projectiles.Tests.BulletProjectileTests.NormalizesVelocityVectorWhenConstructed">
-            <summary>
-            Tests that the velocity vector is normalized from the direction passed in during construction.
             </summary>
         </member>
     </members>
