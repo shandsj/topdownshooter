@@ -124,6 +124,16 @@
             Tests that the controller moves up when the up key or W keys are down.
             </summary>
         </member>
+        <member name="T:TopDownShooter.Engine.UnitTests.Controllers.InputControllerComponentBaseTests">
+            <summary>
+            Contains unit tests for the <see cref="T:TopDownShooter.Engine.Controllers.InputControllerComponentBase" /> class.
+            </summary>
+        </member>
+        <member name="M:TopDownShooter.Engine.UnitTests.Controllers.InputControllerComponentBaseTests.BroadcastsFireMessageWhenFireIsPressedAndUpdated">
+            <summary>
+            Tests that the fire message is broadcasted when fire is pressed.
+            </summary>
+        </member>
         <member name="T:TopDownShooter.Engine.UnitTests.Controllers.SimpleAiInputControllerComponentTests">
             <summary>
             Class for testing the <see cref="T:TopDownShooter.Engine.Controllers.SimpleAiInputControllerComponent"/>
@@ -139,6 +149,46 @@
             The <see cref="T:TopDownShooter.Engine.Controllers.SimpleAiInputControllerComponent"/> should not utilize the Draw method
             on the <see cref="T:TopDownShooter.Engine.Adapters.ISpriteBatchAdapter"/>. It only affects position and velocity.
             </summary>
+        </member>
+        <member name="T:TopDownShooter.Engine.UnitTests.Controllers.TestInputControllerComponent">
+            <summary>
+            Defines a test <see cref="T:TopDownShooter.Engine.Controllers.InputControllerComponentBase" /> class.
+            </summary>
+        </member>
+        <member name="M:TopDownShooter.Engine.UnitTests.Controllers.TestInputControllerComponent.Fire">
+            <summary>
+            Gets a value indicating whether a fire was requested.
+            </summary>
+            <returns>True if the action was requested; false otherwise.</returns>
+        </member>
+        <member name="M:TopDownShooter.Engine.UnitTests.Controllers.TestInputControllerComponent.Initialize">
+            <summary>
+            Initializes the component.
+            </summary>
+        </member>
+        <member name="M:TopDownShooter.Engine.UnitTests.Controllers.TestInputControllerComponent.MoveDown">
+            <summary>
+            Gets whether or not a up move was requested.
+            </summary>
+            <returns>True to move down.</returns>
+        </member>
+        <member name="M:TopDownShooter.Engine.UnitTests.Controllers.TestInputControllerComponent.MoveLeft">
+            <summary>
+            Gets whether or not a left move was requested.
+            </summary>
+            <returns>True to move left.</returns>
+        </member>
+        <member name="M:TopDownShooter.Engine.UnitTests.Controllers.TestInputControllerComponent.MoveRight">
+            <summary>
+            Gets whether or not a right move was requested.
+            </summary>
+            <returns>True to move right.</returns>
+        </member>
+        <member name="M:TopDownShooter.Engine.UnitTests.Controllers.TestInputControllerComponent.MoveUp">
+            <summary>
+            Gets whether or not a up move was requested.
+            </summary>
+            <returns>True to move up.</returns>
         </member>
         <member name="T:TopDownShooter.Engine.UnitTests.GameObjectTests">
             <summary>
