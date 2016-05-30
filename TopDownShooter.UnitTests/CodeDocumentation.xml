@@ -4,5 +4,15 @@
         <name>TopDownShooter.UnitTests</name>
     </assembly>
     <members>
+        <member name="T:TopDownShooter.UnitTests.LeaderBoardTests">
+            <summary>
+            Contains unit tests for the <see cref="T:TopDownShooter.LeaderBoard"/> class.
+            </summary>
+        </member>
+        <member name="M:TopDownShooter.UnitTests.LeaderBoardTests.LoadsPlayerNameSpriteFontWhenLoadingContent">
+            <summary>
+            Tests that the player name font is loaded when loading content.
+            </summary>
+        </member>
     </members>
 </doc>

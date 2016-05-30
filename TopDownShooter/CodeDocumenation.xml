@@ -29,7 +29,7 @@
             The <see cref="T:TopDownShooter.Engine.Levels.Level" />.
             </summary>
         </member>
-        <member name="F:TopDownShooter.Game1.spriteBatch">
+        <member name="F:TopDownShooter.Game1.worldSpriteBatch">
             <summary>
             The default <see cref="T:TopDownShooter.Engine.Adapters.ISpriteBatchAdapter" />.
             </summary>
@@ -71,6 +71,62 @@
             checking for collisions, gathering input, and playing audio.
             </summary>
             <param name="gameTime">Provides a snapshot of timing values.</param>
+        </member>
+        <member name="T:TopDownShooter.LeaderBoard">
+            <summary>
+            Defines a leader board game object.
+            </summary>
+        </member>
+        <member name="M:TopDownShooter.LeaderBoard.#ctor(System.Int32)">
+            <summary>
+            Initializes a new instance of the <see cref="T:TopDownShooter.LeaderBoard"/> class.
+            </summary>
+            <param name="id">The game object identifier.</param>
+        </member>
+        <member name="M:TopDownShooter.LeaderBoard.#ctor(System.Int32,System.Collections.Generic.IEnumerable{TopDownShooter.Engine.IComponent})">
+            <summary>
+            Initializes a new instance of the <see cref="T:TopDownShooter.LeaderBoard"/> class.
+            </summary>
+            <param name="id">The game object identifier.</param>
+            <param name="components">The collection of <see cref="T:TopDownShooter.Engine.IComponent"/> objects.</param>
+        </member>
+        <member name="M:TopDownShooter.LeaderBoard.#ctor(System.Int32,System.Collections.Generic.IEnumerable{TopDownShooter.Engine.IComponent},Microsoft.Xna.Framework.Graphics.SpriteFont)">
+            <summary>
+            Initializes a new instance of the <see cref="T:TopDownShooter.LeaderBoard"/> class.
+            </summary>
+            <param name="id">The game object identifier.</param>
+            <param name="components">The collection of <see cref="T:TopDownShooter.Engine.IComponent"/> objects.</param>
+            <param name="font">The <see cref="T:Microsoft.Xna.Framework.Graphics.SpriteFont"/> to use.</param>
+            <remarks>Internal for unit testing.</remarks>
+        </member>
+        <member name="P:TopDownShooter.LeaderBoard.Height">
+            <summary>
+            Gets the height of the game object.
+            </summary>
+        </member>
+        <member name="P:TopDownShooter.LeaderBoard.Width">
+            <summary>
+            Gets the width of the game object.
+            </summary>
+        </member>
+        <member name="M:TopDownShooter.LeaderBoard.Draw(TopDownShooter.Engine.Adapters.ISpriteBatchAdapter,Microsoft.Xna.Framework.GameTime)">
+            <summary>
+            Draws the game object with the specified sprite batch adapter and game time.
+            </summary>
+            <param name="spriteBatch">The sprite batch adapter.</param>
+            <param name="gameTime">The game time.</param>
+        </member>
+        <member name="M:TopDownShooter.LeaderBoard.LoadContent(TopDownShooter.Engine.Adapters.IContentManagerAdapter)">
+            <summary>
+            Loads the content from the specified content manager adapter.
+            </summary>
+            <param name="contentManager">The content manager adapter.</param>
+        </member>
+        <member name="M:TopDownShooter.LeaderBoard.SetPlayers(System.Collections.Generic.IEnumerable{TopDownShooter.Engine.IPlayer})">
+            <summary>
+            Sets the collection of <see cref="T:TopDownShooter.Engine.IPlayer"/> objects to update from.
+            </summary>
+            <param name="value">The collection of <see cref="T:TopDownShooter.Engine.IPlayer"/> objects.</param>
         </member>
         <member name="T:TopDownShooter.Program">
             <summary>

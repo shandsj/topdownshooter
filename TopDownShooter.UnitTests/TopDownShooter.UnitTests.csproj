@@ -73,6 +73,14 @@
     <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="MonoGame.Framework, Version=3.5.1.1679, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\MonoGame.Framework.WindowsDX.3.5.1.1679\lib\net40\MonoGame.Framework.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Moq, Version=4.2.1510.2205, Culture=neutral, PublicKeyToken=69f491c39445e920, processorArchitecture=MSIL">
+      <HintPath>..\packages\Moq.4.2.1510.2205\lib\net40\Moq.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="System" />
   </ItemGroup>
   <Choose>
@@ -88,9 +96,14 @@
     </Otherwise>
   </Choose>
   <ItemGroup>
+    <Compile Include="LeaderBoardTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\TopDownShooter.Engine\TopDownShooter.Engine.csproj">
+      <Project>{A2320177-A767-4F01-8F17-27AE45737D78}</Project>
+      <Name>TopDownShooter.Engine</Name>
+    </ProjectReference>
     <ProjectReference Include="..\TopDownShooter\TopDownShooter.csproj">
       <Project>{37c0e155-7c8d-45fa-a6ec-26bf3d73ae73}</Project>
       <Name>TopDownShooter</Name>

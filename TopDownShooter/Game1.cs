@@ -52,7 +52,11 @@ namespace TopDownShooter
         /// <summary>
         /// The default <see cref="ISpriteBatchAdapter" />.
         /// </summary>
-        private ISpriteBatchAdapter spriteBatch;
+        private ISpriteBatchAdapter worldSpriteBatch;
+
+        private ISpriteBatchAdapter screenSpriteBatch;
+
+        private LeaderBoard leaderBoard;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="Game1" /> class.
@@ -72,12 +76,14 @@ namespace TopDownShooter
         {
             this.GraphicsDevice.Clear(Color.CornflowerBlue);
 
-            this.spriteBatch.Begin(transformMatrix: this.camera.TransformMatrix);
-            this.level.Draw(this.spriteBatch, gameTime);
+            this.worldSpriteBatch.Begin(transformMatrix: this.camera.TransformMatrix);
+            this.level.Draw(this.worldSpriteBatch, gameTime);
+            this.players.ForEach(o => o.Draw(this.worldSpriteBatch, gameTime));
+            this.worldSpriteBatch.End();
 
-            this.players.ForEach(o => o.Draw(this.spriteBatch, gameTime));
-
-            this.spriteBatch.End();
+            this.screenSpriteBatch.Begin();
+            this.leaderBoard.Draw(this.screenSpriteBatch, gameTime);
+            this.screenSpriteBatch.End();
 
             base.Draw(gameTime);
         }
@@ -94,6 +100,8 @@ namespace TopDownShooter
 
             this.camera = new Camera(this.GraphicsDevice.Viewport) { Zoom = .5f };
             this.level = new Level(CollisionSystem.NextGameObjectId++, this.collisionSystem, new TmxMap("Content/TmxFiles/DefaultLevel.tmx"));
+            this.leaderBoard = new LeaderBoard(CollisionSystem.NextGameObjectId++);
+            this.leaderBoard.Initialize();
 
 #pragma warning disable SA1118 // Parameter must not span multiple lines
             var focusedPlayerId = CollisionSystem.NextGameObjectId++;
@@ -155,11 +163,13 @@ namespace TopDownShooter
         protected override void LoadContent()
         {
             // Create a new SpriteBatch, which can be used to draw textures.
-            this.spriteBatch = new SpriteBatchAdapter(new SpriteBatch(this.GraphicsDevice));
+            this.worldSpriteBatch = new SpriteBatchAdapter(new SpriteBatch(this.GraphicsDevice));
+            this.screenSpriteBatch = new SpriteBatchAdapter(new SpriteBatch(this.GraphicsDevice));
             this.contentManager = new ContentManagerAdapter(this.Content);
 
             this.level.LoadContent(this.contentManager);
             this.players.ForEach(player => player.LoadContent(this.contentManager));
+            this.leaderBoard.LoadContent(this.contentManager);
         }
 
         /// <summary>
@@ -188,6 +198,7 @@ namespace TopDownShooter
 
             this.players.ForEach(o => o.Update(gameTime));
             this.camera.Position = this.focusedPlayer.Position;
+            this.leaderBoard.SetPlayers(this.players);
 
             base.Update(gameTime);
         }
