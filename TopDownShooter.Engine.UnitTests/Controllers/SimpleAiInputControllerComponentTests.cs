@@ -32,7 +32,7 @@ namespace TopDownShooter.Engine.UnitTests.Controllers
                 velocitySetCounts++;
             });
 
-            var inputController = new SimpleAiInputControllerComponent();
+            var inputController = new SimpleAiInputControllerComponent(new Random());
 
             inputController.Update(gameObject.Object, new GameTime());
 
@@ -66,7 +66,7 @@ namespace TopDownShooter.Engine.UnitTests.Controllers
             gameObject.SetupGet(property => property.Position).Returns(new Vector2(42, 42));
             gameObject.SetupSet(property => property.Position = It.IsAny<Vector2>());
 
-            var inputController = new SimpleAiInputControllerComponent();
+            var inputController = new SimpleAiInputControllerComponent(new Random());
 
             inputController.Draw(gameObject.Object, spriteBatch.Object, new GameTime());
 

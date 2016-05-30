@@ -70,10 +70,14 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Adapters\ContentManagerAdapter.cs" />
+    <Compile Include="Adapters\GamePadAdapter.cs" />
     <Compile Include="Adapters\IContentManagerAdapter.cs" />
+    <Compile Include="Adapters\IGamePadAdapter.cs" />
     <Compile Include="Adapters\IKeyboardAdapter.cs" />
+    <Compile Include="Adapters\IMouseAdapter.cs" />
     <Compile Include="Adapters\ISpriteBatchAdapter.cs" />
     <Compile Include="Adapters\KeyboardAdapter.cs" />
+    <Compile Include="Adapters\MouseAdapter.cs" />
     <Compile Include="Adapters\SpriteBatchAdapter.cs" />
     <Compile Include="AnimationComponent.cs" />
     <Compile Include="AnimationComponentManager.cs" />
@@ -111,6 +115,7 @@
     <Compile Include="Projectiles\BulletProjectileColliderComponent.cs" />
     <Compile Include="Projectiles\BulletProjectileGeneratorComponent.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="RandomExtensions.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

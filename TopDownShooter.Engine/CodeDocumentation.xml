@@ -30,6 +30,18 @@
             <param name="assetName">The asset name.</param>
             <returns>The loaded asset.</returns>
         </member>
+        <member name="T:TopDownShooter.Engine.Adapters.GamePadAdapter">
+            <summary>
+            Provides a default implementation of the <see cref="T:TopDownShooter.Engine.Adapters.IGamePadAdapter" /> interface.
+            </summary>
+        </member>
+        <member name="M:TopDownShooter.Engine.Adapters.GamePadAdapter.GetState(Microsoft.Xna.Framework.PlayerIndex)">
+            <summary>
+            Gets the current state of a game pad controller with an independent axes dead zone.
+            </summary>
+            <param name="playerIndex">Player index for the controller you want to query.</param>
+            <returns>The state of the controller.</returns>
+        </member>
         <member name="T:TopDownShooter.Engine.Adapters.IContentManagerAdapter">
             <summary>
             Defines an interface for adapting <see cref="T:Microsoft.Xna.Framework.Content.ContentManager" />.
@@ -43,6 +55,18 @@
             <param name="assetName">The asset name.</param>
             <returns>The loaded asset.</returns>
         </member>
+        <member name="T:TopDownShooter.Engine.Adapters.IGamePadAdapter">
+            <summary>
+            Defines an interface for a game pad adapter.
+            </summary>
+        </member>
+        <member name="M:TopDownShooter.Engine.Adapters.IGamePadAdapter.GetState(Microsoft.Xna.Framework.PlayerIndex)">
+            <summary>
+            Gets the current state of a game pad controller with an independent axes dead zone.
+            </summary>
+            <param name="playerIndex">Player index for the controller you want to query.</param>
+            <returns>The state of the controller.</returns>
+        </member>
         <member name="T:TopDownShooter.Engine.Adapters.IKeyboardAdapter">
             <summary>
             Defines an interface for a keyboard adapter.
@@ -53,6 +77,17 @@
             Returns the current keyboard state.
             </summary>
             <returns>The current keyboard state.</returns>
+        </member>
+        <member name="T:TopDownShooter.Engine.Adapters.IMouseAdapter">
+            <summary>
+            Defines a mouse adapter interface.
+            </summary>
+        </member>
+        <member name="M:TopDownShooter.Engine.Adapters.IMouseAdapter.GetState">
+            <summary>
+            Gets mouse state information that includes position and button presses for the primary window
+            </summary>
+            <returns>The current state of the mouse.</returns>
         </member>
         <member name="T:TopDownShooter.Engine.Adapters.ISpriteBatchAdapter">
             <summary>
@@ -145,6 +180,17 @@
             Returns the current keyboard state.
             </summary>
             <returns>The current keyboard state.</returns>
+        </member>
+        <member name="T:TopDownShooter.Engine.Adapters.MouseAdapter">
+            <summary>
+            Provides a default implementation of the <see cref="T:TopDownShooter.Engine.Adapters.IMouseAdapter" /> interface.
+            </summary>
+        </member>
+        <member name="M:TopDownShooter.Engine.Adapters.MouseAdapter.GetState">
+            <summary>
+            Gets mouse state information that includes position and button presses for the primary window
+            </summary>
+            <returns>The current state of the mouse.</returns>
         </member>
         <member name="T:TopDownShooter.Engine.Adapters.SpriteBatchAdapter">
             <summary>
@@ -716,21 +762,23 @@
         </member>
         <member name="M:TopDownShooter.Engine.Controllers.HumanInputControllerComponent.#ctor">
             <summary>
-            Initializes a new instance of the <see cref="T:TopDownShooter.Engine.Controllers.HumanInputControllerComponent"/> class.
+            Initializes a new instance of the <see cref="T:TopDownShooter.Engine.Controllers.HumanInputControllerComponent" /> class.
             </summary>
         </member>
-        <member name="M:TopDownShooter.Engine.Controllers.HumanInputControllerComponent.#ctor(TopDownShooter.Engine.Adapters.IKeyboardAdapter)">
+        <member name="M:TopDownShooter.Engine.Controllers.HumanInputControllerComponent.#ctor(TopDownShooter.Engine.Adapters.IKeyboardAdapter,TopDownShooter.Engine.Adapters.IMouseAdapter,TopDownShooter.Engine.Adapters.IGamePadAdapter)">
             <summary>
-            Initializes a new instance of the <see cref="T:TopDownShooter.Engine.Controllers.HumanInputControllerComponent"/> class.
+            Initializes a new instance of the <see cref="T:TopDownShooter.Engine.Controllers.HumanInputControllerComponent" /> class.
             Creates a new <see cref="T:TopDownShooter.Engine.Controllers.HumanInputControllerComponent" /> that can be used to have a simple Composite for managing
             inputs among multiple devices.
             </summary>
-            <param name="keyboard">The <see cref="T:TopDownShooter.Engine.Adapters.IKeyboardAdapter"/>.</param>
+            <param name="keyboard">The <see cref="T:TopDownShooter.Engine.Adapters.IKeyboardAdapter" />.</param>
+            <param name="mouse">The <see cref="T:TopDownShooter.Engine.Adapters.IMouseAdapter"/>.</param>
+            <param name="gamePad">The <see cref="T:TopDownShooter.Engine.Adapters.IGamePadAdapter"/>.</param>
             <remarks>Internal for unit testing.</remarks>
         </member>
-        <member name="M:TopDownShooter.Engine.Controllers.HumanInputControllerComponent.Initialize">
+        <member name="P:TopDownShooter.Engine.Controllers.HumanInputControllerComponent.Direction">
             <summary>
-            Initializes the component.
+            Gets the direction vector.
             </summary>
         </member>
         <member name="M:TopDownShooter.Engine.Controllers.HumanInputControllerComponent.Destroy">
@@ -744,29 +792,10 @@
             </summary>
             <returns>True if the action was requested; false otherwise.</returns>
         </member>
-        <member name="M:TopDownShooter.Engine.Controllers.HumanInputControllerComponent.MoveDown">
+        <member name="M:TopDownShooter.Engine.Controllers.HumanInputControllerComponent.Initialize">
             <summary>
-            Gets whether or not a up move was requested.
+            Initializes the component.
             </summary>
-            <returns>True to move down.</returns>
-        </member>
-        <member name="M:TopDownShooter.Engine.Controllers.HumanInputControllerComponent.MoveLeft">
-            <summary>
-            Gets whether or not a left move was requested.
-            </summary>
-            <returns>True to move left.</returns>
-        </member>
-        <member name="M:TopDownShooter.Engine.Controllers.HumanInputControllerComponent.MoveRight">
-            <summary>
-            Gets whether or not a right move was requested.
-            </summary>
-            <returns>True to move right.</returns>
-        </member>
-        <member name="M:TopDownShooter.Engine.Controllers.HumanInputControllerComponent.MoveUp">
-            <summary>
-            Gets whether or not a up move was requested.
-            </summary>
-            <returns>True to move up.</returns>
         </member>
         <member name="M:TopDownShooter.Engine.Controllers.HumanInputControllerComponent.Update(TopDownShooter.Engine.IGameObject,Microsoft.Xna.Framework.GameTime)">
             <summary>
@@ -775,9 +804,28 @@
             <param name="gameObject">The game object to update.</param>
             <param name="time">The game time.</param>
         </member>
+        <member name="M:TopDownShooter.Engine.Controllers.HumanInputControllerComponent.GetDPadDirectionalVector(Microsoft.Xna.Framework.Input.GamePadDPad)">
+            <summary>
+            Gets the DPad directional vector.
+            </summary>
+            <param name="dpad">The <see cref="T:Microsoft.Xna.Framework.Input.GamePadDPad"/>.</param>
+            <returns>The directional vector.</returns>
+        </member>
+        <member name="M:TopDownShooter.Engine.Controllers.HumanInputControllerComponent.GetKeyboardDirectionalVector(Microsoft.Xna.Framework.Input.KeyboardState)">
+            <summary>
+            Gets the keyboard directional vector.
+            </summary>
+            <param name="keyboardState">The <see cref="T:Microsoft.Xna.Framework.Input.KeyboardState"/>.</param>
+            <returns>The directional vector.</returns>
+        </member>
         <member name="T:TopDownShooter.Engine.Controllers.IInputController">
             <summary>
             Simple Controller for requesting Movements
+            </summary>
+        </member>
+        <member name="P:TopDownShooter.Engine.Controllers.IInputController.Direction">
+            <summary>
+            Gets the direction vector.
             </summary>
         </member>
         <member name="M:TopDownShooter.Engine.Controllers.IInputController.Fire">
@@ -786,44 +834,55 @@
             </summary>
             <returns>True if the action was requested; false otherwise.</returns>
         </member>
-        <member name="M:TopDownShooter.Engine.Controllers.IInputController.MoveDown">
-            <summary>
-            Gets whether or not a up move was requested.
-            </summary>
-            <returns>True to move down.</returns>
-        </member>
-        <member name="M:TopDownShooter.Engine.Controllers.IInputController.MoveLeft">
-            <summary>
-            Gets whether or not a left move was requested.
-            </summary>
-            <returns>True to move left.</returns>
-        </member>
-        <member name="M:TopDownShooter.Engine.Controllers.IInputController.MoveRight">
-            <summary>
-            Gets whether or not a right move was requested.
-            </summary>
-            <returns>True to move right.</returns>
-        </member>
-        <member name="M:TopDownShooter.Engine.Controllers.IInputController.MoveUp">
-            <summary>
-            Gets whether or not a up move was requested.
-            </summary>
-            <returns>True to move up.</returns>
-        </member>
         <member name="T:TopDownShooter.Engine.Controllers.InputControllerComponentBase">
             <summary>
-            Base implementation for an <see cref="T:TopDownShooter.Engine.Controllers.IInputController"/>
-            </summary>
-        </member>
-        <member name="M:TopDownShooter.Engine.Controllers.InputControllerComponentBase.#ctor">
-            <summary>
-            Initializes a new instance of the <see cref="T:TopDownShooter.Engine.Controllers.InputControllerComponentBase"/> class.
+            Base implementation for an <see cref="T:TopDownShooter.Engine.Controllers.IInputController" />
             </summary>
         </member>
         <member name="M:TopDownShooter.Engine.Controllers.InputControllerComponentBase.Finalize">
             <summary>
-            Finalizes an instance of the <see cref="T:TopDownShooter.Engine.Controllers.InputControllerComponentBase"/> class.
+            Finalizes an instance of the <see cref="T:TopDownShooter.Engine.Controllers.InputControllerComponentBase" /> class.
             </summary>
+        </member>
+        <member name="P:TopDownShooter.Engine.Controllers.InputControllerComponentBase.Direction">
+            <summary>
+            Gets the direction vector.
+            </summary>
+        </member>
+        <member name="M:TopDownShooter.Engine.Controllers.InputControllerComponentBase.Destroy">
+            <summary>
+            Destroys the component.
+            </summary>
+        </member>
+        <member name="M:TopDownShooter.Engine.Controllers.InputControllerComponentBase.Dispose">
+            <summary>
+            Cleans up any resources used during the execution of this class
+            </summary>
+        </member>
+        <member name="M:TopDownShooter.Engine.Controllers.InputControllerComponentBase.Draw(TopDownShooter.Engine.IGameObject,TopDownShooter.Engine.Adapters.ISpriteBatchAdapter,Microsoft.Xna.Framework.GameTime)">
+            <summary>
+            Draws the component with the specified game object and game time.
+            </summary>
+            <param name="gameObject">The game object.</param>
+            <param name="spriteBatch">The sprite batch adapter.</param>
+            <param name="time">The game time.</param>
+        </member>
+        <member name="M:TopDownShooter.Engine.Controllers.InputControllerComponentBase.Fire">
+            <summary>
+            Gets a value indicating whether a fire was requested.
+            </summary>
+            <returns>True if the action was requested; false otherwise.</returns>
+        </member>
+        <member name="M:TopDownShooter.Engine.Controllers.InputControllerComponentBase.Initialize">
+            <summary>
+            Initializes the component.
+            </summary>
+        </member>
+        <member name="M:TopDownShooter.Engine.Controllers.InputControllerComponentBase.LoadContent(TopDownShooter.Engine.Adapters.IContentManagerAdapter)">
+            <summary>
+            Loads the content from the specified content manager adapter.
+            </summary>
+            <param name="contentManager">The content manager adapter.</param>
         </member>
         <member name="M:TopDownShooter.Engine.Controllers.InputControllerComponentBase.ReceiveMessage(TopDownShooter.Engine.IGameObject,TopDownShooter.Engine.ComponentMessage)">
             <summary>
@@ -839,70 +898,11 @@
             <param name="gameObject">The game object to update.</param>
             <param name="time">The game time.</param>
         </member>
-        <member name="M:TopDownShooter.Engine.Controllers.InputControllerComponentBase.Draw(TopDownShooter.Engine.IGameObject,TopDownShooter.Engine.Adapters.ISpriteBatchAdapter,Microsoft.Xna.Framework.GameTime)">
-            <summary>
-            Draws the component with the specified game object and game time.
-            </summary>
-            <param name="gameObject">The game object.</param>
-            <param name="spriteBatch">The sprite batch adapter.</param>
-            <param name="time">The game time.</param>
-        </member>
-        <member name="M:TopDownShooter.Engine.Controllers.InputControllerComponentBase.LoadContent(TopDownShooter.Engine.Adapters.IContentManagerAdapter)">
-            <summary>
-            Loads the content from the specified content manager adapter.
-            </summary>
-            <param name="contentManager">The content manager adapter.</param>
-        </member>
-        <member name="M:TopDownShooter.Engine.Controllers.InputControllerComponentBase.Initialize">
-            <summary>
-            Initializes the component.
-            </summary>
-        </member>
-        <member name="M:TopDownShooter.Engine.Controllers.InputControllerComponentBase.Destroy">
-            <summary>
-            Destroys the component.
-            </summary>
-        </member>
         <member name="M:TopDownShooter.Engine.Controllers.InputControllerComponentBase.UnloadContent(TopDownShooter.Engine.Adapters.IContentManagerAdapter)">
             <summary>
             Unloads the content from the specified content manager adapter.
             </summary>
             <param name="contentManager">The content manager adapter.</param>
-        </member>
-        <member name="M:TopDownShooter.Engine.Controllers.InputControllerComponentBase.Fire">
-            <summary>
-            Gets a value indicating whether a fire was requested.
-            </summary>
-            <returns>True if the action was requested; false otherwise.</returns>
-        </member>
-        <member name="M:TopDownShooter.Engine.Controllers.InputControllerComponentBase.MoveDown">
-            <summary>
-            Gets whether or not a up move was requested.
-            </summary>
-            <returns>True to move down.</returns>
-        </member>
-        <member name="M:TopDownShooter.Engine.Controllers.InputControllerComponentBase.MoveLeft">
-            <summary>
-            Gets whether or not a left move was requested.
-            </summary>
-            <returns>True to move left.</returns>
-        </member>
-        <member name="M:TopDownShooter.Engine.Controllers.InputControllerComponentBase.MoveRight">
-            <summary>
-            Gets whether or not a right move was requested.
-            </summary>
-            <returns>True to move right.</returns>
-        </member>
-        <member name="M:TopDownShooter.Engine.Controllers.InputControllerComponentBase.MoveUp">
-            <summary>
-            Gets whether or not a up move was requested.
-            </summary>
-            <returns>True to move up.</returns>
-        </member>
-        <member name="M:TopDownShooter.Engine.Controllers.InputControllerComponentBase.Dispose">
-            <summary>
-            Cleans up any resources used during the execution of this class
-            </summary>
         </member>
         <member name="M:TopDownShooter.Engine.Controllers.InputControllerComponentBase.Dispose(System.Boolean)">
             <summary>
@@ -920,14 +920,20 @@
             Controller for controlling a simple AI.
             </summary>
         </member>
-        <member name="M:TopDownShooter.Engine.Controllers.SimpleAiInputControllerComponent.#ctor">
+        <member name="M:TopDownShooter.Engine.Controllers.SimpleAiInputControllerComponent.#ctor(System.Random)">
             <summary>
             Initializes a new instance of the <see cref="T:TopDownShooter.Engine.Controllers.SimpleAiInputControllerComponent" /> class.
             </summary>
+            <param name="random">The <see cref="T:System.Random" /> object.</param>
         </member>
         <member name="M:TopDownShooter.Engine.Controllers.SimpleAiInputControllerComponent.Finalize">
             <summary>
             Finalizes an instance of the <see cref="T:TopDownShooter.Engine.Controllers.SimpleAiInputControllerComponent" /> class.
+            </summary>
+        </member>
+        <member name="P:TopDownShooter.Engine.Controllers.SimpleAiInputControllerComponent.Direction">
+            <summary>
+            Gets the direction vector.
             </summary>
         </member>
         <member name="M:TopDownShooter.Engine.Controllers.SimpleAiInputControllerComponent.Destroy">
@@ -945,30 +951,6 @@
             <summary>
             Initializes the component.
             </summary>
-        </member>
-        <member name="M:TopDownShooter.Engine.Controllers.SimpleAiInputControllerComponent.MoveDown">
-            <summary>
-            Gets whether or not a up move was requested.
-            </summary>
-            <returns>True to move down.</returns>
-        </member>
-        <member name="M:TopDownShooter.Engine.Controllers.SimpleAiInputControllerComponent.MoveLeft">
-            <summary>
-            Gets whether or not a left move was requested.
-            </summary>
-            <returns>True to move left.</returns>
-        </member>
-        <member name="M:TopDownShooter.Engine.Controllers.SimpleAiInputControllerComponent.MoveRight">
-            <summary>
-            Gets whether or not a right move was requested.
-            </summary>
-            <returns>True to move right.</returns>
-        </member>
-        <member name="M:TopDownShooter.Engine.Controllers.SimpleAiInputControllerComponent.MoveUp">
-            <summary>
-            Gets whether or not a up move was requested.
-            </summary>
-            <returns>True to move up.</returns>
         </member>
         <member name="M:TopDownShooter.Engine.Controllers.SimpleAiInputControllerComponent.ManagedDispose">
             <summary>
@@ -1846,6 +1828,20 @@
             </summary>
             <param name="gameObject">The game object to update.</param>
             <param name="time">The game time.</param>
+        </member>
+        <member name="T:TopDownShooter.Engine.RandomExtensions">
+            <summary>
+            Contains extension methods for the <see cref="T:System.Random" /> class.
+            </summary>
+        </member>
+        <member name="M:TopDownShooter.Engine.RandomExtensions.NextDouble(System.Random,System.Double,System.Double)">
+            <summary>
+            Retreives the next random double between the specified range.
+            </summary>
+            <param name="random">The <see cref="T:System.Random" /> object.</param>
+            <param name="minimum">The minimum value.</param>
+            <param name="maximum">The maximum exclusive value.</param>
+            <returns>The random double.</returns>
         </member>
     </members>
 </doc>

@@ -155,6 +155,11 @@
             Defines a test <see cref="T:TopDownShooter.Engine.Controllers.InputControllerComponentBase" /> class.
             </summary>
         </member>
+        <member name="P:TopDownShooter.Engine.UnitTests.Controllers.TestInputControllerComponent.Direction">
+            <summary>
+            Gets the direction vector.
+            </summary>
+        </member>
         <member name="M:TopDownShooter.Engine.UnitTests.Controllers.TestInputControllerComponent.Destroy">
             <summary>
             Destroys the component.
@@ -170,30 +175,6 @@
             <summary>
             Initializes the component.
             </summary>
-        </member>
-        <member name="M:TopDownShooter.Engine.UnitTests.Controllers.TestInputControllerComponent.MoveDown">
-            <summary>
-            Gets whether or not a up move was requested.
-            </summary>
-            <returns>True to move down.</returns>
-        </member>
-        <member name="M:TopDownShooter.Engine.UnitTests.Controllers.TestInputControllerComponent.MoveLeft">
-            <summary>
-            Gets whether or not a left move was requested.
-            </summary>
-            <returns>True to move left.</returns>
-        </member>
-        <member name="M:TopDownShooter.Engine.UnitTests.Controllers.TestInputControllerComponent.MoveRight">
-            <summary>
-            Gets whether or not a right move was requested.
-            </summary>
-            <returns>True to move right.</returns>
-        </member>
-        <member name="M:TopDownShooter.Engine.UnitTests.Controllers.TestInputControllerComponent.MoveUp">
-            <summary>
-            Gets whether or not a up move was requested.
-            </summary>
-            <returns>True to move up.</returns>
         </member>
         <member name="T:TopDownShooter.Engine.UnitTests.GameObjectTests">
             <summary>

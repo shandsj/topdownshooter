@@ -26,23 +26,23 @@ namespace TopDownShooter.Engine.UnitTests.Controllers
         public void MovesDownWhenSOrDownKeysAreDown()
         {
             var keyboard = new Mock<IKeyboardAdapter>();
-            var uut = new HumanInputControllerComponent(keyboard.Object);
+            var uut = new HumanInputControllerComponent(keyboard.Object, new Mock<IMouseAdapter>().Object, new Mock<IGamePadAdapter>().Object);
 
             keyboard.Setup(k => k.GetState()).Returns(default(KeyboardState));
             uut.Update(new Mock<IGameObject>().Object, new GameTime());
-            Assert.IsFalse(uut.MoveDown());
+            Assert.AreEqual(Vector2.Zero, uut.Direction);
 
             keyboard.Setup(k => k.GetState()).Returns(new KeyboardState(Keys.Down));
             uut.Update(new Mock<IGameObject>().Object, new GameTime());
-            Assert.IsTrue(uut.MoveDown());
+            Assert.AreEqual(new Vector2(0, 1), uut.Direction);
 
             keyboard.Setup(k => k.GetState()).Returns(default(KeyboardState));
             uut.Update(new Mock<IGameObject>().Object, new GameTime());
-            Assert.IsFalse(uut.MoveDown());
+            Assert.AreEqual(Vector2.Zero, uut.Direction);
 
             keyboard.Setup(k => k.GetState()).Returns(new KeyboardState(Keys.S));
             uut.Update(new Mock<IGameObject>().Object, new GameTime());
-            Assert.IsTrue(uut.MoveDown());
+            Assert.AreEqual(new Vector2(0, 1), uut.Direction);
         }
 
         /// <summary>
@@ -52,23 +52,23 @@ namespace TopDownShooter.Engine.UnitTests.Controllers
         public void MovesLeftWhenAOrLeftKeysAreDown()
         {
             var keyboard = new Mock<IKeyboardAdapter>();
-            var uut = new HumanInputControllerComponent(keyboard.Object);
+            var uut = new HumanInputControllerComponent(keyboard.Object, new Mock<IMouseAdapter>().Object, new Mock<IGamePadAdapter>().Object);
 
             keyboard.Setup(k => k.GetState()).Returns(default(KeyboardState));
             uut.Update(new Mock<IGameObject>().Object, new GameTime());
-            Assert.IsFalse(uut.MoveLeft());
+            Assert.AreEqual(Vector2.Zero, uut.Direction);
 
             keyboard.Setup(k => k.GetState()).Returns(new KeyboardState(Keys.Left));
             uut.Update(new Mock<IGameObject>().Object, new GameTime());
-            Assert.IsTrue(uut.MoveLeft());
+            Assert.AreEqual(new Vector2(-1, 0), uut.Direction);
 
             keyboard.Setup(k => k.GetState()).Returns(default(KeyboardState));
             uut.Update(new Mock<IGameObject>().Object, new GameTime());
-            Assert.IsFalse(uut.MoveLeft());
+            Assert.AreEqual(Vector2.Zero, uut.Direction);
 
             keyboard.Setup(k => k.GetState()).Returns(new KeyboardState(Keys.A));
             uut.Update(new Mock<IGameObject>().Object, new GameTime());
-            Assert.IsTrue(uut.MoveLeft());
+            Assert.AreEqual(new Vector2(-1, 0), uut.Direction);
         }
 
         /// <summary>
@@ -78,23 +78,23 @@ namespace TopDownShooter.Engine.UnitTests.Controllers
         public void MovesRightWhenDOrRightKeysAreDown()
         {
             var keyboard = new Mock<IKeyboardAdapter>();
-            var uut = new HumanInputControllerComponent(keyboard.Object);
+            var uut = new HumanInputControllerComponent(keyboard.Object, new Mock<IMouseAdapter>().Object, new Mock<IGamePadAdapter>().Object);
 
             keyboard.Setup(k => k.GetState()).Returns(default(KeyboardState));
             uut.Update(new Mock<IGameObject>().Object, new GameTime());
-            Assert.IsFalse(uut.MoveRight());
+            Assert.AreEqual(Vector2.Zero, uut.Direction);
 
             keyboard.Setup(k => k.GetState()).Returns(new KeyboardState(Keys.Right));
             uut.Update(new Mock<IGameObject>().Object, new GameTime());
-            Assert.IsTrue(uut.MoveRight());
+            Assert.AreEqual(new Vector2(1, 0), uut.Direction);
 
             keyboard.Setup(k => k.GetState()).Returns(default(KeyboardState));
             uut.Update(new Mock<IGameObject>().Object, new GameTime());
-            Assert.IsFalse(uut.MoveRight());
+            Assert.AreEqual(Vector2.Zero, uut.Direction);
 
             keyboard.Setup(k => k.GetState()).Returns(new KeyboardState(Keys.D));
             uut.Update(new Mock<IGameObject>().Object, new GameTime());
-            Assert.IsTrue(uut.MoveRight());
+            Assert.AreEqual(new Vector2(1, 0), uut.Direction);
         }
 
         /// <summary>
@@ -104,23 +104,23 @@ namespace TopDownShooter.Engine.UnitTests.Controllers
         public void MovesUpWhenWOrUpKeysAreDown()
         {
             var keyboard = new Mock<IKeyboardAdapter>();
-            var uut = new HumanInputControllerComponent(keyboard.Object);
+            var uut = new HumanInputControllerComponent(keyboard.Object, new Mock<IMouseAdapter>().Object, new Mock<IGamePadAdapter>().Object);
 
             keyboard.Setup(k => k.GetState()).Returns(default(KeyboardState));
             uut.Update(new Mock<IGameObject>().Object, new GameTime());
-            Assert.IsFalse(uut.MoveUp());
+            Assert.AreEqual(Vector2.Zero, uut.Direction);
 
             keyboard.Setup(k => k.GetState()).Returns(new KeyboardState(Keys.Up));
             uut.Update(new Mock<IGameObject>().Object, new GameTime());
-            Assert.IsTrue(uut.MoveUp());
+            Assert.AreEqual(new Vector2(0, -1), uut.Direction);
 
             keyboard.Setup(k => k.GetState()).Returns(default(KeyboardState));
             uut.Update(new Mock<IGameObject>().Object, new GameTime());
-            Assert.IsFalse(uut.MoveUp());
+            Assert.AreEqual(Vector2.Zero, uut.Direction);
 
             keyboard.Setup(k => k.GetState()).Returns(new KeyboardState(Keys.W));
             uut.Update(new Mock<IGameObject>().Object, new GameTime());
-            Assert.IsTrue(uut.MoveUp());
+            Assert.AreEqual(new Vector2(0, -1), uut.Direction);
         }
     }
 }

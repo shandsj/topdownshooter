@@ -6,6 +6,7 @@
 
 namespace TopDownShooter.Engine.UnitTests.Controllers
 {
+    using Microsoft.Xna.Framework;
     using TopDownShooter.Engine.Controllers;
 
     /// <summary>
@@ -13,6 +14,11 @@ namespace TopDownShooter.Engine.UnitTests.Controllers
     /// </summary>
     public class TestInputControllerComponent : InputControllerComponentBase
     {
+        /// <summary>
+        /// Gets the direction vector.
+        /// </summary>
+        public override Vector2 Direction { get; }
+
         /// <summary>
         /// Destroys the component.
         /// </summary>
@@ -34,42 +40,6 @@ namespace TopDownShooter.Engine.UnitTests.Controllers
         /// </summary>
         public override void Initialize()
         {
-        }
-
-        /// <summary>
-        /// Gets whether or not a up move was requested.
-        /// </summary>
-        /// <returns>True to move down.</returns>
-        public override bool MoveDown()
-        {
-            return false;
-        }
-
-        /// <summary>
-        /// Gets whether or not a left move was requested.
-        /// </summary>
-        /// <returns>True to move left.</returns>
-        public override bool MoveLeft()
-        {
-            return false;
-        }
-
-        /// <summary>
-        /// Gets whether or not a right move was requested.
-        /// </summary>
-        /// <returns>True to move right.</returns>
-        public override bool MoveRight()
-        {
-            return false;
-        }
-
-        /// <summary>
-        /// Gets whether or not a up move was requested.
-        /// </summary>
-        /// <returns>True to move up.</returns>
-        public override bool MoveUp()
-        {
-            return false;
         }
     }
 }

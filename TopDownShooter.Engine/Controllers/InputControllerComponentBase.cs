@@ -1,6 +1,8 @@
-﻿// <copyright file="InputControllerComponentBase.cs" company="PlaceholderCompany">
+﻿// --------------------------------------------------------------------------------------------------------------------
+// <copyright file="InputControllerComponentBase.cs" company="PlaceholderCompany">
 // Copyright (c) PlaceholderCompany. All rights reserved.
 // </copyright>
+// --------------------------------------------------------------------------------------------------------------------
 
 namespace TopDownShooter.Engine.Controllers
 {
@@ -9,27 +11,69 @@ namespace TopDownShooter.Engine.Controllers
     using TopDownShooter.Engine.Adapters;
 
     /// <summary>
-    /// Base implementation for an <see cref="IInputController"/>
+    /// Base implementation for an <see cref="IInputController" />
     /// </summary>
     public abstract class InputControllerComponentBase : IInputController, IComponent, IDisposable
     {
+        private readonly float speed = 8f;
+
         // To detect redundant calls
-        private bool disposedValue = false;
-        private float speed = 8f;
+        private bool disposedValue;
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="InputControllerComponentBase"/> class.
-        /// </summary>
-        protected InputControllerComponentBase()
-        {
-        }
-
-        /// <summary>
-        /// Finalizes an instance of the <see cref="InputControllerComponentBase"/> class.
+        /// Finalizes an instance of the <see cref="InputControllerComponentBase" /> class.
         /// </summary>
         ~InputControllerComponentBase()
         {
             this.Dispose(false);
+        }
+
+        /// <summary>
+        /// Gets the direction vector.
+        /// </summary>
+        public abstract Vector2 Direction { get; }
+
+        /// <summary>
+        /// Destroys the component.
+        /// </summary>
+        public abstract void Destroy();
+
+        /// <summary>
+        /// Cleans up any resources used during the execution of this class
+        /// </summary>
+        public void Dispose()
+        {
+            this.Dispose(true);
+            GC.SuppressFinalize(this);
+        }
+
+        /// <summary>
+        /// Draws the component with the specified game object and game time.
+        /// </summary>
+        /// <param name="gameObject">The game object.</param>
+        /// <param name="spriteBatch">The sprite batch adapter.</param>
+        /// <param name="time">The game time.</param>
+        public void Draw(IGameObject gameObject, ISpriteBatchAdapter spriteBatch, GameTime time)
+        {
+        }
+
+        /// <summary>
+        /// Gets a value indicating whether a fire was requested.
+        /// </summary>
+        /// <returns>True if the action was requested; false otherwise.</returns>
+        public abstract bool Fire();
+
+        /// <summary>
+        /// Initializes the component.
+        /// </summary>
+        public abstract void Initialize();
+
+        /// <summary>
+        /// Loads the content from the specified content manager adapter.
+        /// </summary>
+        /// <param name="contentManager">The content manager adapter.</param>
+        public virtual void LoadContent(IContentManagerAdapter contentManager)
+        {
         }
 
         /// <summary>
@@ -53,59 +97,9 @@ namespace TopDownShooter.Engine.Controllers
                 gameObject.BroadcastMessage(new ComponentMessage(MessageType.Fire));
             }
 
-            float x = 0;
-            float y = 0;
-
-            if (this.MoveLeft())
-            {
-                x = -this.speed;
-            }
-
-            if (this.MoveRight())
-            {
-                x = this.speed;
-            }
-
-            if (this.MoveUp())
-            {
-                y = -this.speed;
-            }
-
-            if (this.MoveDown())
-            {
-                y = this.speed;
-            }
-
-            gameObject.Velocity = new Vector2(x, y);
+            this.Direction.Normalize();
+            gameObject.Velocity = this.Direction * this.speed;
         }
-
-        /// <summary>
-        /// Draws the component with the specified game object and game time.
-        /// </summary>
-        /// <param name="gameObject">The game object.</param>
-        /// <param name="spriteBatch">The sprite batch adapter.</param>
-        /// <param name="time">The game time.</param>
-        public void Draw(IGameObject gameObject, ISpriteBatchAdapter spriteBatch, GameTime time)
-        {
-        }
-
-        /// <summary>
-        /// Loads the content from the specified content manager adapter.
-        /// </summary>
-        /// <param name="contentManager">The content manager adapter.</param>
-        public virtual void LoadContent(IContentManagerAdapter contentManager)
-        {
-        }
-
-        /// <summary>
-        /// Initializes the component.
-        /// </summary>
-        public abstract void Initialize();
-
-        /// <summary>
-        /// Destroys the component.
-        /// </summary>
-        public abstract void Destroy();
 
         /// <summary>
         /// Unloads the content from the specified content manager adapter.
@@ -113,45 +107,6 @@ namespace TopDownShooter.Engine.Controllers
         /// <param name="contentManager">The content manager adapter.</param>
         public virtual void UnloadContent(IContentManagerAdapter contentManager)
         {
-        }
-
-        /// <summary>
-        /// Gets a value indicating whether a fire was requested.
-        /// </summary>
-        /// <returns>True if the action was requested; false otherwise.</returns>
-        public abstract bool Fire();
-
-        /// <summary>
-        /// Gets whether or not a up move was requested.
-        /// </summary>
-        /// <returns>True to move down.</returns>
-        public abstract bool MoveDown();
-
-        /// <summary>
-        /// Gets whether or not a left move was requested.
-        /// </summary>
-        /// <returns>True to move left.</returns>
-        public abstract bool MoveLeft();
-
-        /// <summary>
-        /// Gets whether or not a right move was requested.
-        /// </summary>
-        /// <returns>True to move right.</returns>
-        public abstract bool MoveRight();
-
-        /// <summary>
-        /// Gets whether or not a up move was requested.
-        /// </summary>
-        /// <returns>True to move up.</returns>
-        public abstract bool MoveUp();
-
-        /// <summary>
-        /// Cleans up any resources used during the execution of this class
-        /// </summary>
-        public void Dispose()
-        {
-            this.Dispose(true);
-            GC.SuppressFinalize(this);
         }
 
         /// <summary>

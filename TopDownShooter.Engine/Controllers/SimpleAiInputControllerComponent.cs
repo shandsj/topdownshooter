@@ -28,9 +28,10 @@ namespace TopDownShooter.Engine.Controllers
         /// <summary>
         /// Initializes a new instance of the <see cref="SimpleAiInputControllerComponent" /> class.
         /// </summary>
-        public SimpleAiInputControllerComponent()
+        /// <param name="random">The <see cref="Random" /> object.</param>
+        public SimpleAiInputControllerComponent(Random random)
         {
-            this.random = new Random((int)DateTime.Now.Ticks);
+            this.random = random;
         }
 
         /// <summary>
@@ -41,6 +42,11 @@ namespace TopDownShooter.Engine.Controllers
             // Do not change this code. Put cleanup code in Dispose(bool disposing) above.
             this.Dispose(false);
         }
+
+        /// <summary>
+        /// Gets the direction vector.
+        /// </summary>
+        public override Vector2 Direction => this.direction;
 
         /// <summary>
         /// Destroys the component.
@@ -72,7 +78,7 @@ namespace TopDownShooter.Engine.Controllers
                         while (true)
                         {
                             this.SleepRandomly();
-                            this.direction = new Vector2(this.random.Next(-1, 2), this.random.Next(-1, 2));
+                            this.direction = new Vector2((float)this.random.NextDouble(-1, 1), (float)this.random.NextDouble(-1, 1));
                         }
                     }),
                 Task.Factory.StartNew(() =>
@@ -85,42 +91,6 @@ namespace TopDownShooter.Engine.Controllers
                         }
                     })
             });
-        }
-
-        /// <summary>
-        /// Gets whether or not a up move was requested.
-        /// </summary>
-        /// <returns>True to move down.</returns>
-        public override bool MoveDown()
-        {
-            return this.direction.Y > 0;
-        }
-
-        /// <summary>
-        /// Gets whether or not a left move was requested.
-        /// </summary>
-        /// <returns>True to move left.</returns>
-        public override bool MoveLeft()
-        {
-            return this.direction.X < 0;
-        }
-
-        /// <summary>
-        /// Gets whether or not a right move was requested.
-        /// </summary>
-        /// <returns>True to move right.</returns>
-        public override bool MoveRight()
-        {
-            return this.direction.X > 0;
-        }
-
-        /// <summary>
-        /// Gets whether or not a up move was requested.
-        /// </summary>
-        /// <returns>True to move up.</returns>
-        public override bool MoveUp()
-        {
-            return this.direction.Y < 0;
         }
 
         /// <summary>

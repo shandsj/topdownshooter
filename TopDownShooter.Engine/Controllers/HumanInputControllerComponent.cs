@@ -16,39 +16,39 @@ namespace TopDownShooter.Engine.Controllers
     public class HumanInputControllerComponent : InputControllerComponentBase
     {
         private readonly IKeyboardAdapter keyboard;
-        private KeyboardState previousKeyboardState;
-        private KeyboardState currentKeyboardState;
-        private MouseState previousMouseState;
-        private MouseState currentMouseState;
-        private GamePadState previousGamePadState;
-        private GamePadState currentGamePadState;
+        private readonly IMouseAdapter mouse;
+        private readonly IGamePadAdapter gamePad;
+        private bool fire = false;
+        private Vector2 direction;
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="HumanInputControllerComponent"/> class.
+        /// Initializes a new instance of the <see cref="HumanInputControllerComponent" /> class.
         /// </summary>
         public HumanInputControllerComponent()
-            : this(new KeyboardAdapter())
+            : this(new KeyboardAdapter(), new MouseAdapter(), new GamePadAdapter())
         {
         }
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="HumanInputControllerComponent"/> class.
+        /// Initializes a new instance of the <see cref="HumanInputControllerComponent" /> class.
         /// Creates a new <see cref="HumanInputControllerComponent" /> that can be used to have a simple Composite for managing
         /// inputs among multiple devices.
         /// </summary>
-        /// <param name="keyboard">The <see cref="IKeyboardAdapter"/>.</param>
+        /// <param name="keyboard">The <see cref="IKeyboardAdapter" />.</param>
+        /// <param name="mouse">The <see cref="IMouseAdapter"/>.</param>
+        /// <param name="gamePad">The <see cref="IGamePadAdapter"/>.</param>
         /// <remarks>Internal for unit testing.</remarks>
-        internal HumanInputControllerComponent(IKeyboardAdapter keyboard)
+        internal HumanInputControllerComponent(IKeyboardAdapter keyboard, IMouseAdapter mouse, IGamePadAdapter gamePad)
         {
             this.keyboard = keyboard;
+            this.mouse = mouse;
+            this.gamePad = gamePad;
         }
 
         /// <summary>
-        /// Initializes the component.
+        /// Gets the direction vector.
         /// </summary>
-        public override void Initialize()
-        {
-        }
+        public override Vector2 Direction => this.direction;
 
         /// <summary>
         /// Destroys the component.
@@ -63,83 +63,14 @@ namespace TopDownShooter.Engine.Controllers
         /// <returns>True if the action was requested; false otherwise.</returns>
         public override bool Fire()
         {
-            return this.currentMouseState.LeftButton == ButtonState.Pressed;
+            return this.fire;
         }
 
         /// <summary>
-        /// Gets whether or not a up move was requested.
+        /// Initializes the component.
         /// </summary>
-        /// <returns>True to move down.</returns>
-        public override bool MoveDown()
+        public override void Initialize()
         {
-            var result = false;
-
-            result = this.currentKeyboardState.IsKeyDown(Keys.S) || this.currentKeyboardState.IsKeyDown(Keys.Down);
-
-            if (!result)
-            {
-                result = this.currentGamePadState.DPad.Up == ButtonState.Pressed;
-            }
-
-            // TODO: How to handle for mouse?
-            return result;
-        }
-
-        /// <summary>
-        /// Gets whether or not a left move was requested.
-        /// </summary>
-        /// <returns>True to move left.</returns>
-        public override bool MoveLeft()
-        {
-            var result = false;
-
-            result = this.currentKeyboardState.IsKeyDown(Keys.A) || this.currentKeyboardState.IsKeyDown(Keys.Left);
-
-            if (!result)
-            {
-                result = this.currentGamePadState.DPad.Left == ButtonState.Pressed;
-            }
-
-            // TODO: How to handle for mouse?
-            return result;
-        }
-
-        /// <summary>
-        /// Gets whether or not a right move was requested.
-        /// </summary>
-        /// <returns>True to move right.</returns>
-        public override bool MoveRight()
-        {
-            var result = false;
-
-            result = this.currentKeyboardState.IsKeyDown(Keys.D) || this.currentKeyboardState.IsKeyDown(Keys.Right);
-
-            if (!result)
-            {
-                result = this.currentGamePadState.DPad.Right == ButtonState.Pressed;
-            }
-
-            // TODO: How to handle for mouse?
-            return result;
-        }
-
-        /// <summary>
-        /// Gets whether or not a up move was requested.
-        /// </summary>
-        /// <returns>True to move up.</returns>
-        public override bool MoveUp()
-        {
-            var result = false;
-
-            result = this.currentKeyboardState.IsKeyDown(Keys.W) || this.currentKeyboardState.IsKeyDown(Keys.Up);
-
-            if (!result)
-            {
-                result = this.currentGamePadState.DPad.Up == ButtonState.Pressed;
-            }
-
-            // TODO: How to handle for mouse?
-            return result;
         }
 
         /// <summary>
@@ -149,15 +80,94 @@ namespace TopDownShooter.Engine.Controllers
         /// <param name="time">The game time.</param>
         public override void Update(IGameObject gameObject, GameTime time)
         {
-            this.previousMouseState = this.currentMouseState;
-            this.previousKeyboardState = this.currentKeyboardState;
-            this.previousGamePadState = this.currentGamePadState;
+            this.fire = this.mouse.GetState().LeftButton == ButtonState.Pressed;
 
-            this.currentMouseState = Mouse.GetState();
-            this.currentKeyboardState = this.keyboard.GetState();
-            this.currentGamePadState = GamePad.GetState(PlayerIndex.One);
+            var gamePadState = this.gamePad.GetState(PlayerIndex.One);
+            var vector = gamePadState.ThumbSticks.Left;
+            if (vector == Vector2.Zero)
+            {
+                vector = this.GetDPadDirectionalVector(gamePadState.DPad);
+            }
 
+            if (vector == Vector2.Zero)
+            {
+                vector = this.GetKeyboardDirectionalVector(this.keyboard.GetState());
+            }
+
+            this.direction = vector;
             base.Update(gameObject, time);
+        }
+
+        /// <summary>
+        /// Gets the DPad directional vector.
+        /// </summary>
+        /// <param name="dpad">The <see cref="GamePadDPad"/>.</param>
+        /// <returns>The directional vector.</returns>
+        private Vector2 GetDPadDirectionalVector(GamePadDPad dpad)
+        {
+            int x = 0;
+            int y = 0;
+
+            if (dpad.Up == ButtonState.Pressed)
+            {
+                y = -1;
+            }
+
+            if (dpad.Down == ButtonState.Pressed)
+            {
+                y = 1;
+            }
+
+            if (dpad.Right == ButtonState.Pressed)
+            {
+                x = 1;
+            }
+
+            if (dpad.Left == ButtonState.Pressed)
+            {
+                x = -1;
+            }
+
+            return new Vector2(x, y);
+        }
+
+        /// <summary>
+        /// Gets the keyboard directional vector.
+        /// </summary>
+        /// <param name="keyboardState">The <see cref="KeyboardState"/>.</param>
+        /// <returns>The directional vector.</returns>
+        private Vector2 GetKeyboardDirectionalVector(KeyboardState keyboardState)
+        {
+            int x = 0;
+            int y = 0;
+
+            foreach (var key in keyboardState.GetPressedKeys())
+            {
+                switch (key)
+                {
+                    case Keys.Up:
+                    case Keys.W:
+                        y = -1;
+                        break;
+
+                    case Keys.Down:
+                    case Keys.S:
+                        y = 1;
+                        break;
+
+                    case Keys.Left:
+                    case Keys.A:
+                        x = -1;
+                        break;
+
+                    case Keys.Right:
+                    case Keys.D:
+                        x = 1;
+                        break;
+                }
+            }
+
+            return new Vector2(x, y);
         }
     }
 }

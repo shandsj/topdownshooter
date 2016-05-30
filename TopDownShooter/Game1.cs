@@ -39,6 +39,8 @@ namespace TopDownShooter
         /// </summary>
         private GraphicsDeviceManager graphics;
 
+        private Random random = new Random((int)DateTime.Now.Ticks);
+
         /// <summary>
         /// The <see cref="Level" />.
         /// </summary>
@@ -127,7 +129,7 @@ namespace TopDownShooter
                     this.collisionSystem,
                     new IComponent[]
                     {
-                        new SimpleAiInputControllerComponent(),
+                        new SimpleAiInputControllerComponent(this.random),
                         new PlayerColliderComponent(id, this.collisionSystem),
                         new AnimationComponentManager(
                             new AnimationComponent("Walk", "hoodieguy", new FrameProperties(76, 140, TimeSpan.FromSeconds(.1), 2)) { IsLooping = true, IsAnimating = true, IsRendered = true },
