@@ -6,10 +6,10 @@
 
 namespace TopDownShooter.Engine
 {
-    using System;
     using System.Collections.Generic;
     using System.Linq;
     using Microsoft.Xna.Framework;
+    using Microsoft.Xna.Framework.Graphics;
     using TopDownShooter.Engine.Adapters;
     using TopDownShooter.Engine.Collisions;
 
@@ -18,10 +18,13 @@ namespace TopDownShooter.Engine
     /// </summary>
     public class Player : GameObject, IPlayer
     {
+        private readonly IAnimationComponentManager animationComponentManager;
+
         private readonly IColliderComponent colliderComponent;
 
         private readonly ICollisionSystem collisionSystem;
-        private IAnimationComponentManager animationComponentManager;
+
+        private SpriteFont font;
 
         private bool hasCreatedDeathAnimation;
 
@@ -61,6 +64,11 @@ namespace TopDownShooter.Engine
         public override int Height => this.animationComponentManager.FrameProperties.Height;
 
         /// <summary>
+        /// Gets or sets the number of kills this player has performed.
+        /// </summary>
+        public int KillCount { get; set; }
+
+        /// <summary>
         /// Gets or sets the name
         /// </summary>
         public string Name { get; set; }
@@ -74,6 +82,33 @@ namespace TopDownShooter.Engine
         /// Gets the width of the game object.
         /// </summary>
         public override int Width => this.animationComponentManager.FrameProperties.Width;
+
+        /// <summary>
+        /// Draws the game object with the specified sprite batch adapter and game time.
+        /// </summary>
+        /// <param name="spriteBatch">The sprite batch adapter.</param>
+        /// <param name="gameTime">The game time.</param>
+        public override void Draw(ISpriteBatchAdapter spriteBatch, GameTime gameTime)
+        {
+            base.Draw(spriteBatch, gameTime);
+
+            spriteBatch.DrawString(
+                this.font,
+                string.Format("{0} - {1}", this.Name, this.KillCount),
+                this.Position - new Vector2(this.Width / 2f, (this.Height / 2f) + 20),
+                Color.Black);
+        }
+
+        /// <summary>
+        /// Loads the content from the specified content manager adapter.
+        /// </summary>
+        /// <param name="contentManager">The content manager adapter.</param>
+        public override void LoadContent(IContentManagerAdapter contentManager)
+        {
+            base.LoadContent(contentManager);
+
+            this.font = contentManager.Load<SpriteFont>("Fonts/PlayerName");
+        }
 
         /// <summary>
         /// Updates the game object with the specified game time.

@@ -76,3 +76,9 @@
 /processorParam:TextureFormat=Color
 /build:hoodieguyOnFire.png
 
+#begin Fonts/PlayerName.spritefont
+/importer:FontDescriptionImporter
+/processor:FontDescriptionProcessor
+/processorParam:TextureFormat=Compressed
+/build:Fonts/PlayerName.spritefont
+

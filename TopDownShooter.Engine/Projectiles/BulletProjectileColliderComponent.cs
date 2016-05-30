@@ -15,7 +15,7 @@ namespace TopDownShooter.Engine.Projectiles
     /// </summary>
     public class BulletProjectileColliderComponent : SimpleColliderComponent
     {
-        private IGameObject bulletParent;
+        private IPlayer bulletParent;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="BulletProjectileColliderComponent" /> class.
@@ -26,7 +26,7 @@ namespace TopDownShooter.Engine.Projectiles
         public BulletProjectileColliderComponent(int gameObjectId, int bulletParentId, ICollisionSystem collisionSystem)
             : base(gameObjectId, collisionSystem)
         {
-            this.bulletParent = this.CollisionSystem.GetGameObject(bulletParentId);
+            this.bulletParent = this.CollisionSystem.GetGameObject(bulletParentId) as IPlayer;
         }
 
         /// <summary>
@@ -39,6 +39,7 @@ namespace TopDownShooter.Engine.Projectiles
             var player = otherGameObject as IPlayer;
             if (player != null && player != this.bulletParent && player.Health > 0)
             {
+                this.bulletParent.KillCount++;
                 player.Health--;
                 this.CollisionSystem.Unregister(this.GameObjectId);
             }

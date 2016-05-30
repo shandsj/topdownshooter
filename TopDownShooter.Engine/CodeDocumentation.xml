@@ -1472,6 +1472,11 @@
             Gets or sets the name
             </summary>
         </member>
+        <member name="P:TopDownShooter.Engine.IPlayer.KillCount">
+            <summary>
+            Gets or sets the number of kills this player has performed.
+            </summary>
+        </member>
         <member name="T:TopDownShooter.Engine.Levels.ITile">
             <summary>
             Defines an inteface for a tile.
@@ -1684,6 +1689,11 @@
             Gets the height of the game object.
             </summary>
         </member>
+        <member name="P:TopDownShooter.Engine.Player.KillCount">
+            <summary>
+            Gets or sets the number of kills this player has performed.
+            </summary>
+        </member>
         <member name="P:TopDownShooter.Engine.Player.Name">
             <summary>
             Gets or sets the name
@@ -1698,6 +1708,19 @@
             <summary>
             Gets the width of the game object.
             </summary>
+        </member>
+        <member name="M:TopDownShooter.Engine.Player.Draw(TopDownShooter.Engine.Adapters.ISpriteBatchAdapter,Microsoft.Xna.Framework.GameTime)">
+            <summary>
+            Draws the game object with the specified sprite batch adapter and game time.
+            </summary>
+            <param name="spriteBatch">The sprite batch adapter.</param>
+            <param name="gameTime">The game time.</param>
+        </member>
+        <member name="M:TopDownShooter.Engine.Player.LoadContent(TopDownShooter.Engine.Adapters.IContentManagerAdapter)">
+            <summary>
+            Loads the content from the specified content manager adapter.
+            </summary>
+            <param name="contentManager">The content manager adapter.</param>
         </member>
         <member name="M:TopDownShooter.Engine.Player.Update(Microsoft.Xna.Framework.GameTime)">
             <summary>

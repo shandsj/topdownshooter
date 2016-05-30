@@ -20,5 +20,10 @@ namespace TopDownShooter.Engine
         /// Gets or sets the name
         /// </summary>
         string Name { get; set; }
+
+        /// <summary>
+        /// Gets or sets the number of kills this player has performed.
+        /// </summary>
+        int KillCount { get; set; }
     }
 }
