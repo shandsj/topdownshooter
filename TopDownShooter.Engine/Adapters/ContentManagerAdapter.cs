@@ -39,5 +39,13 @@ namespace TopDownShooter.Engine.Adapters
         {
             return this.content.Load<T>(assetName);
         }
+
+        /// <summary>
+        /// Unloads all loaded content from the content manager.
+        /// </summary>
+        public void Unload()
+        {
+            this.content.Unload();
+        }
     }
 }

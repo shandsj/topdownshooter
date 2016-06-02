@@ -60,6 +60,7 @@
     <DocumentationFile>CodeDocumenation.xml</DocumentationFile>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="ArenaScene.cs" />
     <Compile Include="Game1.cs" />
     <Compile Include="LeaderBoard.cs" />
     <Compile Include="Program.cs" />

@@ -19,5 +19,10 @@ namespace TopDownShooter.Engine.Adapters
         /// <param name="assetName">The asset name.</param>
         /// <returns>The loaded asset.</returns>
         T Load<T>(string assetName);
+
+        /// <summary>
+        /// Unloads all loaded content from the content manager.
+        /// </summary>
+        void Unload();
     }
 }

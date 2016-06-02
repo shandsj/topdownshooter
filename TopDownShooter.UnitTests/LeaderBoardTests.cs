@@ -14,12 +14,15 @@ namespace TopDownShooter.UnitTests
     using TopDownShooter.Engine.Adapters;
 
     /// <summary>
-    /// Contains unit tests for the <see cref="LeaderBoard"/> class.
+    /// Contains unit tests for the <see cref="LeaderBoard" /> class.
     /// </summary>
     [TestClass]
     public class LeaderBoardTests
     {
-        [TestMethod()]
+        /// <summary>
+        /// Tests that the player name and kill count is rendered in the sprite batch.
+        /// </summary>
+        [TestMethod]
         public void DrawsPlayerNameAndKillCountInSpriteBatchWhenDrawing()
         {
             var player1 = new Mock<IPlayer>();
@@ -33,7 +36,7 @@ namespace TopDownShooter.UnitTests
             var players = new[] { player1.Object, player2.Object };
 
             var font = new Mock<SpriteFont>();
-            font.Setup(f => f.MeasureString(It.IsAny<string>())).Returns(new Vector2(10,10));
+            font.Setup(f => f.MeasureString(It.IsAny<string>())).Returns(new Vector2(10, 10));
 
             int drawStringMethodCallCount = 0;
             var spriteBatch = new Mock<ISpriteBatchAdapter>();
@@ -81,7 +84,7 @@ namespace TopDownShooter.UnitTests
             contentManager.Setup(cm => cm.Load<SpriteFont>(It.IsAny<string>())).Callback<string>(assetName =>
                 {
                     wasLoadCalled = true;
-                    Assert.AreEqual<string>("Fonts/PlayerName", assetName);
+                    Assert.AreEqual("Fonts/PlayerName", assetName);
                 });
 
             var uut = new LeaderBoard(42, new IComponent[0]);

@@ -4,34 +4,48 @@
         <name>TopDownShooter</name>
     </assembly>
     <members>
+        <member name="T:TopDownShooter.ArenaScene">
+            <summary>
+            Defines the scene for the arena
+            </summary>
+        </member>
+        <member name="M:TopDownShooter.ArenaScene.#ctor(Microsoft.Xna.Framework.Graphics.GraphicsDevice)">
+            <summary>
+            Initializes a new instance of the <see cref="T:TopDownShooter.ArenaScene"/> class.
+            </summary>
+            <param name="graphicsDevice">The <see cref="T:Microsoft.Xna.Framework.Graphics.GraphicsDevice"/>.</param>
+        </member>
+        <member name="M:TopDownShooter.ArenaScene.Destroy">
+            <summary>
+            Destroyes the game object.
+            </summary>
+        </member>
+        <member name="M:TopDownShooter.ArenaScene.Draw(Microsoft.Xna.Framework.GameTime)">
+            <summary>
+            Draws the scene with the specified sprite batch adapter and game time.
+            </summary>
+            <param name="gameTime">The game time.</param>
+        </member>
+        <member name="M:TopDownShooter.ArenaScene.Initialize">
+            <summary>
+            Initializes the game object.
+            </summary>
+        </member>
+        <member name="M:TopDownShooter.ArenaScene.LoadContent(TopDownShooter.Engine.Adapters.IContentManagerAdapter)">
+            <summary>
+            Loads the content from the specified content manager adapter.
+            </summary>
+            <param name="contentManager">The content manager adapter.</param>
+        </member>
+        <member name="M:TopDownShooter.ArenaScene.Update(Microsoft.Xna.Framework.GameTime)">
+            <summary>
+            Updates the game object with the specified game time.
+            </summary>
+            <param name="gameTime">The game time.</param>
+        </member>
         <member name="T:TopDownShooter.Game1">
             <summary>
             This is the main type for your game.
-            </summary>
-        </member>
-        <member name="F:TopDownShooter.Game1.camera">
-            <summary>
-            The <see cref="T:TopDownShooter.Engine.ICamera"/>.
-            </summary>
-        </member>
-        <member name="F:TopDownShooter.Game1.contentManager">
-            <summary>
-            The <see cref="T:TopDownShooter.Engine.Adapters.IContentManagerAdapter" />.
-            </summary>
-        </member>
-        <member name="F:TopDownShooter.Game1.graphics">
-            <summary>
-            The <see cref="T:Microsoft.Xna.Framework.GraphicsDeviceManager" />.
-            </summary>
-        </member>
-        <member name="F:TopDownShooter.Game1.level">
-            <summary>
-            The <see cref="T:TopDownShooter.Engine.Levels.Level" />.
-            </summary>
-        </member>
-        <member name="F:TopDownShooter.Game1.worldSpriteBatch">
-            <summary>
-            The default <see cref="T:TopDownShooter.Engine.Adapters.ISpriteBatchAdapter" />.
             </summary>
         </member>
         <member name="M:TopDownShooter.Game1.#ctor">

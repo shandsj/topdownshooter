@@ -261,6 +261,26 @@
             Tests that the velocity vector is normalized from the direction passed in during construction.
             </summary>
         </member>
+        <member name="T:TopDownShooter.Engine.UnitTests.SceneControllerTests">
+            <summary>
+            Contains unit tests for the <see cref="T:TopDownShooter.Engine.SceneController" /> class.
+            </summary>
+        </member>
+        <member name="M:TopDownShooter.Engine.UnitTests.SceneControllerTests.DestroysPreviousActiveSceneWhenSwitchingScenes">
+            <summary>
+            Tests that the previous active scene is destroyed when switching.
+            </summary>
+        </member>
+        <member name="M:TopDownShooter.Engine.UnitTests.SceneControllerTests.UnloadsContentWhenSwitchingScenes">
+            <summary>
+            Tests that the content is unloaded when switching scenes.
+            </summary>
+        </member>
+        <member name="M:TopDownShooter.Engine.UnitTests.SceneControllerTests.InitializesAndLoadsContentWhenSwitchingScenes">
+            <summary>
+            Tests that the scene is initialized and content is loaded when switching scenes.
+            </summary>
+        </member>
         <member name="T:TopDownShooter.Engine.UnitTests.TestGameObject">
             <summary>
             Defines a test game object.

@@ -30,6 +30,11 @@
             <param name="assetName">The asset name.</param>
             <returns>The loaded asset.</returns>
         </member>
+        <member name="M:TopDownShooter.Engine.Adapters.ContentManagerAdapter.Unload">
+            <summary>
+            Unloads all loaded content from the content manager.
+            </summary>
+        </member>
         <member name="T:TopDownShooter.Engine.Adapters.GamePadAdapter">
             <summary>
             Provides a default implementation of the <see cref="T:TopDownShooter.Engine.Adapters.IGamePadAdapter" /> interface.
@@ -54,6 +59,11 @@
             <typeparam name="T">The type of the asset to load.</typeparam>
             <param name="assetName">The asset name.</param>
             <returns>The loaded asset.</returns>
+        </member>
+        <member name="M:TopDownShooter.Engine.Adapters.IContentManagerAdapter.Unload">
+            <summary>
+            Unloads all loaded content from the content manager.
+            </summary>
         </member>
         <member name="T:TopDownShooter.Engine.Adapters.IGamePadAdapter">
             <summary>
@@ -1477,6 +1487,34 @@
             Gets or sets the number of kills this player has performed.
             </summary>
         </member>
+        <member name="T:TopDownShooter.Engine.ISceneController">
+            <summary>
+            Defines an interface for a scene controller.
+            </summary>
+        </member>
+        <member name="P:TopDownShooter.Engine.ISceneController.ActiveScene">
+            <summary>
+            Gets the active scene.
+            </summary>
+        </member>
+        <member name="M:TopDownShooter.Engine.ISceneController.Draw(Microsoft.Xna.Framework.GameTime)">
+            <summary>
+            Draws the scene with the specified sprite batch adapter and game time.
+            </summary>
+            <param name="gameTime">The game time.</param>
+        </member>
+        <member name="M:TopDownShooter.Engine.ISceneController.Switch(TopDownShooter.Engine.IScene)">
+            <summary>
+            Switches to the specified scene by destorying the previous scene, and initializing and loading content for the specified scene.
+            </summary>
+            <param name="scene">The new active scene.</param>
+        </member>
+        <member name="M:TopDownShooter.Engine.ISceneController.Update(Microsoft.Xna.Framework.GameTime)">
+            <summary>
+            Updates the game object with the specified game time.
+            </summary>
+            <param name="gameTime">The game time.</param>
+        </member>
         <member name="T:TopDownShooter.Engine.Levels.ITile">
             <summary>
             Defines an inteface for a tile.
@@ -1865,6 +1903,73 @@
             <param name="minimum">The minimum value.</param>
             <param name="maximum">The maximum exclusive value.</param>
             <returns>The random double.</returns>
+        </member>
+        <member name="T:TopDownShooter.Engine.IScene">
+            <summary>
+            Defines an interface for a scene.
+            </summary>
+        </member>
+        <member name="M:TopDownShooter.Engine.IScene.Destroy">
+            <summary>
+            Destroyes the game object.
+            </summary>
+        </member>
+        <member name="M:TopDownShooter.Engine.IScene.Draw(Microsoft.Xna.Framework.GameTime)">
+            <summary>
+            Draws the scene with the specified sprite batch adapter and game time.
+            </summary>
+            <param name="gameTime">The game time.</param>
+        </member>
+        <member name="M:TopDownShooter.Engine.IScene.Initialize">
+            <summary>
+            Initializes the game object.
+            </summary>
+        </member>
+        <member name="M:TopDownShooter.Engine.IScene.LoadContent(TopDownShooter.Engine.Adapters.IContentManagerAdapter)">
+            <summary>
+            Loads the content from the specified content manager adapter.
+            </summary>
+            <param name="contentManager">The content manager adapter.</param>
+        </member>
+        <member name="M:TopDownShooter.Engine.IScene.Update(Microsoft.Xna.Framework.GameTime)">
+            <summary>
+            Updates the game object with the specified game time.
+            </summary>
+            <param name="gameTime">The game time.</param>
+        </member>
+        <member name="T:TopDownShooter.Engine.SceneController">
+            <summary>
+            Provides a default implementation of the <see cref="T:TopDownShooter.Engine.ISceneController" /> interface.
+            </summary>
+        </member>
+        <member name="M:TopDownShooter.Engine.SceneController.#ctor(TopDownShooter.Engine.Adapters.IContentManagerAdapter)">
+            <summary>
+            Initializes a new instance of the <see cref="T:TopDownShooter.Engine.SceneController" /> class.
+            </summary>
+            <param name="contentManager">The <see cref="T:TopDownShooter.Engine.Adapters.IContentManagerAdapter" />.</param>
+        </member>
+        <member name="P:TopDownShooter.Engine.SceneController.ActiveScene">
+            <summary>
+            Gets the active scene.
+            </summary>
+        </member>
+        <member name="M:TopDownShooter.Engine.SceneController.Draw(Microsoft.Xna.Framework.GameTime)">
+            <summary>
+            Draws the scene with the specified sprite batch adapter and game time.
+            </summary>
+            <param name="gameTime">The game time.</param>
+        </member>
+        <member name="M:TopDownShooter.Engine.SceneController.Switch(TopDownShooter.Engine.IScene)">
+            <summary>
+            Switches to the specified scene by destorying the previous scene, and initializing and loading content for the specified scene.
+            </summary>
+            <param name="scene">The new active scene.</param>
+        </member>
+        <member name="M:TopDownShooter.Engine.SceneController.Update(Microsoft.Xna.Framework.GameTime)">
+            <summary>
+            Updates the game object with the specified game time.
+            </summary>
+            <param name="gameTime">The game time.</param>
         </member>
     </members>
 </doc>
