@@ -32,7 +32,24 @@ namespace TopDownShooter.Engine
         public override void Collide(IColliderComponent other)
         {
             var gameObject = this.CollisionSystem.GetGameObject(this.GameObjectId);
-            gameObject.Velocity = new Vector2(0, 0); // TODO: modify velocity correctly based on location of collided object
+            var otherObject = this.CollisionSystem.GetGameObject(other.GameObjectId);
+
+            if (gameObject != null && otherObject != null)
+            {
+                IGameItem item = otherObject as IGameItem;
+
+                if (item == null)
+                {
+                    // TODO: modify velocity correctly based on location of collided object
+                    gameObject.Velocity = new Vector2(0, 0);
+                }
+                else
+                {
+                    // Allow players to pass through IGameItems that they can't pickup.
+                    // See if anyone in the gameObject is interested in this item.
+                    gameObject.BroadcastMessage(new ComponentMessage(MessageType.ItemPickup, item));
+                }
+            }
         }
     }
 }

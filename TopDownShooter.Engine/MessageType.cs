@@ -20,6 +20,12 @@ namespace TopDownShooter.Engine
         /// Represents a change in movement
         /// </summary>
         /// <remarks>Details will be a velocity vector?</remarks>
-        Movement
+        Movement,
+
+        /// <summary>
+        /// Represents an item requested to be picked up.
+        /// </summary>
+        /// <remarks>Details should be the <see cref="IGameItem"/></remarks>
+        ItemPickup,
     }
 }

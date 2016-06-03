@@ -39,6 +39,10 @@ namespace TopDownShooter
 
         private List<Player> players;
 
+        // Items for pickup. This probably needs to go into
+        // some type of world state manager or something.
+        private List<IGameObject> gameItems;
+
         private ISpriteBatchAdapter screenSpriteBatch;
 
         private ISpriteBatchAdapter worldSpriteBatch;
@@ -75,6 +79,7 @@ namespace TopDownShooter
             this.worldSpriteBatch.Begin(transformMatrix: this.camera.TransformMatrix);
             this.level.Draw(this.worldSpriteBatch, gameTime);
             this.players.ForEach(o => o.Draw(this.worldSpriteBatch, gameTime));
+            this.gameItems.ForEach(o => o.Draw(this.worldSpriteBatch, gameTime));
             this.worldSpriteBatch.End();
 
             this.screenSpriteBatch.Begin();
@@ -90,6 +95,8 @@ namespace TopDownShooter
             this.collisionSystem = new CollisionSystem();
 
             this.players = new List<Player>();
+            this.gameItems = new List<IGameObject>();
+            this.gameItems.AddRange(new GameObjectFactory().SpawnRandomBulletItems(10, this.collisionSystem, 100, 1500, 100, 1500));
 
             this.camera = new Camera(this.graphicsDevice.Viewport) { Zoom = .5f };
             this.level = new Level(CollisionSystem.NextGameObjectId++, this.collisionSystem, new TmxMap("Content/TmxFiles/DefaultLevel.tmx"));
@@ -106,12 +113,11 @@ namespace TopDownShooter
                 {
                     // Order matters for calls to update and draw
                     new HumanInputControllerComponent(),
-                    new BulletProjectileGeneratorComponent(this.collisionSystem),
                     new PlayerColliderComponent(focusedPlayerId, this.collisionSystem),
                     new AnimationComponentManager(
                         new AnimationComponent("Walk", "hoodieguy", new FrameProperties(76, 140, TimeSpan.FromSeconds(.1), 2)) { IsLooping = true, IsAnimating = true, IsRendered = true },
                         new AnimationComponent("Death", "hoodieguyOnFire", new FrameProperties(76, 140, TimeSpan.FromSeconds(.1), 2)) { IsLooping = true }),
-                    new BulletProjectileGeneratorComponent(this.collisionSystem)
+                    new PlayerInventoryComponent(this.collisionSystem)
                 });
 
             this.focusedPlayer.Name = $"Player {focusedPlayerId}";
@@ -135,9 +141,7 @@ namespace TopDownShooter
                         new AnimationComponentManager(
                             new AnimationComponent("Walk", "hoodieguy", new FrameProperties(76, 140, TimeSpan.FromSeconds(.1), 2)) { IsLooping = true, IsAnimating = true, IsRendered = true },
                             new AnimationComponent("Death", "hoodieguyOnFire", new FrameProperties(76, 140, TimeSpan.FromSeconds(.1), 2)) { IsLooping = true }),
-
-                        // They were pooping them every where!
-                        new BulletProjectileGeneratorComponent(this.collisionSystem)
+                        new PlayerInventoryComponent(this.collisionSystem)
                     });
                 player.Name = $"Ai Player {id}";
                 this.players.Add(player);
@@ -145,6 +149,7 @@ namespace TopDownShooter
 #pragma warning restore SA1118
 
             this.players.ForEach(player => player.Initialize());
+            this.gameItems.ForEach(item => item.Initialize());
         }
 
         /// <summary>
@@ -159,6 +164,7 @@ namespace TopDownShooter
 
             this.level.LoadContent(contentManager);
             this.players.ForEach(player => player.LoadContent(contentManager));
+            this.gameItems.ForEach(item => item.LoadContent(contentManager));
             this.leaderBoard.LoadContent(contentManager);
         }
 
@@ -169,8 +175,11 @@ namespace TopDownShooter
         public void Update(GameTime gameTime)
         {
             this.players.ForEach(o => o.Update(gameTime));
+            this.gameItems.ForEach(o => o.Update(gameTime));
             this.camera.Position = this.focusedPlayer.Position;
             this.leaderBoard.SetPlayers(this.players);
+
+            this.gameItems.RemoveAll(o => (o as IGameItem).IsPickedUp);
         }
 
         /// <summary>

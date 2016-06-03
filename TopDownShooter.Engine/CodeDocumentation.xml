@@ -1044,10 +1044,67 @@
             <param name="list">Enumerable reference</param>
             <param name="predicate">Remove all that match this predicate</param>
         </member>
+        <member name="T:TopDownShooter.Engine.GameItem">
+            <summary>
+            Base implementation for a simple <see cref="T:TopDownShooter.Engine.IGameItem"/>. The primary difference
+            between <see cref="T:TopDownShooter.Engine.IGameObject"/> and <see cref="T:TopDownShooter.Engine.IGameItem"/> is that <see cref="T:TopDownShooter.Engine.IGameItem"/>s
+            can be placed in <see cref="T:TopDownShooter.Engine.InventoryComponentBase"/>
+            </summary>
+        </member>
+        <member name="M:TopDownShooter.Engine.GameItem.#ctor(System.Int32)">
+            <summary>
+            Initializes a new instance of the <see cref="T:TopDownShooter.Engine.GameItem" /> class.
+            </summary>
+            <param name="id">The game object identifier.</param>
+        </member>
+        <member name="M:TopDownShooter.Engine.GameItem.#ctor(System.Int32,System.Collections.Generic.IEnumerable{TopDownShooter.Engine.IComponent})">
+            <summary>
+            Initializes a new instance of the <see cref="T:TopDownShooter.Engine.GameItem" /> class.
+            </summary>
+            <param name="id">The game object identifier.</param>
+            <param name="components">The collection of components.</param>
+        </member>
+        <member name="P:TopDownShooter.Engine.GameItem.IsPickedUp">
+            <summary>
+            Gets a value indicating whether this game item has been picked up.
+            </summary>
+            <remarks>For use when managing a collection of these in the world, which ones
+            can be removed from the update and draw loops</remarks>
+        </member>
+        <member name="M:TopDownShooter.Engine.GameItem.Pickup">
+            <summary>
+            Should be called when another component will be
+            taking ownership of this item.
+            </summary>
+            <returns><see cref="T:TopDownShooter.Engine.IGameItem"/> reference.</returns>
+            <remarks><see cref="T:TopDownShooter.Engine.IGameItem"/> here could be used to return an Inventory friendly
+            viewable GameItem here.</remarks>
+        </member>
         <member name="T:TopDownShooter.Engine.GameObjectFactory">
             <summary>
             Provides an implementation of <see cref="T:TopDownShooter.Engine.IGameObjectFactory" />.
             </summary>
+        </member>
+        <member name="M:TopDownShooter.Engine.GameObjectFactory.SpawnRandomBulletItems(System.Int32,TopDownShooter.Engine.Collisions.ICollisionSystem,System.Int32,System.Int32,System.Int32,System.Int32)">
+            <summary>
+            Spawns a random number of <see cref="T:TopDownShooter.Engine.Items.BulletGameItem"/>s
+            </summary>
+            <param name="count">Number to create</param>
+            <param name="collisionSystem">The <see cref="T:TopDownShooter.Engine.Collisions.ICollisionSystem" />.</param>
+            <param name="minX">Minimum X coordinate</param>
+            <param name="maxX">Maximum X coordinate</param>
+            <param name="minY">Minimum Y coordiante</param>
+            <param name="maxY">Maximum Y coordinate</param>
+            <returns>Collection of uninitalized <see cref="T:System.Collections.Generic.IEnumerable`1"/></returns>
+        </member>
+        <member name="M:TopDownShooter.Engine.GameObjectFactory.CreateBulletItem(System.Int32,Microsoft.Xna.Framework.Vector2,TopDownShooter.Engine.Collisions.ICollisionSystem)">
+            <summary>
+            Creates a bullet item game object.
+            </summary>
+            <param name="id">The game object identifier.</param>
+            <param name="position">The position of the game object.</param>
+            <param name="collisionSystem">The <see cref="T:TopDownShooter.Engine.Collisions.ICollisionSystem" />.</param>
+            <returns>The created bullet item.</returns>
         </member>
         <member name="M:TopDownShooter.Engine.GameObjectFactory.CreateBulletProjectile(System.Int32,System.Int32,Microsoft.Xna.Framework.Vector2,Microsoft.Xna.Framework.Vector2,TopDownShooter.Engine.Collisions.ICollisionSystem)">
             <summary>
@@ -1324,6 +1381,22 @@
             </summary>
             <param name="gameTime">The game time.</param>
         </member>
+        <member name="M:TopDownShooter.Engine.GameObject.Get``1">
+            <summary>
+            Returns the first <see cref="T:TopDownShooter.Engine.IComponent"/> of a requested type.
+            </summary>
+            <typeparam name="TComponent">Component type to find.</typeparam>
+            <returns>TComponent if found, null otherwise.</returns>
+            <remarks>To throw or not to throw? That is the question.</remarks>
+        </member>
+        <member name="M:TopDownShooter.Engine.GameObject.GetAll``1">
+            <summary>
+            Returns the all <see cref="T:TopDownShooter.Engine.IComponent"/>s of a requested type.
+            </summary>
+            <typeparam name="TComponent">Component type to find.</typeparam>
+            <returns><see cref="T:System.Collections.Generic.IEnumerable`1"/> if found, null otherwise.</returns>
+            <remarks>To throw or not to throw? That is the question.</remarks>
+        </member>
         <member name="T:TopDownShooter.Engine.ICamera">
             <summary>
             Defines an interface for a camera.
@@ -1353,6 +1426,28 @@
             <summary>
             Gets or sets the zoom.
             </summary>
+        </member>
+        <member name="T:TopDownShooter.Engine.IGameItem">
+            <summary>
+            Interface for game objects that can be picked up and placed into
+            an inventory.
+            </summary>
+        </member>
+        <member name="P:TopDownShooter.Engine.IGameItem.IsPickedUp">
+            <summary>
+            Gets a value indicating whether this game item has been picked up.
+            </summary>
+            <remarks>For use when managing a collection of these in the world, which ones
+            can be removed from the update and draw loops</remarks>
+        </member>
+        <member name="M:TopDownShooter.Engine.IGameItem.Pickup">
+            <summary>
+            Should be called when another component will be
+            taking ownership of this item.
+            </summary>
+            <returns><see cref="T:TopDownShooter.Engine.IGameItem"/> reference.</returns>
+            <remarks><see cref="T:TopDownShooter.Engine.IGameItem"/> here could be used to return an Inventory friendly
+            viewable GameItem here.</remarks>
         </member>
         <member name="T:TopDownShooter.Engine.IGameObject">
             <summary>
@@ -1467,6 +1562,109 @@
             <param name="components">The collection of components</param>
             <returns>The created bullet projectile.</returns>
         </member>
+        <member name="T:TopDownShooter.Engine.InventoryComponentBase">
+            <summary>
+            Base class for collecting inventory items
+            </summary>
+        </member>
+        <member name="F:TopDownShooter.Engine.InventoryComponentBase.gameItems">
+            <summary>
+            The internal storage for game objects.
+            </summary>
+        </member>
+        <member name="M:TopDownShooter.Engine.InventoryComponentBase.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:TopDownShooter.Engine.InventoryComponentBase"/> class.
+            </summary>
+        </member>
+        <member name="M:TopDownShooter.Engine.InventoryComponentBase.#ctor(System.Collections.Generic.IEnumerable{TopDownShooter.Engine.IGameItem})">
+            <summary>
+            Initializes a new instance of the <see cref="T:TopDownShooter.Engine.InventoryComponentBase"/> class.
+            </summary>
+            <param name="gameObjects">Starting items to load this inventory with</param>
+        </member>
+        <member name="P:TopDownShooter.Engine.InventoryComponentBase.Inventory">
+            <summary>
+            Gets a reference to the current inventory collection.
+            </summary>
+        </member>
+        <member name="M:TopDownShooter.Engine.InventoryComponentBase.Destroy">
+            <summary>
+            Destroys the component.
+            </summary>
+        </member>
+        <member name="M:TopDownShooter.Engine.InventoryComponentBase.Draw(TopDownShooter.Engine.IGameObject,TopDownShooter.Engine.Adapters.ISpriteBatchAdapter,Microsoft.Xna.Framework.GameTime)">
+            <summary>
+            Draws the component with the specified game object and game time.
+            </summary>
+            <param name="gameObject">The game object.</param>
+            <param name="spriteBatch">The sprite batch adapter.</param>
+            <param name="time">The game time.</param>
+        </member>
+        <member name="M:TopDownShooter.Engine.InventoryComponentBase.Initialize">
+            <summary>
+            Initializes the component.
+            </summary>
+        </member>
+        <member name="M:TopDownShooter.Engine.InventoryComponentBase.LoadContent(TopDownShooter.Engine.Adapters.IContentManagerAdapter)">
+            <summary>
+            Loads the content from the specified content manager adapter.
+            </summary>
+            <param name="contentManager">The content manager adapter.</param>
+        </member>
+        <member name="M:TopDownShooter.Engine.InventoryComponentBase.ReceiveMessage(TopDownShooter.Engine.IGameObject,TopDownShooter.Engine.ComponentMessage)">
+            <summary>
+            Receives a message.
+            </summary>
+            <param name="gameObject">The game object.</param>
+            <param name="message">The message object.</param>
+        </member>
+        <member name="M:TopDownShooter.Engine.InventoryComponentBase.Update(TopDownShooter.Engine.IGameObject,Microsoft.Xna.Framework.GameTime)">
+            <summary>
+            Updates the component with the specified game object and game time.
+            </summary>
+            <param name="gameObject">The game object to update.</param>
+            <param name="time">The game time.</param>
+        </member>
+        <member name="T:TopDownShooter.Engine.PlayerInventoryComponent">
+            <summary>
+            Inventory storage for an <see cref="T:TopDownShooter.Engine.IPlayer"/>
+            </summary>
+        </member>
+        <member name="M:TopDownShooter.Engine.PlayerInventoryComponent.#ctor(TopDownShooter.Engine.Collisions.ICollisionSystem)">
+            <summary>
+            Initializes a new instance of the <see cref="T:TopDownShooter.Engine.PlayerInventoryComponent"/> class.
+            </summary>
+            <param name="collisionSystem">Collision system reference.</param>
+        </member>
+        <member name="M:TopDownShooter.Engine.PlayerInventoryComponent.LoadContent(TopDownShooter.Engine.Adapters.IContentManagerAdapter)">
+            <summary>
+            Loads the content from the specified content manager adapter.
+            </summary>
+            <param name="contentManager">The content manager adapter.</param>
+        </member>
+        <member name="M:TopDownShooter.Engine.PlayerInventoryComponent.Update(TopDownShooter.Engine.IGameObject,Microsoft.Xna.Framework.GameTime)">
+            <summary>
+            Updates the component with the specified game object and game time.
+            </summary>
+            <param name="gameObject">The game object to update.</param>
+            <param name="time">The game time.</param>
+        </member>
+        <member name="M:TopDownShooter.Engine.PlayerInventoryComponent.Draw(TopDownShooter.Engine.IGameObject,TopDownShooter.Engine.Adapters.ISpriteBatchAdapter,Microsoft.Xna.Framework.GameTime)">
+            <summary>
+            Draws the component with the specified game object and game time.
+            </summary>
+            <param name="gameObject">The game object.</param>
+            <param name="spriteBatch">The sprite batch adapter.</param>
+            <param name="time">The game time.</param>
+        </member>
+        <member name="M:TopDownShooter.Engine.PlayerInventoryComponent.ReceiveMessage(TopDownShooter.Engine.IGameObject,TopDownShooter.Engine.ComponentMessage)">
+            <summary>
+            Receives a message.
+            </summary>
+            <param name="gameObject">The game object.</param>
+            <param name="message">The message object.</param>
+        </member>
         <member name="T:TopDownShooter.Engine.IPlayer">
             <summary>
             Defines an interface for a player.
@@ -1514,6 +1712,52 @@
             Updates the game object with the specified game time.
             </summary>
             <param name="gameTime">The game time.</param>
+        </member>
+        <member name="T:TopDownShooter.Engine.Items.BulletGameItem">
+            <summary>
+            Bullet Game item implementation
+            </summary>
+        </member>
+        <member name="M:TopDownShooter.Engine.Items.BulletGameItem.#ctor(System.Int32,Microsoft.Xna.Framework.Vector2,TopDownShooter.Engine.Collisions.ICollisionSystem,System.Collections.Generic.IEnumerable{TopDownShooter.Engine.IComponent})">
+            <summary>
+            Initializes a new instance of the <see cref="T:TopDownShooter.Engine.Items.BulletGameItem"/> class.
+            </summary>
+            <param name="id">The game object identifier.</param>
+            <param name="position">The position of the player.</param>
+            <param name="collisionSystem">The <see cref="T:TopDownShooter.Engine.Collisions.ICollisionSystem" />.</param>
+            <param name="components">A collection of components.</param>
+        </member>
+        <member name="P:TopDownShooter.Engine.Items.BulletGameItem.Height">
+            <summary>
+            Gets the height of the game object.
+            </summary>
+        </member>
+        <member name="P:TopDownShooter.Engine.Items.BulletGameItem.Width">
+            <summary>
+            Gets the Width of the game object.
+            </summary>
+        </member>
+        <member name="M:TopDownShooter.Engine.Items.BulletGameItem.Initialize">
+            <summary>
+            Initializes the game object.
+            </summary>
+        </member>
+        <member name="M:TopDownShooter.Engine.Items.BulletGameItem.Pickup">
+            <summary>
+            Should be called when another component will be
+            taking ownership of this item.
+            </summary>
+            <returns><see cref="T:TopDownShooter.Engine.IGameItem"/> reference.</returns>
+            <remarks><see cref="T:TopDownShooter.Engine.IGameItem"/> here could be used to return an Inventory friendly
+            viewable GameItem here.</remarks>
+        </member>
+        <member name="M:TopDownShooter.Engine.Items.BulletGameItem.Update(Microsoft.Xna.Framework.GameTime)">
+            <summary>
+            Updates the game object with the specified game time.
+            </summary>
+            <param name="gameTime">The game time.</param>
+            <remarks>GameObject updates position based on velocity. GameItems are
+            stationary for now.</remarks>
         </member>
         <member name="T:TopDownShooter.Engine.Levels.ITile">
             <summary>
@@ -1697,6 +1941,12 @@
             Represents a change in movement
             </summary>
             <remarks>Details will be a velocity vector?</remarks>
+        </member>
+        <member name="F:TopDownShooter.Engine.MessageType.ItemPickup">
+            <summary>
+            Represents an item requested to be picked up.
+            </summary>
+            <remarks>Details should be the <see cref="T:TopDownShooter.Engine.IGameItem"/></remarks>
         </member>
         <member name="T:TopDownShooter.Engine.Player">
             <summary>
