@@ -53,11 +53,17 @@ namespace TopDownShooter
         }
 
         /// <summary>
+        /// Raised when the scene is completed.
+        /// </summary>
+        public event EventHandler Completed;
+
+        /// <summary>
         /// Destroyes the game object.
         /// </summary>
         public void Destroy()
         {
-            // TODO: destroy all game objects.
+            this.OnCompleted();
+            //// TODO: destroy all game objects.
         }
 
         /// <summary>
@@ -165,6 +171,14 @@ namespace TopDownShooter
             this.players.ForEach(o => o.Update(gameTime));
             this.camera.Position = this.focusedPlayer.Position;
             this.leaderBoard.SetPlayers(this.players);
+        }
+
+        /// <summary>
+        /// Raises the <see cref="Completed"/> event.
+        /// </summary>
+        protected virtual void OnCompleted()
+        {
+            this.Completed?.Invoke(this, EventArgs.Empty);
         }
     }
 }

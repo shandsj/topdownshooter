@@ -15,6 +15,11 @@
             </summary>
             <param name="graphicsDevice">The <see cref="T:Microsoft.Xna.Framework.Graphics.GraphicsDevice"/>.</param>
         </member>
+        <member name="E:TopDownShooter.ArenaScene.Completed">
+            <summary>
+            Raised when the scene is completed.
+            </summary>
+        </member>
         <member name="M:TopDownShooter.ArenaScene.Destroy">
             <summary>
             Destroyes the game object.
@@ -42,6 +47,11 @@
             Updates the game object with the specified game time.
             </summary>
             <param name="gameTime">The game time.</param>
+        </member>
+        <member name="M:TopDownShooter.ArenaScene.OnCompleted">
+            <summary>
+            Raises the <see cref="E:TopDownShooter.ArenaScene.Completed"/> event.
+            </summary>
         </member>
         <member name="T:TopDownShooter.Game1">
             <summary>
@@ -150,6 +160,75 @@
         <member name="M:TopDownShooter.Program.Main">
             <summary>
             The main entry point for the application.
+            </summary>
+        </member>
+        <member name="T:TopDownShooter.TitleScene">
+            <summary>
+            Defines a title scene.
+            </summary>
+        </member>
+        <member name="M:TopDownShooter.TitleScene.#ctor(Microsoft.Xna.Framework.Graphics.GraphicsDevice)">
+            <summary>
+            Initializes a new instance of the <see cref="T:TopDownShooter.TitleScene" /> class.
+            </summary>
+            <param name="graphicsDevice">The <see cref="T:Microsoft.Xna.Framework.Graphics.GraphicsDevice" />.</param>
+        </member>
+        <member name="E:TopDownShooter.TitleScene.Completed">
+            <summary>
+            Raised when the scene is completed.
+            </summary>
+        </member>
+        <member name="T:TopDownShooter.TitleScene.State">
+            <summary>
+            Defines the states for the title screens
+            </summary>
+        </member>
+        <member name="F:TopDownShooter.TitleScene.State.FadingIn">
+            <summary>
+            Text is fading in.
+            </summary>
+        </member>
+        <member name="F:TopDownShooter.TitleScene.State.FadingOut">
+            <summary>
+            Text is fading out.
+            </summary>
+        </member>
+        <member name="F:TopDownShooter.TitleScene.State.NotFading">
+            <summary>
+            Text is not fading.
+            </summary>
+        </member>
+        <member name="M:TopDownShooter.TitleScene.Destroy">
+            <summary>
+            Destroyes the game object.
+            </summary>
+        </member>
+        <member name="M:TopDownShooter.TitleScene.Draw(Microsoft.Xna.Framework.GameTime)">
+            <summary>
+            Draws the scene with the specified sprite batch adapter and game time.
+            </summary>
+            <param name="gameTime">The game time.</param>
+        </member>
+        <member name="M:TopDownShooter.TitleScene.Initialize">
+            <summary>
+            Initializes the game object.
+            </summary>
+        </member>
+        <member name="M:TopDownShooter.TitleScene.LoadContent(TopDownShooter.Engine.Adapters.IContentManagerAdapter)">
+            <summary>
+            Loads the content from the specified content manager adapter.
+            </summary>
+            <param name="contentManager">The content manager adapter.</param>
+        </member>
+        <member name="M:TopDownShooter.TitleScene.Update(Microsoft.Xna.Framework.GameTime)">
+            <summary>
+            Updates the game object with the specified game time.
+            </summary>
+            <param name="gameTime">The game time.</param>
+        </member>
+        <member name="M:TopDownShooter.TitleScene.OnCompleted">
+            <summary>
+            Raises the <see cref="E:TopDownShooter.TitleScene.Completed" /> event.
             </summary>
         </member>
     </members>

@@ -6,6 +6,7 @@
 
 namespace TopDownShooter.Engine
 {
+    using System;
     using Microsoft.Xna.Framework;
     using TopDownShooter.Engine.Adapters;
 
@@ -14,6 +15,11 @@ namespace TopDownShooter.Engine
     /// </summary>
     public interface IScene
     {
+        /// <summary>
+        /// Raised when the scene is completed.
+        /// </summary>
+        event EventHandler Completed;
+
         /// <summary>
         /// Destroyes the game object.
         /// </summary>

@@ -1909,6 +1909,11 @@
             Defines an interface for a scene.
             </summary>
         </member>
+        <member name="E:TopDownShooter.Engine.IScene.Completed">
+            <summary>
+            Raised when the scene is completed.
+            </summary>
+        </member>
         <member name="M:TopDownShooter.Engine.IScene.Destroy">
             <summary>
             Destroyes the game object.

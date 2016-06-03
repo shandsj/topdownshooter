@@ -19,7 +19,7 @@ namespace TopDownShooter
     {
         private SpriteFont font;
 
-        private List<IPlayer> players;
+        private List<IPlayer> players = new List<IPlayer>();
 
         /// <summary>
         /// Initializes a new instance of the <see cref="LeaderBoard"/> class.

@@ -58,7 +58,10 @@ namespace TopDownShooter
         {
             this.contentManager = new ContentManagerAdapter(this.Content);
             this.sceneController = new SceneController(this.contentManager);
-            this.sceneController.Switch(new ArenaScene(this.GraphicsDevice));
+
+            var titleScene = new TitleScene(this.GraphicsDevice);
+            titleScene.Completed += (s, e) => this.sceneController.Switch(new ArenaScene(this.GraphicsDevice));
+            this.sceneController.Switch(titleScene);
 
             base.Initialize();
         }
