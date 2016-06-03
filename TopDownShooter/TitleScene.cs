@@ -23,7 +23,7 @@ namespace TopDownShooter
     {
         private const float PlayButtonScale = .25f;
 
-        private const float LogoScale = 1f;
+        private const float LogoScale = .70f;
 
         private readonly GraphicsDevice graphicsDevice;
 
@@ -104,7 +104,7 @@ namespace TopDownShooter
         {
             this.level.LoadContent(contentManager);
             this.playButtonTexture = contentManager.Load<Texture2D>("UI/BluePlayButton");
-            this.logoTexture = contentManager.Load<Texture2D>("UI/Title");
+            this.logoTexture = contentManager.Load<Texture2D>("UI/SingleShot");
 
             // Scale everything off the view port. Put the play button in the center of the screen,
             //  but down about 30% to make room for the title image and the user name textbox
