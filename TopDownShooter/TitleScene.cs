@@ -23,13 +23,17 @@ namespace TopDownShooter
     {
         private const float PlayButtonScale = .25f;
 
+        private const float LogoScale = 1f;
+
         private readonly GraphicsDevice graphicsDevice;
 
         private Level level;
 
         private Vector2 playButtonPosition;
-
         private Texture2D playButtonTexture;
+
+        private Vector2 logoPosition;
+        private Texture2D logoTexture;
 
         private ISpriteBatchAdapter spriteBatch;
 
@@ -79,6 +83,7 @@ namespace TopDownShooter
             this.spriteBatch.Begin();
             this.level.Draw(this.spriteBatch, gameTime);
             this.spriteBatch.Draw(this.playButtonTexture, this.playButtonPosition, null, Color.White, 0f, new Vector2(0, 0), PlayButtonScale, SpriteEffects.None, 0f);
+            this.spriteBatch.Draw(this.logoTexture, this.logoPosition, null, Color.White, 0f, new Vector2(0, 0), LogoScale, SpriteEffects.None, 0f);
             this.spriteBatch.End();
         }
 
@@ -99,13 +104,21 @@ namespace TopDownShooter
         {
             this.level.LoadContent(contentManager);
             this.playButtonTexture = contentManager.Load<Texture2D>("UI/BluePlayButton");
+            this.logoTexture = contentManager.Load<Texture2D>("UI/Title");
 
             // Scale everything off the view port. Put the play button in the center of the screen,
-            //  but down about 20% to make room for the title image and the user name textbox
+            //  but down about 30% to make room for the title image and the user name textbox
             var x = (this.spriteBatch.GraphicsDevice.Viewport.Width - (this.playButtonTexture.Width * PlayButtonScale)) / 2f;
             var y = ((this.spriteBatch.GraphicsDevice.Viewport.Height - (this.playButtonTexture.Height * PlayButtonScale)) / 2f) +
-                    (this.spriteBatch.GraphicsDevice.Viewport.Height * .20f);
+                    (this.spriteBatch.GraphicsDevice.Viewport.Height * .30f);
             this.playButtonPosition = new Vector2(x, y);
+
+            // Scale everything off the view port. Put the play button in the center of the screen,
+            //  but down about 5% to make room for the title image and the user name textbox
+            x = (this.spriteBatch.GraphicsDevice.Viewport.Width - (this.logoTexture.Width * LogoScale)) / 2f;
+            y = ((this.spriteBatch.GraphicsDevice.Viewport.Height - (this.logoTexture.Height * LogoScale)) / 2f) -
+                    (this.spriteBatch.GraphicsDevice.Viewport.Height * .08f);
+            this.logoPosition = new Vector2(x, y);
         }
 
         /// <summary>
