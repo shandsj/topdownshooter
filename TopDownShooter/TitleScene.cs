@@ -9,35 +9,50 @@ namespace TopDownShooter
     using System;
     using Microsoft.Xna.Framework;
     using Microsoft.Xna.Framework.Graphics;
+    using Microsoft.Xna.Framework.Input;
+    using TiledSharp;
     using TopDownShooter.Engine;
     using TopDownShooter.Engine.Adapters;
+    using TopDownShooter.Engine.Collisions;
+    using TopDownShooter.Engine.Levels;
 
     /// <summary>
     /// Defines a title scene.
     /// </summary>
     public class TitleScene : IScene
     {
+        private const float PlayButtonScale = .25f;
+
         private readonly GraphicsDevice graphicsDevice;
 
-        private int alpha;
+        private Level level;
 
-        private SpriteFont font;
+        private Vector2 playButtonPosition;
 
-        private TimeSpan notFadingStartTime;
+        private Texture2D playButtonTexture;
 
         private ISpriteBatchAdapter spriteBatch;
 
-        private State state = State.FadingIn;
-
-        private string text = "My Shooter Game";
+        private IMouseAdapter mouse;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="TitleScene" /> class.
         /// </summary>
         /// <param name="graphicsDevice">The <see cref="GraphicsDevice" />.</param>
         public TitleScene(GraphicsDevice graphicsDevice)
+            : this(graphicsDevice, new MouseAdapter())
+        {
+        }
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="TitleScene" /> class.
+        /// </summary>
+        /// <param name="graphicsDevice">The <see cref="GraphicsDevice" />.</param>
+        /// <param name="mouse">The <see cref="IMouseAdapter"/>.</param>
+        internal TitleScene(GraphicsDevice graphicsDevice, IMouseAdapter mouse)
         {
             this.graphicsDevice = graphicsDevice;
+            this.mouse = mouse;
         }
 
         /// <summary>
@@ -46,31 +61,11 @@ namespace TopDownShooter
         public event EventHandler Completed;
 
         /// <summary>
-        /// Defines the states for the title screens
-        /// </summary>
-        public enum State
-        {
-            /// <summary>
-            /// Text is fading in.
-            /// </summary>
-            FadingIn,
-
-            /// <summary>
-            /// Text is fading out.
-            /// </summary>
-            FadingOut,
-
-            /// <summary>
-            /// Text is not fading.
-            /// </summary>
-            NotFading
-        }
-
-        /// <summary>
         /// Destroyes the game object.
         /// </summary>
         public void Destroy()
         {
+            this.level.Destroy();
         }
 
         /// <summary>
@@ -80,14 +75,10 @@ namespace TopDownShooter
         public void Draw(GameTime gameTime)
         {
             this.graphicsDevice.Clear(Color.Black);
-            var textSize = this.font.MeasureString(this.text);
 
-            this.spriteBatch.Begin(blendState: BlendState.NonPremultiplied);
-            this.spriteBatch.DrawString(
-                this.font,
-                this.text,
-                new Vector2((this.graphicsDevice.Viewport.Width / 2f) - (textSize.X / 2f), (this.graphicsDevice.Viewport.Height / 2f) - (textSize.Y / 2f)),
-                new Color(Color.Blue, this.alpha));
+            this.spriteBatch.Begin();
+            this.level.Draw(this.spriteBatch, gameTime);
+            this.spriteBatch.Draw(this.playButtonTexture, this.playButtonPosition, null, Color.White, 0f, new Vector2(0, 0), PlayButtonScale, SpriteEffects.None, 0f);
             this.spriteBatch.End();
         }
 
@@ -97,6 +88,7 @@ namespace TopDownShooter
         public void Initialize()
         {
             this.spriteBatch = new SpriteBatchAdapter(new SpriteBatch(this.graphicsDevice));
+            this.level = new Level(CollisionSystem.NextGameObjectId++, new CollisionSystem(), new TmxMap("Content/TmxFiles/DefaultLevel.tmx"));
         }
 
         /// <summary>
@@ -105,7 +97,15 @@ namespace TopDownShooter
         /// <param name="contentManager">The content manager adapter.</param>
         public void LoadContent(IContentManagerAdapter contentManager)
         {
-            this.font = contentManager.Load<SpriteFont>("Fonts/PlayerName");
+            this.level.LoadContent(contentManager);
+            this.playButtonTexture = contentManager.Load<Texture2D>("UI/BluePlayButton");
+
+            // Scale everything off the view port. Put the play button in the center of the screen,
+            //  but down about 20% to make room for the title image and the user name textbox
+            var x = (this.spriteBatch.GraphicsDevice.Viewport.Width - (this.playButtonTexture.Width * PlayButtonScale)) / 2f;
+            var y = ((this.spriteBatch.GraphicsDevice.Viewport.Height - (this.playButtonTexture.Height * PlayButtonScale)) / 2f) +
+                    (this.spriteBatch.GraphicsDevice.Viewport.Height * .20f);
+            this.playButtonPosition = new Vector2(x, y);
         }
 
         /// <summary>
@@ -114,51 +114,17 @@ namespace TopDownShooter
         /// <param name="gameTime">The game time.</param>
         public void Update(GameTime gameTime)
         {
-            switch (this.state)
+            var mouseState = this.mouse.GetState();
+            if (mouseState.LeftButton == ButtonState.Pressed)
             {
-                case State.FadingIn:
-                    if (this.alpha < 255)
-                    {
-                        this.alpha += (int)(gameTime.ElapsedGameTime.TotalSeconds * 60f);
-                    }
-                    else
-                    {
-                        this.state = State.NotFading;
-                        this.notFadingStartTime = gameTime.TotalGameTime;
-                    }
-
-                    break;
-
-                case State.NotFading:
-                    if (gameTime.TotalGameTime - this.notFadingStartTime > TimeSpan.FromSeconds(2))
-                    {
-                        this.state = State.FadingOut;
-                        this.alpha = 255;
-                    }
-
-                    break;
-
-                case State.FadingOut:
-                    if (this.alpha > 0)
-                    {
-                        this.alpha -= (int)(gameTime.ElapsedGameTime.TotalSeconds * 60f);
-                    }
-                    else
-                    {
-                        if (this.text == "My Shooter Game")
-                        {
-                            this.text = "J&J Studios";
-                            this.alpha = 0;
-                            this.state = State.FadingIn;
-                        }
-                        else
-                        {
-                            this.OnCompleted();
-                        }
-                    }
-
-                    break;
+                // TODO: Draw a mouse cursor and enable this
+                ////if (this.playButtonTexture.Bounds.Contains(mouseState.Position))
+                {
+                    this.OnCompleted();
+                }
             }
+
+            this.level.Update(gameTime);
         }
 
         /// <summary>
