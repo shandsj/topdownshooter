@@ -7,6 +7,7 @@
 namespace TopDownShooter.Engine
 {
     using System.Collections.Generic;
+    using System.Linq;
     using Microsoft.Xna.Framework;
     using TopDownShooter.Engine.Adapters;
 
@@ -151,6 +152,28 @@ namespace TopDownShooter.Engine
             }
 
             this.Position += this.Velocity;
+        }
+
+        /// <summary>
+        /// Returns the first <see cref="IComponent"/> of a requested type.
+        /// </summary>
+        /// <typeparam name="TComponent">Component type to find.</typeparam>
+        /// <returns>TComponent if found, null otherwise.</returns>
+        /// <remarks>To throw or not to throw? That is the question.</remarks>
+        protected TComponent Get<TComponent>()
+        {
+            return this.Components.OfType<TComponent>().FirstOrDefault();
+        }
+
+        /// <summary>
+        /// Returns the all <see cref="IComponent"/>s of a requested type.
+        /// </summary>
+        /// <typeparam name="TComponent">Component type to find.</typeparam>
+        /// <returns><see cref="IEnumerable{TComponent}"/> if found, null otherwise.</returns>
+        /// <remarks>To throw or not to throw? That is the question.</remarks>
+        protected IEnumerable<TComponent> GetAll<TComponent>()
+        {
+            return this.Components.OfType<TComponent>();
         }
     }
 }

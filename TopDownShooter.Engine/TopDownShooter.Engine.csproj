@@ -94,6 +94,7 @@
     <Compile Include="Controllers\SimpleAiInputControllerComponent.cs" />
     <Compile Include="DebugComponent.cs" />
     <Compile Include="Extensions.cs" />
+    <Compile Include="GameItem.cs" />
     <Compile Include="GameObjectFactory.cs" />
     <Compile Include="IAnimationComponent.cs" />
     <Compile Include="IAnimationComponentManager.cs" />
@@ -101,10 +102,14 @@
     <Compile Include="FrameProperties.cs" />
     <Compile Include="GameObject.cs" />
     <Compile Include="ICamera.cs" />
+    <Compile Include="IGameItem.cs" />
     <Compile Include="IGameObject.cs" />
     <Compile Include="IGameObjectFactory.cs" />
+    <Compile Include="InventoryComponentBase.cs" />
+    <Compile Include="Inventory\PlayerInventoryComponent.cs" />
     <Compile Include="IPlayer.cs" />
     <Compile Include="ISceneController.cs" />
+    <Compile Include="Items\BulletGameItem.cs" />
     <Compile Include="Levels\ITile.cs" />
     <Compile Include="Levels\Level.cs" />
     <Compile Include="Levels\Tile.cs" />
