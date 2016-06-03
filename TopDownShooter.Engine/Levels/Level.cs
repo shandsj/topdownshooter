@@ -183,7 +183,7 @@ namespace TopDownShooter.Engine.Levels
                     new Point(tile.X, tile.Y),
                     tileSet.TileWidth,
                     tileSet.TileHeight,
-                    new Vector2((x - 1) * tileSet.TileWidth, (y - 1) * tileSet.TileHeight));
+                    new Vector2((x - 1) * (tileSet.TileWidth + tileSet.Spacing), (y - 1) * (tileSet.TileHeight + tileSet.Spacing)));
 
                 myTile.Initialize();
                 this.tiles.Add(new Point(tile.X, tile.Y), myTile);
