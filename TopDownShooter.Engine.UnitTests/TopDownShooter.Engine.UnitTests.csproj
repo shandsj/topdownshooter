@@ -59,7 +59,9 @@
     </When>
     <Otherwise>
       <ItemGroup>
-        <Reference Include="Microsoft.VisualStudio.QualityTools.UnitTestFramework" />
+        <Reference Include="Microsoft.VisualStudio.QualityTools.UnitTestFramework">
+          <Private>False</Private>
+        </Reference>
       </ItemGroup>
     </Otherwise>
   </Choose>
@@ -77,6 +79,7 @@
     <Compile Include="GameObjectTests.cs" />
     <Compile Include="Levels\TileTests.cs" />
     <Compile Include="PlayerColliderComponentTests.cs" />
+    <Compile Include="PlayerInventoryComponentTests.cs" />
     <Compile Include="PlayerTests.cs" />
     <Compile Include="Projectiles\BulletProjectileColliderComponentTests.cs" />
     <Compile Include="Projectiles\BulletProjectileTests.cs" />

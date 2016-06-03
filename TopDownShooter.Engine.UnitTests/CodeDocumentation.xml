@@ -226,6 +226,26 @@
             Tests that collisions are check when the component is updated and the parent game object has a non-zero velocity.
             </summary>
         </member>
+        <member name="T:TopDownShooter.Engine.UnitTests.PlayerInventoryComponentTests">
+            <summary>
+            Tests Container for <see cref="T:TopDownShooter.Engine.PlayerInventoryComponent"/>
+            </summary>
+        </member>
+        <member name="M:TopDownShooter.Engine.UnitTests.PlayerInventoryComponentTests.TestSingleItemIsPickedUp">
+            <summary>
+            Tests that an Item is picked up by listening for a Component Message
+            </summary>
+        </member>
+        <member name="M:TopDownShooter.Engine.UnitTests.PlayerInventoryComponentTests.TestPickupOnlyOneBullet">
+            <summary>
+            Tests that an Item is picked up by listening for a Component Message
+            </summary>
+        </member>
+        <member name="M:TopDownShooter.Engine.UnitTests.PlayerInventoryComponentTests.TestCollisionTriggersBroadcast">
+            <summary>
+            Tests that an Item is picked up by listening for a Component Message
+            </summary>
+        </member>
         <member name="T:TopDownShooter.Engine.UnitTests.PlayerTests">
             <summary>
             Contains unit tests for the <see cref="T:TopDownShooter.Engine.Player"/> class.
