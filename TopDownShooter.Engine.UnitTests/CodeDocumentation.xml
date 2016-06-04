@@ -228,10 +228,10 @@
         </member>
         <member name="T:TopDownShooter.Engine.UnitTests.PlayerInventoryComponentTests">
             <summary>
-            Tests Container for <see cref="T:TopDownShooter.Engine.PlayerInventoryComponent"/>
+            Tests Container for <see cref="T:TopDownShooter.Engine.PlayerInventoryComponent" />
             </summary>
         </member>
-        <member name="M:TopDownShooter.Engine.UnitTests.PlayerInventoryComponentTests.TestSingleItemIsPickedUp">
+        <member name="M:TopDownShooter.Engine.UnitTests.PlayerInventoryComponentTests.TestCollisionTriggersBroadcast">
             <summary>
             Tests that an Item is picked up by listening for a Component Message
             </summary>
@@ -241,7 +241,7 @@
             Tests that an Item is picked up by listening for a Component Message
             </summary>
         </member>
-        <member name="M:TopDownShooter.Engine.UnitTests.PlayerInventoryComponentTests.TestCollisionTriggersBroadcast">
+        <member name="M:TopDownShooter.Engine.UnitTests.PlayerInventoryComponentTests.TestSingleItemIsPickedUp">
             <summary>
             Tests that an Item is picked up by listening for a Component Message
             </summary>

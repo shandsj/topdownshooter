@@ -58,12 +58,13 @@ namespace TopDownShooter.Engine
         /// Draws the component with the specified game object and game time.
         /// </summary>
         /// <param name="gameObject">The game object.</param>
+        /// <param name="camera">The <see cref="ICamera"/>.</param>
         /// <param name="spriteBatch">The sprite batch adapter.</param>
         /// <param name="time">The game time.</param>
-        public override void Draw(IGameObject gameObject, ISpriteBatchAdapter spriteBatch, GameTime time)
+        public override void Draw(IGameObject gameObject, ICamera camera, ISpriteBatchAdapter spriteBatch, GameTime time)
         {
-            base.Draw(gameObject, spriteBatch, time);
-            this.bulletProjectileGeneratorComponent.Draw(gameObject, spriteBatch, time);
+            base.Draw(gameObject, camera, spriteBatch, time);
+            this.bulletProjectileGeneratorComponent.Draw(gameObject, camera, spriteBatch, time);
         }
 
         /// <summary>

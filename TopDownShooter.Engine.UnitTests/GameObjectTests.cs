@@ -32,6 +32,7 @@ namespace TopDownShooter.Engine.UnitTests
             var component = new Mock<IComponent>();
             component.Setup(method => method.Draw(
                 It.IsAny<IGameObject>(),
+                It.IsAny<ICamera>(),
                 It.IsAny<ISpriteBatchAdapter>(),
                 It.IsAny<GameTime>()))
                 .Callback<IGameObject, ISpriteBatchAdapter, GameTime>((go, sb, gt) =>
@@ -43,7 +44,7 @@ namespace TopDownShooter.Engine.UnitTests
                     });
 
             uut.Components.Add(component.Object);
-            uut.Draw(spriteBatch, gameTime);
+            uut.Draw(new Mock<ICamera>().Object, spriteBatch, gameTime);
 
             Assert.IsTrue(wasMethodCalled);
         }

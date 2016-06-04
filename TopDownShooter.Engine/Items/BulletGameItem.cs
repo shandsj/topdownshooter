@@ -41,20 +41,12 @@ namespace TopDownShooter.Engine.Items
         /// <summary>
         /// Gets the height of the game object.
         /// </summary>
-        public override int Height {
-            get {
-                return this.animationComponentManager?.FrameProperties.Height ?? 0;
-            }
-        }
+        public override int Height => this.animationComponentManager?.FrameProperties.Height ?? 0;
 
         /// <summary>
         /// Gets the Width of the game object.
         /// </summary>
-        public override int Width {
-            get {
-                return this.animationComponentManager?.FrameProperties.Width ?? 0;
-            }
-        }
+        public override int Width => this.animationComponentManager?.FrameProperties.Width ?? 0;
 
         /// <summary>
         /// Initializes the game object.

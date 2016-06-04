@@ -1,19 +1,20 @@
-﻿// <copyright file="PlayerInventoryComponentTests.cs" company="PlaceholderCompany">
+﻿// --------------------------------------------------------------------------------------------------------------------
+// <copyright file="PlayerInventoryComponentTests.cs" company="PlaceholderCompany">
 // Copyright (c) PlaceholderCompany. All rights reserved.
 // </copyright>
+// --------------------------------------------------------------------------------------------------------------------
 
 namespace TopDownShooter.Engine.UnitTests
 {
-    using System;
-    using Engine.Collisions;
+    using System.Collections.Generic;
+    using System.Linq;
     using Microsoft.VisualStudio.TestTools.UnitTesting;
     using Moq;
-    using System.Collections.Generic;
-    using Items;
-    using System.Linq;
-    using Microsoft.Xna.Framework;/// <summary>
-                                  /// Tests Container for <see cref="PlayerInventoryComponent"/>
-                                  /// </summary>
+    using TopDownShooter.Engine.Collisions;
+
+    /// <summary>
+    /// Tests Container for <see cref="PlayerInventoryComponent" />
+    /// </summary>
     [TestClass]
     public class PlayerInventoryComponentTests
     {
@@ -21,21 +22,30 @@ namespace TopDownShooter.Engine.UnitTests
         /// Tests that an Item is picked up by listening for a Component Message
         /// </summary>
         [TestMethod]
-        public void TestSingleItemIsPickedUp()
+        public void TestCollisionTriggersBroadcast()
         {
             var mockItem = new Mock<IGameItem>();
-            var isPickedUp = false;
+            var wasBroadcastFired = false;
 
-            mockItem.Setup(item => item.Pickup()).Returns(() =>
-            {
-                isPickedUp = true;
-                return mockItem.Object;
-            });
+            var mockPlayerObject = new Mock<IGameObject>();
+            mockPlayerObject.Setup(o => o.BroadcastMessage(It.IsAny<ComponentMessage>())).Callback((ComponentMessage message) =>
+                {
+                    wasBroadcastFired = true;
+                    Assert.AreEqual(MessageType.ItemPickup, message.MessageType);
+                    Assert.AreEqual(mockItem.Object, message.MessageDetails);
+                });
 
-            var playerInventoryComponent = new PlayerInventoryComponent(new Mock<ICollisionSystem>().Object);
-            playerInventoryComponent.ReceiveMessage(new Mock<IGameObject>().Object, new ComponentMessage(MessageType.ItemPickup, mockItem.Object));
+            var collisionSystem = new Mock<ICollisionSystem>();
 
-            Assert.AreEqual(true, isPickedUp);
+            collisionSystem.Setup(col => col.GetGameObject(It.Is<int>(o => o == 43))).Returns(mockItem.Object);
+            collisionSystem.Setup(col => col.GetGameObject(It.Is<int>(o => o == 42))).Returns(mockPlayerObject.Object);
+
+            var uut = new PlayerColliderComponent(42, collisionSystem.Object);
+            var itemCollider = new SimpleColliderComponent(43, collisionSystem.Object);
+
+            uut.Collide(itemCollider);
+
+            Assert.AreEqual(true, wasBroadcastFired);
         }
 
         /// <summary>
@@ -64,30 +74,21 @@ namespace TopDownShooter.Engine.UnitTests
         /// Tests that an Item is picked up by listening for a Component Message
         /// </summary>
         [TestMethod]
-        public void TestCollisionTriggersBroadcast()
+        public void TestSingleItemIsPickedUp()
         {
             var mockItem = new Mock<IGameItem>();
-            var wasBroadcastFired = false;
+            var isPickedUp = false;
 
-            var mockPlayerObject = new Mock<IGameObject>();
-            mockPlayerObject.Setup(o => o.BroadcastMessage(It.IsAny<ComponentMessage>())).Callback((ComponentMessage message) =>
-            {
-                wasBroadcastFired = true;
-                Assert.AreEqual(MessageType.ItemPickup, message.MessageType);
-                Assert.AreEqual(mockItem.Object, message.MessageDetails);
-            });
+            mockItem.Setup(item => item.Pickup()).Returns(() =>
+                {
+                    isPickedUp = true;
+                    return mockItem.Object;
+                });
 
-            var collisionSystem = new Mock<ICollisionSystem>();
+            var playerInventoryComponent = new PlayerInventoryComponent(new Mock<ICollisionSystem>().Object);
+            playerInventoryComponent.ReceiveMessage(new Mock<IGameObject>().Object, new ComponentMessage(MessageType.ItemPickup, mockItem.Object));
 
-            collisionSystem.Setup(col => col.GetGameObject(It.Is<int>(o => o == 43))).Returns(mockItem.Object);
-            collisionSystem.Setup(col => col.GetGameObject(It.Is<int>(o => o == 42))).Returns(mockPlayerObject.Object);
-
-            var uut = new PlayerColliderComponent(42, collisionSystem.Object);
-            var itemCollider = new SimpleColliderComponent(43, collisionSystem.Object);
-
-            uut.Collide(itemCollider);
-
-            Assert.AreEqual(true, wasBroadcastFired);
+            Assert.AreEqual(true, isPickedUp);
         }
     }
 }

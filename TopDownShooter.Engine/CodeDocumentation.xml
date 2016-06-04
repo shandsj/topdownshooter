@@ -364,11 +364,12 @@
             Gets or sets the <see cref="T:Microsoft.Xna.Framework.Graphics.SpriteEffects" /> for this <see cref="T:TopDownShooter.Engine.AnimationComponent" />.
             </summary>
         </member>
-        <member name="M:TopDownShooter.Engine.AnimationComponent.Draw(TopDownShooter.Engine.IGameObject,TopDownShooter.Engine.Adapters.ISpriteBatchAdapter,Microsoft.Xna.Framework.GameTime)">
+        <member name="M:TopDownShooter.Engine.AnimationComponent.Draw(TopDownShooter.Engine.IGameObject,TopDownShooter.Engine.ICamera,TopDownShooter.Engine.Adapters.ISpriteBatchAdapter,Microsoft.Xna.Framework.GameTime)">
             <summary>
             Draws the component with the specified game object and game time.
             </summary>
             <param name="gameObject">The game object.</param>
+            <param name="camera">The <see cref="T:TopDownShooter.Engine.ICamera"/>.</param>
             <param name="spriteBatch">The sprite batch adapter.</param>
             <param name="time">The game time.</param>
         </member>
@@ -436,11 +437,12 @@
             Gets the current animations <see cref="P:TopDownShooter.Engine.AnimationComponentManager.FrameProperties"/>
             </summary>
         </member>
-        <member name="M:TopDownShooter.Engine.AnimationComponentManager.Draw(TopDownShooter.Engine.IGameObject,TopDownShooter.Engine.Adapters.ISpriteBatchAdapter,Microsoft.Xna.Framework.GameTime)">
+        <member name="M:TopDownShooter.Engine.AnimationComponentManager.Draw(TopDownShooter.Engine.IGameObject,TopDownShooter.Engine.ICamera,TopDownShooter.Engine.Adapters.ISpriteBatchAdapter,Microsoft.Xna.Framework.GameTime)">
             <summary>
             Draws the component with the specified game object and game time.
             </summary>
             <param name="gameObject">The game object.</param>
+            <param name="camera">The <see cref="T:TopDownShooter.Engine.ICamera"/>.</param>
             <param name="spriteBatch">The sprite batch adapter.</param>
             <param name="time">The game time.</param>
         </member>
@@ -552,11 +554,12 @@
             Gets the <see cref="T:TopDownShooter.Engine.Collisions.ICollisionSystem" />.
             </summary>
         </member>
-        <member name="M:TopDownShooter.Engine.Collisions.ColliderComponentBase.Draw(TopDownShooter.Engine.IGameObject,TopDownShooter.Engine.Adapters.ISpriteBatchAdapter,Microsoft.Xna.Framework.GameTime)">
+        <member name="M:TopDownShooter.Engine.Collisions.ColliderComponentBase.Draw(TopDownShooter.Engine.IGameObject,TopDownShooter.Engine.ICamera,TopDownShooter.Engine.Adapters.ISpriteBatchAdapter,Microsoft.Xna.Framework.GameTime)">
             <summary>
             Draws the component with the specified game object and game time.
             </summary>
             <param name="gameObject">The game object.</param>
+            <param name="camera">The <see cref="T:TopDownShooter.Engine.ICamera"/>.</param>
             <param name="spriteBatch">The sprite batch adapter.</param>
             <param name="time">The game time.</param>
         </member>
@@ -869,11 +872,12 @@
             Cleans up any resources used during the execution of this class
             </summary>
         </member>
-        <member name="M:TopDownShooter.Engine.Controllers.InputControllerComponentBase.Draw(TopDownShooter.Engine.IGameObject,TopDownShooter.Engine.Adapters.ISpriteBatchAdapter,Microsoft.Xna.Framework.GameTime)">
+        <member name="M:TopDownShooter.Engine.Controllers.InputControllerComponentBase.Draw(TopDownShooter.Engine.IGameObject,TopDownShooter.Engine.ICamera,TopDownShooter.Engine.Adapters.ISpriteBatchAdapter,Microsoft.Xna.Framework.GameTime)">
             <summary>
             Draws the component with the specified game object and game time.
             </summary>
             <param name="gameObject">The game object.</param>
+            <param name="camera">The <see cref="T:TopDownShooter.Engine.ICamera"/>.</param>
             <param name="spriteBatch">The sprite batch adapter.</param>
             <param name="time">The game time.</param>
         </member>
@@ -986,11 +990,12 @@
             <param name="color">Border color for the bounding box around a given <see cref="T:TopDownShooter.Engine.GameObject"/></param>
             <param name="borderThickness">The thickness for the rectangluar border for a given <see cref="T:TopDownShooter.Engine.GameObject"/></param>
         </member>
-        <member name="M:TopDownShooter.Engine.DebugComponent.Draw(TopDownShooter.Engine.IGameObject,TopDownShooter.Engine.Adapters.ISpriteBatchAdapter,Microsoft.Xna.Framework.GameTime)">
+        <member name="M:TopDownShooter.Engine.DebugComponent.Draw(TopDownShooter.Engine.IGameObject,TopDownShooter.Engine.ICamera,TopDownShooter.Engine.Adapters.ISpriteBatchAdapter,Microsoft.Xna.Framework.GameTime)">
             <summary>
             Draws the component with the specified game object and game time.
             </summary>
             <param name="gameObject">The game object.</param>
+            <param name="camera">The <see cref="T:TopDownShooter.Engine.ICamera"/>.</param>
             <param name="spriteBatch">The sprite batch adapter.</param>
             <param name="time">The game time.</param>
         </member>
@@ -1225,11 +1230,12 @@
             <param name="gameObject">The game object to update.</param>
             <param name="time">The game time.</param>
         </member>
-        <member name="M:TopDownShooter.Engine.IComponent.Draw(TopDownShooter.Engine.IGameObject,TopDownShooter.Engine.Adapters.ISpriteBatchAdapter,Microsoft.Xna.Framework.GameTime)">
+        <member name="M:TopDownShooter.Engine.IComponent.Draw(TopDownShooter.Engine.IGameObject,TopDownShooter.Engine.ICamera,TopDownShooter.Engine.Adapters.ISpriteBatchAdapter,Microsoft.Xna.Framework.GameTime)">
             <summary>
             Draws the component with the specified game object and game time.
             </summary>
             <param name="gameObject">The game object.</param>
+            <param name="camera">The <see cref="T:TopDownShooter.Engine.ICamera"/>.</param>
             <param name="spriteBatch">The sprite batch adapter.</param>
             <param name="time">The game time.</param>
         </member>
@@ -1346,10 +1352,11 @@
             Gets or sets the velocity of the entity.
             </summary>
         </member>
-        <member name="M:TopDownShooter.Engine.GameObject.Draw(TopDownShooter.Engine.Adapters.ISpriteBatchAdapter,Microsoft.Xna.Framework.GameTime)">
+        <member name="M:TopDownShooter.Engine.GameObject.Draw(TopDownShooter.Engine.ICamera,TopDownShooter.Engine.Adapters.ISpriteBatchAdapter,Microsoft.Xna.Framework.GameTime)">
             <summary>
             Draws the game object with the specified sprite batch adapter and game time.
             </summary>
+            <param name="camera">The <see cref="T:TopDownShooter.Engine.ICamera"/>.</param>
             <param name="spriteBatch">The sprite batch adapter.</param>
             <param name="gameTime">The game time.</param>
         </member>
@@ -1511,10 +1518,11 @@
             </summary>
             <param name="gameTime">The game time.</param>
         </member>
-        <member name="M:TopDownShooter.Engine.IGameObject.Draw(TopDownShooter.Engine.Adapters.ISpriteBatchAdapter,Microsoft.Xna.Framework.GameTime)">
+        <member name="M:TopDownShooter.Engine.IGameObject.Draw(TopDownShooter.Engine.ICamera,TopDownShooter.Engine.Adapters.ISpriteBatchAdapter,Microsoft.Xna.Framework.GameTime)">
             <summary>
             Draws the game object with the specified sprite batch adapter and game time.
             </summary>
+            <param name="camera">The <see cref="T:TopDownShooter.Engine.ICamera"/>.</param>
             <param name="spriteBatch">The sprite batch adapter.</param>
             <param name="gameTime">The game time.</param>
         </member>
@@ -1593,11 +1601,12 @@
             Destroys the component.
             </summary>
         </member>
-        <member name="M:TopDownShooter.Engine.InventoryComponentBase.Draw(TopDownShooter.Engine.IGameObject,TopDownShooter.Engine.Adapters.ISpriteBatchAdapter,Microsoft.Xna.Framework.GameTime)">
+        <member name="M:TopDownShooter.Engine.InventoryComponentBase.Draw(TopDownShooter.Engine.IGameObject,TopDownShooter.Engine.ICamera,TopDownShooter.Engine.Adapters.ISpriteBatchAdapter,Microsoft.Xna.Framework.GameTime)">
             <summary>
             Draws the component with the specified game object and game time.
             </summary>
             <param name="gameObject">The game object.</param>
+            <param name="camera">The <see cref="T:TopDownShooter.Engine.ICamera"/>.</param>
             <param name="spriteBatch">The sprite batch adapter.</param>
             <param name="time">The game time.</param>
         </member>
@@ -1650,11 +1659,12 @@
             <param name="gameObject">The game object to update.</param>
             <param name="time">The game time.</param>
         </member>
-        <member name="M:TopDownShooter.Engine.PlayerInventoryComponent.Draw(TopDownShooter.Engine.IGameObject,TopDownShooter.Engine.Adapters.ISpriteBatchAdapter,Microsoft.Xna.Framework.GameTime)">
+        <member name="M:TopDownShooter.Engine.PlayerInventoryComponent.Draw(TopDownShooter.Engine.IGameObject,TopDownShooter.Engine.ICamera,TopDownShooter.Engine.Adapters.ISpriteBatchAdapter,Microsoft.Xna.Framework.GameTime)">
             <summary>
             Draws the component with the specified game object and game time.
             </summary>
             <param name="gameObject">The game object.</param>
+            <param name="camera">The <see cref="T:TopDownShooter.Engine.ICamera"/>.</param>
             <param name="spriteBatch">The sprite batch adapter.</param>
             <param name="time">The game time.</param>
         </member>
@@ -1819,10 +1829,11 @@
             Gets the height of the game object.
             </summary>
         </member>
-        <member name="M:TopDownShooter.Engine.Levels.Level.Draw(TopDownShooter.Engine.Adapters.ISpriteBatchAdapter,Microsoft.Xna.Framework.GameTime)">
+        <member name="M:TopDownShooter.Engine.Levels.Level.Draw(TopDownShooter.Engine.ICamera,TopDownShooter.Engine.Adapters.ISpriteBatchAdapter,Microsoft.Xna.Framework.GameTime)">
             <summary>
             Draws the game object with the specified sprite batch adapter and game time.
             </summary>
+            <param name="camera">The <see cref="T:TopDownShooter.Engine.ICamera"/>.</param>
             <param name="spriteBatch">The sprite batch adapter.</param>
             <param name="gameTime">The game time.</param>
         </member>
@@ -1895,10 +1906,11 @@
             Gets the <see cref="P:TopDownShooter.Engine.Levels.Tile.TileInteractionType" />.
             </summary>
         </member>
-        <member name="M:TopDownShooter.Engine.Levels.Tile.Draw(TopDownShooter.Engine.Adapters.ISpriteBatchAdapter,Microsoft.Xna.Framework.GameTime)">
+        <member name="M:TopDownShooter.Engine.Levels.Tile.Draw(TopDownShooter.Engine.ICamera,TopDownShooter.Engine.Adapters.ISpriteBatchAdapter,Microsoft.Xna.Framework.GameTime)">
             <summary>
             Draws this <see cref="T:TopDownShooter.Engine.Levels.Tile" />.
             </summary>
+            <param name="camera">The <see cref="T:TopDownShooter.Engine.ICamera"/>.</param>
             <param name="spriteBatch">
             The <see cref="T:TopDownShooter.Engine.Adapters.ISpriteBatchAdapter" />.
             </param>
@@ -1997,10 +2009,11 @@
             Gets the width of the game object.
             </summary>
         </member>
-        <member name="M:TopDownShooter.Engine.Player.Draw(TopDownShooter.Engine.Adapters.ISpriteBatchAdapter,Microsoft.Xna.Framework.GameTime)">
+        <member name="M:TopDownShooter.Engine.Player.Draw(TopDownShooter.Engine.ICamera,TopDownShooter.Engine.Adapters.ISpriteBatchAdapter,Microsoft.Xna.Framework.GameTime)">
             <summary>
             Draws the game object with the specified sprite batch adapter and game time.
             </summary>
+            <param name="camera">The <see cref="T:TopDownShooter.Engine.ICamera"/>.</param>
             <param name="spriteBatch">The sprite batch adapter.</param>
             <param name="gameTime">The game time.</param>
         </member>
@@ -2107,11 +2120,12 @@
             Destroys the component.
             </summary>
         </member>
-        <member name="M:TopDownShooter.Engine.Projectiles.BulletProjectileGeneratorComponent.Draw(TopDownShooter.Engine.IGameObject,TopDownShooter.Engine.Adapters.ISpriteBatchAdapter,Microsoft.Xna.Framework.GameTime)">
+        <member name="M:TopDownShooter.Engine.Projectiles.BulletProjectileGeneratorComponent.Draw(TopDownShooter.Engine.IGameObject,TopDownShooter.Engine.ICamera,TopDownShooter.Engine.Adapters.ISpriteBatchAdapter,Microsoft.Xna.Framework.GameTime)">
             <summary>
             Draws the component with the specified game object and game time.
             </summary>
             <param name="gameObject">The game object.</param>
+            <param name="camera">The <see cref="T:TopDownShooter.Engine.ICamera"/>.</param>
             <param name="spriteBatch">The sprite batch adapter.</param>
             <param name="time">The game time.</param>
         </member>

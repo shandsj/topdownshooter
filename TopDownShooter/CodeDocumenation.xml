@@ -133,10 +133,11 @@
             Gets the width of the game object.
             </summary>
         </member>
-        <member name="M:TopDownShooter.LeaderBoard.Draw(TopDownShooter.Engine.Adapters.ISpriteBatchAdapter,Microsoft.Xna.Framework.GameTime)">
+        <member name="M:TopDownShooter.LeaderBoard.Draw(TopDownShooter.Engine.ICamera,TopDownShooter.Engine.Adapters.ISpriteBatchAdapter,Microsoft.Xna.Framework.GameTime)">
             <summary>
             Draws the game object with the specified sprite batch adapter and game time.
             </summary>
+            <param name="camera">The <see cref="T:TopDownShooter.Engine.ICamera"/>.</param>
             <param name="spriteBatch">The sprite batch adapter.</param>
             <param name="gameTime">The game time.</param>
         </member>

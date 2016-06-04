@@ -84,13 +84,14 @@ namespace TopDownShooter.Engine
         /// <summary>
         /// Draws the game object with the specified sprite batch adapter and game time.
         /// </summary>
+        /// <param name="camera">The <see cref="ICamera"/>.</param>
         /// <param name="spriteBatch">The sprite batch adapter.</param>
         /// <param name="gameTime">The game time.</param>
-        public virtual void Draw(ISpriteBatchAdapter spriteBatch, GameTime gameTime)
+        public virtual void Draw(ICamera camera, ISpriteBatchAdapter spriteBatch, GameTime gameTime)
         {
             foreach (var component in this.Components)
             {
-                component.Draw(this, spriteBatch, gameTime);
+                component.Draw(this, camera, spriteBatch, gameTime);
             }
         }
 

@@ -69,7 +69,7 @@ namespace TopDownShooter.UnitTests
 
             var uut = new LeaderBoard(42, null, font.Object);
             uut.SetPlayers(players);
-            uut.Draw(spriteBatch.Object, new GameTime());
+            uut.Draw(new Mock<ICamera>().Object, spriteBatch.Object, new GameTime());
             Assert.AreEqual(2, drawStringMethodCallCount);
         }
 

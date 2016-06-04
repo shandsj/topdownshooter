@@ -77,13 +77,13 @@ namespace TopDownShooter
         public void Draw(GameTime gameTime)
         {
             this.worldSpriteBatch.Begin(transformMatrix: this.camera.TransformMatrix);
-            this.level.Draw(this.worldSpriteBatch, gameTime);
-            this.players.ForEach(o => o.Draw(this.worldSpriteBatch, gameTime));
-            this.gameItems.ForEach(o => o.Draw(this.worldSpriteBatch, gameTime));
+            this.level.Draw(this.camera, this.worldSpriteBatch, gameTime);
+            this.players.ForEach(o => o.Draw(this.camera, this.worldSpriteBatch, gameTime));
+            this.gameItems.ForEach(o => o.Draw(this.camera, this.worldSpriteBatch, gameTime));
             this.worldSpriteBatch.End();
 
             this.screenSpriteBatch.Begin();
-            this.leaderBoard.Draw(this.screenSpriteBatch, gameTime);
+            this.leaderBoard.Draw(this.camera, this.screenSpriteBatch, gameTime);
             this.screenSpriteBatch.End();
         }
 

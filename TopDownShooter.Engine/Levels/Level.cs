@@ -64,16 +64,17 @@ namespace TopDownShooter.Engine.Levels
         /// <summary>
         /// Draws the game object with the specified sprite batch adapter and game time.
         /// </summary>
+        /// <param name="camera">The <see cref="ICamera"/>.</param>
         /// <param name="spriteBatch">The sprite batch adapter.</param>
         /// <param name="gameTime">The game time.</param>
-        public override void Draw(ISpriteBatchAdapter spriteBatch, GameTime gameTime)
+        public override void Draw(ICamera camera, ISpriteBatchAdapter spriteBatch, GameTime gameTime)
         {
             foreach (var tile in this.Tiles)
             {
-                tile.Draw(spriteBatch, gameTime);
+                tile.Draw(camera, spriteBatch, gameTime);
             }
 
-            base.Draw(spriteBatch, gameTime);
+            base.Draw(camera, spriteBatch, gameTime);
         }
 
         /// <summary>

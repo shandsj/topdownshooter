@@ -39,6 +39,8 @@ namespace TopDownShooter
 
         private IMouseAdapter mouse;
 
+        private ICamera camera;
+
         /// <summary>
         /// Initializes a new instance of the <see cref="TitleScene" /> class.
         /// </summary>
@@ -56,6 +58,7 @@ namespace TopDownShooter
         internal TitleScene(GraphicsDevice graphicsDevice, IMouseAdapter mouse)
         {
             this.graphicsDevice = graphicsDevice;
+            this.camera = new Camera(this.graphicsDevice.Viewport) { Zoom = .5f };
             this.mouse = mouse;
         }
 
@@ -81,7 +84,7 @@ namespace TopDownShooter
             this.graphicsDevice.Clear(Color.Black);
 
             this.spriteBatch.Begin();
-            this.level.Draw(this.spriteBatch, gameTime);
+            this.level.Draw(this.camera, this.spriteBatch, gameTime);
             this.spriteBatch.Draw(this.playButtonTexture, this.playButtonPosition, null, Color.White, 0f, new Vector2(0, 0), PlayButtonScale, SpriteEffects.None, 0f);
             this.spriteBatch.Draw(this.logoTexture, this.logoPosition, null, Color.White, 0f, new Vector2(0, 0), LogoScale, SpriteEffects.None, 0f);
             this.spriteBatch.End();
