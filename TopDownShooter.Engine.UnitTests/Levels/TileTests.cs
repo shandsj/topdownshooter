@@ -84,7 +84,7 @@ namespace TopDownShooter.Engine.UnitTests.Levels
                         });
 
             var uut = new Tile(42, new Mock<ICollisionSystem>().Object, TileInteractionType.Blocking, null, new Vector2(42, 42), Point.Zero, 42, 42, new Vector2(10, 10));
-            uut.Draw(new Mock<ICamera>().Object, spriteBatch.Object, new GameTime());
+            uut.Draw(new Mock<ICamera2DAdapter>().Object, spriteBatch.Object, new GameTime());
             Assert.IsTrue(wasDrawCalled);
         }
     }

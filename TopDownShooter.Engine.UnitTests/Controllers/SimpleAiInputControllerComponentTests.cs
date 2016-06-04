@@ -68,7 +68,7 @@ namespace TopDownShooter.Engine.UnitTests.Controllers
 
             var inputController = new SimpleAiInputControllerComponent(new Random());
 
-            inputController.Draw(gameObject.Object, new Mock<ICamera>().Object, spriteBatch.Object, new GameTime());
+            inputController.Draw(gameObject.Object, new Mock<ICamera2DAdapter>().Object, spriteBatch.Object, new GameTime());
 
             // Verify that this controller does not mess with the sprite batch.
             Assert.IsFalse(wasDrawCalled);

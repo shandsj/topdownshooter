@@ -62,7 +62,7 @@ namespace TopDownShooter.Engine.UnitTests
             };
 
             // Do the thing!
-            uut.Draw(gameObject.Object, new Mock<ICamera>().Object, spriteBatch.Object, new GameTime());
+            uut.Draw(gameObject.Object, new Mock<ICamera2DAdapter>().Object, spriteBatch.Object, new GameTime());
 
             // Verify all our parameters as we expected them to be passed
             // through to the draw method.

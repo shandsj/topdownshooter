@@ -10,11 +10,14 @@ namespace TopDownShooter
     using System.Collections.Generic;
     using Microsoft.Xna.Framework;
     using Microsoft.Xna.Framework.Graphics;
+    using MonoGame.Extended;
+    using MonoGame.Extended.ViewportAdapters;
     using TiledSharp;
     using TopDownShooter.Engine;
     using TopDownShooter.Engine.Adapters;
     using TopDownShooter.Engine.Collisions;
     using TopDownShooter.Engine.Controllers;
+    using TopDownShooter.Engine.Inventory;
     using TopDownShooter.Engine.Levels;
     using TopDownShooter.Engine.Projectiles;
 
@@ -27,7 +30,7 @@ namespace TopDownShooter
 
         private readonly Random random = new Random((int)DateTime.Now.Ticks);
 
-        private ICamera camera;
+        private ICamera2DAdapter camera2DAdapter;
 
         private ICollisionSystem collisionSystem;
 
@@ -76,14 +79,14 @@ namespace TopDownShooter
         /// <param name="gameTime">The game time.</param>
         public void Draw(GameTime gameTime)
         {
-            this.worldSpriteBatch.Begin(transformMatrix: this.camera.TransformMatrix);
-            this.level.Draw(this.camera, this.worldSpriteBatch, gameTime);
-            this.players.ForEach(o => o.Draw(this.camera, this.worldSpriteBatch, gameTime));
-            this.gameItems.ForEach(o => o.Draw(this.camera, this.worldSpriteBatch, gameTime));
+            this.worldSpriteBatch.Begin(transformMatrix: this.camera2DAdapter.GetViewMatrix());
+            this.level.Draw(this.camera2DAdapter, this.worldSpriteBatch, gameTime);
+            this.players.ForEach(o => o.Draw(this.camera2DAdapter, this.worldSpriteBatch, gameTime));
+            this.gameItems.ForEach(o => o.Draw(this.camera2DAdapter, this.worldSpriteBatch, gameTime));
             this.worldSpriteBatch.End();
 
             this.screenSpriteBatch.Begin();
-            this.leaderBoard.Draw(this.camera, this.screenSpriteBatch, gameTime);
+            this.leaderBoard.Draw(this.camera2DAdapter, this.screenSpriteBatch, gameTime);
             this.screenSpriteBatch.End();
         }
 
@@ -98,7 +101,7 @@ namespace TopDownShooter
             this.gameItems = new List<IGameObject>();
             this.gameItems.AddRange(new GameObjectFactory().SpawnRandomBulletItems(10, this.collisionSystem, 100, 1500, 100, 1500));
 
-            this.camera = new Camera(this.graphicsDevice.Viewport) { Zoom = .5f };
+            this.camera2DAdapter = new Camera2DAdapter(new Camera2D(this.graphicsDevice) { Zoom = .5f });
             this.level = new Level(CollisionSystem.NextGameObjectId++, this.collisionSystem, new TmxMapAdapter(new TmxMap("Content/TmxFiles/DefaultLevel.tmx")));
             this.leaderBoard = new LeaderBoard(CollisionSystem.NextGameObjectId++);
             this.leaderBoard.Initialize();
@@ -176,7 +179,7 @@ namespace TopDownShooter
         {
             this.players.ForEach(o => o.Update(gameTime));
             this.gameItems.ForEach(o => o.Update(gameTime));
-            this.camera.Position = this.focusedPlayer.Position;
+            this.camera2DAdapter.LookAt(this.focusedPlayer.Position);
             this.leaderBoard.SetPlayers(this.players);
 
             this.gameItems.RemoveAll(o => (o as IGameItem).IsPickedUp);

@@ -75,10 +75,10 @@ namespace TopDownShooter.Engine
         /// <summary>
         /// Draws the game object with the specified sprite batch adapter and game time.
         /// </summary>
-        /// <param name="camera">The <see cref="ICamera"/>.</param>
+        /// <param name="camera">The <see cref="ICamera2DAdapter"/>.</param>
         /// <param name="spriteBatch">The sprite batch adapter.</param>
         /// <param name="gameTime">The game time.</param>
-        void Draw(ICamera camera, ISpriteBatchAdapter spriteBatch, GameTime gameTime);
+        void Draw(ICamera2DAdapter camera, ISpriteBatchAdapter spriteBatch, GameTime gameTime);
 
         /// <summary>
         /// Loads the content from the specified content manager adapter.

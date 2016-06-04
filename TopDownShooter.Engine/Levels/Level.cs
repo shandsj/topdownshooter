@@ -84,10 +84,10 @@ namespace TopDownShooter.Engine.Levels
         /// <summary>
         /// Draws the game object with the specified sprite batch adapter and game time.
         /// </summary>
-        /// <param name="camera">The <see cref="ICamera" />.</param>
+        /// <param name="camera">The <see cref="ICamera2DAdapter" />.</param>
         /// <param name="spriteBatch">The sprite batch adapter.</param>
         /// <param name="gameTime">The game time.</param>
-        public override void Draw(ICamera camera, ISpriteBatchAdapter spriteBatch, GameTime gameTime)
+        public override void Draw(ICamera2DAdapter camera, ISpriteBatchAdapter spriteBatch, GameTime gameTime)
         {
             // Calculate the tile sizes in the current camera view based off zoom level.
             var scaledTileWidth = (int)(this.map.TileWidth * camera.Zoom);
@@ -95,15 +95,15 @@ namespace TopDownShooter.Engine.Levels
 
             // Calculate the bounds we will use to draw tiles from. We will go a tile extra
             // just to make sure the entire screen is covered in tiles.
-            var boundWidth = camera.Bounds.Width + scaledTileWidth;
-            var boundHeight = camera.Bounds.Height + scaledTileHeight;
+            var boundWidth = camera.GetBoundingRectangle().Width + scaledTileWidth;
+            var boundHeight = camera.GetBoundingRectangle().Height + scaledTileHeight;
 
             for (int i = 0; i < boundWidth; i += scaledTileWidth)
             {
                 for (int j = 0; j < boundHeight; j += scaledTileHeight)
                 {
                     // Grab the world coordinates of the current iteration, and then figure out the nearest tile coordinates.
-                    var worldCoordinates = camera.GetWorldCoordinates(new Vector2(i, j));
+                    var worldCoordinates = camera.ScreenToWorld(i, j);
                     var nearestTileLocation = new Vector2(
                         (int)worldCoordinates.X / this.map.TileWidth * this.map.TileWidth,
                         (int)worldCoordinates.Y / this.map.TileHeight * this.map.TileHeight);

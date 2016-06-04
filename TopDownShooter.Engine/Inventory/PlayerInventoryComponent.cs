@@ -2,18 +2,14 @@
 // Copyright (c) PlaceholderCompany. All rights reserved.
 // </copyright>
 
-namespace TopDownShooter.Engine
+namespace TopDownShooter.Engine.Inventory
 {
-    using System;
-    using System.Collections.Generic;
     using System.Linq;
-    using System.Text;
-    using System.Threading.Tasks;
-    using Adapters;
-    using Collisions;
-    using Items;
     using Microsoft.Xna.Framework;
-    using Projectiles;
+    using TopDownShooter.Engine.Adapters;
+    using TopDownShooter.Engine.Collisions;
+    using TopDownShooter.Engine.Items;
+    using TopDownShooter.Engine.Projectiles;
 
     /// <summary>
     /// Inventory storage for an <see cref="IPlayer"/>
@@ -58,10 +54,10 @@ namespace TopDownShooter.Engine
         /// Draws the component with the specified game object and game time.
         /// </summary>
         /// <param name="gameObject">The game object.</param>
-        /// <param name="camera">The <see cref="ICamera"/>.</param>
+        /// <param name="camera">The <see cref="ICamera2DAdapter"/>.</param>
         /// <param name="spriteBatch">The sprite batch adapter.</param>
         /// <param name="time">The game time.</param>
-        public override void Draw(IGameObject gameObject, ICamera camera, ISpriteBatchAdapter spriteBatch, GameTime time)
+        public override void Draw(IGameObject gameObject, ICamera2DAdapter camera, ISpriteBatchAdapter spriteBatch, GameTime time)
         {
             base.Draw(gameObject, camera, spriteBatch, time);
             this.bulletProjectileGeneratorComponent.Draw(gameObject, camera, spriteBatch, time);

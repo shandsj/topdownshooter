@@ -86,10 +86,10 @@ namespace TopDownShooter.Engine
         /// <summary>
         /// Draws the game object with the specified sprite batch adapter and game time.
         /// </summary>
-        /// <param name="camera">The <see cref="ICamera"/>.</param>
+        /// <param name="camera">The <see cref="ICamera2DAdapter"/>.</param>
         /// <param name="spriteBatch">The sprite batch adapter.</param>
         /// <param name="gameTime">The game time.</param>
-        public override void Draw(ICamera camera, ISpriteBatchAdapter spriteBatch, GameTime gameTime)
+        public override void Draw(ICamera2DAdapter camera, ISpriteBatchAdapter spriteBatch, GameTime gameTime)
         {
             base.Draw(camera, spriteBatch, gameTime);
 

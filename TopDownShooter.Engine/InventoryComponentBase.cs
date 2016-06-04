@@ -62,10 +62,10 @@ namespace TopDownShooter.Engine
         /// Draws the component with the specified game object and game time.
         /// </summary>
         /// <param name="gameObject">The game object.</param>
-        /// <param name="camera">The <see cref="ICamera"/>.</param>
+        /// <param name="camera">The <see cref="ICamera2DAdapter"/>.</param>
         /// <param name="spriteBatch">The sprite batch adapter.</param>
         /// <param name="time">The game time.</param>
-        public virtual void Draw(IGameObject gameObject, ICamera camera, ISpriteBatchAdapter spriteBatch, GameTime time)
+        public virtual void Draw(IGameObject gameObject, ICamera2DAdapter camera, ISpriteBatchAdapter spriteBatch, GameTime time)
         {
             // TODO: Draw information about current state of the inventory.
         }

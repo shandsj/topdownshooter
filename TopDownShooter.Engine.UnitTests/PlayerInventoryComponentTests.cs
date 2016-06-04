@@ -11,6 +11,7 @@ namespace TopDownShooter.Engine.UnitTests
     using Microsoft.VisualStudio.TestTools.UnitTesting;
     using Moq;
     using TopDownShooter.Engine.Collisions;
+    using TopDownShooter.Engine.Inventory;
 
     /// <summary>
     /// Tests Container for <see cref="PlayerInventoryComponent" />

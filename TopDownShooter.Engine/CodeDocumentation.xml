@@ -4,6 +4,159 @@
         <name>TopDownShooter.Engine</name>
     </assembly>
     <members>
+        <member name="T:TopDownShooter.Engine.Adapters.Camera2DAdapter">
+            <summary>
+            Provides a default implementation of the <see cref="T:TopDownShooter.Engine.Adapters.ICamera2DAdapter" /> class.
+            </summary>
+        </member>
+        <member name="M:TopDownShooter.Engine.Adapters.Camera2DAdapter.#ctor(MonoGame.Extended.Camera2D)">
+            <summary>
+            Initializes a new instance of the <see cref="T:TopDownShooter.Engine.Adapters.Camera2DAdapter"/> class.
+            </summary>
+            <param name="camera">The <see cref="T:MonoGame.Extended.Camera2D"/>.</param>
+        </member>
+        <member name="P:TopDownShooter.Engine.Adapters.Camera2DAdapter.MaximumZoom">
+            <summary>
+            Gets or sets the maximum zoom.
+            </summary>
+        </member>
+        <member name="P:TopDownShooter.Engine.Adapters.Camera2DAdapter.MinimumZoom">
+            <summary>
+            Gets or sets the minimum zoom.
+            </summary>
+        </member>
+        <member name="P:TopDownShooter.Engine.Adapters.Camera2DAdapter.Origin">
+            <summary>
+            Gets or sets the origin.
+            </summary>
+        </member>
+        <member name="P:TopDownShooter.Engine.Adapters.Camera2DAdapter.Position">
+            <summary>
+            Gets or sets the position.
+            </summary>
+        </member>
+        <member name="P:TopDownShooter.Engine.Adapters.Camera2DAdapter.Rotation">
+            <summary>
+            Gets or sets the rotation.
+            </summary>
+        </member>
+        <member name="P:TopDownShooter.Engine.Adapters.Camera2DAdapter.Zoom">
+            <summary>
+            Gets or sets the zoom.
+            </summary>
+        </member>
+        <member name="M:TopDownShooter.Engine.Adapters.Camera2DAdapter.Contains(Microsoft.Xna.Framework.Rectangle)">
+            <summary>
+            Determines if the specified rectangle is contained in the camera.
+            </summary>
+            <param name="rectangle">The rectangle.</param>
+            <returns>The <see cref="T:Microsoft.Xna.Framework.ContainmentType" />.</returns>
+        </member>
+        <member name="M:TopDownShooter.Engine.Adapters.Camera2DAdapter.Contains(Microsoft.Xna.Framework.Vector2)">
+            <summary>
+            Determines if the specified vector is contained in the camera.
+            </summary>
+            <param name="vector2">The vector.</param>
+            <returns>The <see cref="T:Microsoft.Xna.Framework.ContainmentType" />.</returns>
+        </member>
+        <member name="M:TopDownShooter.Engine.Adapters.Camera2DAdapter.Contains(Microsoft.Xna.Framework.Point)">
+            <summary>
+            Determines if the specified point is contained in the camera.
+            </summary>
+            <param name="point">The point.</param>
+            <returns>The <see cref="T:Microsoft.Xna.Framework.ContainmentType" />.</returns>
+        </member>
+        <member name="M:TopDownShooter.Engine.Adapters.Camera2DAdapter.GetBoundingFrustum">
+            <summary>
+            Gets the bounding frustum.
+            </summary>
+            <returns>The bounding frustum.</returns>
+        </member>
+        <member name="M:TopDownShooter.Engine.Adapters.Camera2DAdapter.GetBoundingRectangle">
+            <summary>
+            Gets the bounding rectangle.
+            </summary>
+            <returns>The bounding rectangle</returns>
+        </member>
+        <member name="M:TopDownShooter.Engine.Adapters.Camera2DAdapter.GetInverseViewMatrix">
+            <summary>
+            Gets the inverse view matrix.
+            </summary>
+            <returns>The inverse view matrix.</returns>
+        </member>
+        <member name="M:TopDownShooter.Engine.Adapters.Camera2DAdapter.GetViewMatrix">
+            <summary>
+            Gets the view matrix.
+            </summary>
+            <returns>The view matrix.</returns>
+        </member>
+        <member name="M:TopDownShooter.Engine.Adapters.Camera2DAdapter.GetViewMatrix(Microsoft.Xna.Framework.Vector2)">
+            <summary>
+            Gets the view matrix with the specified parallax factor.
+            </summary>
+            <param name="parallaxFactor">The parallax factor.</param>
+            <returns>The view matrix.</returns>
+        </member>
+        <member name="M:TopDownShooter.Engine.Adapters.Camera2DAdapter.LookAt(Microsoft.Xna.Framework.Vector2)">
+            <summary>
+            Instructs the camera to look at the specified location.
+            </summary>
+            <param name="position">The location.</param>
+        </member>
+        <member name="M:TopDownShooter.Engine.Adapters.Camera2DAdapter.Move(Microsoft.Xna.Framework.Vector2)">
+            <summary>
+            Instructs the camera to move in the specified direction.
+            </summary>
+            <param name="direction">The direction.</param>
+        </member>
+        <member name="M:TopDownShooter.Engine.Adapters.Camera2DAdapter.Rotate(System.Single)">
+            <summary>
+            Rotates the camera the specified radians.
+            </summary>
+            <param name="deltaRadians">The change in radians.</param>
+        </member>
+        <member name="M:TopDownShooter.Engine.Adapters.Camera2DAdapter.ScreenToWorld(Microsoft.Xna.Framework.Vector2)">
+            <summary>
+            Converts the specified screen position to world coordinates.
+            </summary>
+            <param name="screenPosition">The screen position.</param>
+            <returns>The converted world coordinates.</returns>
+        </member>
+        <member name="M:TopDownShooter.Engine.Adapters.Camera2DAdapter.ScreenToWorld(System.Single,System.Single)">
+            <summary>
+            Converts the specified screen position to world coordinates.
+            </summary>
+            <param name="x">The x screen coordinate.</param>
+            <param name="y">The y screen coordinate.</param>
+            <returns>The converted world coordinates.</returns>
+        </member>
+        <member name="M:TopDownShooter.Engine.Adapters.Camera2DAdapter.WorldToScreen(Microsoft.Xna.Framework.Vector2)">
+            <summary>
+            Converts the specified world position to screen coordinates.
+            </summary>
+            <param name="worldPosition">The world position.</param>
+            <returns>The converted screen coordinates.</returns>
+        </member>
+        <member name="M:TopDownShooter.Engine.Adapters.Camera2DAdapter.WorldToScreen(System.Single,System.Single)">
+            <summary>
+            Converts the specified world position to screen coordinates.
+            </summary>
+            <param name="x">The x world coordinate.</param>
+            <param name="y">The y world coordinate.</param>
+            <returns>The converted screen coordinates.</returns>
+        </member>
+        <member name="M:TopDownShooter.Engine.Adapters.Camera2DAdapter.ZoomIn(System.Single)">
+            <summary>
+            Zooms in the camera the specified change.
+            </summary>
+            <param name="deltaZoom">The change in zoom level.</param>
+        </member>
+        <member name="M:TopDownShooter.Engine.Adapters.Camera2DAdapter.ZoomOut(System.Single)">
+            <summary>
+            Zooms out the camera the specified change.
+            </summary>
+            <param name="deltaZoom">The change in zoom level.</param>
+        </member>
         <member name="T:TopDownShooter.Engine.Adapters.ContentManagerAdapter">
             <summary>
             Defines an adapter for the <see cref="T:Microsoft.Xna.Framework.Content.ContentManager" /> class.
@@ -46,6 +199,153 @@
             </summary>
             <param name="playerIndex">Player index for the controller you want to query.</param>
             <returns>The state of the controller.</returns>
+        </member>
+        <member name="T:TopDownShooter.Engine.Adapters.ICamera2DAdapter">
+            <summary>
+            Defines an interface for a camera.
+            </summary>
+        </member>
+        <member name="P:TopDownShooter.Engine.Adapters.ICamera2DAdapter.MaximumZoom">
+            <summary>
+            Gets or sets the maximum zoom.
+            </summary>
+        </member>
+        <member name="P:TopDownShooter.Engine.Adapters.ICamera2DAdapter.MinimumZoom">
+            <summary>
+            Gets or sets the minimum zoom.
+            </summary>
+        </member>
+        <member name="P:TopDownShooter.Engine.Adapters.ICamera2DAdapter.Origin">
+            <summary>
+            Gets or sets the origin.
+            </summary>
+        </member>
+        <member name="P:TopDownShooter.Engine.Adapters.ICamera2DAdapter.Position">
+            <summary>
+            Gets or sets the position.
+            </summary>
+        </member>
+        <member name="P:TopDownShooter.Engine.Adapters.ICamera2DAdapter.Rotation">
+            <summary>
+            Gets or sets the rotation.
+            </summary>
+        </member>
+        <member name="P:TopDownShooter.Engine.Adapters.ICamera2DAdapter.Zoom">
+            <summary>
+            Gets or sets the zoom.
+            </summary>
+        </member>
+        <member name="M:TopDownShooter.Engine.Adapters.ICamera2DAdapter.Contains(Microsoft.Xna.Framework.Rectangle)">
+            <summary>
+            Determines if the specified rectangle is contained in the camera.
+            </summary>
+            <param name="rectangle">The rectangle.</param>
+            <returns>The <see cref="T:Microsoft.Xna.Framework.ContainmentType"/>.</returns>
+        </member>
+        <member name="M:TopDownShooter.Engine.Adapters.ICamera2DAdapter.Contains(Microsoft.Xna.Framework.Vector2)">
+            <summary>
+            Determines if the specified vector is contained in the camera.
+            </summary>
+            <param name="vector2">The vector.</param>
+            <returns>The <see cref="T:Microsoft.Xna.Framework.ContainmentType"/>.</returns>
+        </member>
+        <member name="M:TopDownShooter.Engine.Adapters.ICamera2DAdapter.Contains(Microsoft.Xna.Framework.Point)">
+            <summary>
+            Determines if the specified point is contained in the camera.
+            </summary>
+            <param name="point">The point.</param>
+            <returns>The <see cref="T:Microsoft.Xna.Framework.ContainmentType"/>.</returns>
+        </member>
+        <member name="M:TopDownShooter.Engine.Adapters.ICamera2DAdapter.GetBoundingFrustum">
+            <summary>
+            Gets the bounding frustum.
+            </summary>
+            <returns>The bounding frustum.</returns>
+        </member>
+        <member name="M:TopDownShooter.Engine.Adapters.ICamera2DAdapter.GetBoundingRectangle">
+            <summary>
+            Gets the bounding rectangle.
+            </summary>
+            <returns>The bounding rectangle.</returns>
+        </member>
+        <member name="M:TopDownShooter.Engine.Adapters.ICamera2DAdapter.GetInverseViewMatrix">
+            <summary>
+            Gets the inverse view matrix.
+            </summary>
+            <returns>The inverse view matrix.</returns>
+        </member>
+        <member name="M:TopDownShooter.Engine.Adapters.ICamera2DAdapter.GetViewMatrix">
+            <summary>
+            Gets the view matrix.
+            </summary>
+            <returns>The view matrix.</returns>
+        </member>
+        <member name="M:TopDownShooter.Engine.Adapters.ICamera2DAdapter.GetViewMatrix(Microsoft.Xna.Framework.Vector2)">
+            <summary>
+            Gets the view matrix with the specified parallax factor.
+            </summary>
+            <param name="parallaxFactor">The parallax factor.</param>
+            <returns>The view matrix.</returns>
+        </member>
+        <member name="M:TopDownShooter.Engine.Adapters.ICamera2DAdapter.LookAt(Microsoft.Xna.Framework.Vector2)">
+            <summary>
+            Instructs the camera to look at the specified location.
+            </summary>
+            <param name="position">The location.</param>
+        </member>
+        <member name="M:TopDownShooter.Engine.Adapters.ICamera2DAdapter.Move(Microsoft.Xna.Framework.Vector2)">
+            <summary>
+            Instructs the camera to move in the specified direction.
+            </summary>
+            <param name="direction">The direction.</param>
+        </member>
+        <member name="M:TopDownShooter.Engine.Adapters.ICamera2DAdapter.Rotate(System.Single)">
+            <summary>
+            Rotates the camera the specified radians.
+            </summary>
+            <param name="deltaRadians">The change in radians.</param>
+        </member>
+        <member name="M:TopDownShooter.Engine.Adapters.ICamera2DAdapter.ScreenToWorld(Microsoft.Xna.Framework.Vector2)">
+            <summary>
+            Converts the specified screen position to world coordinates.
+            </summary>
+            <param name="screenPosition">The screen position.</param>
+            <returns>The converted world coordinates.</returns>
+        </member>
+        <member name="M:TopDownShooter.Engine.Adapters.ICamera2DAdapter.ScreenToWorld(System.Single,System.Single)">
+            <summary>
+            Converts the specified screen position to world coordinates.
+            </summary>
+            <param name="x">The x screen coordinate.</param>
+            <param name="y">The y screen coordinate.</param>
+            <returns>The converted world coordinates.</returns>
+        </member>
+        <member name="M:TopDownShooter.Engine.Adapters.ICamera2DAdapter.WorldToScreen(Microsoft.Xna.Framework.Vector2)">
+            <summary>
+            Converts the specified world position to screen coordinates.
+            </summary>
+            <param name="worldPosition">The world position.</param>
+            <returns>The converted screen coordinates.</returns>
+        </member>
+        <member name="M:TopDownShooter.Engine.Adapters.ICamera2DAdapter.WorldToScreen(System.Single,System.Single)">
+            <summary>
+            Converts the specified world position to screen coordinates.
+            </summary>
+            <param name="x">The x world coordinate.</param>
+            <param name="y">The y world coordinate.</param>
+            <returns>The converted screen coordinates.</returns>
+        </member>
+        <member name="M:TopDownShooter.Engine.Adapters.ICamera2DAdapter.ZoomIn(System.Single)">
+            <summary>
+            Zooms in the camera the specified change.
+            </summary>
+            <param name="deltaZoom">The change in zoom level.</param>
+        </member>
+        <member name="M:TopDownShooter.Engine.Adapters.ICamera2DAdapter.ZoomOut(System.Single)">
+            <summary>
+            Zooms out the camera the specified change.
+            </summary>
+            <param name="deltaZoom">The change in zoom level.</param>
         </member>
         <member name="T:TopDownShooter.Engine.Adapters.IContentManagerAdapter">
             <summary>
@@ -420,12 +720,12 @@
             Gets or sets the <see cref="T:Microsoft.Xna.Framework.Graphics.SpriteEffects" /> for this <see cref="T:TopDownShooter.Engine.AnimationComponent" />.
             </summary>
         </member>
-        <member name="M:TopDownShooter.Engine.AnimationComponent.Draw(TopDownShooter.Engine.IGameObject,TopDownShooter.Engine.ICamera,TopDownShooter.Engine.Adapters.ISpriteBatchAdapter,Microsoft.Xna.Framework.GameTime)">
+        <member name="M:TopDownShooter.Engine.AnimationComponent.Draw(TopDownShooter.Engine.IGameObject,TopDownShooter.Engine.Adapters.ICamera2DAdapter,TopDownShooter.Engine.Adapters.ISpriteBatchAdapter,Microsoft.Xna.Framework.GameTime)">
             <summary>
             Draws the component with the specified game object and game time.
             </summary>
             <param name="gameObject">The game object.</param>
-            <param name="camera">The <see cref="T:TopDownShooter.Engine.ICamera"/>.</param>
+            <param name="camera">The <see cref="T:TopDownShooter.Engine.Adapters.ICamera2DAdapter"/>.</param>
             <param name="spriteBatch">The sprite batch adapter.</param>
             <param name="time">The game time.</param>
         </member>
@@ -493,12 +793,12 @@
             Gets the current animations <see cref="P:TopDownShooter.Engine.AnimationComponentManager.FrameProperties"/>
             </summary>
         </member>
-        <member name="M:TopDownShooter.Engine.AnimationComponentManager.Draw(TopDownShooter.Engine.IGameObject,TopDownShooter.Engine.ICamera,TopDownShooter.Engine.Adapters.ISpriteBatchAdapter,Microsoft.Xna.Framework.GameTime)">
+        <member name="M:TopDownShooter.Engine.AnimationComponentManager.Draw(TopDownShooter.Engine.IGameObject,TopDownShooter.Engine.Adapters.ICamera2DAdapter,TopDownShooter.Engine.Adapters.ISpriteBatchAdapter,Microsoft.Xna.Framework.GameTime)">
             <summary>
             Draws the component with the specified game object and game time.
             </summary>
             <param name="gameObject">The game object.</param>
-            <param name="camera">The <see cref="T:TopDownShooter.Engine.ICamera"/>.</param>
+            <param name="camera">The <see cref="T:TopDownShooter.Engine.Adapters.ICamera2DAdapter"/>.</param>
             <param name="spriteBatch">The sprite batch adapter.</param>
             <param name="time">The game time.</param>
         </member>
@@ -550,58 +850,6 @@
             that is loaded.
             </summary>
         </member>
-        <member name="T:TopDownShooter.Engine.Camera">
-            <summary>
-            The camera.
-            </summary>
-        </member>
-        <member name="M:TopDownShooter.Engine.Camera.#ctor(Microsoft.Xna.Framework.Graphics.Viewport)">
-            <summary>
-            Initializes a new instance of the <see cref="T:TopDownShooter.Engine.Camera" /> class.
-            </summary>
-            <param name="viewport">
-            The viewport.
-            </param>
-        </member>
-        <member name="P:TopDownShooter.Engine.Camera.Bounds">
-            <summary>
-            Gets or sets the bounds.
-            </summary>
-        </member>
-        <member name="P:TopDownShooter.Engine.Camera.Position">
-            <summary>
-            Gets or sets the position.
-            </summary>
-        </member>
-        <member name="P:TopDownShooter.Engine.Camera.Rotation">
-            <summary>
-            Gets or sets the rotation.
-            </summary>
-        </member>
-        <member name="P:TopDownShooter.Engine.Camera.TransformMatrix">
-            <summary>
-            Gets the transform matrix.
-            </summary>
-        </member>
-        <member name="P:TopDownShooter.Engine.Camera.Zoom">
-            <summary>
-            Gets or sets the zoom.
-            </summary>
-        </member>
-        <member name="M:TopDownShooter.Engine.Camera.GetScreenCoordinates(Microsoft.Xna.Framework.Vector2)">
-            <summary>
-            Gets the screen coordinates for the specified world coordinates.
-            </summary>
-            <param name="worldCoordinates">The world coordinates.</param>
-            <returns>The screen coordinates.</returns>
-        </member>
-        <member name="M:TopDownShooter.Engine.Camera.GetWorldCoordinates(Microsoft.Xna.Framework.Vector2)">
-            <summary>
-            Gets the world coordinates for the specified screen coordinates.
-            </summary>
-            <param name="screenCoordinates">The screen coordinates.</param>
-            <returns>The world coordinates.</returns>
-        </member>
         <member name="T:TopDownShooter.Engine.Collisions.ColliderComponentBase">
             <summary>
             Defines a rigid body component that will respond to collisions with other rigid bodies.
@@ -624,12 +872,12 @@
             Gets the <see cref="T:TopDownShooter.Engine.Collisions.ICollisionSystem" />.
             </summary>
         </member>
-        <member name="M:TopDownShooter.Engine.Collisions.ColliderComponentBase.Draw(TopDownShooter.Engine.IGameObject,TopDownShooter.Engine.ICamera,TopDownShooter.Engine.Adapters.ISpriteBatchAdapter,Microsoft.Xna.Framework.GameTime)">
+        <member name="M:TopDownShooter.Engine.Collisions.ColliderComponentBase.Draw(TopDownShooter.Engine.IGameObject,TopDownShooter.Engine.Adapters.ICamera2DAdapter,TopDownShooter.Engine.Adapters.ISpriteBatchAdapter,Microsoft.Xna.Framework.GameTime)">
             <summary>
             Draws the component with the specified game object and game time.
             </summary>
             <param name="gameObject">The game object.</param>
-            <param name="camera">The <see cref="T:TopDownShooter.Engine.ICamera"/>.</param>
+            <param name="camera">The <see cref="T:TopDownShooter.Engine.Adapters.ICamera2DAdapter"/>.</param>
             <param name="spriteBatch">The sprite batch adapter.</param>
             <param name="time">The game time.</param>
         </member>
@@ -942,12 +1190,12 @@
             Cleans up any resources used during the execution of this class
             </summary>
         </member>
-        <member name="M:TopDownShooter.Engine.Controllers.InputControllerComponentBase.Draw(TopDownShooter.Engine.IGameObject,TopDownShooter.Engine.ICamera,TopDownShooter.Engine.Adapters.ISpriteBatchAdapter,Microsoft.Xna.Framework.GameTime)">
+        <member name="M:TopDownShooter.Engine.Controllers.InputControllerComponentBase.Draw(TopDownShooter.Engine.IGameObject,TopDownShooter.Engine.Adapters.ICamera2DAdapter,TopDownShooter.Engine.Adapters.ISpriteBatchAdapter,Microsoft.Xna.Framework.GameTime)">
             <summary>
             Draws the component with the specified game object and game time.
             </summary>
             <param name="gameObject">The game object.</param>
-            <param name="camera">The <see cref="T:TopDownShooter.Engine.ICamera"/>.</param>
+            <param name="camera">The <see cref="T:TopDownShooter.Engine.Adapters.ICamera2DAdapter"/>.</param>
             <param name="spriteBatch">The sprite batch adapter.</param>
             <param name="time">The game time.</param>
         </member>
@@ -1060,12 +1308,12 @@
             <param name="color">Border color for the bounding box around a given <see cref="T:TopDownShooter.Engine.GameObject"/></param>
             <param name="borderThickness">The thickness for the rectangluar border for a given <see cref="T:TopDownShooter.Engine.GameObject"/></param>
         </member>
-        <member name="M:TopDownShooter.Engine.DebugComponent.Draw(TopDownShooter.Engine.IGameObject,TopDownShooter.Engine.ICamera,TopDownShooter.Engine.Adapters.ISpriteBatchAdapter,Microsoft.Xna.Framework.GameTime)">
+        <member name="M:TopDownShooter.Engine.DebugComponent.Draw(TopDownShooter.Engine.IGameObject,TopDownShooter.Engine.Adapters.ICamera2DAdapter,TopDownShooter.Engine.Adapters.ISpriteBatchAdapter,Microsoft.Xna.Framework.GameTime)">
             <summary>
             Draws the component with the specified game object and game time.
             </summary>
             <param name="gameObject">The game object.</param>
-            <param name="camera">The <see cref="T:TopDownShooter.Engine.ICamera"/>.</param>
+            <param name="camera">The <see cref="T:TopDownShooter.Engine.Adapters.ICamera2DAdapter"/>.</param>
             <param name="spriteBatch">The sprite batch adapter.</param>
             <param name="time">The game time.</param>
         </member>
@@ -1300,12 +1548,12 @@
             <param name="gameObject">The game object to update.</param>
             <param name="time">The game time.</param>
         </member>
-        <member name="M:TopDownShooter.Engine.IComponent.Draw(TopDownShooter.Engine.IGameObject,TopDownShooter.Engine.ICamera,TopDownShooter.Engine.Adapters.ISpriteBatchAdapter,Microsoft.Xna.Framework.GameTime)">
+        <member name="M:TopDownShooter.Engine.IComponent.Draw(TopDownShooter.Engine.IGameObject,TopDownShooter.Engine.Adapters.ICamera2DAdapter,TopDownShooter.Engine.Adapters.ISpriteBatchAdapter,Microsoft.Xna.Framework.GameTime)">
             <summary>
             Draws the component with the specified game object and game time.
             </summary>
             <param name="gameObject">The game object.</param>
-            <param name="camera">The <see cref="T:TopDownShooter.Engine.ICamera"/>.</param>
+            <param name="camera">The <see cref="T:TopDownShooter.Engine.Adapters.ICamera2DAdapter"/>.</param>
             <param name="spriteBatch">The sprite batch adapter.</param>
             <param name="time">The game time.</param>
         </member>
@@ -1422,11 +1670,11 @@
             Gets or sets the velocity of the entity.
             </summary>
         </member>
-        <member name="M:TopDownShooter.Engine.GameObject.Draw(TopDownShooter.Engine.ICamera,TopDownShooter.Engine.Adapters.ISpriteBatchAdapter,Microsoft.Xna.Framework.GameTime)">
+        <member name="M:TopDownShooter.Engine.GameObject.Draw(TopDownShooter.Engine.Adapters.ICamera2DAdapter,TopDownShooter.Engine.Adapters.ISpriteBatchAdapter,Microsoft.Xna.Framework.GameTime)">
             <summary>
             Draws the game object with the specified sprite batch adapter and game time.
             </summary>
-            <param name="camera">The <see cref="T:TopDownShooter.Engine.ICamera"/>.</param>
+            <param name="camera">The <see cref="T:TopDownShooter.Engine.Adapters.ICamera2DAdapter"/>.</param>
             <param name="spriteBatch">The sprite batch adapter.</param>
             <param name="gameTime">The game time.</param>
         </member>
@@ -1473,50 +1721,6 @@
             <typeparam name="TComponent">Component type to find.</typeparam>
             <returns><see cref="T:System.Collections.Generic.IEnumerable`1"/> if found, null otherwise.</returns>
             <remarks>To throw or not to throw? That is the question.</remarks>
-        </member>
-        <member name="T:TopDownShooter.Engine.ICamera">
-            <summary>
-            Defines an interface for a camera.
-            </summary>
-        </member>
-        <member name="P:TopDownShooter.Engine.ICamera.Bounds">
-            <summary>
-            Gets or sets the bounds.
-            </summary>
-        </member>
-        <member name="P:TopDownShooter.Engine.ICamera.Position">
-            <summary>
-            Gets or sets the position.
-            </summary>
-        </member>
-        <member name="P:TopDownShooter.Engine.ICamera.Rotation">
-            <summary>
-            Gets or sets the rotation.
-            </summary>
-        </member>
-        <member name="P:TopDownShooter.Engine.ICamera.TransformMatrix">
-            <summary>
-            Gets the transform matrix.
-            </summary>
-        </member>
-        <member name="P:TopDownShooter.Engine.ICamera.Zoom">
-            <summary>
-            Gets or sets the zoom.
-            </summary>
-        </member>
-        <member name="M:TopDownShooter.Engine.ICamera.GetScreenCoordinates(Microsoft.Xna.Framework.Vector2)">
-            <summary>
-            Gets the screen coordinates for the specified world coordinates.
-            </summary>
-            <param name="worldCoordinates">The world coordinates.</param>
-            <returns>The screen coordinates.</returns>
-        </member>
-        <member name="M:TopDownShooter.Engine.ICamera.GetWorldCoordinates(Microsoft.Xna.Framework.Vector2)">
-            <summary>
-            Gets the world coordinates for the specified screen coordinates.
-            </summary>
-            <param name="screenCoordinates">The screen coordinates.</param>
-            <returns>The world coordinates.</returns>
         </member>
         <member name="T:TopDownShooter.Engine.IGameItem">
             <summary>
@@ -1602,11 +1806,11 @@
             </summary>
             <param name="gameTime">The game time.</param>
         </member>
-        <member name="M:TopDownShooter.Engine.IGameObject.Draw(TopDownShooter.Engine.ICamera,TopDownShooter.Engine.Adapters.ISpriteBatchAdapter,Microsoft.Xna.Framework.GameTime)">
+        <member name="M:TopDownShooter.Engine.IGameObject.Draw(TopDownShooter.Engine.Adapters.ICamera2DAdapter,TopDownShooter.Engine.Adapters.ISpriteBatchAdapter,Microsoft.Xna.Framework.GameTime)">
             <summary>
             Draws the game object with the specified sprite batch adapter and game time.
             </summary>
-            <param name="camera">The <see cref="T:TopDownShooter.Engine.ICamera"/>.</param>
+            <param name="camera">The <see cref="T:TopDownShooter.Engine.Adapters.ICamera2DAdapter"/>.</param>
             <param name="spriteBatch">The sprite batch adapter.</param>
             <param name="gameTime">The game time.</param>
         </member>
@@ -1685,12 +1889,12 @@
             Destroys the component.
             </summary>
         </member>
-        <member name="M:TopDownShooter.Engine.InventoryComponentBase.Draw(TopDownShooter.Engine.IGameObject,TopDownShooter.Engine.ICamera,TopDownShooter.Engine.Adapters.ISpriteBatchAdapter,Microsoft.Xna.Framework.GameTime)">
+        <member name="M:TopDownShooter.Engine.InventoryComponentBase.Draw(TopDownShooter.Engine.IGameObject,TopDownShooter.Engine.Adapters.ICamera2DAdapter,TopDownShooter.Engine.Adapters.ISpriteBatchAdapter,Microsoft.Xna.Framework.GameTime)">
             <summary>
             Draws the component with the specified game object and game time.
             </summary>
             <param name="gameObject">The game object.</param>
-            <param name="camera">The <see cref="T:TopDownShooter.Engine.ICamera"/>.</param>
+            <param name="camera">The <see cref="T:TopDownShooter.Engine.Adapters.ICamera2DAdapter"/>.</param>
             <param name="spriteBatch">The sprite batch adapter.</param>
             <param name="time">The game time.</param>
         </member>
@@ -1719,40 +1923,40 @@
             <param name="gameObject">The game object to update.</param>
             <param name="time">The game time.</param>
         </member>
-        <member name="T:TopDownShooter.Engine.PlayerInventoryComponent">
+        <member name="T:TopDownShooter.Engine.Inventory.PlayerInventoryComponent">
             <summary>
             Inventory storage for an <see cref="T:TopDownShooter.Engine.IPlayer"/>
             </summary>
         </member>
-        <member name="M:TopDownShooter.Engine.PlayerInventoryComponent.#ctor(TopDownShooter.Engine.Collisions.ICollisionSystem)">
+        <member name="M:TopDownShooter.Engine.Inventory.PlayerInventoryComponent.#ctor(TopDownShooter.Engine.Collisions.ICollisionSystem)">
             <summary>
-            Initializes a new instance of the <see cref="T:TopDownShooter.Engine.PlayerInventoryComponent"/> class.
+            Initializes a new instance of the <see cref="T:TopDownShooter.Engine.Inventory.PlayerInventoryComponent"/> class.
             </summary>
             <param name="collisionSystem">Collision system reference.</param>
         </member>
-        <member name="M:TopDownShooter.Engine.PlayerInventoryComponent.LoadContent(TopDownShooter.Engine.Adapters.IContentManagerAdapter)">
+        <member name="M:TopDownShooter.Engine.Inventory.PlayerInventoryComponent.LoadContent(TopDownShooter.Engine.Adapters.IContentManagerAdapter)">
             <summary>
             Loads the content from the specified content manager adapter.
             </summary>
             <param name="contentManager">The content manager adapter.</param>
         </member>
-        <member name="M:TopDownShooter.Engine.PlayerInventoryComponent.Update(TopDownShooter.Engine.IGameObject,Microsoft.Xna.Framework.GameTime)">
+        <member name="M:TopDownShooter.Engine.Inventory.PlayerInventoryComponent.Update(TopDownShooter.Engine.IGameObject,Microsoft.Xna.Framework.GameTime)">
             <summary>
             Updates the component with the specified game object and game time.
             </summary>
             <param name="gameObject">The game object to update.</param>
             <param name="time">The game time.</param>
         </member>
-        <member name="M:TopDownShooter.Engine.PlayerInventoryComponent.Draw(TopDownShooter.Engine.IGameObject,TopDownShooter.Engine.ICamera,TopDownShooter.Engine.Adapters.ISpriteBatchAdapter,Microsoft.Xna.Framework.GameTime)">
+        <member name="M:TopDownShooter.Engine.Inventory.PlayerInventoryComponent.Draw(TopDownShooter.Engine.IGameObject,TopDownShooter.Engine.Adapters.ICamera2DAdapter,TopDownShooter.Engine.Adapters.ISpriteBatchAdapter,Microsoft.Xna.Framework.GameTime)">
             <summary>
             Draws the component with the specified game object and game time.
             </summary>
             <param name="gameObject">The game object.</param>
-            <param name="camera">The <see cref="T:TopDownShooter.Engine.ICamera"/>.</param>
+            <param name="camera">The <see cref="T:TopDownShooter.Engine.Adapters.ICamera2DAdapter"/>.</param>
             <param name="spriteBatch">The sprite batch adapter.</param>
             <param name="time">The game time.</param>
         </member>
-        <member name="M:TopDownShooter.Engine.PlayerInventoryComponent.ReceiveMessage(TopDownShooter.Engine.IGameObject,TopDownShooter.Engine.ComponentMessage)">
+        <member name="M:TopDownShooter.Engine.Inventory.PlayerInventoryComponent.ReceiveMessage(TopDownShooter.Engine.IGameObject,TopDownShooter.Engine.ComponentMessage)">
             <summary>
             Receives a message.
             </summary>
@@ -1955,11 +2159,11 @@
             Gets the width of the game object.
             </summary>
         </member>
-        <member name="M:TopDownShooter.Engine.Levels.Level.Draw(TopDownShooter.Engine.ICamera,TopDownShooter.Engine.Adapters.ISpriteBatchAdapter,Microsoft.Xna.Framework.GameTime)">
+        <member name="M:TopDownShooter.Engine.Levels.Level.Draw(TopDownShooter.Engine.Adapters.ICamera2DAdapter,TopDownShooter.Engine.Adapters.ISpriteBatchAdapter,Microsoft.Xna.Framework.GameTime)">
             <summary>
             Draws the game object with the specified sprite batch adapter and game time.
             </summary>
-            <param name="camera">The <see cref="T:TopDownShooter.Engine.ICamera" />.</param>
+            <param name="camera">The <see cref="T:TopDownShooter.Engine.Adapters.ICamera2DAdapter" />.</param>
             <param name="spriteBatch">The sprite batch adapter.</param>
             <param name="gameTime">The game time.</param>
         </member>
@@ -2025,11 +2229,11 @@
             Gets the <see cref="P:TopDownShooter.Engine.Levels.Tile.TileInteractionType" />.
             </summary>
         </member>
-        <member name="M:TopDownShooter.Engine.Levels.Tile.Draw(TopDownShooter.Engine.ICamera,TopDownShooter.Engine.Adapters.ISpriteBatchAdapter,Microsoft.Xna.Framework.GameTime)">
+        <member name="M:TopDownShooter.Engine.Levels.Tile.Draw(TopDownShooter.Engine.Adapters.ICamera2DAdapter,TopDownShooter.Engine.Adapters.ISpriteBatchAdapter,Microsoft.Xna.Framework.GameTime)">
             <summary>
             Draws this <see cref="T:TopDownShooter.Engine.Levels.Tile" />.
             </summary>
-            <param name="camera">The <see cref="T:TopDownShooter.Engine.ICamera"/>.</param>
+            <param name="camera">The <see cref="T:TopDownShooter.Engine.Adapters.ICamera2DAdapter"/>.</param>
             <param name="spriteBatch">
             The <see cref="T:TopDownShooter.Engine.Adapters.ISpriteBatchAdapter" />.
             </param>
@@ -2172,11 +2376,11 @@
             Gets the width of the game object.
             </summary>
         </member>
-        <member name="M:TopDownShooter.Engine.Player.Draw(TopDownShooter.Engine.ICamera,TopDownShooter.Engine.Adapters.ISpriteBatchAdapter,Microsoft.Xna.Framework.GameTime)">
+        <member name="M:TopDownShooter.Engine.Player.Draw(TopDownShooter.Engine.Adapters.ICamera2DAdapter,TopDownShooter.Engine.Adapters.ISpriteBatchAdapter,Microsoft.Xna.Framework.GameTime)">
             <summary>
             Draws the game object with the specified sprite batch adapter and game time.
             </summary>
-            <param name="camera">The <see cref="T:TopDownShooter.Engine.ICamera"/>.</param>
+            <param name="camera">The <see cref="T:TopDownShooter.Engine.Adapters.ICamera2DAdapter"/>.</param>
             <param name="spriteBatch">The sprite batch adapter.</param>
             <param name="gameTime">The game time.</param>
         </member>
@@ -2283,12 +2487,12 @@
             Destroys the component.
             </summary>
         </member>
-        <member name="M:TopDownShooter.Engine.Projectiles.BulletProjectileGeneratorComponent.Draw(TopDownShooter.Engine.IGameObject,TopDownShooter.Engine.ICamera,TopDownShooter.Engine.Adapters.ISpriteBatchAdapter,Microsoft.Xna.Framework.GameTime)">
+        <member name="M:TopDownShooter.Engine.Projectiles.BulletProjectileGeneratorComponent.Draw(TopDownShooter.Engine.IGameObject,TopDownShooter.Engine.Adapters.ICamera2DAdapter,TopDownShooter.Engine.Adapters.ISpriteBatchAdapter,Microsoft.Xna.Framework.GameTime)">
             <summary>
             Draws the component with the specified game object and game time.
             </summary>
             <param name="gameObject">The game object.</param>
-            <param name="camera">The <see cref="T:TopDownShooter.Engine.ICamera"/>.</param>
+            <param name="camera">The <see cref="T:TopDownShooter.Engine.Adapters.ICamera2DAdapter"/>.</param>
             <param name="spriteBatch">The sprite batch adapter.</param>
             <param name="time">The game time.</param>
         </member>

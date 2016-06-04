@@ -77,14 +77,14 @@ namespace TopDownShooter.Engine.Levels
         /// <summary>
         /// Draws this <see cref="Tile" />.
         /// </summary>
-        /// <param name="camera">The <see cref="ICamera"/>.</param>
+        /// <param name="camera">The <see cref="ICamera2DAdapter"/>.</param>
         /// <param name="spriteBatch">
         /// The <see cref="ISpriteBatchAdapter" />.
         /// </param>
         /// <param name="gameTime">
         /// The game time.
         /// </param>
-        public override void Draw(ICamera camera, ISpriteBatchAdapter spriteBatch, GameTime gameTime)
+        public override void Draw(ICamera2DAdapter camera, ISpriteBatchAdapter spriteBatch, GameTime gameTime)
         {
             spriteBatch.Draw(
                 this.Texture,

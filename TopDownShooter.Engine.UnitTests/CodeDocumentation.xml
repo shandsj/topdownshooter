@@ -19,16 +19,6 @@
             Tests whether the frame index gets updated when the update method is called.
             </summary>
         </member>
-        <member name="T:TopDownShooter.Engine.UnitTests.CameraTests">
-            <summary>
-            Contains unit tests for the <see cref="T:TopDownShooter.Engine.Camera"/> class.
-            </summary>
-        </member>
-        <member name="M:TopDownShooter.Engine.UnitTests.CameraTests.CalculatesTransformMatrix">
-            <summary>
-            Tests that the transform matrix is calculated.
-            </summary>
-        </member>
         <member name="T:TopDownShooter.Engine.UnitTests.Collisions.ColliderComponentBaseTests">
             <summary>
             Contains unit tests for the <see cref="T:TopDownShooter.Engine.Collisions.ColliderComponentBase" /> class.
@@ -238,7 +228,7 @@
         </member>
         <member name="T:TopDownShooter.Engine.UnitTests.PlayerInventoryComponentTests">
             <summary>
-            Tests Container for <see cref="T:TopDownShooter.Engine.PlayerInventoryComponent" />
+            Tests Container for <see cref="T:TopDownShooter.Engine.Inventory.PlayerInventoryComponent" />
             </summary>
         </member>
         <member name="M:TopDownShooter.Engine.UnitTests.PlayerInventoryComponentTests.TestCollisionTriggersBroadcast">

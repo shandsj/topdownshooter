@@ -25,19 +25,10 @@ namespace TopDownShooter.Engine.UnitTests.Levels
         [TestMethod]
         public void DrawsOnlyTilesInTheCameraBounds()
         {
-            var camera = new Mock<ICamera>();
-            camera.Setup(o => o.Bounds).Returns(new Rectangle(0, 0, 10, 10));
+            var camera = new Mock<ICamera2DAdapter>();
+            camera.Setup(o => o.GetBoundingRectangle()).Returns(new Rectangle(0, 0, 10, 10));
             camera.Setup(o => o.Zoom).Returns(1f);
-            camera.Setup(o => o.GetWorldCoordinates(It.IsIn(
-                new Vector2(0, 0),
-                new Vector2(0, 5),
-                new Vector2(0, 10),
-                new Vector2(5, 0),
-                new Vector2(5, 5),
-                new Vector2(5, 10),
-                new Vector2(10, 0),
-                new Vector2(10, 5),
-                new Vector2(10, 10))));
+            camera.Setup(o => o.ScreenToWorld(It.IsIn(0f, 5f, 10f), It.IsIn(0f, 5f, 10f)));
 
             var spriteBatch = new Mock<ISpriteBatchAdapter>();
 
@@ -55,17 +46,7 @@ namespace TopDownShooter.Engine.UnitTests.Levels
             uut.Draw(camera.Object, spriteBatch.Object, new GameTime());
 
             tile.Verify(o => o.Draw(camera.Object, spriteBatch.Object, It.IsAny<GameTime>()), Times.Exactly(9));
-            camera.Verify(
-                o => o.GetWorldCoordinates(It.IsIn(
-                    new Vector2(0, 0),
-                    new Vector2(0, 5),
-                    new Vector2(0, 10),
-                    new Vector2(5, 0),
-                    new Vector2(5, 5),
-                    new Vector2(5, 10),
-                    new Vector2(10, 0),
-                    new Vector2(10, 5),
-                    new Vector2(10, 10))), Times.Exactly(9));
+            camera.Verify(o => o.ScreenToWorld(It.IsIn(0f, 5f, 10f), It.IsIn(0f, 5f, 10f)), Times.Exactly(9));
         }
     }
 }

@@ -26,7 +26,7 @@ namespace TopDownShooter.Engine.UnitTests
         {
             var uut = new TestGameObject(1);
             var spriteBatch = new Mock<ISpriteBatchAdapter>().Object;
-            var camera = new Mock<ICamera>().Object;
+            var camera = new Mock<ICamera2DAdapter>().Object;
             var gameTime = new GameTime(TimeSpan.FromSeconds(42), TimeSpan.FromSeconds(5));
             var component = new Mock<IComponent>();
             component.Setup(o => o.Draw(uut, camera, spriteBatch, gameTime));
