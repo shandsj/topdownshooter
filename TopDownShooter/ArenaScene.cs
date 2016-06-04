@@ -44,7 +44,7 @@ namespace TopDownShooter
 
         // Items for pickup. This probably needs to go into
         // some type of world state manager or something.
-        private List<IGameObject> gameItems;
+        private List<IGameItem> gameItems;
 
         private ISpriteBatchAdapter screenSpriteBatch;
 
@@ -98,8 +98,9 @@ namespace TopDownShooter
             this.collisionSystem = new CollisionSystem();
 
             this.players = new List<Player>();
-            this.gameItems = new List<IGameObject>();
-            this.gameItems.AddRange(new GameObjectFactory().SpawnRandomBulletItems(10, this.collisionSystem, 100, 1500, 100, 1500));
+            this.gameItems = new List<IGameItem>();
+            this.gameItems.AddRange(new GameItemFactory().SpawnRandomCoinItems(1000, this.collisionSystem, 100, 1500, 100, 1500));
+            this.gameItems.AddRange(new GameItemFactory().SpawnRandomBulletItems(100, this.collisionSystem, 1500, 3000, 1500, 3000));
 
             this.camera2DAdapter = new Camera2DAdapter(new Camera2D(this.graphicsDevice) { Zoom = .5f });
             this.level = new Level(CollisionSystem.NextGameObjectId++, this.collisionSystem, new TmxMapAdapter(new TmxMap("Content/TmxFiles/DefaultLevel.tmx")));

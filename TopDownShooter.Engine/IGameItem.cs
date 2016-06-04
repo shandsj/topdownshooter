@@ -17,6 +17,11 @@ namespace TopDownShooter.Engine
     public interface IGameItem : IGameObject
     {
         /// <summary>
+        /// Gets a description for this item.
+        /// </summary>
+        string Description { get; }
+
+        /// <summary>
         /// Gets a value indicating whether this game item has been picked up.
         /// </summary>
         /// <remarks>For use when managing a collection of these in the world, which ones

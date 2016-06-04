@@ -10,7 +10,8 @@ namespace TopDownShooter.Engine.Inventory
     using TopDownShooter.Engine.Collisions;
     using TopDownShooter.Engine.Items;
     using TopDownShooter.Engine.Projectiles;
-
+    using System.Collections.Generic;
+    using Microsoft.Xna.Framework.Graphics;
     /// <summary>
     /// Inventory storage for an <see cref="IPlayer"/>
     /// </summary>
@@ -19,6 +20,9 @@ namespace TopDownShooter.Engine.Inventory
         // For now just farming off fire requests to this, all the components that
         // could respond to fire events should be passed in
         private BulletProjectileGeneratorComponent bulletProjectileGeneratorComponent;
+        private SpriteFont font;
+
+        private Dictionary<string, int> itemCounts;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="PlayerInventoryComponent"/> class.
@@ -26,6 +30,7 @@ namespace TopDownShooter.Engine.Inventory
         /// <param name="collisionSystem">Collision system reference.</param>
         public PlayerInventoryComponent(ICollisionSystem collisionSystem)
         {
+            this.itemCounts = new Dictionary<string, int>();
             this.bulletProjectileGeneratorComponent = new BulletProjectileGeneratorComponent(collisionSystem);
         }
 
@@ -37,6 +42,8 @@ namespace TopDownShooter.Engine.Inventory
         {
             base.LoadContent(contentManager);
             this.bulletProjectileGeneratorComponent.LoadContent(contentManager);
+
+            this.font = contentManager.Load<SpriteFont>("Fonts/PlayerName");
         }
 
         /// <summary>
@@ -48,6 +55,9 @@ namespace TopDownShooter.Engine.Inventory
         {
             base.Update(gameObject, time);
             this.bulletProjectileGeneratorComponent.Update(gameObject, time);
+
+            this.itemCounts = this.Inventory.GroupBy(obj => obj.Description)
+                .ToDictionary(group => group.Key, count => count.Count());
         }
 
         /// <summary>
@@ -61,6 +71,28 @@ namespace TopDownShooter.Engine.Inventory
         {
             base.Draw(gameObject, camera, spriteBatch, time);
             this.bulletProjectileGeneratorComponent.Draw(gameObject, camera, spriteBatch, time);
+
+            // TODO: Investigate how to make a HUD for the currently
+            //       focused player. For now, don't draw if their name
+            //       contains ai. HACK.
+            if ((gameObject as Player).Name.Contains("Ai"))
+            {
+                return;
+            }
+
+            int index = 0;
+            foreach (var kvp in this.itemCounts)
+            {
+                var text = $"{kvp.Key}: {kvp.Value}";
+                var textSize = this.font.MeasureString(text);
+                spriteBatch.DrawString(
+                    this.font,
+                    text,
+                    new Vector2(camera.Position.X - camera.Origin.X + 10, (camera.Position.Y - camera.Origin.Y) + ((index * textSize.Y) + 10)),
+                    Color.Black);
+
+                index++;
+            }
         }
 
         /// <summary>
@@ -89,9 +121,14 @@ namespace TopDownShooter.Engine.Inventory
                 IGameItem item = message.MessageDetails as IGameItem;
 
                 // can only have one bulllet item at a time in this inventory.
-                if (item != null && !this.Inventory.OfType<BulletGameItem>().Any())
+                if (item != null)
                 {
-                    this.Inventory.Add(item.Pickup());
+                    var isBullet = item as BulletGameItem != null;
+                    if ((isBullet && !this.Inventory.OfType<BulletGameItem>().Any())
+                        || !isBullet)
+                    {
+                        this.Inventory.Add(item.Pickup());
+                    }
                 }
             }
         }

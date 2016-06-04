@@ -1387,6 +1387,11 @@
             <param name="id">The game object identifier.</param>
             <param name="components">The collection of components.</param>
         </member>
+        <member name="P:TopDownShooter.Engine.GameItem.Description">
+            <summary>
+            Gets a description for this item.
+            </summary>
+        </member>
         <member name="P:TopDownShooter.Engine.GameItem.IsPickedUp">
             <summary>
             Gets a value indicating whether this game item has been picked up.
@@ -1403,14 +1408,14 @@
             <remarks><see cref="T:TopDownShooter.Engine.IGameItem"/> here could be used to return an Inventory friendly
             viewable GameItem here.</remarks>
         </member>
-        <member name="T:TopDownShooter.Engine.GameObjectFactory">
+        <member name="T:TopDownShooter.Engine.GameItemFactory">
             <summary>
-            Provides an implementation of <see cref="T:TopDownShooter.Engine.IGameObjectFactory" />.
+            Factor that can be used to generate <see cref="T:TopDownShooter.Engine.IGameItem"/>
             </summary>
         </member>
-        <member name="M:TopDownShooter.Engine.GameObjectFactory.SpawnRandomBulletItems(System.Int32,TopDownShooter.Engine.Collisions.ICollisionSystem,System.Int32,System.Int32,System.Int32,System.Int32)">
+        <member name="M:TopDownShooter.Engine.GameItemFactory.SpawnRandomBulletItems(System.Int32,TopDownShooter.Engine.Collisions.ICollisionSystem,System.Int32,System.Int32,System.Int32,System.Int32)">
             <summary>
-            Spawns a random number of <see cref="T:TopDownShooter.Engine.Items.BulletGameItem"/>s
+            Spawns a random number of <see cref="T:TopDownShooter.Engine.Items.CoinGameItem"/>s
             </summary>
             <param name="count">Number to create</param>
             <param name="collisionSystem">The <see cref="T:TopDownShooter.Engine.Collisions.ICollisionSystem" />.</param>
@@ -1420,7 +1425,7 @@
             <param name="maxY">Maximum Y coordinate</param>
             <returns>Collection of uninitalized <see cref="T:System.Collections.Generic.IEnumerable`1"/></returns>
         </member>
-        <member name="M:TopDownShooter.Engine.GameObjectFactory.CreateBulletItem(System.Int32,Microsoft.Xna.Framework.Vector2,TopDownShooter.Engine.Collisions.ICollisionSystem)">
+        <member name="M:TopDownShooter.Engine.GameItemFactory.CreateBulletItem(System.Int32,Microsoft.Xna.Framework.Vector2,TopDownShooter.Engine.Collisions.ICollisionSystem)">
             <summary>
             Creates a bullet item game object.
             </summary>
@@ -1428,6 +1433,32 @@
             <param name="position">The position of the game object.</param>
             <param name="collisionSystem">The <see cref="T:TopDownShooter.Engine.Collisions.ICollisionSystem" />.</param>
             <returns>The created bullet item.</returns>
+        </member>
+        <member name="M:TopDownShooter.Engine.GameItemFactory.SpawnRandomCoinItems(System.Int32,TopDownShooter.Engine.Collisions.ICollisionSystem,System.Int32,System.Int32,System.Int32,System.Int32)">
+            <summary>
+            Spawns a random number of <see cref="T:TopDownShooter.Engine.Items.CoinGameItem"/>s
+            </summary>
+            <param name="count">Number to create</param>
+            <param name="collisionSystem">The <see cref="T:TopDownShooter.Engine.Collisions.ICollisionSystem" />.</param>
+            <param name="minX">Minimum X coordinate</param>
+            <param name="maxX">Maximum X coordinate</param>
+            <param name="minY">Minimum Y coordiante</param>
+            <param name="maxY">Maximum Y coordinate</param>
+            <returns>Collection of uninitalized <see cref="T:System.Collections.Generic.IEnumerable`1"/></returns>
+        </member>
+        <member name="M:TopDownShooter.Engine.GameItemFactory.CreateCoinItem(System.Int32,Microsoft.Xna.Framework.Vector2,TopDownShooter.Engine.Collisions.ICollisionSystem)">
+            <summary>
+            Creates a bullet item game object.
+            </summary>
+            <param name="id">The game object identifier.</param>
+            <param name="position">The position of the game object.</param>
+            <param name="collisionSystem">The <see cref="T:TopDownShooter.Engine.Collisions.ICollisionSystem" />.</param>
+            <returns>The created bullet item.</returns>
+        </member>
+        <member name="T:TopDownShooter.Engine.GameObjectFactory">
+            <summary>
+            Provides an implementation of <see cref="T:TopDownShooter.Engine.IGameObjectFactory" />.
+            </summary>
         </member>
         <member name="M:TopDownShooter.Engine.GameObjectFactory.CreateBulletProjectile(System.Int32,System.Int32,Microsoft.Xna.Framework.Vector2,Microsoft.Xna.Framework.Vector2,TopDownShooter.Engine.Collisions.ICollisionSystem)">
             <summary>
@@ -1728,6 +1759,11 @@
             an inventory.
             </summary>
         </member>
+        <member name="P:TopDownShooter.Engine.IGameItem.Description">
+            <summary>
+            Gets a description for this item.
+            </summary>
+        </member>
         <member name="P:TopDownShooter.Engine.IGameItem.IsPickedUp">
             <summary>
             Gets a value indicating whether this game item has been picked up.
@@ -1743,6 +1779,53 @@
             <returns><see cref="T:TopDownShooter.Engine.IGameItem"/> reference.</returns>
             <remarks><see cref="T:TopDownShooter.Engine.IGameItem"/> here could be used to return an Inventory friendly
             viewable GameItem here.</remarks>
+        </member>
+        <member name="T:TopDownShooter.Engine.IGameItemFactory">
+            <summary>
+            Factory that can be used to create <see cref="T:TopDownShooter.Engine.IGameItem"/>
+            </summary>
+        </member>
+        <member name="M:TopDownShooter.Engine.IGameItemFactory.SpawnRandomBulletItems(System.Int32,TopDownShooter.Engine.Collisions.ICollisionSystem,System.Int32,System.Int32,System.Int32,System.Int32)">
+            <summary>
+            Spawns a random number of <see cref="T:TopDownShooter.Engine.Items.CoinGameItem"/>s
+            </summary>
+            <param name="count">Number to create</param>
+            <param name="collisionSystem">The <see cref="T:TopDownShooter.Engine.Collisions.ICollisionSystem" />.</param>
+            <param name="minX">Minimum X coordinate</param>
+            <param name="maxX">Maximum X coordinate</param>
+            <param name="minY">Minimum Y coordiante</param>
+            <param name="maxY">Maximum Y coordinate</param>
+            <returns>Collection of uninitalized <see cref="T:System.Collections.Generic.IEnumerable`1"/></returns>
+        </member>
+        <member name="M:TopDownShooter.Engine.IGameItemFactory.CreateBulletItem(System.Int32,Microsoft.Xna.Framework.Vector2,TopDownShooter.Engine.Collisions.ICollisionSystem)">
+            <summary>
+            Creates a bullet item game object.
+            </summary>
+            <param name="id">The game object identifier.</param>
+            <param name="position">The position of the game object.</param>
+            <param name="collisionSystem">The <see cref="T:TopDownShooter.Engine.Collisions.ICollisionSystem" />.</param>
+            <returns>The created bullet item.</returns>
+        </member>
+        <member name="M:TopDownShooter.Engine.IGameItemFactory.SpawnRandomCoinItems(System.Int32,TopDownShooter.Engine.Collisions.ICollisionSystem,System.Int32,System.Int32,System.Int32,System.Int32)">
+            <summary>
+            Spawns a random number of 
+            </summary>
+            <param name="count">Number to create</param>
+            <param name="collisionSystem">The <see cref="T:TopDownShooter.Engine.Collisions.ICollisionSystem" />.</param>
+            <param name="minX">Minimum X coordinate</param>
+            <param name="maxX">Maximum X coordinate</param>
+            <param name="minY">Minimum Y coordiante</param>
+            <param name="maxY">Maximum Y coordinate</param>
+            <returns>Collection of uninitalized <see cref="T:System.Collections.Generic.IEnumerable`1"/></returns>
+        </member>
+        <member name="M:TopDownShooter.Engine.IGameItemFactory.CreateCoinItem(System.Int32,Microsoft.Xna.Framework.Vector2,TopDownShooter.Engine.Collisions.ICollisionSystem)">
+            <summary>
+            Creates a coin item game object.
+            </summary>
+            <param name="id">The game object identifier.</param>
+            <param name="position">The position of the game object.</param>
+            <param name="collisionSystem">The <see cref="T:TopDownShooter.Engine.Collisions.ICollisionSystem" />.</param>
+            <returns>The created bullet item.</returns>
         </member>
         <member name="T:TopDownShooter.Engine.IGameObject">
             <summary>
@@ -2025,6 +2108,11 @@
             <param name="collisionSystem">The <see cref="T:TopDownShooter.Engine.Collisions.ICollisionSystem" />.</param>
             <param name="components">A collection of components.</param>
         </member>
+        <member name="P:TopDownShooter.Engine.Items.BulletGameItem.Description">
+            <summary>
+            Gets a description for this item.
+            </summary>
+        </member>
         <member name="P:TopDownShooter.Engine.Items.BulletGameItem.Height">
             <summary>
             Gets the height of the game object.
@@ -2049,13 +2137,48 @@
             <remarks><see cref="T:TopDownShooter.Engine.IGameItem"/> here could be used to return an Inventory friendly
             viewable GameItem here.</remarks>
         </member>
-        <member name="M:TopDownShooter.Engine.Items.BulletGameItem.Update(Microsoft.Xna.Framework.GameTime)">
+        <member name="T:TopDownShooter.Engine.Items.CoinGameItem">
             <summary>
-            Updates the game object with the specified game time.
+            Bullet Game item implementation
             </summary>
-            <param name="gameTime">The game time.</param>
-            <remarks>GameObject updates position based on velocity. GameItems are
-            stationary for now.</remarks>
+        </member>
+        <member name="M:TopDownShooter.Engine.Items.CoinGameItem.#ctor(System.Int32,Microsoft.Xna.Framework.Vector2,TopDownShooter.Engine.Collisions.ICollisionSystem,System.Collections.Generic.IEnumerable{TopDownShooter.Engine.IComponent})">
+            <summary>
+            Initializes a new instance of the <see cref="T:TopDownShooter.Engine.Items.CoinGameItem"/> class.
+            </summary>
+            <param name="id">The game object identifier.</param>
+            <param name="position">The position of the player.</param>
+            <param name="collisionSystem">The <see cref="T:TopDownShooter.Engine.Collisions.ICollisionSystem" />.</param>
+            <param name="components">A collection of components.</param>
+        </member>
+        <member name="P:TopDownShooter.Engine.Items.CoinGameItem.Description">
+            <summary>
+            Gets a description for this item.
+            </summary>
+        </member>
+        <member name="P:TopDownShooter.Engine.Items.CoinGameItem.Height">
+            <summary>
+            Gets the height of the game object.
+            </summary>
+        </member>
+        <member name="P:TopDownShooter.Engine.Items.CoinGameItem.Width">
+            <summary>
+            Gets the Width of the game object.
+            </summary>
+        </member>
+        <member name="M:TopDownShooter.Engine.Items.CoinGameItem.Initialize">
+            <summary>
+            Initializes the game object.
+            </summary>
+        </member>
+        <member name="M:TopDownShooter.Engine.Items.CoinGameItem.Pickup">
+            <summary>
+            Should be called when another component will be
+            taking ownership of this item.
+            </summary>
+            <returns><see cref="T:TopDownShooter.Engine.IGameItem"/> reference.</returns>
+            <remarks><see cref="T:TopDownShooter.Engine.IGameItem"/> here could be used to return an Inventory friendly
+            viewable GameItem here.</remarks>
         </member>
         <member name="T:TopDownShooter.Engine.Levels.ITile">
             <summary>

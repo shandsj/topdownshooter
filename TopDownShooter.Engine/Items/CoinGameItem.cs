@@ -1,4 +1,4 @@
-﻿// <copyright file="BulletGameItem.cs" company="PlaceholderCompany">
+﻿// <copyright file="CoinGameItem.cs" company="PlaceholderCompany">
 // Copyright (c) PlaceholderCompany. All rights reserved.
 // </copyright>
 
@@ -9,26 +9,26 @@ namespace TopDownShooter.Engine.Items
     using System.Linq;
     using System.Text;
     using System.Threading.Tasks;
-    using Collisions;
     using Microsoft.Xna.Framework;
+    using TopDownShooter.Engine.Collisions;
 
     /// <summary>
     /// Bullet Game item implementation
     /// </summary>
-    public class BulletGameItem : GameItem
+    public class CoinGameItem : GameItem
     {
         private ICollisionSystem collisionSystem;
         private IAnimationComponentManager animationComponentManager;
         private IColliderComponent colliderComponent;
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="BulletGameItem"/> class.
+        /// Initializes a new instance of the <see cref="CoinGameItem"/> class.
         /// </summary>
         /// <param name="id">The game object identifier.</param>
         /// <param name="position">The position of the player.</param>
         /// <param name="collisionSystem">The <see cref="ICollisionSystem" />.</param>
         /// <param name="components">A collection of components.</param>
-        public BulletGameItem(int id, Vector2 position, ICollisionSystem collisionSystem, IEnumerable<IComponent> components)
+        public CoinGameItem(int id, Vector2 position, ICollisionSystem collisionSystem, IEnumerable<IComponent> components)
             : base(id, components)
         {
             this.Position = position;
@@ -43,7 +43,7 @@ namespace TopDownShooter.Engine.Items
         /// </summary>
         public override string Description {
             get {
-                return "Bullets";
+                return "Coins";
             }
         }
 

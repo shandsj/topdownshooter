@@ -57,7 +57,7 @@ namespace TopDownShooter.Engine.UnitTests
         {
             var collisionSystem = new Mock<ICollisionSystem>();
 
-            IEnumerable<IGameObject> gameObjects = new GameObjectFactory()
+            IEnumerable<IGameItem> gameObjects = new GameItemFactory()
                 .SpawnRandomBulletItems(3, collisionSystem.Object, 0, 0, 0, 0);
 
             var playerInventoryComponent = new PlayerInventoryComponent(collisionSystem.Object);
