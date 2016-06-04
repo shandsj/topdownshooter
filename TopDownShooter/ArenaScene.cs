@@ -99,7 +99,7 @@ namespace TopDownShooter
             this.gameItems.AddRange(new GameObjectFactory().SpawnRandomBulletItems(10, this.collisionSystem, 100, 1500, 100, 1500));
 
             this.camera = new Camera(this.graphicsDevice.Viewport) { Zoom = .5f };
-            this.level = new Level(CollisionSystem.NextGameObjectId++, this.collisionSystem, new TmxMap("Content/TmxFiles/DefaultLevel.tmx"));
+            this.level = new Level(CollisionSystem.NextGameObjectId++, this.collisionSystem, new TmxMapAdapter(new TmxMap("Content/TmxFiles/DefaultLevel.tmx")));
             this.leaderBoard = new LeaderBoard(CollisionSystem.NextGameObjectId++);
             this.leaderBoard.Initialize();
 

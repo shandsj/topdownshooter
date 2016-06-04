@@ -36,5 +36,19 @@ namespace TopDownShooter.Engine
         /// Gets or sets the zoom.
         /// </summary>
         float Zoom { get; set; }
+
+        /// <summary>
+        /// Gets the screen coordinates for the specified world coordinates.
+        /// </summary>
+        /// <param name="worldCoordinates">The world coordinates.</param>
+        /// <returns>The screen coordinates.</returns>
+        Vector2 GetScreenCoordinates(Vector2 worldCoordinates);
+
+        /// <summary>
+        /// Gets the world coordinates for the specified screen coordinates.
+        /// </summary>
+        /// <param name="screenCoordinates">The screen coordinates.</param>
+        /// <returns>The world coordinates.</returns>
+        Vector2 GetWorldCoordinates(Vector2 screenCoordinates);
     }
 }

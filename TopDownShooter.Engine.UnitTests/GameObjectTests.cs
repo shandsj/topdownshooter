@@ -26,27 +26,15 @@ namespace TopDownShooter.Engine.UnitTests
         {
             var uut = new TestGameObject(1);
             var spriteBatch = new Mock<ISpriteBatchAdapter>().Object;
+            var camera = new Mock<ICamera>().Object;
             var gameTime = new GameTime(TimeSpan.FromSeconds(42), TimeSpan.FromSeconds(5));
-
-            bool wasMethodCalled = false;
             var component = new Mock<IComponent>();
-            component.Setup(method => method.Draw(
-                It.IsAny<IGameObject>(),
-                It.IsAny<ICamera>(),
-                It.IsAny<ISpriteBatchAdapter>(),
-                It.IsAny<GameTime>()))
-                .Callback<IGameObject, ISpriteBatchAdapter, GameTime>((go, sb, gt) =>
-                    {
-                        wasMethodCalled = true;
-                        Assert.AreSame(uut, go);
-                        Assert.AreSame(spriteBatch, sb);
-                        Assert.AreEqual(gameTime, gt);
-                    });
+            component.Setup(o => o.Draw(uut, camera, spriteBatch, gameTime));
 
             uut.Components.Add(component.Object);
-            uut.Draw(new Mock<ICamera>().Object, spriteBatch, gameTime);
+            uut.Draw(camera, spriteBatch, gameTime);
 
-            Assert.IsTrue(wasMethodCalled);
+            component.Verify(o => o.Draw(uut, camera, spriteBatch, gameTime), Times.Once);
         }
 
         /////// <summary>

@@ -180,6 +180,31 @@
             Flushes all batched text and sprites to the screen.
             </summary>
         </member>
+        <member name="T:TopDownShooter.Engine.Adapters.ITmxMapAdapter">
+            <summary>
+            Defines an adapter interface for a <see cref="T:TiledSharp.TmxMap" />.
+            </summary>
+        </member>
+        <member name="P:TopDownShooter.Engine.Adapters.ITmxMapAdapter.Layers">
+            <summary>
+            Gets the collection of layers.
+            </summary>
+        </member>
+        <member name="P:TopDownShooter.Engine.Adapters.ITmxMapAdapter.TileHeight">
+            <summary>
+            Gets the height of the tiles.
+            </summary>
+        </member>
+        <member name="P:TopDownShooter.Engine.Adapters.ITmxMapAdapter.Tilesets">
+            <summary>
+            Gets the collection of tilesets.
+            </summary>
+        </member>
+        <member name="P:TopDownShooter.Engine.Adapters.ITmxMapAdapter.TileWidth">
+            <summary>
+            Gets the width of the tiles.
+            </summary>
+        </member>
         <member name="T:TopDownShooter.Engine.Adapters.KeyboardAdapter">
             <summary>
             Provides a default implementation of the <see cref="T:TopDownShooter.Engine.Adapters.IKeyboardAdapter" /> interface.
@@ -294,6 +319,37 @@
         <member name="M:TopDownShooter.Engine.Adapters.SpriteBatchAdapter.End">
             <summary>
             Flushes all batched text and sprites to the screen.
+            </summary>
+        </member>
+        <member name="T:TopDownShooter.Engine.Adapters.TmxMapAdapter">
+            <summary>
+            Provides a default implementation of the <see cref="T:TopDownShooter.Engine.Adapters.ITmxMapAdapter" /> interface.
+            </summary>
+        </member>
+        <member name="M:TopDownShooter.Engine.Adapters.TmxMapAdapter.#ctor(TiledSharp.TmxMap)">
+            <summary>
+            Initializes a new instance of the <see cref="T:TopDownShooter.Engine.Adapters.TmxMapAdapter" /> class.
+            </summary>
+            <param name="map">The <see cref="T:TiledSharp.TmxMap" /> to adapt.</param>
+        </member>
+        <member name="P:TopDownShooter.Engine.Adapters.TmxMapAdapter.Layers">
+            <summary>
+            Gets the collection of layers.
+            </summary>
+        </member>
+        <member name="P:TopDownShooter.Engine.Adapters.TmxMapAdapter.TileHeight">
+            <summary>
+            Gets the height of the tiles.
+            </summary>
+        </member>
+        <member name="P:TopDownShooter.Engine.Adapters.TmxMapAdapter.Tilesets">
+            <summary>
+            Gets the collection of tilesets.
+            </summary>
+        </member>
+        <member name="P:TopDownShooter.Engine.Adapters.TmxMapAdapter.TileWidth">
+            <summary>
+            Gets the width of the tiles.
             </summary>
         </member>
         <member name="T:TopDownShooter.Engine.AnimationComponent">
@@ -531,6 +587,20 @@
             <summary>
             Gets or sets the zoom.
             </summary>
+        </member>
+        <member name="M:TopDownShooter.Engine.Camera.GetScreenCoordinates(Microsoft.Xna.Framework.Vector2)">
+            <summary>
+            Gets the screen coordinates for the specified world coordinates.
+            </summary>
+            <param name="worldCoordinates">The world coordinates.</param>
+            <returns>The screen coordinates.</returns>
+        </member>
+        <member name="M:TopDownShooter.Engine.Camera.GetWorldCoordinates(Microsoft.Xna.Framework.Vector2)">
+            <summary>
+            Gets the world coordinates for the specified screen coordinates.
+            </summary>
+            <param name="screenCoordinates">The screen coordinates.</param>
+            <returns>The world coordinates.</returns>
         </member>
         <member name="T:TopDownShooter.Engine.Collisions.ColliderComponentBase">
             <summary>
@@ -1434,6 +1504,20 @@
             Gets or sets the zoom.
             </summary>
         </member>
+        <member name="M:TopDownShooter.Engine.ICamera.GetScreenCoordinates(Microsoft.Xna.Framework.Vector2)">
+            <summary>
+            Gets the screen coordinates for the specified world coordinates.
+            </summary>
+            <param name="worldCoordinates">The world coordinates.</param>
+            <returns>The screen coordinates.</returns>
+        </member>
+        <member name="M:TopDownShooter.Engine.ICamera.GetWorldCoordinates(Microsoft.Xna.Framework.Vector2)">
+            <summary>
+            Gets the world coordinates for the specified screen coordinates.
+            </summary>
+            <param name="screenCoordinates">The screen coordinates.</param>
+            <returns>The world coordinates.</returns>
+        </member>
         <member name="T:TopDownShooter.Engine.IGameItem">
             <summary>
             Interface for game objects that can be picked up and placed into
@@ -1789,6 +1873,45 @@
             Gets the position of the tile in the tileset.
             </summary>
         </member>
+        <member name="T:TopDownShooter.Engine.Levels.ITileCollection">
+            <summary>
+            Defines an interface for storing and indexing tiles.
+            </summary>
+        </member>
+        <member name="M:TopDownShooter.Engine.Levels.ITileCollection.Add(Microsoft.Xna.Framework.Vector2,TopDownShooter.Engine.Levels.ITile)">
+            <summary>
+            Adds a tile to the collection at the specified world coordinate.
+            </summary>
+            <param name="coordinate">The location of the tile, in world coordinates.</param>
+            <param name="tile">The <see cref="T:TopDownShooter.Engine.Levels.ITile" />.</param>
+        </member>
+        <member name="M:TopDownShooter.Engine.Levels.ITileCollection.GetTile(Microsoft.Xna.Framework.Vector2)">
+            <summary>
+            Gets the tile at the specified world coordinates.
+            </summary>
+            <param name="coordinate">The location of the tile, in world coordinates.</param>
+            <returns>The <see cref="T:TopDownShooter.Engine.Levels.ITile" />.</returns>
+        </member>
+        <member name="T:TopDownShooter.Engine.Levels.ITileFactory">
+            <summary>
+            Defines an interface for a tile factory.
+            </summary>
+        </member>
+        <member name="M:TopDownShooter.Engine.Levels.ITileFactory.CreateTile(System.Int32,TopDownShooter.Engine.Collisions.ICollisionSystem,TopDownShooter.Engine.Levels.TileInteractionType,Microsoft.Xna.Framework.Graphics.Texture2D,Microsoft.Xna.Framework.Vector2,Microsoft.Xna.Framework.Point,System.Int32,System.Int32,Microsoft.Xna.Framework.Vector2)">
+            <summary>
+            Creates a tile.
+            </summary>
+            <param name="id">The game object identifier.</param>
+            <param name="collisionSystem">The <see cref="T:TopDownShooter.Engine.Collisions.ICollisionSystem" />.</param>
+            <param name="tileInteractionType">The <see cref="T:TopDownShooter.Engine.Levels.TileInteractionType" />.</param>
+            <param name="texture">The <see cref="T:Microsoft.Xna.Framework.Graphics.Texture2D" />.</param>
+            <param name="position">The position of the tile.</param>
+            <param name="tileCoordinates">The tile's position in tile coordinates.</param>
+            <param name="width">The width of the tile.</param>
+            <param name="height">The height of the tile.</param>
+            <param name="texturePosition">The texture's position in the tile set.</param>
+            <returns>The created tile.</returns>
+        </member>
         <member name="T:TopDownShooter.Engine.Levels.Level">
             <summary>
             Defines a level.
@@ -1799,24 +1922,32 @@
             The <see cref="T:TiledSharp.TmxMap" />.
             </summary>
         </member>
-        <member name="F:TopDownShooter.Engine.Levels.Level.tiles">
-            <summary>
-            The collection of tiles, mapped from tile coordinates.
-            </summary>
-        </member>
-        <member name="M:TopDownShooter.Engine.Levels.Level.#ctor(System.Int32,TopDownShooter.Engine.Collisions.ICollisionSystem,TiledSharp.TmxMap)">
+        <member name="M:TopDownShooter.Engine.Levels.Level.#ctor(System.Int32,TopDownShooter.Engine.Collisions.ICollisionSystem,TopDownShooter.Engine.Adapters.ITmxMapAdapter)">
             <summary>
             Initializes a new instance of the <see cref="T:TopDownShooter.Engine.Levels.Level" /> class.
             </summary>
-            <param name="collisionSystem">The <see cref="T:TopDownShooter.Engine.Collisions.ICollisionSystem"/>.</param>
+            <param name="collisionSystem">The <see cref="T:TopDownShooter.Engine.Collisions.ICollisionSystem" />.</param>
             <param name="map">
-            The <see cref="T:TiledSharp.TmxMap" /> used to generate the level.
+            The <see cref="T:TopDownShooter.Engine.Adapters.ITmxMapAdapter" /> used to generate the level.
             </param>
             <param name="id">The game object identifier</param>
         </member>
-        <member name="P:TopDownShooter.Engine.Levels.Level.Tiles">
+        <member name="M:TopDownShooter.Engine.Levels.Level.#ctor(System.Int32,TopDownShooter.Engine.Collisions.ICollisionSystem,TopDownShooter.Engine.Adapters.ITmxMapAdapter,TopDownShooter.Engine.Levels.ITileFactory,TopDownShooter.Engine.Levels.ITileCollection)">
             <summary>
-            Gets the collection of <see cref="T:TopDownShooter.Engine.Levels.Tile" /> objects.
+            Initializes a new instance of the <see cref="T:TopDownShooter.Engine.Levels.Level" /> class.
+            </summary>
+            <param name="collisionSystem">The <see cref="T:TopDownShooter.Engine.Collisions.ICollisionSystem" />.</param>
+            <param name="map">
+            The <see cref="T:TopDownShooter.Engine.Adapters.ITmxMapAdapter" /> used to generate the level.
+            </param>
+            <param name="id">The game object identifier</param>
+            <param name="tileFactory">The <see cref="T:TopDownShooter.Engine.Levels.ITileFactory"/> used to generate tiles.</param>
+            <param name="tileCollection">The <see cref="T:TopDownShooter.Engine.Levels.ITileCollection"/> used to store tiles.</param>
+            <remarks>Internal for unit testing.</remarks>
+        </member>
+        <member name="P:TopDownShooter.Engine.Levels.Level.Height">
+            <summary>
+            Gets the height of the game object.
             </summary>
         </member>
         <member name="P:TopDownShooter.Engine.Levels.Level.Width">
@@ -1824,25 +1955,13 @@
             Gets the width of the game object.
             </summary>
         </member>
-        <member name="P:TopDownShooter.Engine.Levels.Level.Height">
-            <summary>
-            Gets the height of the game object.
-            </summary>
-        </member>
         <member name="M:TopDownShooter.Engine.Levels.Level.Draw(TopDownShooter.Engine.ICamera,TopDownShooter.Engine.Adapters.ISpriteBatchAdapter,Microsoft.Xna.Framework.GameTime)">
             <summary>
             Draws the game object with the specified sprite batch adapter and game time.
             </summary>
-            <param name="camera">The <see cref="T:TopDownShooter.Engine.ICamera"/>.</param>
+            <param name="camera">The <see cref="T:TopDownShooter.Engine.ICamera" />.</param>
             <param name="spriteBatch">The sprite batch adapter.</param>
             <param name="gameTime">The game time.</param>
-        </member>
-        <member name="M:TopDownShooter.Engine.Levels.Level.GetTile(Microsoft.Xna.Framework.Point)">
-            <summary>
-            Gets the tile at the specified tile coordinates.
-            </summary>
-            <param name="point">The location of the tile, in tile coordinates.</param>
-            <returns>The <see cref="T:TopDownShooter.Engine.Levels.Tile" />.</returns>
         </member>
         <member name="M:TopDownShooter.Engine.Levels.Level.LoadContent(TopDownShooter.Engine.Adapters.IContentManagerAdapter)">
             <summary>
@@ -1922,6 +2041,50 @@
             <summary>
             Initializes the game object.
             </summary>
+        </member>
+        <member name="T:TopDownShooter.Engine.Levels.TileCollection">
+            <summary>
+            Provides a default implementation of the <see cref="T:TopDownShooter.Engine.Levels.ITileCollection" /> interface.
+            </summary>
+        </member>
+        <member name="F:TopDownShooter.Engine.Levels.TileCollection.tiles">
+            <summary>
+            The collection of tiles, mapped from world coordinates.
+            </summary>
+        </member>
+        <member name="M:TopDownShooter.Engine.Levels.TileCollection.Add(Microsoft.Xna.Framework.Vector2,TopDownShooter.Engine.Levels.ITile)">
+            <summary>
+            Adds a tile to the collection at the specified world coordinate.
+            </summary>
+            <param name="coordinate">The location of the tile, in world coordinates.</param>
+            <param name="tile">The <see cref="T:TopDownShooter.Engine.Levels.ITile" />.</param>
+        </member>
+        <member name="M:TopDownShooter.Engine.Levels.TileCollection.GetTile(Microsoft.Xna.Framework.Vector2)">
+            <summary>
+            Gets the tile at the specified world coordinates.
+            </summary>
+            <param name="coordinate">The location of the tile, in world coordinates.</param>
+            <returns>The <see cref="T:TopDownShooter.Engine.Levels.ITile" />.</returns>
+        </member>
+        <member name="T:TopDownShooter.Engine.Levels.TileFactory">
+            <summary>
+            Provides a default implementation of the <see cref="T:TopDownShooter.Engine.Levels.ITileFactory" /> interface.
+            </summary>
+        </member>
+        <member name="M:TopDownShooter.Engine.Levels.TileFactory.CreateTile(System.Int32,TopDownShooter.Engine.Collisions.ICollisionSystem,TopDownShooter.Engine.Levels.TileInteractionType,Microsoft.Xna.Framework.Graphics.Texture2D,Microsoft.Xna.Framework.Vector2,Microsoft.Xna.Framework.Point,System.Int32,System.Int32,Microsoft.Xna.Framework.Vector2)">
+            <summary>
+            Creates a tile.
+            </summary>
+            <param name="id">The game object identifier.</param>
+            <param name="collisionSystem">The <see cref="T:TopDownShooter.Engine.Collisions.ICollisionSystem" />.</param>
+            <param name="tileInteractionType">The <see cref="T:TopDownShooter.Engine.Levels.TileInteractionType" />.</param>
+            <param name="texture">The <see cref="T:Microsoft.Xna.Framework.Graphics.Texture2D" />.</param>
+            <param name="position">The position of the tile.</param>
+            <param name="tileCoordinates">The tile's position in tile coordinates.</param>
+            <param name="width">The width of the tile.</param>
+            <param name="height">The height of the tile.</param>
+            <param name="texturePosition">The texture's position in the tile set.</param>
+            <returns>The created tile.</returns>
         </member>
         <member name="T:TopDownShooter.Engine.Levels.TileInteractionType">
             <summary>

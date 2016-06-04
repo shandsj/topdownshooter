@@ -76,9 +76,11 @@
     <Compile Include="Adapters\IKeyboardAdapter.cs" />
     <Compile Include="Adapters\IMouseAdapter.cs" />
     <Compile Include="Adapters\ISpriteBatchAdapter.cs" />
+    <Compile Include="Adapters\ITmxMapAdapter.cs" />
     <Compile Include="Adapters\KeyboardAdapter.cs" />
     <Compile Include="Adapters\MouseAdapter.cs" />
     <Compile Include="Adapters\SpriteBatchAdapter.cs" />
+    <Compile Include="Adapters\TmxMapAdapter.cs" />
     <Compile Include="AnimationComponent.cs" />
     <Compile Include="AnimationComponentManager.cs" />
     <Compile Include="Camera.cs" />
@@ -111,8 +113,12 @@
     <Compile Include="ISceneController.cs" />
     <Compile Include="Items\BulletGameItem.cs" />
     <Compile Include="Levels\ITile.cs" />
+    <Compile Include="Levels\ITileCollection.cs" />
+    <Compile Include="Levels\ITileFactory.cs" />
     <Compile Include="Levels\Level.cs" />
     <Compile Include="Levels\Tile.cs" />
+    <Compile Include="Levels\TileCollection.cs" />
+    <Compile Include="Levels\TileFactory.cs" />
     <Compile Include="Levels\TileInteractionType.cs" />
     <Compile Include="MessageType.cs" />
     <Compile Include="Player.cs" />

@@ -77,6 +77,7 @@
     <Compile Include="Controllers\SimpleAiInputControllerComponentTests.cs" />
     <Compile Include="Controllers\TestInputControllerComponent.cs" />
     <Compile Include="GameObjectTests.cs" />
+    <Compile Include="Levels\LevelTests.cs" />
     <Compile Include="Levels\TileTests.cs" />
     <Compile Include="PlayerColliderComponentTests.cs" />
     <Compile Include="PlayerInventoryComponentTests.cs" />

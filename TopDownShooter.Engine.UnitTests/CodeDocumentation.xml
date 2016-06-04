@@ -196,6 +196,16 @@
             Tests that the game object delegates update calls to a component.
             </summary>
         </member>
+        <member name="T:TopDownShooter.Engine.UnitTests.Levels.LevelTests">
+            <summary>
+            Contains unit tests for the <see cref="T:TopDownShooter.Engine.Levels.Level"/> class.
+            </summary>
+        </member>
+        <member name="M:TopDownShooter.Engine.UnitTests.Levels.LevelTests.DrawsOnlyTilesInTheCameraBounds">
+            <summary>
+            Tests that the level only draws the tiles in the camera bounds.
+            </summary>
+        </member>
         <member name="T:TopDownShooter.Engine.UnitTests.Levels.TileTests">
             <summary>
             Contains unit tests for the <see cref="T:TopDownShooter.Engine.Levels.Tile" /> class.

@@ -20,41 +20,56 @@ namespace TopDownShooter.Engine.Levels
     /// </summary>
     public class Level : GameObject
     {
+        private readonly ICollisionSystem collisionSystem;
+
         /// <summary>
         /// The <see cref="TiledSharp.TmxMap" />.
         /// </summary>
-        private readonly TmxMap map;
+        private readonly ITmxMapAdapter map;
 
-        /// <summary>
-        /// The collection of tiles, mapped from tile coordinates.
-        /// </summary>
-        private readonly Dictionary<Point, Tile> tiles = new Dictionary<Point, Tile>();
-        private readonly ICollisionSystem collisionSystem;
+        private readonly int halfTileHeight;
+
+        private readonly int halfTileWidth;
+
+        private ITileFactory tileFactory;
+
+        private ITileCollection tileCollection;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="Level" /> class.
         /// </summary>
-        /// <param name="collisionSystem">The <see cref="ICollisionSystem"/>.</param>
+        /// <param name="collisionSystem">The <see cref="ICollisionSystem" />.</param>
         /// <param name="map">
-        /// The <see cref="TmxMap" /> used to generate the level.
+        /// The <see cref="ITmxMapAdapter" /> used to generate the level.
         /// </param>
         /// <param name="id">The game object identifier</param>
-        public Level(int id, ICollisionSystem collisionSystem, TmxMap map)
+        public Level(int id, ICollisionSystem collisionSystem, ITmxMapAdapter map)
+            : this(id, collisionSystem, map, new TileFactory(), new TileCollection())
+        {
+        }
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="Level" /> class.
+        /// </summary>
+        /// <param name="collisionSystem">The <see cref="ICollisionSystem" />.</param>
+        /// <param name="map">
+        /// The <see cref="ITmxMapAdapter" /> used to generate the level.
+        /// </param>
+        /// <param name="id">The game object identifier</param>
+        /// <param name="tileFactory">The <see cref="ITileFactory"/> used to generate tiles.</param>
+        /// <param name="tileCollection">The <see cref="ITileCollection"/> used to store tiles.</param>
+        /// <remarks>Internal for unit testing.</remarks>
+        internal Level(int id, ICollisionSystem collisionSystem, ITmxMapAdapter map, ITileFactory tileFactory, ITileCollection tileCollection)
             : base(id)
         {
             this.collisionSystem = collisionSystem;
             this.map = map;
+            this.tileFactory = tileFactory;
+            this.tileCollection = tileCollection;
+
+            this.halfTileHeight = map.TileHeight / 2;
+            this.halfTileWidth = map.TileWidth / 2;
         }
-
-        /// <summary>
-        /// Gets the collection of <see cref="Tile" /> objects.
-        /// </summary>
-        public IEnumerable<Tile> Tiles => this.tiles.Values.AsEnumerable();
-
-        /// <summary>
-        /// Gets the width of the game object.
-        /// </summary>
-        public override int Width { get; }
 
         /// <summary>
         /// Gets the height of the game object.
@@ -62,31 +77,44 @@ namespace TopDownShooter.Engine.Levels
         public override int Height { get; }
 
         /// <summary>
+        /// Gets the width of the game object.
+        /// </summary>
+        public override int Width { get; }
+
+        /// <summary>
         /// Draws the game object with the specified sprite batch adapter and game time.
         /// </summary>
-        /// <param name="camera">The <see cref="ICamera"/>.</param>
+        /// <param name="camera">The <see cref="ICamera" />.</param>
         /// <param name="spriteBatch">The sprite batch adapter.</param>
         /// <param name="gameTime">The game time.</param>
         public override void Draw(ICamera camera, ISpriteBatchAdapter spriteBatch, GameTime gameTime)
         {
-            foreach (var tile in this.Tiles)
+            // Calculate the tile sizes in the current camera view based off zoom level.
+            var scaledTileWidth = (int)(this.map.TileWidth * camera.Zoom);
+            var scaledTileHeight = (int)(this.map.TileHeight * camera.Zoom);
+
+            // Calculate the bounds we will use to draw tiles from. We will go a tile extra
+            // just to make sure the entire screen is covered in tiles.
+            var boundWidth = camera.Bounds.Width + scaledTileWidth;
+            var boundHeight = camera.Bounds.Height + scaledTileHeight;
+
+            for (int i = 0; i < boundWidth; i += scaledTileWidth)
             {
-                tile.Draw(camera, spriteBatch, gameTime);
+                for (int j = 0; j < boundHeight; j += scaledTileHeight)
+                {
+                    // Grab the world coordinates of the current iteration, and then figure out the nearest tile coordinates.
+                    var worldCoordinates = camera.GetWorldCoordinates(new Vector2(i, j));
+                    var nearestTileLocation = new Vector2(
+                        (int)worldCoordinates.X / this.map.TileWidth * this.map.TileWidth,
+                        (int)worldCoordinates.Y / this.map.TileHeight * this.map.TileHeight);
+
+                    // Get the tile and render it!
+                    var tile = this.tileCollection.GetTile(nearestTileLocation);
+                    tile?.Draw(camera, spriteBatch, gameTime);
+                }
             }
 
             base.Draw(camera, spriteBatch, gameTime);
-        }
-
-        /// <summary>
-        /// Gets the tile at the specified tile coordinates.
-        /// </summary>
-        /// <param name="point">The location of the tile, in tile coordinates.</param>
-        /// <returns>The <see cref="Tile" />.</returns>
-        public ITile GetTile(Point point)
-        {
-            Tile tile;
-            this.tiles.TryGetValue(point, out tile);
-            return tile;
         }
 
         /// <summary>
@@ -175,19 +203,20 @@ namespace TopDownShooter.Engine.Levels
 
                 var tileInteractionType = isBlocking ? TileInteractionType.Blocking : TileInteractionType.NonBlocking;
 
-                var myTile = new Tile(
+                var position = new Vector2(tile.X * tileSet.TileWidth, tile.Y * tileSet.TileHeight);
+                var myTile = this.tileFactory.CreateTile(
                     CollisionSystem.NextGameObjectId++,
                     this.collisionSystem,
                     tileInteractionType,
                     texture,
-                    new Vector2(tile.X * tileSet.TileWidth, tile.Y * tileSet.TileHeight),
+                    position,
                     new Point(tile.X, tile.Y),
                     tileSet.TileWidth,
                     tileSet.TileHeight,
                     new Vector2((x - 1) * (tileSet.TileWidth + tileSet.Spacing), (y - 1) * (tileSet.TileHeight + tileSet.Spacing)));
 
                 myTile.Initialize();
-                this.tiles.Add(new Point(tile.X, tile.Y), myTile);
+                this.tileCollection.Add(position, myTile);
             }
         }
     }

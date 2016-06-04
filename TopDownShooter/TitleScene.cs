@@ -96,7 +96,7 @@ namespace TopDownShooter
         public void Initialize()
         {
             this.spriteBatch = new SpriteBatchAdapter(new SpriteBatch(this.graphicsDevice));
-            this.level = new Level(CollisionSystem.NextGameObjectId++, new CollisionSystem(), new TmxMap("Content/TmxFiles/DefaultLevel.tmx"));
+            this.level = new Level(CollisionSystem.NextGameObjectId++, new CollisionSystem(), new TmxMapAdapter(new TmxMap("Content/TmxFiles/DefaultLevel.tmx")));
         }
 
         /// <summary>
