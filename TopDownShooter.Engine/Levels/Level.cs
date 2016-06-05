@@ -9,6 +9,7 @@ namespace TopDownShooter.Engine.Levels
     using System;
     using System.Collections.Generic;
     using System.Linq;
+    using System.Threading.Tasks;
     using Microsoft.Xna.Framework;
     using Microsoft.Xna.Framework.Graphics;
     using TiledSharp;
@@ -22,18 +23,16 @@ namespace TopDownShooter.Engine.Levels
     {
         private readonly ICollisionSystem collisionSystem;
 
+        private readonly ITileCollection tileCollection;
+
+        private readonly ITileFactory tileFactory;
+
         /// <summary>
         /// The <see cref="TiledSharp.TmxMap" />.
         /// </summary>
         private readonly ITmxMapAdapter map;
 
-        private readonly int halfTileHeight;
-
-        private readonly int halfTileWidth;
-
-        private ITileFactory tileFactory;
-
-        private ITileCollection tileCollection;
+        private IProgress<int> progress;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="Level" /> class.
@@ -56,8 +55,8 @@ namespace TopDownShooter.Engine.Levels
         /// The <see cref="ITmxMapAdapter" /> used to generate the level.
         /// </param>
         /// <param name="id">The game object identifier</param>
-        /// <param name="tileFactory">The <see cref="ITileFactory"/> used to generate tiles.</param>
-        /// <param name="tileCollection">The <see cref="ITileCollection"/> used to store tiles.</param>
+        /// <param name="tileFactory">The <see cref="ITileFactory" /> used to generate tiles.</param>
+        /// <param name="tileCollection">The <see cref="ITileCollection" /> used to store tiles.</param>
         /// <remarks>Internal for unit testing.</remarks>
         internal Level(int id, ICollisionSystem collisionSystem, ITmxMapAdapter map, ITileFactory tileFactory, ITileCollection tileCollection)
             : base(id)
@@ -66,9 +65,6 @@ namespace TopDownShooter.Engine.Levels
             this.map = map;
             this.tileFactory = tileFactory;
             this.tileCollection = tileCollection;
-
-            this.halfTileHeight = map.TileHeight / 2;
-            this.halfTileWidth = map.TileWidth / 2;
         }
 
         /// <summary>
@@ -147,12 +143,25 @@ namespace TopDownShooter.Engine.Levels
         }
 
         /// <summary>
+        /// Asynchronously loads the content from the specified content manager adapter.
+        /// </summary>
+        /// <param name="contentManager">The content manager adapter.</param>
+        /// <param name="progress">The <see cref="IProgress{Int32}"/> to report progress to.</param>
+        /// <returns>An awaitable task.</returns>
+        public Task LoadContentAsync(IContentManagerAdapter contentManager, IProgress<int> progress)
+        {
+            this.progress = progress;
+            return Task.Run(() => { this.LoadContent(contentManager); });
+        }
+
+        /// <summary>
         /// Imports the tiles from the specified <see cref="TmxLayer" /> using the specified textures.
         /// </summary>
         /// <param name="layer">The <see cref="TmxLayer" /> to import from.</param>
         /// <param name="textures">The textures map that contains <see cref="TmxTileset" /> to <see cref="Texture2D" /> mappings.</param>
         private void ImportLayer(TmxLayer layer, Dictionary<TmxTileset, Texture2D> textures)
         {
+            int count = 0;
             foreach (var tile in layer.Tiles)
             {
                 // If the tile doesn't have a GID, then it is a transparent tile
@@ -217,6 +226,13 @@ namespace TopDownShooter.Engine.Levels
 
                 myTile.Initialize();
                 this.tileCollection.Add(position, myTile);
+
+                count++;
+
+                if (this.progress != null && count % 50000 == 0)
+                {
+                    this.progress.Report((int)(count / (float)layer.Tiles.Count * 100f));
+                }
             }
         }
     }

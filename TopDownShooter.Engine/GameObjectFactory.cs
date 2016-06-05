@@ -8,18 +8,15 @@ namespace TopDownShooter.Engine
 {
     using System;
     using System.Collections.Generic;
-    using Collisions;
-    using Items;
     using Microsoft.Xna.Framework;
-    using Projectiles;
+    using TopDownShooter.Engine.Collisions;
+    using TopDownShooter.Engine.Projectiles;
 
     /// <summary>
     /// Provides an implementation of <see cref="IGameObjectFactory" />.
     /// </summary>
     public class GameObjectFactory : IGameObjectFactory
     {
-
-
         /// <summary>
         /// Creates a bullet projectile game object.
         /// </summary>

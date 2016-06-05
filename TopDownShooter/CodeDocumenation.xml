@@ -9,11 +9,12 @@
             Defines the scene for the arena
             </summary>
         </member>
-        <member name="M:TopDownShooter.ArenaScene.#ctor(Microsoft.Xna.Framework.Graphics.GraphicsDevice)">
+        <member name="M:TopDownShooter.ArenaScene.#ctor(Microsoft.Xna.Framework.Graphics.GraphicsDevice,TopDownShooter.Engine.Levels.Level)">
             <summary>
             Initializes a new instance of the <see cref="T:TopDownShooter.ArenaScene"/> class.
             </summary>
             <param name="graphicsDevice">The <see cref="T:Microsoft.Xna.Framework.Graphics.GraphicsDevice"/>.</param>
+            <param name="level">The preloaded level.</param>
         </member>
         <member name="E:TopDownShooter.ArenaScene.Completed">
             <summary>
@@ -48,10 +49,11 @@
             </summary>
             <param name="gameTime">The game time.</param>
         </member>
-        <member name="M:TopDownShooter.ArenaScene.OnCompleted">
+        <member name="M:TopDownShooter.ArenaScene.OnCompleted(TopDownShooter.Engine.CompletedEventArgs)">
             <summary>
             Raises the <see cref="E:TopDownShooter.ArenaScene.Completed"/> event.
             </summary>
+            <param name="args">A <see cref="T:TopDownShooter.Engine.CompletedEventArgs"/> that contains the event data.</param>
         </member>
         <member name="T:TopDownShooter.Game1">
             <summary>
@@ -179,7 +181,7 @@
             Initializes a new instance of the <see cref="T:TopDownShooter.TitleScene" /> class.
             </summary>
             <param name="graphicsDevice">The <see cref="T:Microsoft.Xna.Framework.Graphics.GraphicsDevice" />.</param>
-            <param name="mouse">The <see cref="T:TopDownShooter.Engine.Adapters.IMouseAdapter"/>.</param>
+            <param name="mouse">The <see cref="T:TopDownShooter.Engine.Adapters.IMouseAdapter" />.</param>
         </member>
         <member name="E:TopDownShooter.TitleScene.Completed">
             <summary>
@@ -208,16 +210,23 @@
             </summary>
             <param name="contentManager">The content manager adapter.</param>
         </member>
+        <member name="M:TopDownShooter.TitleScene.Report(System.Int32)">
+            <summary>
+            Reports a progress update.
+            </summary>
+            <param name="value">The value of the updated progress.</param>
+        </member>
         <member name="M:TopDownShooter.TitleScene.Update(Microsoft.Xna.Framework.GameTime)">
             <summary>
             Updates the game object with the specified game time.
             </summary>
             <param name="gameTime">The game time.</param>
         </member>
-        <member name="M:TopDownShooter.TitleScene.OnCompleted">
+        <member name="M:TopDownShooter.TitleScene.OnCompleted(TopDownShooter.Engine.CompletedEventArgs)">
             <summary>
             Raises the <see cref="E:TopDownShooter.TitleScene.Completed" /> event.
             </summary>
+            <param name="args">A <see cref="T:TopDownShooter.Engine.CompletedEventArgs"/> that contains the event data.</param>
         </member>
     </members>
 </doc>
