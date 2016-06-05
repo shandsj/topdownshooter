@@ -58,6 +58,7 @@ namespace TopDownShooter
         /// Initializes a new instance of the <see cref="TitleScene" /> class.
         /// </summary>
         /// <param name="graphicsDevice">The <see cref="GraphicsDevice" />.</param>
+        /// <param name="collisionSystem">The <see cref="ICollisionSystem"/>.</param>
         public TitleScene(GraphicsDevice graphicsDevice, ICollisionSystem collisionSystem)
             : this(graphicsDevice, collisionSystem, new MouseAdapter())
         {
@@ -67,6 +68,7 @@ namespace TopDownShooter
         /// Initializes a new instance of the <see cref="TitleScene" /> class.
         /// </summary>
         /// <param name="graphicsDevice">The <see cref="GraphicsDevice" />.</param>
+        /// <param name="collisionSystem">The <see cref="ICollisionSystem"/>.</param>
         /// <param name="mouse">The <see cref="IMouseAdapter" />.</param>
         internal TitleScene(GraphicsDevice graphicsDevice, ICollisionSystem collisionSystem, IMouseAdapter mouse)
         {

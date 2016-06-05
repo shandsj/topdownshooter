@@ -14,6 +14,7 @@
             Initializes a new instance of the <see cref="T:TopDownShooter.ArenaScene"/> class.
             </summary>
             <param name="graphicsDevice">The <see cref="T:Microsoft.Xna.Framework.Graphics.GraphicsDevice"/>.</param>
+            <param name="collisionSystem">The <see cref="T:TopDownShooter.Engine.Collisions.ICollisionSystem"/>.</param>
             <param name="level">The preloaded level.</param>
         </member>
         <member name="E:TopDownShooter.ArenaScene.Completed">
@@ -175,12 +176,14 @@
             Initializes a new instance of the <see cref="T:TopDownShooter.TitleScene" /> class.
             </summary>
             <param name="graphicsDevice">The <see cref="T:Microsoft.Xna.Framework.Graphics.GraphicsDevice" />.</param>
+            <param name="collisionSystem">The <see cref="T:TopDownShooter.Engine.Collisions.ICollisionSystem"/>.</param>
         </member>
         <member name="M:TopDownShooter.TitleScene.#ctor(Microsoft.Xna.Framework.Graphics.GraphicsDevice,TopDownShooter.Engine.Collisions.ICollisionSystem,TopDownShooter.Engine.Adapters.IMouseAdapter)">
             <summary>
             Initializes a new instance of the <see cref="T:TopDownShooter.TitleScene" /> class.
             </summary>
             <param name="graphicsDevice">The <see cref="T:Microsoft.Xna.Framework.Graphics.GraphicsDevice" />.</param>
+            <param name="collisionSystem">The <see cref="T:TopDownShooter.Engine.Collisions.ICollisionSystem"/>.</param>
             <param name="mouse">The <see cref="T:TopDownShooter.Engine.Adapters.IMouseAdapter" />.</param>
         </member>
         <member name="E:TopDownShooter.TitleScene.Completed">

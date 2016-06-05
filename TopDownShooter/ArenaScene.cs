@@ -54,6 +54,7 @@ namespace TopDownShooter
         /// Initializes a new instance of the <see cref="ArenaScene"/> class.
         /// </summary>
         /// <param name="graphicsDevice">The <see cref="GraphicsDevice"/>.</param>
+        /// <param name="collisionSystem">The <see cref="ICollisionSystem"/>.</param>
         /// <param name="level">The preloaded level.</param>
         public ArenaScene(GraphicsDevice graphicsDevice, ICollisionSystem collisionSystem, Level level)
         {
