@@ -130,6 +130,11 @@ namespace TopDownShooter.Engine
         /// <param name="message">The message object.</param>
         public void ReceiveMessage(IGameObject gameObject, ComponentMessage message)
         {
+            if (message.MessageType == MessageType.Movement)
+            {
+                Vector2 vector = (Vector2)message.MessageDetails;
+                this.currentAnimationComponent.Rotation = (float)Math.Atan2(vector.Y, vector.X) + (float)(Math.PI / 2);
+            }
         }
 
         /// <summary>

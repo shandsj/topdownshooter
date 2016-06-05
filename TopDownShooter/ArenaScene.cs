@@ -120,9 +120,11 @@ namespace TopDownShooter
                     new HumanInputControllerComponent(),
                     new PlayerColliderComponent(focusedPlayerId, this.collisionSystem),
                     new AnimationComponentManager(
-                        new AnimationComponent("Walk", "hoodieguy", new FrameProperties(76, 140, TimeSpan.FromSeconds(.1), 2)) { IsLooping = true, IsAnimating = true, IsRendered = true },
+                        new AnimationComponent("Stand", "SpriteSheets/red-standing-still", new FrameProperties(200, 141, TimeSpan.MaxValue, 1)) { IsRendered = true },
+                        new AnimationComponent("Walk", "SpriteSheets/red-walking", new FrameProperties(200, 143, TimeSpan.FromSeconds(.2), 1)) { IsLooping = true, IsAnimating = true },
                         new AnimationComponent("Death", "hoodieguyOnFire", new FrameProperties(76, 140, TimeSpan.FromSeconds(.1), 2)) { IsLooping = true }),
-                    new PlayerInventoryComponent(this.collisionSystem)
+                    new PlayerInventoryComponent(this.collisionSystem),
+                    new DebugComponent(Color.Red, 2)
                 });
 
             this.focusedPlayer.Name = $"Player {focusedPlayerId}";
@@ -144,7 +146,8 @@ namespace TopDownShooter
                         new SimpleAiInputControllerComponent(this.random),
                         new PlayerColliderComponent(id, this.collisionSystem),
                         new AnimationComponentManager(
-                            new AnimationComponent("Walk", "hoodieguy", new FrameProperties(76, 140, TimeSpan.FromSeconds(.1), 2)) { IsLooping = true, IsAnimating = true, IsRendered = true },
+                            new AnimationComponent("Stand", "SpriteSheets/red-standing-still", new FrameProperties(200, 141, TimeSpan.MaxValue, 1)) { IsRendered = true },
+                            new AnimationComponent("Walk", "SpriteSheets/red-walking", new FrameProperties(200, 143, TimeSpan.FromSeconds(.2), 1)) { IsLooping = true, IsAnimating = true, IsRendered = true },
                             new AnimationComponent("Death", "hoodieguyOnFire", new FrameProperties(76, 140, TimeSpan.FromSeconds(.1), 2)) { IsLooping = true }),
                         new PlayerInventoryComponent(this.collisionSystem)
                     });

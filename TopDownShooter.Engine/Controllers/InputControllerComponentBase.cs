@@ -100,6 +100,11 @@ namespace TopDownShooter.Engine.Controllers
 
             this.Direction.Normalize();
             gameObject.Velocity = this.Direction * this.speed;
+
+            if (gameObject.Velocity.Length() > 0)
+            {
+                gameObject.BroadcastMessage(new ComponentMessage(MessageType.Movement, gameObject.Velocity));
+            }
         }
 
         /// <summary>

@@ -135,7 +135,7 @@ namespace TopDownShooter.Engine
             }
             else if (this.Velocity.Equals(Vector2.Zero))
             {
-                this.animationComponentManager.Stop();
+                this.animationComponentManager.Play("Stand");
             }
             else
             {
