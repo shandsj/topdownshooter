@@ -6,6 +6,7 @@
 
 namespace TopDownShooter.Engine
 {
+    using System.Threading.Tasks;
     using Microsoft.Xna.Framework;
     using TopDownShooter.Engine.Adapters;
 
@@ -36,7 +37,17 @@ namespace TopDownShooter.Engine
         /// <param name="gameTime">The game time.</param>
         public void Draw(GameTime gameTime)
         {
-            this.ActiveScene.Draw(gameTime);
+            this.ActiveScene?.Draw(gameTime);
+        }
+
+        /// <summary>
+        /// Asyncronously preloads the specified initialized scene.
+        /// </summary>
+        /// <param name="scene">The initialized scene.</param>
+        /// <returns>An awaitable task.</returns>
+        public Task PreloadAsync(IScene scene)
+        {
+            return scene.LoadContentAsync(this.contentManager, this);
         }
 
         /// <summary>
@@ -48,8 +59,6 @@ namespace TopDownShooter.Engine
             this.ActiveScene?.Destroy();
             ////this.contentManager.Unload();
 
-            scene.Initialize();
-            scene.LoadContent(this.contentManager);
             this.ActiveScene = scene;
         }
 
@@ -59,7 +68,16 @@ namespace TopDownShooter.Engine
         /// <param name="gameTime">The game time.</param>
         public void Update(GameTime gameTime)
         {
-            this.ActiveScene.Update(gameTime);
+            this.ActiveScene?.Update(gameTime);
+        }
+
+        /// <summary>
+        /// Reports a progress update.
+        /// </summary>
+        /// <param name="value">The value of the updated progress.</param>
+        public void Report(int value)
+        {
+            this.ActiveScene?.Report(value);
         }
     }
 }

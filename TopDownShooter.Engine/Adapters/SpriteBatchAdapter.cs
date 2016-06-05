@@ -8,6 +8,7 @@ namespace TopDownShooter.Engine.Adapters
 {
     using Microsoft.Xna.Framework;
     using Microsoft.Xna.Framework.Graphics;
+    using MonoGame.Extended.Shapes;
 
     /// <summary>
     /// Defines an adapter for <see cref="SpriteBatch" />.
@@ -120,6 +121,27 @@ namespace TopDownShooter.Engine.Adapters
         public void Draw(Texture2D texture, Vector2 position, Rectangle? sourceRectangle, Color color, float rotation, Vector2 origin, float scale, SpriteEffects effects, float layerDepth)
         {
             this.spriteBatch.Draw(texture, position, sourceRectangle, color, rotation, origin, scale, effects, layerDepth);
+        }
+
+        /// <summary>
+        /// Draws the specified rectangle in the current batch.
+        /// </summary>
+        /// <param name="rectangle">The <see cref="RectangleF"/> to render.</param>
+        /// <param name="color">The color.</param>
+        /// <param name="thickness">The thickness.</param>
+        public void DrawRectangle(RectangleF rectangle, Color color, float thickness = 1)
+        {
+            this.spriteBatch.DrawRectangle(rectangle, color, thickness);
+        }
+
+        /// <summary>
+        /// Draws and fills the specified rectangle in the current batch.
+        /// </summary>
+        /// <param name="rectangle">The <see cref="RectangleF"/> to render.</param>
+        /// <param name="color">The color.</param>
+        public void FillRectangle(RectangleF rectangle, Color color)
+        {
+            this.spriteBatch.FillRectangle(rectangle, color);
         }
 
         /// <summary>

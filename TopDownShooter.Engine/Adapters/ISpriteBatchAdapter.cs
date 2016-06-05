@@ -6,6 +6,7 @@ namespace TopDownShooter.Engine.Adapters
 {
     using Microsoft.Xna.Framework;
     using Microsoft.Xna.Framework.Graphics;
+    using MonoGame.Extended.Shapes;
 
     /// <summary>
     /// Defines an interface for adapting <see cref="SpriteBatch" />.
@@ -87,5 +88,20 @@ namespace TopDownShooter.Engine.Adapters
         /// Flushes all batched text and sprites to the screen.
         /// </summary>
         void End();
+
+        /// <summary>
+        /// Draws the specified rectangle in the current batch.
+        /// </summary>
+        /// <param name="rectangle">The <see cref="RectangleF"/> to render.</param>
+        /// <param name="color">The color.</param>
+        /// <param name="thickness">The thickness.</param>
+        void DrawRectangle(RectangleF rectangle, Color color, float thickness = 1);
+
+        /// <summary>
+        /// Draws and fills the specified rectangle in the current batch.
+        /// </summary>
+        /// <param name="rectangle">The <see cref="RectangleF"/> to render.</param>
+        /// <param name="color">The color.</param>
+        void FillRectangle(RectangleF rectangle, Color color);
     }
 }

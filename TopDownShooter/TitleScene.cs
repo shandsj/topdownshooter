@@ -7,10 +7,12 @@
 namespace TopDownShooter
 {
     using System;
+    using System.Threading.Tasks;
     using Microsoft.Xna.Framework;
     using Microsoft.Xna.Framework.Graphics;
     using Microsoft.Xna.Framework.Input;
     using MonoGame.Extended;
+    using MonoGame.Extended.Shapes;
     using TiledSharp;
     using TopDownShooter.Engine;
     using TopDownShooter.Engine.Adapters;
@@ -26,17 +28,19 @@ namespace TopDownShooter
 
         private const float PlayButtonScale = .25f;
 
+        private const float ProgressBarScale = .15f;
+
         private readonly GraphicsDevice graphicsDevice;
 
         private readonly IMouseAdapter mouse;
 
         private ICamera2DAdapter camera2DAdapter;
 
+        private RectangleF progressBarRectangle;
+
         private SpriteFont font;
 
         private bool isLoaded;
-
-        private Level level;
 
         private Level background;
 
@@ -50,17 +54,18 @@ namespace TopDownShooter
 
         private Texture2D playButtonTexture;
 
-        private ISpriteBatchAdapter spriteBatch;
+        private Texture2D progressBarTexture;
 
-        private ICollisionSystem collisionSystem;
+        private Vector2 progressBarPosition;
+
+        private ISpriteBatchAdapter spriteBatch;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="TitleScene" /> class.
         /// </summary>
         /// <param name="graphicsDevice">The <see cref="GraphicsDevice" />.</param>
-        /// <param name="collisionSystem">The <see cref="ICollisionSystem"/>.</param>
-        public TitleScene(GraphicsDevice graphicsDevice, ICollisionSystem collisionSystem)
-            : this(graphicsDevice, collisionSystem, new MouseAdapter())
+        public TitleScene(GraphicsDevice graphicsDevice)
+            : this(graphicsDevice, new MouseAdapter())
         {
         }
 
@@ -68,12 +73,10 @@ namespace TopDownShooter
         /// Initializes a new instance of the <see cref="TitleScene" /> class.
         /// </summary>
         /// <param name="graphicsDevice">The <see cref="GraphicsDevice" />.</param>
-        /// <param name="collisionSystem">The <see cref="ICollisionSystem"/>.</param>
         /// <param name="mouse">The <see cref="IMouseAdapter" />.</param>
-        internal TitleScene(GraphicsDevice graphicsDevice, ICollisionSystem collisionSystem, IMouseAdapter mouse)
+        internal TitleScene(GraphicsDevice graphicsDevice, IMouseAdapter mouse)
         {
             this.graphicsDevice = graphicsDevice;
-            this.collisionSystem = collisionSystem;
             this.camera2DAdapter = new Camera2DAdapter(new Camera2D(this.graphicsDevice) { Zoom = .5f });
             this.mouse = mouse;
         }
@@ -108,11 +111,8 @@ namespace TopDownShooter
             }
             else
             {
-                this.spriteBatch.DrawString(
-                    this.font,
-                    this.loadProgress.ToString(),
-                    this.playButtonPosition,
-                    Color.White);
+                this.spriteBatch.Draw(this.progressBarTexture, this.progressBarPosition, null, Color.White, 0f, new Vector2(0, 0), ProgressBarScale, SpriteEffects.None, 0f);
+                this.spriteBatch.FillRectangle(this.progressBarRectangle, new Color(60, 115, 202));
             }
 
             this.spriteBatch.Draw(this.logoTexture, this.logoPosition, null, Color.White, 0f, new Vector2(0, 0), LogoScale, SpriteEffects.None, 0f);
@@ -126,20 +126,20 @@ namespace TopDownShooter
         {
             this.spriteBatch = new SpriteBatchAdapter(new SpriteBatch(this.graphicsDevice));
 
-            this.background = new Level(CollisionSystem.NextGameObjectId++, this.collisionSystem, new TmxMapAdapter(new TmxMap("Content/TmxFiles/TitleScene.tmx")));
+            this.background = new Level(CollisionSystem.NextGameObjectId++, new CollisionSystem(), new TmxMapAdapter(new TmxMap("Content/TmxFiles/TitleScene.tmx")));
             this.background.Initialize();
-
-            this.level = new Level(CollisionSystem.NextGameObjectId++, this.collisionSystem, new TmxMapAdapter(new TmxMap("Content/TmxFiles/DefaultLevel.tmx")));
-            this.level.Initialize();
         }
 
         /// <summary>
-        /// Loads the content from the specified content manager adapter.
+        /// Asynchronously oads the content from the specified content manager adapter.
         /// </summary>
         /// <param name="contentManager">The content manager adapter.</param>
-        public void LoadContent(IContentManagerAdapter contentManager)
+        /// <param name="progress">The <see cref="IProgress{Int32}"/> to report progress.</param>
+        /// <returns>A <see cref="Task"/> representing the asynchronous operation.</returns>
+        public Task LoadContentAsync(IContentManagerAdapter contentManager, IProgress<int> progress)
         {
             this.playButtonTexture = contentManager.Load<Texture2D>("UI/BluePlayButton");
+            this.progressBarTexture = contentManager.Load<Texture2D>("UI/LoadingProgressBar");
             this.logoTexture = contentManager.Load<Texture2D>("UI/SingleShot");
 
             // Scale everything off the view port. Put the play button in the center of the screen,
@@ -148,6 +148,13 @@ namespace TopDownShooter
             var y = ((this.spriteBatch.GraphicsDevice.Viewport.Height - (this.playButtonTexture.Height * PlayButtonScale)) / 2f) +
                     (this.spriteBatch.GraphicsDevice.Viewport.Height * .30f);
             this.playButtonPosition = new Vector2(x, y);
+
+            // Scale everything off the view port. Put the play button in the center of the screen,
+            //  but down about 30% to make room for the title image and the user name textbox
+            x = (this.spriteBatch.GraphicsDevice.Viewport.Width - (this.progressBarTexture.Width * ProgressBarScale)) / 2f;
+            y = ((this.spriteBatch.GraphicsDevice.Viewport.Height - (this.progressBarTexture.Height * ProgressBarScale)) / 2f) +
+                    (this.spriteBatch.GraphicsDevice.Viewport.Height * .30f);
+            this.progressBarPosition = new Vector2(x, y);
 
             // Scale everything off the view port. Put the play button in the center of the screen,
             //  but down about 5% to make room for the title image and the user name textbox
@@ -159,7 +166,8 @@ namespace TopDownShooter
             this.font = contentManager.Load<SpriteFont>("Fonts/PlayerName");
 
             this.background.LoadContent(contentManager);
-            this.level.LoadContentAsync(contentManager, this).ContinueWith(a => { this.isLoaded = true; });
+
+            return Task.Delay(0);
         }
 
         /// <summary>
@@ -168,7 +176,25 @@ namespace TopDownShooter
         /// <param name="value">The value of the updated progress.</param>
         public void Report(int value)
         {
+            var maxWidth = this.spriteBatch.GraphicsDevice.Viewport.Width * .8f;
+            var width = maxWidth * (value / 100f);
+            var height = this.spriteBatch.GraphicsDevice.Viewport.Height * .05f;
+
+            // Scale everything off the view port. Put the play button in the center of the screen,
+            //  but down about 30% to make room for the title image and the user name textbox
+            var x = (this.spriteBatch.GraphicsDevice.Viewport.Width - (maxWidth * 1f)) / 2f;
+            var y = ((this.spriteBatch.GraphicsDevice.Viewport.Height - (height * 1f)) / 2f) +
+                    (this.spriteBatch.GraphicsDevice.Viewport.Height * .36f);
+
+            var rectangle = new RectangleF(x, y, width, height);
+
             this.loadProgress = value;
+            this.progressBarRectangle = rectangle;
+
+            if (this.loadProgress == 100)
+            {
+                this.isLoaded = true;
+            }
         }
 
         /// <summary>
@@ -183,7 +209,7 @@ namespace TopDownShooter
                 // TODO: Draw a mouse cursor and enable this
                 ////if (this.playButtonTexture.Bounds.Contains(mouseState.Position))
                 {
-                    this.OnCompleted(new CompletedEventArgs(this.level));
+                    this.OnCompleted(new CompletedEventArgs());
                 }
             }
         }

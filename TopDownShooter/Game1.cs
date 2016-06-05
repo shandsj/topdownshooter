@@ -50,15 +50,26 @@ namespace TopDownShooter
         /// related content.  Calling base.Initialize will enumerate through any components
         /// and initialize them as well.
         /// </summary>
-        protected override void Initialize()
+        protected override async void Initialize()
         {
+            var collisionSystem = new CollisionSystem();
             this.contentManager = new ContentManagerAdapter(this.Content);
             this.sceneController = new SceneController(this.contentManager);
 
-            var collisionSystem = new CollisionSystem();
-            var titleScene = new TitleScene(this.GraphicsDevice, collisionSystem);
-            titleScene.Completed += (s, e) => this.sceneController.Switch(new ArenaScene(this.GraphicsDevice, collisionSystem, (Level)e.Data));
+            var arenaScene = new ArenaScene(this.GraphicsDevice, collisionSystem);
+            arenaScene.Initialize();
+
+            // This operation is meant to be performed asynchronously so the preload can happen.
+#pragma warning disable CS4014 // Because this call is not awaited, execution of the current method continues before the call is completed
+            this.sceneController.PreloadAsync(arenaScene);
+#pragma warning restore CS4014 // Because this call is not awaited, execution of the current method continues before the call is completed
+
+            var titleScene = new TitleScene(this.GraphicsDevice);
+            titleScene.Initialize();
+            await this.sceneController.PreloadAsync(titleScene);
             this.sceneController.Switch(titleScene);
+
+            titleScene.Completed += (s, e) => this.sceneController.Switch(arenaScene);
 
             base.Initialize();
         }
