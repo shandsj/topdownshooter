@@ -20,35 +20,27 @@ namespace TopDownShooter
     /// <summary>
     /// Defines a title scene.
     /// </summary>
-    public class TitleScene : IScene, IProgress<int>
+    public class TitleScene : IScene
     {
-        private const float LogoScale = .70f;
-
         private const float PlayButtonScale = .25f;
+
+        private const float LogoScale = .70f;
 
         private readonly GraphicsDevice graphicsDevice;
 
-        private readonly IMouseAdapter mouse;
-
-        private ICamera2DAdapter camera2DAdapter;
-
-        private SpriteFont font;
-
-        private bool isLoaded;
-
         private Level level;
 
-        private int loadProgress;
-
-        private Vector2 logoPosition;
-
-        private Texture2D logoTexture;
-
         private Vector2 playButtonPosition;
-
         private Texture2D playButtonTexture;
 
+        private Vector2 logoPosition;
+        private Texture2D logoTexture;
+
         private ISpriteBatchAdapter spriteBatch;
+
+        private IMouseAdapter mouse;
+
+        private ICamera2DAdapter camera2DAdapter;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="TitleScene" /> class.
@@ -63,7 +55,7 @@ namespace TopDownShooter
         /// Initializes a new instance of the <see cref="TitleScene" /> class.
         /// </summary>
         /// <param name="graphicsDevice">The <see cref="GraphicsDevice" />.</param>
-        /// <param name="mouse">The <see cref="IMouseAdapter" />.</param>
+        /// <param name="mouse">The <see cref="IMouseAdapter"/>.</param>
         internal TitleScene(GraphicsDevice graphicsDevice, IMouseAdapter mouse)
         {
             this.graphicsDevice = graphicsDevice;
@@ -74,7 +66,7 @@ namespace TopDownShooter
         /// <summary>
         /// Raised when the scene is completed.
         /// </summary>
-        public event EventHandler<CompletedEventArgs> Completed;
+        public event EventHandler Completed;
 
         /// <summary>
         /// Destroyes the game object.
@@ -93,20 +85,8 @@ namespace TopDownShooter
             this.graphicsDevice.Clear(Color.Black);
 
             this.spriteBatch.Begin();
-
-            if (this.isLoaded)
-            {
-                this.spriteBatch.Draw(this.playButtonTexture, this.playButtonPosition, null, Color.White, 0f, new Vector2(0, 0), PlayButtonScale, SpriteEffects.None, 0f);
-            }
-            else
-            {
-                this.spriteBatch.DrawString(
-                    this.font,
-                    this.loadProgress.ToString(),
-                    this.playButtonPosition,
-                    Color.White);
-            }
-
+            this.level.Draw(this.camera2DAdapter, this.spriteBatch, gameTime);
+            this.spriteBatch.Draw(this.playButtonTexture, this.playButtonPosition, null, Color.White, 0f, new Vector2(0, 0), PlayButtonScale, SpriteEffects.None, 0f);
             this.spriteBatch.Draw(this.logoTexture, this.logoPosition, null, Color.White, 0f, new Vector2(0, 0), LogoScale, SpriteEffects.None, 0f);
             this.spriteBatch.End();
         }
@@ -126,6 +106,7 @@ namespace TopDownShooter
         /// <param name="contentManager">The content manager adapter.</param>
         public void LoadContent(IContentManagerAdapter contentManager)
         {
+            this.level.LoadContent(contentManager);
             this.playButtonTexture = contentManager.Load<Texture2D>("UI/BluePlayButton");
             this.logoTexture = contentManager.Load<Texture2D>("UI/SingleShot");
 
@@ -140,21 +121,8 @@ namespace TopDownShooter
             //  but down about 5% to make room for the title image and the user name textbox
             x = (this.spriteBatch.GraphicsDevice.Viewport.Width - (this.logoTexture.Width * LogoScale)) / 2f;
             y = ((this.spriteBatch.GraphicsDevice.Viewport.Height - (this.logoTexture.Height * LogoScale)) / 2f) -
-                (this.spriteBatch.GraphicsDevice.Viewport.Height * .08f);
+                    (this.spriteBatch.GraphicsDevice.Viewport.Height * .08f);
             this.logoPosition = new Vector2(x, y);
-
-            this.font = contentManager.Load<SpriteFont>("Fonts/PlayerName");
-
-            this.level.LoadContentAsync(contentManager, this).ContinueWith(a => { this.isLoaded = true; });
-        }
-
-        /// <summary>
-        /// Reports a progress update.
-        /// </summary>
-        /// <param name="value">The value of the updated progress.</param>
-        public void Report(int value)
-        {
-            this.loadProgress = value;
         }
 
         /// <summary>
@@ -169,18 +137,19 @@ namespace TopDownShooter
                 // TODO: Draw a mouse cursor and enable this
                 ////if (this.playButtonTexture.Bounds.Contains(mouseState.Position))
                 {
-                    this.OnCompleted(new CompletedEventArgs(this.level));
+                    this.OnCompleted();
                 }
             }
+
+            this.level.Update(gameTime);
         }
 
         /// <summary>
         /// Raises the <see cref="Completed" /> event.
         /// </summary>
-        /// <param name="args">A <see cref="CompletedEventArgs"/> that contains the event data.</param>
-        protected virtual void OnCompleted(CompletedEventArgs args)
+        protected virtual void OnCompleted()
         {
-            this.Completed?.Invoke(this, args);
+            this.Completed?.Invoke(this, EventArgs.Empty);
         }
     }
 }

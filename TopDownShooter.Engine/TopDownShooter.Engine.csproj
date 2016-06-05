@@ -94,7 +94,6 @@
     <Compile Include="Collisions\IColliderComponent.cs" />
     <Compile Include="Collisions\ICollisionSystem.cs" />
     <Compile Include="Collisions\SimpleColliderComponent.cs" />
-    <Compile Include="CompletedEventArgs.cs" />
     <Compile Include="ComponentMessage.cs" />
     <Compile Include="Controllers\HumanInputControllerComponent.cs" />
     <Compile Include="Controllers\IInputController.cs" />

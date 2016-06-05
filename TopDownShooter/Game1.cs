@@ -6,11 +6,18 @@
 
 namespace TopDownShooter
 {
+    using System;
+    using System.Collections.Generic;
     using Microsoft.Xna.Framework;
+    using Microsoft.Xna.Framework.Graphics;
     using Microsoft.Xna.Framework.Input;
+    using TiledSharp;
     using TopDownShooter.Engine;
     using TopDownShooter.Engine.Adapters;
+    using TopDownShooter.Engine.Collisions;
+    using TopDownShooter.Engine.Controllers;
     using TopDownShooter.Engine.Levels;
+    using TopDownShooter.Engine.Projectiles;
 
     /// <summary>
     /// This is the main type for your game.
@@ -18,9 +25,7 @@ namespace TopDownShooter
     public class Game1 : Game
     {
         private IContentManagerAdapter contentManager;
-
         private GraphicsDeviceManager graphics;
-
         private ISceneController sceneController;
 
         /// <summary>
@@ -55,7 +60,7 @@ namespace TopDownShooter
             this.sceneController = new SceneController(this.contentManager);
 
             var titleScene = new TitleScene(this.GraphicsDevice);
-            titleScene.Completed += (s, e) => this.sceneController.Switch(new ArenaScene(this.GraphicsDevice, (Level)e.Data));
+            titleScene.Completed += (s, e) => this.sceneController.Switch(new ArenaScene(this.GraphicsDevice));
             this.sceneController.Switch(titleScene);
 
             base.Initialize();

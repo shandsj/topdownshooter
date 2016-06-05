@@ -1,28 +1,28 @@
-﻿// --------------------------------------------------------------------------------------------------------------------
-// <copyright file="BulletGameItem.cs" company="PlaceholderCompany">
+﻿// <copyright file="BulletGameItem.cs" company="PlaceholderCompany">
 // Copyright (c) PlaceholderCompany. All rights reserved.
 // </copyright>
-// --------------------------------------------------------------------------------------------------------------------
 
 namespace TopDownShooter.Engine.Items
 {
+    using System;
     using System.Collections.Generic;
+    using System.Linq;
+    using System.Text;
+    using System.Threading.Tasks;
+    using Collisions;
     using Microsoft.Xna.Framework;
-    using TopDownShooter.Engine.Collisions;
 
     /// <summary>
     /// Bullet Game item implementation
     /// </summary>
     public class BulletGameItem : GameItem
     {
-        private readonly ICollisionSystem collisionSystem;
-
+        private ICollisionSystem collisionSystem;
         private IAnimationComponentManager animationComponentManager;
-
         private IColliderComponent colliderComponent;
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="BulletGameItem" /> class.
+        /// Initializes a new instance of the <see cref="BulletGameItem"/> class.
         /// </summary>
         /// <param name="id">The game object identifier.</param>
         /// <param name="position">The position of the player.</param>
@@ -41,7 +41,11 @@ namespace TopDownShooter.Engine.Items
         /// <summary>
         /// Gets a description for this item.
         /// </summary>
-        public override string Description => "Bullets";
+        public override string Description {
+            get {
+                return "Bullets";
+            }
+        }
 
         /// <summary>
         /// Gets the height of the game object.
@@ -67,11 +71,9 @@ namespace TopDownShooter.Engine.Items
         /// Should be called when another component will be
         /// taking ownership of this item.
         /// </summary>
-        /// <returns><see cref="IGameItem" /> reference.</returns>
-        /// <remarks>
-        /// <see cref="IGameItem" /> here could be used to return an Inventory friendly
-        /// viewable GameItem here.
-        /// </remarks>
+        /// <returns><see cref="IGameItem"/> reference.</returns>
+        /// <remarks><see cref="IGameItem"/> here could be used to return an Inventory friendly
+        /// viewable GameItem here.</remarks>
         public override IGameItem Pickup()
         {
             this.collisionSystem.Unregister(this.Id);

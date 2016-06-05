@@ -41,7 +41,11 @@ namespace TopDownShooter.Engine.Items
         /// <summary>
         /// Gets a description for this item.
         /// </summary>
-        public override string Description => "Coins";
+        public override string Description {
+            get {
+                return "Coins";
+            }
+        }
 
         /// <summary>
         /// Gets the height of the game object.
