@@ -54,22 +54,24 @@ namespace TopDownShooter
         /// Initializes a new instance of the <see cref="ArenaScene"/> class.
         /// </summary>
         /// <param name="graphicsDevice">The <see cref="GraphicsDevice"/>.</param>
-        public ArenaScene(GraphicsDevice graphicsDevice)
+        /// <param name="level">The preloaded level.</param>
+        public ArenaScene(GraphicsDevice graphicsDevice, Level level)
         {
             this.graphicsDevice = graphicsDevice;
+            this.level = level;
         }
 
         /// <summary>
         /// Raised when the scene is completed.
         /// </summary>
-        public event EventHandler Completed;
+        public event EventHandler<CompletedEventArgs> Completed;
 
         /// <summary>
         /// Destroyes the game object.
         /// </summary>
         public void Destroy()
         {
-            this.OnCompleted();
+            this.OnCompleted(new CompletedEventArgs());
             //// TODO: destroy all game objects.
         }
 
@@ -103,7 +105,6 @@ namespace TopDownShooter
             this.gameItems.AddRange(new GameItemFactory().SpawnRandomBulletItems(100, this.collisionSystem, 1500, 3000, 1500, 3000));
 
             this.camera2DAdapter = new Camera2DAdapter(new Camera2D(this.graphicsDevice) { Zoom = .5f });
-            this.level = new Level(CollisionSystem.NextGameObjectId++, this.collisionSystem, new TmxMapAdapter(new TmxMap("Content/TmxFiles/DefaultLevel.tmx")));
             this.leaderBoard = new LeaderBoard(CollisionSystem.NextGameObjectId++);
             this.leaderBoard.Initialize();
 
@@ -166,7 +167,6 @@ namespace TopDownShooter
             this.worldSpriteBatch = new SpriteBatchAdapter(new SpriteBatch(this.graphicsDevice));
             this.screenSpriteBatch = new SpriteBatchAdapter(new SpriteBatch(this.graphicsDevice));
 
-            this.level.LoadContent(contentManager);
             this.players.ForEach(player => player.LoadContent(contentManager));
             this.gameItems.ForEach(item => item.LoadContent(contentManager));
             this.leaderBoard.LoadContent(contentManager);
@@ -189,9 +189,10 @@ namespace TopDownShooter
         /// <summary>
         /// Raises the <see cref="Completed"/> event.
         /// </summary>
-        protected virtual void OnCompleted()
+        /// <param name="args">A <see cref="CompletedEventArgs"/> that contains the event data.</param>
+        protected virtual void OnCompleted(CompletedEventArgs args)
         {
-            this.Completed?.Invoke(this, EventArgs.Empty);
+            this.Completed?.Invoke(this, args);
         }
     }
 }

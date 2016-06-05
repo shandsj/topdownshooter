@@ -18,7 +18,7 @@ namespace TopDownShooter.Engine
         /// <summary>
         /// Raised when the scene is completed.
         /// </summary>
-        event EventHandler Completed;
+        event EventHandler<CompletedEventArgs> Completed;
 
         /// <summary>
         /// Destroyes the game object.
