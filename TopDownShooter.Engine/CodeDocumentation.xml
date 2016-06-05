@@ -480,6 +480,21 @@
             Flushes all batched text and sprites to the screen.
             </summary>
         </member>
+        <member name="M:TopDownShooter.Engine.Adapters.ISpriteBatchAdapter.DrawRectangle(MonoGame.Extended.Shapes.RectangleF,Microsoft.Xna.Framework.Color,System.Single)">
+            <summary>
+            Draws the specified rectangle in the current batch.
+            </summary>
+            <param name="rectangle">The <see cref="T:MonoGame.Extended.Shapes.RectangleF"/> to render.</param>
+            <param name="color">The color.</param>
+            <param name="thickness">The thickness.</param>
+        </member>
+        <member name="M:TopDownShooter.Engine.Adapters.ISpriteBatchAdapter.FillRectangle(MonoGame.Extended.Shapes.RectangleF,Microsoft.Xna.Framework.Color)">
+            <summary>
+            Draws and fills the specified rectangle in the current batch.
+            </summary>
+            <param name="rectangle">The <see cref="T:MonoGame.Extended.Shapes.RectangleF"/> to render.</param>
+            <param name="color">The color.</param>
+        </member>
         <member name="T:TopDownShooter.Engine.Adapters.ITmxMapAdapter">
             <summary>
             Defines an adapter interface for a <see cref="T:TiledSharp.TmxMap" />.
@@ -615,6 +630,21 @@
             <param name="scale">A scaling of this sprite.</param>
             <param name="effects">Modifications for drawing. Can be combined.</param>
             <param name="layerDepth">A depth of the layer of this sprite.</param>
+        </member>
+        <member name="M:TopDownShooter.Engine.Adapters.SpriteBatchAdapter.DrawRectangle(MonoGame.Extended.Shapes.RectangleF,Microsoft.Xna.Framework.Color,System.Single)">
+            <summary>
+            Draws the specified rectangle in the current batch.
+            </summary>
+            <param name="rectangle">The <see cref="T:MonoGame.Extended.Shapes.RectangleF"/> to render.</param>
+            <param name="color">The color.</param>
+            <param name="thickness">The thickness.</param>
+        </member>
+        <member name="M:TopDownShooter.Engine.Adapters.SpriteBatchAdapter.FillRectangle(MonoGame.Extended.Shapes.RectangleF,Microsoft.Xna.Framework.Color)">
+            <summary>
+            Draws and fills the specified rectangle in the current batch.
+            </summary>
+            <param name="rectangle">The <see cref="T:MonoGame.Extended.Shapes.RectangleF"/> to render.</param>
+            <param name="color">The color.</param>
         </member>
         <member name="M:TopDownShooter.Engine.Adapters.SpriteBatchAdapter.End">
             <summary>
