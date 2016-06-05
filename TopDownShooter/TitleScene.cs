@@ -7,6 +7,7 @@
 namespace TopDownShooter
 {
     using System;
+    using System.Threading.Tasks;
     using Microsoft.Xna.Framework;
     using Microsoft.Xna.Framework.Graphics;
     using Microsoft.Xna.Framework.Input;
@@ -36,8 +37,6 @@ namespace TopDownShooter
 
         private bool isLoaded;
 
-        private Level level;
-
         private Level background;
 
         private int loadProgress;
@@ -52,15 +51,12 @@ namespace TopDownShooter
 
         private ISpriteBatchAdapter spriteBatch;
 
-        private ICollisionSystem collisionSystem;
-
         /// <summary>
         /// Initializes a new instance of the <see cref="TitleScene" /> class.
         /// </summary>
         /// <param name="graphicsDevice">The <see cref="GraphicsDevice" />.</param>
-        /// <param name="collisionSystem">The <see cref="ICollisionSystem"/>.</param>
-        public TitleScene(GraphicsDevice graphicsDevice, ICollisionSystem collisionSystem)
-            : this(graphicsDevice, collisionSystem, new MouseAdapter())
+        public TitleScene(GraphicsDevice graphicsDevice)
+            : this(graphicsDevice, new MouseAdapter())
         {
         }
 
@@ -68,12 +64,10 @@ namespace TopDownShooter
         /// Initializes a new instance of the <see cref="TitleScene" /> class.
         /// </summary>
         /// <param name="graphicsDevice">The <see cref="GraphicsDevice" />.</param>
-        /// <param name="collisionSystem">The <see cref="ICollisionSystem"/>.</param>
         /// <param name="mouse">The <see cref="IMouseAdapter" />.</param>
-        internal TitleScene(GraphicsDevice graphicsDevice, ICollisionSystem collisionSystem, IMouseAdapter mouse)
+        internal TitleScene(GraphicsDevice graphicsDevice, IMouseAdapter mouse)
         {
             this.graphicsDevice = graphicsDevice;
-            this.collisionSystem = collisionSystem;
             this.camera2DAdapter = new Camera2DAdapter(new Camera2D(this.graphicsDevice) { Zoom = .5f });
             this.mouse = mouse;
         }
@@ -126,18 +120,17 @@ namespace TopDownShooter
         {
             this.spriteBatch = new SpriteBatchAdapter(new SpriteBatch(this.graphicsDevice));
 
-            this.background = new Level(CollisionSystem.NextGameObjectId++, this.collisionSystem, new TmxMapAdapter(new TmxMap("Content/TmxFiles/TitleScene.tmx")));
+            this.background = new Level(CollisionSystem.NextGameObjectId++, new CollisionSystem(), new TmxMapAdapter(new TmxMap("Content/TmxFiles/TitleScene.tmx")));
             this.background.Initialize();
-
-            this.level = new Level(CollisionSystem.NextGameObjectId++, this.collisionSystem, new TmxMapAdapter(new TmxMap("Content/TmxFiles/DefaultLevel.tmx")));
-            this.level.Initialize();
         }
 
         /// <summary>
-        /// Loads the content from the specified content manager adapter.
+        /// Asynchronously oads the content from the specified content manager adapter.
         /// </summary>
         /// <param name="contentManager">The content manager adapter.</param>
-        public void LoadContent(IContentManagerAdapter contentManager)
+        /// <param name="progress">The <see cref="IProgress{Int32}"/> to report progress.</param>
+        /// <returns>A <see cref="Task"/> representing the asynchronous operation.</returns>
+        public Task LoadContentAsync(IContentManagerAdapter contentManager, IProgress<int> progress)
         {
             this.playButtonTexture = contentManager.Load<Texture2D>("UI/BluePlayButton");
             this.logoTexture = contentManager.Load<Texture2D>("UI/SingleShot");
@@ -159,7 +152,8 @@ namespace TopDownShooter
             this.font = contentManager.Load<SpriteFont>("Fonts/PlayerName");
 
             this.background.LoadContent(contentManager);
-            this.level.LoadContentAsync(contentManager, this).ContinueWith(a => { this.isLoaded = true; });
+
+            return Task.Delay(0);
         }
 
         /// <summary>
@@ -169,6 +163,10 @@ namespace TopDownShooter
         public void Report(int value)
         {
             this.loadProgress = value;
+            if (this.loadProgress == 100)
+            {
+                this.isLoaded = true;
+            }
         }
 
         /// <summary>
@@ -183,7 +181,7 @@ namespace TopDownShooter
                 // TODO: Draw a mouse cursor and enable this
                 ////if (this.playButtonTexture.Bounds.Contains(mouseState.Position))
                 {
-                    this.OnCompleted(new CompletedEventArgs(this.level));
+                    this.OnCompleted(new CompletedEventArgs());
                 }
             }
         }

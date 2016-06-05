@@ -8,10 +8,10 @@ namespace TopDownShooter
 {
     using System;
     using System.Collections.Generic;
+    using System.Threading.Tasks;
     using Microsoft.Xna.Framework;
     using Microsoft.Xna.Framework.Graphics;
     using MonoGame.Extended;
-    using MonoGame.Extended.ViewportAdapters;
     using TiledSharp;
     using TopDownShooter.Engine;
     using TopDownShooter.Engine.Adapters;
@@ -19,22 +19,23 @@ namespace TopDownShooter
     using TopDownShooter.Engine.Controllers;
     using TopDownShooter.Engine.Inventory;
     using TopDownShooter.Engine.Levels;
-    using TopDownShooter.Engine.Projectiles;
 
     /// <summary>
     /// Defines the scene for the arena
     /// </summary>
     public class ArenaScene : IScene
     {
+        private readonly ICollisionSystem collisionSystem;
+
         private readonly GraphicsDevice graphicsDevice;
 
         private readonly Random random = new Random((int)DateTime.Now.Ticks);
 
         private ICamera2DAdapter camera2DAdapter;
 
-        private ICollisionSystem collisionSystem;
-
         private Player focusedPlayer;
+
+        private List<IGameItem> gameItems;
 
         private LeaderBoard leaderBoard;
 
@@ -42,25 +43,19 @@ namespace TopDownShooter
 
         private List<Player> players;
 
-        // Items for pickup. This probably needs to go into
-        // some type of world state manager or something.
-        private List<IGameItem> gameItems;
-
         private ISpriteBatchAdapter screenSpriteBatch;
 
         private ISpriteBatchAdapter worldSpriteBatch;
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="ArenaScene"/> class.
+        /// Initializes a new instance of the <see cref="ArenaScene" /> class.
         /// </summary>
-        /// <param name="graphicsDevice">The <see cref="GraphicsDevice"/>.</param>
-        /// <param name="collisionSystem">The <see cref="ICollisionSystem"/>.</param>
-        /// <param name="level">The preloaded level.</param>
-        public ArenaScene(GraphicsDevice graphicsDevice, ICollisionSystem collisionSystem, Level level)
+        /// <param name="graphicsDevice">The <see cref="GraphicsDevice" />.</param>
+        /// <param name="collisionSystem">The <see cref="ICollisionSystem" />.</param>
+        public ArenaScene(GraphicsDevice graphicsDevice, ICollisionSystem collisionSystem)
         {
             this.graphicsDevice = graphicsDevice;
             this.collisionSystem = collisionSystem;
-            this.level = level;
         }
 
         /// <summary>
@@ -99,6 +94,9 @@ namespace TopDownShooter
         /// </summary>
         public void Initialize()
         {
+            this.level = new Level(CollisionSystem.NextGameObjectId++, this.collisionSystem, new TmxMapAdapter(new TmxMap("Content/TmxFiles/DefaultLevel.tmx")));
+            this.level.Initialize();
+
             this.players = new List<Player>();
             this.gameItems = new List<IGameItem>();
             this.gameItems.AddRange(new GameItemFactory().SpawnRandomCoinItems(1000, this.collisionSystem, 100, 1500, 100, 1500));
@@ -158,11 +156,15 @@ namespace TopDownShooter
         }
 
         /// <summary>
-        /// Loads the content from the specified content manager adapter.
+        /// Asynchronously oads the content from the specified content manager adapter.
         /// </summary>
         /// <param name="contentManager">The content manager adapter.</param>
-        public void LoadContent(IContentManagerAdapter contentManager)
+        /// <param name="progress">The <see cref="IProgress{Int32}"/> to report progress.</param>
+        /// <returns>A <see cref="Task"/> representing the asynchronous operation.</returns>
+        public Task LoadContentAsync(IContentManagerAdapter contentManager, IProgress<int> progress)
         {
+            var loadLevelTask = this.level.LoadContentAsync(contentManager, progress);
+
             // Create a new SpriteBatch, which can be used to draw textures.
             this.worldSpriteBatch = new SpriteBatchAdapter(new SpriteBatch(this.graphicsDevice));
             this.screenSpriteBatch = new SpriteBatchAdapter(new SpriteBatch(this.graphicsDevice));
@@ -170,6 +172,8 @@ namespace TopDownShooter
             this.players.ForEach(player => player.LoadContent(contentManager));
             this.gameItems.ForEach(item => item.LoadContent(contentManager));
             this.leaderBoard.LoadContent(contentManager);
+
+            return loadLevelTask;
         }
 
         /// <summary>
@@ -182,13 +186,22 @@ namespace TopDownShooter
             this.gameItems.ForEach(o => o.Update(gameTime));
             this.camera2DAdapter.LookAt(this.focusedPlayer.Position);
             this.leaderBoard.SetPlayers(this.players);
-            this.gameItems.RemoveAll(o => (o as IGameItem).IsPickedUp);
+            this.gameItems.RemoveAll(o => o.IsPickedUp);
         }
 
         /// <summary>
-        /// Raises the <see cref="Completed"/> event.
+        /// Reports a progress update.
         /// </summary>
-        /// <param name="args">A <see cref="CompletedEventArgs"/> that contains the event data.</param>
+        /// <param name="value">The value of the updated progress.</param>
+        public void Report(int value)
+        {
+            // This scene does not preload any scene, so there is nothing to do here.
+        }
+
+        /// <summary>
+        /// Raises the <see cref="Completed" /> event.
+        /// </summary>
+        /// <param name="args">A <see cref="CompletedEventArgs" /> that contains the event data.</param>
         protected virtual void OnCompleted(CompletedEventArgs args)
         {
             this.Completed?.Invoke(this, args);

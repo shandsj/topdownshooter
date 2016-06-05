@@ -6,6 +6,7 @@
 
 namespace TopDownShooter.Engine.UnitTests
 {
+    using System;
     using Microsoft.VisualStudio.TestTools.UnitTesting;
     using Moq;
     using TopDownShooter.Engine.Adapters;
@@ -59,7 +60,7 @@ namespace TopDownShooter.Engine.UnitTests
             bool wasLoadContentCalled = false;
             var scene = new Mock<IScene>();
             scene.Setup(s => s.Initialize()).Callback(() => { wasInitializeCalled = true; });
-            scene.Setup(s => s.LoadContent(It.IsAny<IContentManagerAdapter>())).Callback(() => { wasLoadContentCalled = true; });
+            scene.Setup(s => s.LoadContentAsync(It.IsAny<IContentManagerAdapter>(), new Mock<IProgress<int>>().Object)).Callback(() => { wasLoadContentCalled = true; });
 
             var uut = new SceneController(new Mock<IContentManagerAdapter>().Object);
             uut.Switch(scene.Object);

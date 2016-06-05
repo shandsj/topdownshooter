@@ -6,12 +6,14 @@
 
 namespace TopDownShooter.Engine
 {
+    using System;
+    using System.Threading.Tasks;
     using Microsoft.Xna.Framework;
 
     /// <summary>
     /// Defines an interface for a scene controller.
     /// </summary>
-    public interface ISceneController
+    public interface ISceneController : IProgress<int>
     {
         /// <summary>
         /// Gets the active scene.
@@ -23,6 +25,13 @@ namespace TopDownShooter.Engine
         /// </summary>
         /// <param name="gameTime">The game time.</param>
         void Draw(GameTime gameTime);
+
+        /// <summary>
+        /// Asyncronously preloads the specified initialized scene.
+        /// </summary>
+        /// <param name="scene">The initialized scene.</param>
+        /// <returns>An awaitable task.</returns>
+        Task PreloadAsync(IScene scene);
 
         /// <summary>
         /// Switches to the specified scene by destorying the previous scene, and initializing and loading content for the specified scene.

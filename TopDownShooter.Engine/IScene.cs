@@ -7,13 +7,14 @@
 namespace TopDownShooter.Engine
 {
     using System;
+    using System.Threading.Tasks;
     using Microsoft.Xna.Framework;
     using TopDownShooter.Engine.Adapters;
 
     /// <summary>
     /// Defines an interface for a scene.
     /// </summary>
-    public interface IScene
+    public interface IScene : IProgress<int>
     {
         /// <summary>
         /// Raised when the scene is completed.
@@ -37,10 +38,12 @@ namespace TopDownShooter.Engine
         void Initialize();
 
         /// <summary>
-        /// Loads the content from the specified content manager adapter.
+        /// Asynchronously oads the content from the specified content manager adapter.
         /// </summary>
         /// <param name="contentManager">The content manager adapter.</param>
-        void LoadContent(IContentManagerAdapter contentManager);
+        /// <param name="progress">The <see cref="IProgress{Int32}"/> to report progress.</param>
+        /// <returns>A <see cref="Task"/> representing the asynchronous operation.</returns>
+        Task LoadContentAsync(IContentManagerAdapter contentManager, IProgress<int> progress);
 
         /// <summary>
         /// Updates the game object with the specified game time.

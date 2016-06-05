@@ -2103,6 +2103,13 @@
             </summary>
             <param name="gameTime">The game time.</param>
         </member>
+        <member name="M:TopDownShooter.Engine.ISceneController.PreloadAsync(TopDownShooter.Engine.IScene)">
+            <summary>
+            Asyncronously preloads the specified initialized scene.
+            </summary>
+            <param name="scene">The initialized scene.</param>
+            <returns>An awaitable task.</returns>
+        </member>
         <member name="M:TopDownShooter.Engine.ISceneController.Switch(TopDownShooter.Engine.IScene)">
             <summary>
             Switches to the specified scene by destorying the previous scene, and initializing and loading content for the specified scene.
@@ -2715,11 +2722,13 @@
             Initializes the game object.
             </summary>
         </member>
-        <member name="M:TopDownShooter.Engine.IScene.LoadContent(TopDownShooter.Engine.Adapters.IContentManagerAdapter)">
+        <member name="M:TopDownShooter.Engine.IScene.LoadContentAsync(TopDownShooter.Engine.Adapters.IContentManagerAdapter,System.IProgress{System.Int32})">
             <summary>
-            Loads the content from the specified content manager adapter.
+            Asynchronously oads the content from the specified content manager adapter.
             </summary>
             <param name="contentManager">The content manager adapter.</param>
+            <param name="progress">The <see cref="T:System.IProgress`1"/> to report progress.</param>
+            <returns>A <see cref="T:System.Threading.Tasks.Task"/> representing the asynchronous operation.</returns>
         </member>
         <member name="M:TopDownShooter.Engine.IScene.Update(Microsoft.Xna.Framework.GameTime)">
             <summary>
@@ -2749,6 +2758,13 @@
             </summary>
             <param name="gameTime">The game time.</param>
         </member>
+        <member name="M:TopDownShooter.Engine.SceneController.PreloadAsync(TopDownShooter.Engine.IScene)">
+            <summary>
+            Asyncronously preloads the specified initialized scene.
+            </summary>
+            <param name="scene">The initialized scene.</param>
+            <returns>An awaitable task.</returns>
+        </member>
         <member name="M:TopDownShooter.Engine.SceneController.Switch(TopDownShooter.Engine.IScene)">
             <summary>
             Switches to the specified scene by destorying the previous scene, and initializing and loading content for the specified scene.
@@ -2760,6 +2776,12 @@
             Updates the game object with the specified game time.
             </summary>
             <param name="gameTime">The game time.</param>
+        </member>
+        <member name="M:TopDownShooter.Engine.SceneController.Report(System.Int32)">
+            <summary>
+            Reports a progress update.
+            </summary>
+            <param name="value">The value of the updated progress.</param>
         </member>
     </members>
 </doc>
