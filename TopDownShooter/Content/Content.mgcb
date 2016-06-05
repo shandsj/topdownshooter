@@ -130,3 +130,6 @@
 /processorParam:TextureFormat=Color
 /build:SpriteSheets/coin24.png
 
+#begin TmxFiles/TitleScene.tmx
+/copy:TmxFiles/TitleScene.tmx
+

@@ -55,9 +55,10 @@ namespace TopDownShooter
         /// </summary>
         /// <param name="graphicsDevice">The <see cref="GraphicsDevice"/>.</param>
         /// <param name="level">The preloaded level.</param>
-        public ArenaScene(GraphicsDevice graphicsDevice, Level level)
+        public ArenaScene(GraphicsDevice graphicsDevice, ICollisionSystem collisionSystem, Level level)
         {
             this.graphicsDevice = graphicsDevice;
+            this.collisionSystem = collisionSystem;
             this.level = level;
         }
 
@@ -83,8 +84,8 @@ namespace TopDownShooter
         {
             this.worldSpriteBatch.Begin(transformMatrix: this.camera2DAdapter.GetViewMatrix());
             this.level.Draw(this.camera2DAdapter, this.worldSpriteBatch, gameTime);
-            this.players.ForEach(o => o.Draw(this.camera2DAdapter, this.worldSpriteBatch, gameTime));
             this.gameItems.ForEach(o => o.Draw(this.camera2DAdapter, this.worldSpriteBatch, gameTime));
+            this.players.ForEach(o => o.Draw(this.camera2DAdapter, this.worldSpriteBatch, gameTime));
             this.worldSpriteBatch.End();
 
             this.screenSpriteBatch.Begin();
@@ -97,8 +98,6 @@ namespace TopDownShooter
         /// </summary>
         public void Initialize()
         {
-            this.collisionSystem = new CollisionSystem();
-
             this.players = new List<Player>();
             this.gameItems = new List<IGameItem>();
             this.gameItems.AddRange(new GameItemFactory().SpawnRandomCoinItems(1000, this.collisionSystem, 100, 1500, 100, 1500));
@@ -182,7 +181,6 @@ namespace TopDownShooter
             this.gameItems.ForEach(o => o.Update(gameTime));
             this.camera2DAdapter.LookAt(this.focusedPlayer.Position);
             this.leaderBoard.SetPlayers(this.players);
-
             this.gameItems.RemoveAll(o => (o as IGameItem).IsPickedUp);
         }
 

@@ -38,6 +38,8 @@ namespace TopDownShooter
 
         private Level level;
 
+        private Level background;
+
         private int loadProgress;
 
         private Vector2 logoPosition;
@@ -50,12 +52,14 @@ namespace TopDownShooter
 
         private ISpriteBatchAdapter spriteBatch;
 
+        private ICollisionSystem collisionSystem;
+
         /// <summary>
         /// Initializes a new instance of the <see cref="TitleScene" /> class.
         /// </summary>
         /// <param name="graphicsDevice">The <see cref="GraphicsDevice" />.</param>
-        public TitleScene(GraphicsDevice graphicsDevice)
-            : this(graphicsDevice, new MouseAdapter())
+        public TitleScene(GraphicsDevice graphicsDevice, ICollisionSystem collisionSystem)
+            : this(graphicsDevice, collisionSystem, new MouseAdapter())
         {
         }
 
@@ -64,9 +68,10 @@ namespace TopDownShooter
         /// </summary>
         /// <param name="graphicsDevice">The <see cref="GraphicsDevice" />.</param>
         /// <param name="mouse">The <see cref="IMouseAdapter" />.</param>
-        internal TitleScene(GraphicsDevice graphicsDevice, IMouseAdapter mouse)
+        internal TitleScene(GraphicsDevice graphicsDevice, ICollisionSystem collisionSystem, IMouseAdapter mouse)
         {
             this.graphicsDevice = graphicsDevice;
+            this.collisionSystem = collisionSystem;
             this.camera2DAdapter = new Camera2DAdapter(new Camera2D(this.graphicsDevice) { Zoom = .5f });
             this.mouse = mouse;
         }
@@ -81,7 +86,7 @@ namespace TopDownShooter
         /// </summary>
         public void Destroy()
         {
-            this.level.Destroy();
+            this.background.Destroy();
         }
 
         /// <summary>
@@ -93,6 +98,7 @@ namespace TopDownShooter
             this.graphicsDevice.Clear(Color.Black);
 
             this.spriteBatch.Begin();
+            this.background.Draw(this.camera2DAdapter, this.spriteBatch, gameTime);
 
             if (this.isLoaded)
             {
@@ -117,7 +123,12 @@ namespace TopDownShooter
         public void Initialize()
         {
             this.spriteBatch = new SpriteBatchAdapter(new SpriteBatch(this.graphicsDevice));
-            this.level = new Level(CollisionSystem.NextGameObjectId++, new CollisionSystem(), new TmxMapAdapter(new TmxMap("Content/TmxFiles/DefaultLevel.tmx")));
+
+            this.background = new Level(CollisionSystem.NextGameObjectId++, this.collisionSystem, new TmxMapAdapter(new TmxMap("Content/TmxFiles/TitleScene.tmx")));
+            this.background.Initialize();
+
+            this.level = new Level(CollisionSystem.NextGameObjectId++, this.collisionSystem, new TmxMapAdapter(new TmxMap("Content/TmxFiles/DefaultLevel.tmx")));
+            this.level.Initialize();
         }
 
         /// <summary>
@@ -145,6 +156,7 @@ namespace TopDownShooter
 
             this.font = contentManager.Load<SpriteFont>("Fonts/PlayerName");
 
+            this.background.LoadContent(contentManager);
             this.level.LoadContentAsync(contentManager, this).ContinueWith(a => { this.isLoaded = true; });
         }
 

@@ -46,7 +46,7 @@ namespace TopDownShooter.Engine
         public void Switch(IScene scene)
         {
             this.ActiveScene?.Destroy();
-            this.contentManager.Unload();
+            ////this.contentManager.Unload();
 
             scene.Initialize();
             scene.LoadContent(this.contentManager);

@@ -10,6 +10,7 @@ namespace TopDownShooter
     using Microsoft.Xna.Framework.Input;
     using TopDownShooter.Engine;
     using TopDownShooter.Engine.Adapters;
+    using TopDownShooter.Engine.Collisions;
     using TopDownShooter.Engine.Levels;
 
     /// <summary>
@@ -54,8 +55,9 @@ namespace TopDownShooter
             this.contentManager = new ContentManagerAdapter(this.Content);
             this.sceneController = new SceneController(this.contentManager);
 
-            var titleScene = new TitleScene(this.GraphicsDevice);
-            titleScene.Completed += (s, e) => this.sceneController.Switch(new ArenaScene(this.GraphicsDevice, (Level)e.Data));
+            var collisionSystem = new CollisionSystem();
+            var titleScene = new TitleScene(this.GraphicsDevice, collisionSystem);
+            titleScene.Completed += (s, e) => this.sceneController.Switch(new ArenaScene(this.GraphicsDevice, collisionSystem, (Level)e.Data));
             this.sceneController.Switch(titleScene);
 
             base.Initialize();

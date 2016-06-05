@@ -9,7 +9,7 @@
             Defines the scene for the arena
             </summary>
         </member>
-        <member name="M:TopDownShooter.ArenaScene.#ctor(Microsoft.Xna.Framework.Graphics.GraphicsDevice,TopDownShooter.Engine.Levels.Level)">
+        <member name="M:TopDownShooter.ArenaScene.#ctor(Microsoft.Xna.Framework.Graphics.GraphicsDevice,TopDownShooter.Engine.Collisions.ICollisionSystem,TopDownShooter.Engine.Levels.Level)">
             <summary>
             Initializes a new instance of the <see cref="T:TopDownShooter.ArenaScene"/> class.
             </summary>
@@ -170,13 +170,13 @@
             Defines a title scene.
             </summary>
         </member>
-        <member name="M:TopDownShooter.TitleScene.#ctor(Microsoft.Xna.Framework.Graphics.GraphicsDevice)">
+        <member name="M:TopDownShooter.TitleScene.#ctor(Microsoft.Xna.Framework.Graphics.GraphicsDevice,TopDownShooter.Engine.Collisions.ICollisionSystem)">
             <summary>
             Initializes a new instance of the <see cref="T:TopDownShooter.TitleScene" /> class.
             </summary>
             <param name="graphicsDevice">The <see cref="T:Microsoft.Xna.Framework.Graphics.GraphicsDevice" />.</param>
         </member>
-        <member name="M:TopDownShooter.TitleScene.#ctor(Microsoft.Xna.Framework.Graphics.GraphicsDevice,TopDownShooter.Engine.Adapters.IMouseAdapter)">
+        <member name="M:TopDownShooter.TitleScene.#ctor(Microsoft.Xna.Framework.Graphics.GraphicsDevice,TopDownShooter.Engine.Collisions.ICollisionSystem,TopDownShooter.Engine.Adapters.IMouseAdapter)">
             <summary>
             Initializes a new instance of the <see cref="T:TopDownShooter.TitleScene" /> class.
             </summary>
