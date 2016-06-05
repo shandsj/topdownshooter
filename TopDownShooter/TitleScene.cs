@@ -112,12 +112,6 @@ namespace TopDownShooter
             else
             {
                 this.spriteBatch.Draw(this.progressBarTexture, this.progressBarPosition, null, Color.White, 0f, new Vector2(0, 0), ProgressBarScale, SpriteEffects.None, 0f);
-                ////this.spriteBatch.DrawString(
-                ////    this.font,
-                ////    this.loadProgress.ToString(),
-                ////    this.playButtonPosition,
-                ////    Color.White);
-
                 this.spriteBatch.FillRectangle(this.progressBarRectangle, new Color(60, 115, 202));
             }
 
