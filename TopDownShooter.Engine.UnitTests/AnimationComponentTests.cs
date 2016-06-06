@@ -61,8 +61,11 @@ namespace TopDownShooter.Engine.UnitTests
                 IsRendered = true
             };
 
+            var camera = new Mock<ICamera2DAdapter>();
+            camera.Setup(o => o.Contains(It.IsAny<Rectangle>())).Returns(ContainmentType.Contains);
+
             // Do the thing!
-            uut.Draw(gameObject.Object, new Mock<ICamera2DAdapter>().Object, spriteBatch.Object, new GameTime());
+            uut.Draw(gameObject.Object, camera.Object, spriteBatch.Object, new GameTime());
 
             // Verify all our parameters as we expected them to be passed
             // through to the draw method.

@@ -291,14 +291,9 @@
             Tests that the previous active scene is destroyed when switching.
             </summary>
         </member>
-        <member name="M:TopDownShooter.Engine.UnitTests.SceneControllerTests.UnloadsContentWhenSwitchingScenes">
+        <member name="M:TopDownShooter.Engine.UnitTests.SceneControllerTests.LoadsContentWhenPreloadingAScene">
             <summary>
-            Tests that the content is unloaded when switching scenes.
-            </summary>
-        </member>
-        <member name="M:TopDownShooter.Engine.UnitTests.SceneControllerTests.InitializesAndLoadsContentWhenSwitchingScenes">
-            <summary>
-            Tests that the scene is initialized and content is loaded when switching scenes.
+            Tests that the content is loaded when preloading a scene.
             </summary>
         </member>
         <member name="T:TopDownShooter.Engine.UnitTests.TestGameObject">

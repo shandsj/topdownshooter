@@ -101,9 +101,7 @@ namespace TopDownShooter.Engine
                 return;
             }
 
-            var bounds = this.texture.Bounds;
-            bounds.Offset(gameObject.Position);
-            if (camera.Contains(bounds) == ContainmentType.Disjoint)
+            if (camera.Contains(gameObject.Bounds) == ContainmentType.Disjoint)
             {
                 return;
             }
