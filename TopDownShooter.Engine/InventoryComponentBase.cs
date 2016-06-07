@@ -98,7 +98,8 @@ namespace TopDownShooter.Engine
         /// </summary>
         /// <param name="gameObject">The game object.</param>
         /// <param name="message">The message object.</param>
-        public virtual void ReceiveMessage(IGameObject gameObject, ComponentMessage message)
+        /// <param name="gameTime">The game time.</param>
+        public virtual void ReceiveMessage(IGameObject gameObject, ComponentMessage message, GameTime gameTime)
         {
         }
 
@@ -106,8 +107,8 @@ namespace TopDownShooter.Engine
         /// Updates the component with the specified game object and game time.
         /// </summary>
         /// <param name="gameObject">The game object to update.</param>
-        /// <param name="time">The game time.</param>
-        public virtual void Update(IGameObject gameObject, GameTime time)
+        /// <param name="gameTime">The game time.</param>
+        public virtual void Update(IGameObject gameObject, GameTime gameTime)
         {
             // TODO: Update item counts for if we decide to draw an inventory summary
         }

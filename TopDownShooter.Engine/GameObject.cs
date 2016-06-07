@@ -133,11 +133,12 @@ namespace TopDownShooter.Engine
         /// Broadcasts a message to all components.
         /// </summary>
         /// <param name="message">The message to broadcast.</param>
-        public void BroadcastMessage(ComponentMessage message)
+        /// <param name="gameTime">The game time.</param>
+        public virtual void BroadcastMessage(ComponentMessage message, GameTime gameTime)
         {
             foreach (var component in this.Components)
             {
-                component.ReceiveMessage(this, message);
+                component.ReceiveMessage(this, message, gameTime);
             }
         }
 

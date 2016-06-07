@@ -7,6 +7,7 @@
 namespace TopDownShooter.Engine.Collisions
 {
     using System.Collections.Generic;
+    using Microsoft.Xna.Framework;
 
     /// <summary>
     /// Defines an interface for providing game object lookups.
@@ -27,7 +28,8 @@ namespace TopDownShooter.Engine.Collisions
         /// Checks the collisions for the specified <see cref="IColliderComponent" />.
         /// </summary>
         /// <param name="collider">The rigid body.</param>
-        void CheckCollisions(IColliderComponent collider);
+        /// <param name="gameTime">The game time.</param>
+        void CheckCollisions(IColliderComponent collider, GameTime gameTime);
 
         /// <summary>
         /// Gets the <see cref="IGameObject" /> with the specified identifer.

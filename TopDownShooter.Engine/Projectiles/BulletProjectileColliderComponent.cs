@@ -33,7 +33,8 @@ namespace TopDownShooter.Engine.Projectiles
         /// Performs a collision with the specified <see cref="IColliderComponent" />.
         /// </summary>
         /// <param name="other">The other collider component.</param>
-        public override void Collide(IColliderComponent other)
+        /// <param name="gameTime">The game time.</param>
+        public override void Collide(IColliderComponent other, GameTime gameTime)
         {
             var otherGameObject = this.CollisionSystem.GetGameObject(other.GameObjectId);
             var player = otherGameObject as IPlayer;
@@ -50,7 +51,7 @@ namespace TopDownShooter.Engine.Projectiles
                 this.CollisionSystem.Unregister(this.GameObjectId);
             }
 
-            base.Collide(other);
+            base.Collide(other, gameTime);
         }
     }
 }

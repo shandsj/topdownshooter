@@ -9,6 +9,7 @@ namespace TopDownShooter.Engine.UnitTests
     using System.Collections.Generic;
     using System.Linq;
     using Microsoft.VisualStudio.TestTools.UnitTesting;
+    using Microsoft.Xna.Framework;
     using Moq;
     using TopDownShooter.Engine.Collisions;
     using TopDownShooter.Engine.Inventory;
@@ -29,7 +30,7 @@ namespace TopDownShooter.Engine.UnitTests
             var wasBroadcastFired = false;
 
             var mockPlayerObject = new Mock<IGameObject>();
-            mockPlayerObject.Setup(o => o.BroadcastMessage(It.IsAny<ComponentMessage>())).Callback((ComponentMessage message) =>
+            mockPlayerObject.Setup(o => o.BroadcastMessage(It.IsAny<ComponentMessage>(), It.IsAny<GameTime>())).Callback((ComponentMessage message) =>
                 {
                     wasBroadcastFired = true;
                     Assert.AreEqual(MessageType.ItemPickup, message.MessageType);
@@ -44,7 +45,7 @@ namespace TopDownShooter.Engine.UnitTests
             var uut = new PlayerColliderComponent(42, collisionSystem.Object);
             var itemCollider = new SimpleColliderComponent(43, collisionSystem.Object);
 
-            uut.Collide(itemCollider);
+            uut.Collide(itemCollider, new Microsoft.Xna.Framework.GameTime());
 
             Assert.AreEqual(true, wasBroadcastFired);
         }
@@ -64,7 +65,7 @@ namespace TopDownShooter.Engine.UnitTests
 
             foreach (var gameObject in gameObjects)
             {
-                playerInventoryComponent.ReceiveMessage(new Mock<IGameObject>().Object, new ComponentMessage(MessageType.ItemPickup, gameObject));
+                playerInventoryComponent.ReceiveMessage(new Mock<IGameObject>().Object, new ComponentMessage(MessageType.ItemPickup, gameObject), new Microsoft.Xna.Framework.GameTime());
             }
 
             Assert.AreEqual(1, gameObjects.Count(obj => (obj as IGameItem).IsPickedUp));
@@ -87,7 +88,7 @@ namespace TopDownShooter.Engine.UnitTests
                 });
 
             var playerInventoryComponent = new PlayerInventoryComponent(new Mock<ICollisionSystem>().Object);
-            playerInventoryComponent.ReceiveMessage(new Mock<IGameObject>().Object, new ComponentMessage(MessageType.ItemPickup, mockItem.Object));
+            playerInventoryComponent.ReceiveMessage(new Mock<IGameObject>().Object, new ComponentMessage(MessageType.ItemPickup, mockItem.Object), new Microsoft.Xna.Framework.GameTime());
 
             Assert.AreEqual(true, isPickedUp);
         }

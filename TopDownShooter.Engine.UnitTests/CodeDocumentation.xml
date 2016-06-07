@@ -76,11 +76,12 @@
             <param name="gameObjectId">The game object identifier.</param>
             <param name="collisionSystem">The <see cref="T:TopDownShooter.Engine.Collisions.ICollisionSystem" />.</param>
         </member>
-        <member name="M:TopDownShooter.Engine.UnitTests.Collisions.TestColliderComponent.Collide(TopDownShooter.Engine.Collisions.IColliderComponent)">
+        <member name="M:TopDownShooter.Engine.UnitTests.Collisions.TestColliderComponent.Collide(TopDownShooter.Engine.Collisions.IColliderComponent,Microsoft.Xna.Framework.GameTime)">
             <summary>
             Performs a collision with the specified <see cref="T:TopDownShooter.Engine.Collisions.IColliderComponent" />.
             </summary>
             <param name="other">The other collider component.</param>
+            <param name="gameTime">The game time.</param>
         </member>
         <member name="M:TopDownShooter.Engine.UnitTests.Collisions.TestColliderComponent.IsCollision(TopDownShooter.Engine.Collisions.IColliderComponent)">
             <summary>
@@ -158,6 +159,12 @@
         <member name="M:TopDownShooter.Engine.UnitTests.Controllers.TestInputControllerComponent.Fire">
             <summary>
             Gets a value indicating whether a fire was requested.
+            </summary>
+            <returns>True if the action was requested; false otherwise.</returns>
+        </member>
+        <member name="M:TopDownShooter.Engine.UnitTests.Controllers.TestInputControllerComponent.Dash">
+            <summary>
+            Gets a value indicating whether a dash was requested.
             </summary>
             <returns>True if the action was requested; false otherwise.</returns>
         </member>

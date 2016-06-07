@@ -6,6 +6,8 @@
 
 namespace TopDownShooter.Engine.Collisions
 {
+    using Microsoft.Xna.Framework;
+
     /// <summary>
     /// Defines an interface for a collider component.
     /// </summary>
@@ -20,7 +22,8 @@ namespace TopDownShooter.Engine.Collisions
         /// Performs a collision with the specified <see cref="IColliderComponent" />.
         /// </summary>
         /// <param name="other">The other collider component.</param>
-        void Collide(IColliderComponent other);
+        /// <param name="gameTime">The game time.</param>
+        void Collide(IColliderComponent other, GameTime gameTime);
 
         /// <summary>
         /// Determines a collision occured with the specified <see cref="IColliderComponent" />.

@@ -53,7 +53,7 @@ namespace TopDownShooter.Engine.UnitTests.Projectiles
             // Now set up the collision system to return the player constructed above.
             collisionSystem.Setup(cs => cs.GetGameObject(It.IsAny<int>())).Callback<int>(id => { Assert.AreEqual(42, id); }).Returns(player.Object);
 
-            uut.Collide(otherCollider.Object);
+            uut.Collide(otherCollider.Object, new Microsoft.Xna.Framework.GameTime());
 
             Assert.IsTrue(wasSetHealthCalled);
             Assert.IsTrue(wasUnregisterCalled);
@@ -76,7 +76,7 @@ namespace TopDownShooter.Engine.UnitTests.Projectiles
                 });
 
             var uut = new BulletProjectileColliderComponent(42, 43, collisionSystem.Object);
-            uut.Collide(new Mock<IColliderComponent>().Object);
+            uut.Collide(new Mock<IColliderComponent>().Object, new Microsoft.Xna.Framework.GameTime());
             Assert.IsTrue(wasUnregisterCalled);
         }
     }

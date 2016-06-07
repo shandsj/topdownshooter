@@ -25,7 +25,7 @@ namespace TopDownShooter.Engine.UnitTests.Controllers
         {
             bool wasBroadcastMessageCalled = false;
             var gameObject = new Mock<IGameObject>();
-            gameObject.Setup(go => go.BroadcastMessage(It.IsAny<ComponentMessage>())).Callback<ComponentMessage>(message =>
+            gameObject.Setup(go => go.BroadcastMessage(It.IsAny<ComponentMessage>(), It.IsAny<GameTime>())).Callback<ComponentMessage>(message =>
                 {
                     wasBroadcastMessageCalled = true;
                     Assert.AreEqual(MessageType.Fire, message.MessageType);

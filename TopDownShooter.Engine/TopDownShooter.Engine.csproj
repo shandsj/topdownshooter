@@ -100,6 +100,7 @@
     <Compile Include="Controllers\IInputController.cs" />
     <Compile Include="Controllers\InputControllerComponentBase.cs" />
     <Compile Include="Controllers\SimpleAiInputControllerComponent.cs" />
+    <Compile Include="DashComponent.cs" />
     <Compile Include="DebugComponent.cs" />
     <Compile Include="Extensions.cs" />
     <Compile Include="GameItem.cs" />

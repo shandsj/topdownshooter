@@ -65,6 +65,12 @@ namespace TopDownShooter.Engine.Controllers
         public abstract bool Fire();
 
         /// <summary>
+        /// Gets a value indicating whether a dash was requested.
+        /// </summary>
+        /// <returns>True if the action was requested; false otherwise.</returns>
+        public abstract bool Dash();
+
+        /// <summary>
         /// Initializes the component.
         /// </summary>
         public abstract void Initialize();
@@ -82,7 +88,8 @@ namespace TopDownShooter.Engine.Controllers
         /// </summary>
         /// <param name="gameObject">The game object.</param>
         /// <param name="message">The message object.</param>
-        public void ReceiveMessage(IGameObject gameObject, ComponentMessage message)
+        /// <param name="gameTime">The game time.</param>
+        public virtual void ReceiveMessage(IGameObject gameObject, ComponentMessage message, GameTime gameTime)
         {
         }
 
@@ -90,20 +97,25 @@ namespace TopDownShooter.Engine.Controllers
         /// Updates the component with the specified game object and game time.
         /// </summary>
         /// <param name="gameObject">The game object to update.</param>
-        /// <param name="time">The game time.</param>
-        public virtual void Update(IGameObject gameObject, GameTime time)
+        /// <param name="gameTime">The game time.</param>
+        public virtual void Update(IGameObject gameObject, GameTime gameTime)
         {
-            if (this.Fire())
-            {
-                gameObject.BroadcastMessage(new ComponentMessage(MessageType.Fire));
-            }
-
             this.Direction.Normalize();
             gameObject.Velocity = this.Direction * this.speed;
 
             if (gameObject.Velocity.Length() > 0)
             {
-                gameObject.BroadcastMessage(new ComponentMessage(MessageType.Movement, gameObject.Velocity));
+                gameObject.BroadcastMessage(new ComponentMessage(MessageType.Movement, gameObject.Velocity), gameTime);
+            }
+
+            if (this.Fire())
+            {
+                gameObject.BroadcastMessage(new ComponentMessage(MessageType.Fire), gameTime);
+            }
+
+            if (this.Dash())
+            {
+                gameObject.BroadcastMessage(new ComponentMessage(MessageType.Dash), gameTime);
             }
         }
 

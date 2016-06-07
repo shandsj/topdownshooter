@@ -27,7 +27,7 @@ namespace TopDownShooter.Engine.UnitTests.Collisions
 
             bool wasCheckCollisionCalled = false;
             var uut = new TestColliderComponent(42, collisionSystem.Object);
-            collisionSystem.Setup(cs => cs.CheckCollisions(It.IsAny<IColliderComponent>())).Callback<IColliderComponent>(cc =>
+            collisionSystem.Setup(cs => cs.CheckCollisions(It.IsAny<IColliderComponent>(), It.IsAny<GameTime>())).Callback<IColliderComponent>(cc =>
                 {
                     wasCheckCollisionCalled = true;
                     Assert.AreSame(uut, cc);

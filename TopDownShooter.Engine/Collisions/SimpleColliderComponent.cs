@@ -6,6 +6,8 @@
 
 namespace TopDownShooter.Engine.Collisions
 {
+    using Microsoft.Xna.Framework;
+
     /// <summary>
     /// Provides a simple collider component that does bounds checking for collision detection.
     /// </summary>
@@ -25,7 +27,8 @@ namespace TopDownShooter.Engine.Collisions
         /// Performs a collision with the specified <see cref="IColliderComponent" />.
         /// </summary>
         /// <param name="other">The other collider component.</param>
-        public override void Collide(IColliderComponent other)
+        /// <param name="gameTime">The game time.</param>
+        public override void Collide(IColliderComponent other, GameTime gameTime)
         {
         }
 

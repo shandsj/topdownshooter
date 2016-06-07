@@ -73,7 +73,8 @@ namespace TopDownShooter.Engine.Collisions
         /// </summary>
         /// <param name="gameObject">The game object.</param>
         /// <param name="message">The message object.</param>
-        public void ReceiveMessage(IGameObject gameObject, ComponentMessage message)
+        /// <param name="gameTime">The game time.</param>
+        public virtual void ReceiveMessage(IGameObject gameObject, ComponentMessage message, GameTime gameTime)
         {
         }
 
@@ -81,13 +82,13 @@ namespace TopDownShooter.Engine.Collisions
         /// Updates the component with the specified game object and game time.
         /// </summary>
         /// <param name="gameObject">The game object to update.</param>
-        /// <param name="time">The game time.</param>
-        public virtual void Update(IGameObject gameObject, GameTime time)
+        /// <param name="gameTime">The game time.</param>
+        public virtual void Update(IGameObject gameObject, GameTime gameTime)
         {
             // If the entity is moving, check for collision in the collider system.
             if (gameObject.Velocity.Length() != 0)
             {
-                this.CollisionSystem.CheckCollisions(this);
+                this.CollisionSystem.CheckCollisions(this, gameTime);
             }
         }
 
@@ -95,7 +96,8 @@ namespace TopDownShooter.Engine.Collisions
         /// Performs a collision with the specified <see cref="IColliderComponent" />.
         /// </summary>
         /// <param name="other">The other collider component.</param>
-        public abstract void Collide(IColliderComponent other);
+        /// <param name="gameTime">The game time.</param>
+        public abstract void Collide(IColliderComponent other, GameTime gameTime);
 
         /// <summary>
         /// Determines a collision occured with the specified <see cref="IColliderComponent" />.

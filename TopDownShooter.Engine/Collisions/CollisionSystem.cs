@@ -8,6 +8,7 @@ namespace TopDownShooter.Engine.Collisions
 {
     using System.Collections.Generic;
     using System.Linq;
+    using Microsoft.Xna.Framework;
 
     /// <summary>
     /// Defines a system to handle collisions.
@@ -42,13 +43,14 @@ namespace TopDownShooter.Engine.Collisions
         /// Checks the collisions for the specified <see cref="IColliderComponent" />.
         /// </summary>
         /// <param name="collider">The rigid body.</param>
-        public void CheckCollisions(IColliderComponent collider)
+        /// <param name="gameTime">The game time.</param>
+        public void CheckCollisions(IColliderComponent collider, GameTime gameTime)
         {
             foreach (var other in this.Colliders)
             {
                 if (other != collider && collider.IsCollision(other))
                 {
-                    collider.Collide(other);
+                    collider.Collide(other, gameTime);
                 }
             }
         }

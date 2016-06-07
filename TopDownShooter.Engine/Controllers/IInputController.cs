@@ -23,5 +23,11 @@ namespace TopDownShooter.Engine.Controllers
         /// </summary>
         /// <returns>True if the action was requested; false otherwise.</returns>
         bool Fire();
+
+        /// <summary>
+        /// Gets a value indicating whether a dash was requested.
+        /// </summary>
+        /// <returns>True if the action was requested; false otherwise.</returns>
+        bool Dash();
     }
 }

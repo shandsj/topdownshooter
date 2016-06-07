@@ -67,6 +67,15 @@ namespace TopDownShooter.Engine.Controllers
         }
 
         /// <summary>
+        /// Gets a value indicating whether a dash was requested.
+        /// </summary>
+        /// <returns>True if the action was requested; false otherwise.</returns>
+        public override bool Dash()
+        {
+            return this.keyboard.GetState().IsKeyDown(Keys.LeftShift);
+        }
+
+        /// <summary>
         /// Initializes the component.
         /// </summary>
         public override void Initialize()
@@ -77,8 +86,8 @@ namespace TopDownShooter.Engine.Controllers
         /// Updates the component with the specified game object and game time.
         /// </summary>
         /// <param name="gameObject">The game object to update.</param>
-        /// <param name="time">The game time.</param>
-        public override void Update(IGameObject gameObject, GameTime time)
+        /// <param name="gameTime">The game time.</param>
+        public override void Update(IGameObject gameObject, GameTime gameTime)
         {
             this.fire = this.mouse.GetState().LeftButton == ButtonState.Pressed;
 
@@ -95,7 +104,7 @@ namespace TopDownShooter.Engine.Controllers
             }
 
             this.direction = vector;
-            base.Update(gameObject, time);
+            base.Update(gameObject, gameTime);
         }
 
         /// <summary>

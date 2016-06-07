@@ -90,9 +90,10 @@ namespace TopDownShooter.Engine.Inventory
         /// </summary>
         /// <param name="gameObject">The game object.</param>
         /// <param name="message">The message object.</param>
-        public override void ReceiveMessage(IGameObject gameObject, ComponentMessage message)
+        /// <param name="gameTime">The game time.</param>
+        public override void ReceiveMessage(IGameObject gameObject, ComponentMessage message, GameTime gameTime)
         {
-            base.ReceiveMessage(gameObject, message);
+            base.ReceiveMessage(gameObject, message, gameTime);
 
             if (message.MessageType == MessageType.Fire)
             {
@@ -102,7 +103,7 @@ namespace TopDownShooter.Engine.Inventory
                     // For now just forwarding it on to the bullet projectile generator component
                     // so that we don't have to manage all the bullet items ourselves. Would this
                     // be relegated to more of a global projectile component?
-                    this.bulletProjectileGeneratorComponent.ReceiveMessage(gameObject, message);
+                    this.bulletProjectileGeneratorComponent.ReceiveMessage(gameObject, message, gameTime);
                     this.Inventory.Remove(bulletObject);
                 }
             }
@@ -127,11 +128,11 @@ namespace TopDownShooter.Engine.Inventory
         /// Updates the component with the specified game object and game time.
         /// </summary>
         /// <param name="gameObject">The game object to update.</param>
-        /// <param name="time">The game time.</param>
-        public override void Update(IGameObject gameObject, GameTime time)
+        /// <param name="gameTime">The game time.</param>
+        public override void Update(IGameObject gameObject, GameTime gameTime)
         {
-            base.Update(gameObject, time);
-            this.bulletProjectileGeneratorComponent.Update(gameObject, time);
+            base.Update(gameObject, gameTime);
+            this.bulletProjectileGeneratorComponent.Update(gameObject, gameTime);
 
             this.itemCounts = this.Inventory.GroupBy(obj => obj.Description)
                 .ToDictionary(group => group.Key, count => count.Count());

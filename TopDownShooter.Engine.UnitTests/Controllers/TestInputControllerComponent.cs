@@ -36,6 +36,15 @@ namespace TopDownShooter.Engine.UnitTests.Controllers
         }
 
         /// <summary>
+        /// Gets a value indicating whether a dash was requested.
+        /// </summary>
+        /// <returns>True if the action was requested; false otherwise.</returns>
+        public override bool Dash()
+        {
+            return false;
+        }
+
+        /// <summary>
         /// Initializes the component.
         /// </summary>
         public override void Initialize()

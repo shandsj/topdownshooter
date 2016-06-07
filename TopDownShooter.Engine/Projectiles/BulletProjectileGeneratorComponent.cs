@@ -102,7 +102,8 @@ namespace TopDownShooter.Engine.Projectiles
         /// </summary>
         /// <param name="gameObject">The game object.</param>
         /// <param name="message">The message object.</param>
-        public void ReceiveMessage(IGameObject gameObject, ComponentMessage message)
+        /// <param name="gameTime">The game time.</param>
+        public void ReceiveMessage(IGameObject gameObject, ComponentMessage message, GameTime gameTime)
         {
             if (this.isDestroyed)
             {
@@ -125,12 +126,12 @@ namespace TopDownShooter.Engine.Projectiles
         /// Updates the component with the specified game object and game time.
         /// </summary>
         /// <param name="gameObject">The game object to update.</param>
-        /// <param name="time">The game time.</param>
-        public void Update(IGameObject gameObject, GameTime time)
+        /// <param name="gameTime">The game time.</param>
+        public void Update(IGameObject gameObject, GameTime gameTime)
         {
             foreach (var bullet in this.bullets)
             {
-                bullet.Update(time);
+                bullet.Update(gameTime);
             }
         }
     }

@@ -37,7 +37,7 @@ namespace TopDownShooter.Engine.UnitTests
             collisionSystem.Setup(cs => cs.GetGameObject(It.IsAny<int>())).Returns(tile.Object);
 
             var uut = new PlayerColliderComponent(42, collisionSystem.Object);
-            uut.Collide(new Mock<IColliderComponent>().Object);
+            uut.Collide(new Mock<IColliderComponent>().Object, new Microsoft.Xna.Framework.GameTime());
             Assert.IsTrue(wasSetVelocityCalled);
         }
 
@@ -51,7 +51,7 @@ namespace TopDownShooter.Engine.UnitTests
             var uut = new PlayerColliderComponent(42, collisionSystem.Object);
 
             bool wasCheckCollisionsCalled = false;
-            collisionSystem.Setup(cs => cs.CheckCollisions(It.IsAny<IColliderComponent>())).Callback<IColliderComponent>(cc =>
+            collisionSystem.Setup(cs => cs.CheckCollisions(It.IsAny<IColliderComponent>(), It.IsAny<GameTime>())).Callback<IColliderComponent>(cc =>
                 {
                     wasCheckCollisionsCalled = true;
                     Assert.AreSame(uut, cc);

@@ -8,6 +8,7 @@ namespace TopDownShooter.Engine.UnitTests.Collisions
 {
     using System.Linq;
     using Microsoft.VisualStudio.TestTools.UnitTesting;
+    using Microsoft.Xna.Framework;
     using Moq;
     using TopDownShooter.Engine.Collisions;
 
@@ -28,7 +29,7 @@ namespace TopDownShooter.Engine.UnitTests.Collisions
             bool wasCollideCalled = false;
             var collider = new Mock<IColliderComponent>();
             collider.Setup(c => c.IsCollision(It.IsAny<IColliderComponent>())).Returns(true);
-            collider.Setup(c => c.Collide(It.IsAny<IColliderComponent>())).Callback<IColliderComponent>(c =>
+            collider.Setup(c => c.Collide(It.IsAny<IColliderComponent>(), It.IsAny<GameTime>())).Callback<IColliderComponent>(c =>
                 {
                     wasCollideCalled = true;
                     Assert.AreEqual(other.Object, c);
@@ -36,7 +37,7 @@ namespace TopDownShooter.Engine.UnitTests.Collisions
 
             var uut = new CollisionSystem();
             uut.Register(42, new Mock<IGameObject>().Object, other.Object);
-            uut.CheckCollisions(collider.Object);
+            uut.CheckCollisions(collider.Object, new Microsoft.Xna.Framework.GameTime());
 
             Assert.IsTrue(wasCollideCalled);
         }

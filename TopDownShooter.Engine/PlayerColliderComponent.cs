@@ -29,7 +29,8 @@ namespace TopDownShooter.Engine
         /// Performs a collision with the specified <see cref="IColliderComponent" />.
         /// </summary>
         /// <param name="other">The other collider component.</param>
-        public override void Collide(IColliderComponent other)
+        /// <param name="gameTime">The game time.</param>
+        public override void Collide(IColliderComponent other, GameTime gameTime)
         {
             var gameObject = this.CollisionSystem.GetGameObject(this.GameObjectId);
             var otherObject = this.CollisionSystem.GetGameObject(other.GameObjectId);
@@ -47,7 +48,7 @@ namespace TopDownShooter.Engine
                 {
                     // Allow players to pass through IGameItems that they can't pickup.
                     // See if anyone in the gameObject is interested in this item.
-                    gameObject.BroadcastMessage(new ComponentMessage(MessageType.ItemPickup, item));
+                    gameObject.BroadcastMessage(new ComponentMessage(MessageType.ItemPickup, item), gameTime);
                 }
             }
         }

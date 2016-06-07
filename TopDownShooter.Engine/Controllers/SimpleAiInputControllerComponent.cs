@@ -25,6 +25,8 @@ namespace TopDownShooter.Engine.Controllers
 
         private List<Task> taskList;
 
+        private bool dash;
+
         /// <summary>
         /// Initializes a new instance of the <see cref="SimpleAiInputControllerComponent" /> class.
         /// </summary>
@@ -66,6 +68,15 @@ namespace TopDownShooter.Engine.Controllers
         }
 
         /// <summary>
+        /// Gets a value indicating whether a dash was requested.
+        /// </summary>
+        /// <returns>True if the action was requested; false otherwise.</returns>
+        public override bool Dash()
+        {
+            return this.dash;
+        }
+
+        /// <summary>
         /// Initializes the component.
         /// </summary>
         public override void Initialize()
@@ -88,6 +99,15 @@ namespace TopDownShooter.Engine.Controllers
                             this.SleepRandomly();
 
                             this.fire = !this.fire;
+                        }
+                    }),
+                Task.Factory.StartNew(() =>
+                    {
+                        while (true)
+                        {
+                            this.SleepRandomly();
+
+                            this.dash = !this.dash;
                         }
                     })
             });

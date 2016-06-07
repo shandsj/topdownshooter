@@ -27,5 +27,10 @@ namespace TopDownShooter.Engine
         /// </summary>
         /// <remarks>Details should be the <see cref="IGameItem"/></remarks>
         ItemPickup,
+
+        /// <summary>
+        /// Represents a dash movement.
+        /// </summary>
+        Dash
     }
 }

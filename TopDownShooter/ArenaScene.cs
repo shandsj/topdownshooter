@@ -116,6 +116,7 @@ namespace TopDownShooter
                 {
                     // Order matters for calls to update and draw
                     new HumanInputControllerComponent(),
+                    new DashComponent(),
                     new PlayerColliderComponent(focusedPlayerId, this.collisionSystem),
                     new AnimationComponentManager(
                         new AnimationComponent("Stand", "SpriteSheets/red-standing-still", new FrameProperties(200, 141, TimeSpan.MaxValue, 1)) { IsRendered = true },
@@ -142,6 +143,7 @@ namespace TopDownShooter
                     new IComponent[]
                     {
                         new SimpleAiInputControllerComponent(this.random),
+                        new DashComponent(),
                         new PlayerColliderComponent(id, this.collisionSystem),
                         new AnimationComponentManager(
                             new AnimationComponent("Stand", "SpriteSheets/red-standing-still", new FrameProperties(200, 141, TimeSpan.MaxValue, 1)) { IsRendered = true },
