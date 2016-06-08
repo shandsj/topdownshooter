@@ -37,18 +37,30 @@ namespace TopDownShooter.Engine
 
             if (gameObject != null && otherObject != null)
             {
-                IGameItem item = otherObject as IGameItem;
-
-                if (item == null)
-                {
-                    // TODO: modify velocity correctly based on location of collided object
-                    gameObject.Velocity = new Vector2(0, 0);
-                }
-                else
+                var item = otherObject as IGameItem;
+                if (item != null)
                 {
                     // Allow players to pass through IGameItems that they can't pickup.
                     // See if anyone in the gameObject is interested in this item.
                     gameObject.BroadcastMessage(new ComponentMessage(MessageType.ItemPickup, item), gameTime);
+                }
+
+                var tile = otherObject as ITile;
+                if (tile != null && tile.TileInteractionType == TileInteractionType.Blocking)
+                {
+                    // TODO: modify velocity correctly based on location of collided object
+                    gameObject.Velocity = new Vector2(0, 0);
+                }
+
+                var player = otherObject as IPlayer;
+                if (player != null)
+                {
+                    var dashRequest = new DashStatusRequestMessage();
+                    gameObject.BroadcastMessage(dashRequest, gameTime);
+                    if (dashRequest.IsDashing)
+                    {
+                        player.Health--;
+                    }
                 }
             }
         }

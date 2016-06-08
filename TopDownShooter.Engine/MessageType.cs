@@ -31,6 +31,11 @@ namespace TopDownShooter.Engine
         /// <summary>
         /// Represents a dash movement.
         /// </summary>
-        Dash
+        Dash,
+
+        /// <summary>
+        /// Represents a dash status request.
+        /// </summary>
+        DashStatusRequest
     }
 }

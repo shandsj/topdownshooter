@@ -1454,12 +1454,34 @@
             <param name="gameObject">The game object to update.</param>
             <param name="gameTime">The game time.</param>
         </member>
+        <member name="M:TopDownShooter.Engine.DashComponent.IsDashing(Microsoft.Xna.Framework.GameTime)">
+            <summary>
+            Gets a value indicating whether the component is dashing at the specified game time.
+            </summary>
+            <param name="gameTime">The game time.</param>
+            <returns>True if the component is dashing; false otherwise.</returns>
+        </member>
         <member name="M:TopDownShooter.Engine.DashComponent.TryStartDash(Microsoft.Xna.Framework.GameTime)">
             <summary>
             Attempts to start a dash at the specified game time.
             </summary>
             <param name="gameTime">The game time.</param>
             <returns>True if the dash successfully started; false otherwise.</returns>
+        </member>
+        <member name="T:TopDownShooter.Engine.DashStatusRequestMessage">
+            <summary>
+            Defines a message that requests a dash status of a player.
+            </summary>
+        </member>
+        <member name="M:TopDownShooter.Engine.DashStatusRequestMessage.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:TopDownShooter.Engine.DashStatusRequestMessage" /> class.
+            </summary>
+        </member>
+        <member name="P:TopDownShooter.Engine.DashStatusRequestMessage.IsDashing">
+            <summary>
+            Gets or sets a value indicating whether a dash is in progress.
+            </summary>
         </member>
         <member name="T:TopDownShooter.Engine.DebugComponent">
             <summary>
@@ -2381,6 +2403,11 @@
             Gets the position of the tile in the tileset.
             </summary>
         </member>
+        <member name="P:TopDownShooter.Engine.Levels.ITile.TileInteractionType">
+            <summary>
+            Gets the <see cref="P:TopDownShooter.Engine.Levels.ITile.TileInteractionType" />.
+            </summary>
+        </member>
         <member name="T:TopDownShooter.Engine.Levels.ITileCollection">
             <summary>
             Defines an interface for storing and indexing tiles.
@@ -2642,6 +2669,11 @@
         <member name="F:TopDownShooter.Engine.MessageType.Dash">
             <summary>
             Represents a dash movement.
+            </summary>
+        </member>
+        <member name="F:TopDownShooter.Engine.MessageType.DashStatusRequest">
+            <summary>
+            Represents a dash status request.
             </summary>
         </member>
         <member name="T:TopDownShooter.Engine.Player">

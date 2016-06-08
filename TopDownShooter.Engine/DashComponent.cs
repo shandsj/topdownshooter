@@ -94,6 +94,12 @@ namespace TopDownShooter.Engine
             {
                 this.TryStartDash(gameTime);
             }
+
+            if (message.MessageType == MessageType.DashStatusRequest)
+            {
+                var dashRequest = (DashStatusRequestMessage)message;
+                dashRequest.IsDashing = this.IsDashing(gameTime);
+            }
         }
 
         /// <summary>
@@ -103,11 +109,21 @@ namespace TopDownShooter.Engine
         /// <param name="gameTime">The game time.</param>
         public void Update(IGameObject gameObject, GameTime gameTime)
         {
-            if (gameTime.TotalGameTime > this.StartedTime &&
-                gameTime.TotalGameTime < this.CompletedTime)
+            if (this.IsDashing(gameTime))
             {
                 gameObject.Velocity *= this.SpeedFactor;
             }
+        }
+
+        /// <summary>
+        /// Gets a value indicating whether the component is dashing at the specified game time.
+        /// </summary>
+        /// <param name="gameTime">The game time.</param>
+        /// <returns>True if the component is dashing; false otherwise.</returns>
+        public bool IsDashing(GameTime gameTime)
+        {
+            return gameTime.TotalGameTime > this.StartedTime &&
+                   gameTime.TotalGameTime < this.CompletedTime;
         }
 
         /// <summary>

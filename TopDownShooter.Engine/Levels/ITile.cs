@@ -26,5 +26,10 @@ namespace TopDownShooter.Engine.Levels
         /// Gets the position of the tile in the tileset.
         /// </summary>
         Vector2 TexturePosition { get; }
+
+        /// <summary>
+        /// Gets the <see cref="TileInteractionType" />.
+        /// </summary>
+        TileInteractionType TileInteractionType { get; }
     }
 }
