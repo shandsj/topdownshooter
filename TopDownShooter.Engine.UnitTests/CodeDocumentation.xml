@@ -173,6 +173,21 @@
             Initializes the component.
             </summary>
         </member>
+        <member name="T:TopDownShooter.Engine.UnitTests.DashComponentTests">
+            <summary>
+            Contains unit tests for the <see cref="T:TopDownShooter.Engine.DashComponent" /> class.
+            </summary>
+        </member>
+        <member name="M:TopDownShooter.Engine.UnitTests.DashComponentTests.StartsDashingWhenReceivingADashMessage">
+            <summary>
+            Tests that a dash is started when a dash message is received.
+            </summary>
+        </member>
+        <member name="M:TopDownShooter.Engine.UnitTests.DashComponentTests.UpdatesVelocityWhenDashingAndUpdating">
+            <summary>
+            Tests that the game object's velocity is updated when Update() is called and a dash is occuring.
+            </summary>
+        </member>
         <member name="T:TopDownShooter.Engine.UnitTests.GameObjectTests">
             <summary>
             Contains unit tests for the <see cref="T:TopDownShooter.Engine.GameObject" /> class.
