@@ -1602,6 +1602,17 @@
             Factor that can be used to generate <see cref="T:TopDownShooter.Engine.IGameItem"/>
             </summary>
         </member>
+        <member name="M:TopDownShooter.Engine.GameItemFactory.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:TopDownShooter.Engine.GameItemFactory"/> class.
+            </summary>
+        </member>
+        <member name="M:TopDownShooter.Engine.GameItemFactory.#ctor(TopDownShooter.Engine.IRandomGenerator)">
+            <summary>
+            Initializes a new instance of the <see cref="T:TopDownShooter.Engine.GameItemFactory"/> class.
+            </summary>
+            <param name="rng">Random Number generator</param>
+        </member>
         <member name="M:TopDownShooter.Engine.GameItemFactory.SpawnRandomBulletItems(System.Int32,TopDownShooter.Engine.Collisions.ICollisionSystem,System.Int32,System.Int32,System.Int32,System.Int32)">
             <summary>
             Spawns a random number of <see cref="T:TopDownShooter.Engine.Items.CoinGameItem"/>s
@@ -2259,6 +2270,25 @@
             <summary>
             Gets or sets the number of kills this player has performed.
             </summary>
+        </member>
+        <member name="T:TopDownShooter.Engine.IRandomGenerator">
+            <summary>
+            Interface for providing random values.
+            </summary>
+        </member>
+        <member name="M:TopDownShooter.Engine.IRandomGenerator.NextDouble">
+            <summary>
+            Retreives the next random double between 0 and 1.
+            </summary>
+            <returns>The random double.</returns>
+        </member>
+        <member name="M:TopDownShooter.Engine.IRandomGenerator.NextDouble(System.Double,System.Double)">
+            <summary>
+            Retreives the next random double between a specified min and max value.
+            </summary>
+            <param name="minimum">The minimum value.</param>
+            <param name="maximum">The maximum exclusive value.</param>
+            <returns>The random double.</returns>
         </member>
         <member name="T:TopDownShooter.Engine.ISceneController">
             <summary>
@@ -2926,6 +2956,91 @@
             Updates the game object with the specified game time.
             </summary>
             <param name="gameTime">The game time.</param>
+        </member>
+        <member name="T:TopDownShooter.Engine.RandomGenerators.GaussianRandomGenerator">
+            <summary>
+            Provides a gaussian distribution provider.
+            </summary>
+        </member>
+        <member name="M:TopDownShooter.Engine.RandomGenerators.GaussianRandomGenerator.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:TopDownShooter.Engine.RandomGenerators.GaussianRandomGenerator"/> class.
+            </summary>
+        </member>
+        <member name="M:TopDownShooter.Engine.RandomGenerators.GaussianRandomGenerator.#ctor(System.Random)">
+            <summary>
+            Initializes a new instance of the <see cref="T:TopDownShooter.Engine.RandomGenerators.GaussianRandomGenerator"/> class.
+            </summary>
+            <param name="randomProvider">Can provide a configured random provider.</param>
+        </member>
+        <member name="M:TopDownShooter.Engine.RandomGenerators.GaussianRandomGenerator.NextDouble">
+            <summary>
+            Retreives the next random double between 0 and 1.
+            </summary>
+            <returns>The random double.</returns>
+        </member>
+        <member name="M:TopDownShooter.Engine.RandomGenerators.GaussianRandomGenerator.NextDouble(System.Double,System.Double)">
+            <summary>
+            Retreives the next random double between a specified min and max value.
+            </summary>
+            <param name="minimum">The minimum value.</param>
+            <param name="maximum">The maximum exclusive value.</param>
+            <returns>The random double.</returns>
+        </member>
+        <member name="M:TopDownShooter.Engine.RandomGenerators.GaussianRandomGenerator.NextGaussian">
+            <summary>
+            Generates a random gaussian value with a mean of 0 and standard deviation of 1
+            </summary>
+            <returns>Random value</returns>
+        </member>
+        <member name="M:TopDownShooter.Engine.RandomGenerators.GaussianRandomGenerator.NextGaussian(System.Double,System.Double)">
+            <summary>
+            Generates a random gaussian value with a mean of 0 and standard deviation of 1
+            </summary>
+            <param name="mean">Configure the mean value for this distribution sample</param>
+            <param name="standard_deviation">Configure the standard deviation value for this distribution sample</param>
+            <returns>Random value</returns>
+        </member>
+        <member name="M:TopDownShooter.Engine.RandomGenerators.GaussianRandomGenerator.NextGaussian(System.Double,System.Double,System.Double,System.Double)">
+            <summary>
+            Generates a random gaussian value with a mean of 0 and standard deviation of 1
+            </summary>
+            <param name="mean">Configure the mean value for this distribution sample</param>
+            <param name="standard_deviation">Configure the standard deviation value for this distribution sample</param>
+            <param name="minimum">Minimum value</param>
+            <param name="maximum">Maximum value</param>
+            <returns>Random value</returns>
+        </member>
+        <member name="T:TopDownShooter.Engine.RandomGenerators.SystemRandomGenerator">
+            <summary>
+            Provides a random distribution provider based around the <see cref="T:System.Random"/> class.
+            </summary>
+            <remarks>Pretty much just a wrapper around the <see cref="T:System.Random"/> for consistency.</remarks>
+        </member>
+        <member name="M:TopDownShooter.Engine.RandomGenerators.SystemRandomGenerator.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:TopDownShooter.Engine.RandomGenerators.SystemRandomGenerator"/> class.
+            </summary>
+        </member>
+        <member name="M:TopDownShooter.Engine.RandomGenerators.SystemRandomGenerator.#ctor(System.Random)">
+            <summary>
+            Initializes a new instance of the <see cref="T:TopDownShooter.Engine.RandomGenerators.SystemRandomGenerator"/> class.
+            </summary>
+            <param name="randomProvider">Can provide a configured random provider.</param>
+        </member>
+        <member name="M:TopDownShooter.Engine.RandomGenerators.SystemRandomGenerator.NextDouble">
+            <summary>
+            Retreives the next random double between 0 and 1.
+            </summary>
+            <returns>The random double.</returns>
+        </member>
+        <member name="M:TopDownShooter.Engine.RandomGenerators.SystemRandomGenerator.NextDouble(System.Double,System.Double)">
+            <summary>
+            Retreives the next random double between a specified min and max value.
+            </summary>
+            <param name="minimum">The minimum value.</param>
+            <param name="maximum">The maximum exclusive value.</param>
+            <returns>The random double.</returns>
         </member>
         <member name="T:TopDownShooter.Engine.SceneController">
             <summary>

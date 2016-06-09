@@ -6,18 +6,35 @@ namespace TopDownShooter.Engine
 {
     using System;
     using System.Collections.Generic;
-    using System.Linq;
-    using System.Text;
-    using System.Threading.Tasks;
     using Collisions;
     using Items;
     using Microsoft.Xna.Framework;
+    using RandomGenerators;
 
     /// <summary>
     /// Factor that can be used to generate <see cref="IGameItem"/>
     /// </summary>
     public class GameItemFactory : IGameItemFactory
     {
+        private IRandomGenerator randomGenerator;
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="GameItemFactory"/> class.
+        /// </summary>
+        public GameItemFactory()
+            : this(new GaussianRandomGenerator())
+        {
+        }
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="GameItemFactory"/> class.
+        /// </summary>
+        /// <param name="rng">Random Number generator</param>
+        public GameItemFactory(IRandomGenerator rng)
+        {
+            this.randomGenerator = rng;
+        }
+
         /// <summary>
         /// Spawns a random number of <see cref="CoinGameItem"/>s
         /// </summary>
@@ -30,13 +47,12 @@ namespace TopDownShooter.Engine
         /// <returns>Collection of uninitalized <see cref="IEnumerable{IGameItem}"/></returns>
         public IEnumerable<IGameItem> SpawnRandomBulletItems(int count, ICollisionSystem collisionSystem, int minX, int maxX, int minY, int maxY)
         {
-            Random random = new Random((int)DateTime.Now.Ticks);
             List<IGameItem> result = new List<IGameItem>();
 
             for (int i = 0; i < count; i++)
             {
-                int x = random.Next(minX, maxX);
-                int y = random.Next(minY, maxY);
+                int x = (int)this.randomGenerator.NextDouble(minX, maxX);
+                int y = (int)this.randomGenerator.NextDouble(minY, maxY);
 
                 result.Add(this.CreateBulletItem(CollisionSystem.NextGameObjectId++, new Vector2(x, y), collisionSystem));
             }
@@ -75,13 +91,12 @@ namespace TopDownShooter.Engine
         /// <returns>Collection of uninitalized <see cref="IEnumerable{IGameItem}"/></returns>
         public IEnumerable<IGameItem> SpawnRandomCoinItems(int count, ICollisionSystem collisionSystem, int minX, int maxX, int minY, int maxY)
         {
-            Random random = new Random((int)DateTime.Now.Ticks);
             List<IGameItem> result = new List<IGameItem>();
 
             for (int i = 0; i < count; i++)
             {
-                int x = random.Next(minX, maxX);
-                int y = random.Next(minY, maxY);
+                int x = (int)this.randomGenerator.NextDouble(minX, maxX);
+                int y = (int)this.randomGenerator.NextDouble(minY, maxY);
 
                 result.Add(this.CreateCoinItem(CollisionSystem.NextGameObjectId++, new Vector2(x, y), collisionSystem));
             }
