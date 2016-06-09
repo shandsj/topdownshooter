@@ -23,17 +23,17 @@ namespace TopDownShooter.Engine.UnitTests.Controllers
         [TestMethod]
         public void BroadcastsFireMessageWhenFireIsPressedAndUpdated()
         {
-            bool wasBroadcastMessageCalled = false;
             var gameObject = new Mock<IGameObject>();
-            gameObject.Setup(go => go.BroadcastMessage(It.IsAny<ComponentMessage>(), It.IsAny<GameTime>())).Callback<ComponentMessage>(message =>
-                {
-                    wasBroadcastMessageCalled = true;
-                    Assert.AreEqual(MessageType.Fire, message.MessageType);
-                });
+            gameObject.Setup(go => go.BroadcastMessage(It.IsAny<ComponentMessage>(), It.IsAny<GameTime>()))
+                .Callback<ComponentMessage, GameTime>((message, gameTime) =>
+                    {
+                        Assert.AreEqual(MessageType.Fire, message.MessageType);
+                    });
 
             var uut = new TestInputControllerComponent();
             uut.Update(gameObject.Object, new GameTime());
-            Assert.IsTrue(wasBroadcastMessageCalled);
+
+            gameObject.Verify(o => o.BroadcastMessage(It.IsAny<ComponentMessage>(), It.IsAny<GameTime>()), Times.AtLeastOnce);
         }
     }
 }

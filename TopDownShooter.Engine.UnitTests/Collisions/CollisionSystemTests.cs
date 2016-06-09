@@ -25,21 +25,15 @@ namespace TopDownShooter.Engine.UnitTests.Collisions
         public void CallsCollideWhenACollisionIsDetected()
         {
             var other = new Mock<IColliderComponent>();
-
-            bool wasCollideCalled = false;
             var collider = new Mock<IColliderComponent>();
             collider.Setup(c => c.IsCollision(It.IsAny<IColliderComponent>())).Returns(true);
-            collider.Setup(c => c.Collide(It.IsAny<IColliderComponent>(), It.IsAny<GameTime>())).Callback<IColliderComponent>(c =>
-                {
-                    wasCollideCalled = true;
-                    Assert.AreEqual(other.Object, c);
-                });
+            collider.Setup(c => c.Collide(other.Object, It.IsAny<GameTime>()));
 
             var uut = new CollisionSystem();
             uut.Register(42, new Mock<IGameObject>().Object, other.Object);
             uut.CheckCollisions(collider.Object, new Microsoft.Xna.Framework.GameTime());
 
-            Assert.IsTrue(wasCollideCalled);
+            collider.Verify(o => o.Collide(other.Object, It.IsAny<GameTime>()));
         }
 
         /// <summary>

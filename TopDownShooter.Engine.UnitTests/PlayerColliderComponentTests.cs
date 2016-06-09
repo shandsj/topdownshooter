@@ -22,23 +22,28 @@ namespace TopDownShooter.Engine.UnitTests
         /// Tests that the velocity on the parent game object is modified when colliding with a tile.
         /// </summary>
         [TestMethod]
-        public void ModifiesVelocityWhenCollidingWithATile()
+        public void ModifiesVelocityWhenCollidingWithABlockingTile()
         {
-            bool wasSetVelocityCalled = false;
-
+            var player = new Mock<IPlayer>();
+            player.SetupSet(o => o.Velocity = Vector2.Zero);
             var tile = new Mock<ITile>();
-            tile.SetupSet(t => t.Velocity = It.IsAny<Vector2>()).Callback<Vector2>(vector =>
-                {
-                    wasSetVelocityCalled = true;
-                    Assert.AreEqual(new Vector2(0, 0), vector);
-                });
+            tile.Setup(o => o.TileInteractionType).Returns(TileInteractionType.Blocking);
 
             var collisionSystem = new Mock<ICollisionSystem>();
-            collisionSystem.Setup(cs => cs.GetGameObject(It.IsAny<int>())).Returns(tile.Object);
+            collisionSystem.Setup(cs => cs.GetGameObject(It.IsAny<int>())).Returns<int>(id =>
+                {
+                    if (id == 42)
+                    {
+                        return player.Object;
+                    }
+
+                    return tile.Object;
+                });
 
             var uut = new PlayerColliderComponent(42, collisionSystem.Object);
             uut.Collide(new Mock<IColliderComponent>().Object, new Microsoft.Xna.Framework.GameTime());
-            Assert.IsTrue(wasSetVelocityCalled);
+
+            player.VerifySet(o => o.Velocity = Vector2.Zero);
         }
 
         /// <summary>
@@ -49,18 +54,13 @@ namespace TopDownShooter.Engine.UnitTests
         {
             var collisionSystem = new Mock<ICollisionSystem>();
             var uut = new PlayerColliderComponent(42, collisionSystem.Object);
-
-            bool wasCheckCollisionsCalled = false;
-            collisionSystem.Setup(cs => cs.CheckCollisions(It.IsAny<IColliderComponent>(), It.IsAny<GameTime>())).Callback<IColliderComponent>(cc =>
-                {
-                    wasCheckCollisionsCalled = true;
-                    Assert.AreSame(uut, cc);
-                });
+            collisionSystem.Setup(cs => cs.CheckCollisions(uut, It.IsAny<GameTime>()));
 
             var gameObject = new Mock<IGameObject>();
             gameObject.SetupGet(go => go.Velocity).Returns(new Vector2(42, 42));
             uut.Update(gameObject.Object, new GameTime());
-            Assert.IsTrue(wasCheckCollisionsCalled);
+
+            collisionSystem.Verify(o => o.CheckCollisions(uut, It.IsAny<GameTime>()), Times.Once);
         }
     }
 }

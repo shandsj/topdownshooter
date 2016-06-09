@@ -38,7 +38,7 @@ namespace TopDownShooter.Engine.UnitTests.Projectiles
 
             // Set up the collision system to return a false bullet parent different than the collided player for
             // construction of the uut.
-            collisionSystem.Setup(cs => cs.GetGameObject(It.IsAny<int>())).Returns(new Mock<IGameObject>().Object);
+            collisionSystem.Setup(cs => cs.GetGameObject(It.IsAny<int>())).Returns(new Mock<IPlayer>().Object);
             collisionSystem.Setup(cs => cs.Unregister(It.IsAny<int>())).Callback<int>(id =>
                 {
                     wasUnregisterCalled = true;

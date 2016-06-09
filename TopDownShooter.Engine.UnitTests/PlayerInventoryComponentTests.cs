@@ -30,12 +30,13 @@ namespace TopDownShooter.Engine.UnitTests
             var wasBroadcastFired = false;
 
             var mockPlayerObject = new Mock<IGameObject>();
-            mockPlayerObject.Setup(o => o.BroadcastMessage(It.IsAny<ComponentMessage>(), It.IsAny<GameTime>())).Callback((ComponentMessage message) =>
-                {
-                    wasBroadcastFired = true;
-                    Assert.AreEqual(MessageType.ItemPickup, message.MessageType);
-                    Assert.AreEqual(mockItem.Object, message.MessageDetails);
-                });
+            mockPlayerObject.Setup(o => o.BroadcastMessage(It.IsAny<ComponentMessage>(), It.IsAny<GameTime>()))
+                .Callback<ComponentMessage, GameTime>((message, gameTime) =>
+                    {
+                        wasBroadcastFired = true;
+                        Assert.AreEqual(MessageType.ItemPickup, message.MessageType);
+                        Assert.AreEqual(mockItem.Object, message.MessageDetails);
+                    });
 
             var collisionSystem = new Mock<ICollisionSystem>();
 

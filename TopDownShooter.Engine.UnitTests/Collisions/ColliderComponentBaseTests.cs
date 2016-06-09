@@ -24,22 +24,20 @@ namespace TopDownShooter.Engine.UnitTests.Collisions
         public void ChecksForCollisionsWhenVelocityIsNotZero()
         {
             var collisionSystem = new Mock<ICollisionSystem>();
-
-            bool wasCheckCollisionCalled = false;
             var uut = new TestColliderComponent(42, collisionSystem.Object);
-            collisionSystem.Setup(cs => cs.CheckCollisions(It.IsAny<IColliderComponent>(), It.IsAny<GameTime>())).Callback<IColliderComponent>(cc =>
+            collisionSystem.Setup(cs => cs.CheckCollisions(It.IsAny<IColliderComponent>(), It.IsAny<GameTime>()))
+                .Callback<IColliderComponent, GameTime>((cc, gameTime) =>
                 {
-                    wasCheckCollisionCalled = true;
                     Assert.AreSame(uut, cc);
                 });
 
             var gameObject = new Mock<IGameObject>();
             uut.Update(gameObject.Object, new GameTime());
-            Assert.IsFalse(wasCheckCollisionCalled);
+            collisionSystem.Verify(o => o.CheckCollisions(It.IsAny<IColliderComponent>(), It.IsAny<GameTime>()), Times.Never);
 
             gameObject.Setup(go => go.Velocity).Returns(new Vector2(42, 42));
             uut.Update(gameObject.Object, new GameTime());
-            Assert.IsTrue(wasCheckCollisionCalled);
+            collisionSystem.Verify(o => o.CheckCollisions(It.IsAny<IColliderComponent>(), It.IsAny<GameTime>()), Times.Once);
         }
     }
 }

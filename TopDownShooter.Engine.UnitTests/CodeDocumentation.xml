@@ -223,7 +223,7 @@
             Contains unit tests for the <see cref="T:TopDownShooter.Engine.PlayerColliderComponent" /> class.
             </summary>
         </member>
-        <member name="M:TopDownShooter.Engine.UnitTests.PlayerColliderComponentTests.ModifiesVelocityWhenCollidingWithATile">
+        <member name="M:TopDownShooter.Engine.UnitTests.PlayerColliderComponentTests.ModifiesVelocityWhenCollidingWithABlockingTile">
             <summary>
             Tests that the velocity on the parent game object is modified when colliding with a tile.
             </summary>
