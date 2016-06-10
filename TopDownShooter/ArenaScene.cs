@@ -27,11 +27,15 @@ namespace TopDownShooter
     {
         private readonly ICollisionSystem collisionSystem;
 
+        private readonly GameItemFactory gameItemFactory;
+
         private readonly GraphicsDevice graphicsDevice;
 
         private readonly Random random = new Random((int)DateTime.Now.Ticks);
 
         private ICamera2DAdapter camera2DAdapter;
+
+        private IContentManagerAdapter contentManager;
 
         private Player focusedPlayer;
 
@@ -56,6 +60,7 @@ namespace TopDownShooter
         {
             this.graphicsDevice = graphicsDevice;
             this.collisionSystem = collisionSystem;
+            this.gameItemFactory = new GameItemFactory();
         }
 
         /// <summary>
@@ -99,8 +104,8 @@ namespace TopDownShooter
 
             this.players = new List<Player>();
             this.gameItems = new List<IGameItem>();
-            this.gameItems.AddRange(new GameItemFactory().SpawnRandomCoinItems(1000, this.collisionSystem, 100, 1500, 100, 1500));
-            this.gameItems.AddRange(new GameItemFactory().SpawnRandomBulletItems(100, this.collisionSystem, 1500, 3000, 1500, 3000));
+            this.gameItems.AddRange(this.gameItemFactory.SpawnRandomCoinItems(1000, this.collisionSystem, 100, 1500, 100, 1500, false));
+            this.gameItems.AddRange(this.gameItemFactory.SpawnRandomBulletItems(100, this.collisionSystem, 1500, 3000, 1500, 3000));
 
             this.camera2DAdapter = new Camera2DAdapter(new Camera2D(this.graphicsDevice) { Zoom = .5f });
             this.leaderBoard = new LeaderBoard(CollisionSystem.NextGameObjectId++);
@@ -156,7 +161,11 @@ namespace TopDownShooter
             }
 #pragma warning restore SA1118
 
-            this.players.ForEach(player => player.Initialize());
+            this.players.ForEach(player =>
+                {
+                    player.Initialize();
+                    player.MessageReady += this.GameObjectMessageReady;
+                });
             this.gameItems.ForEach(item => item.Initialize());
         }
 
@@ -164,10 +173,12 @@ namespace TopDownShooter
         /// Asynchronously oads the content from the specified content manager adapter.
         /// </summary>
         /// <param name="contentManager">The content manager adapter.</param>
-        /// <param name="progress">The <see cref="IProgress{Int32}"/> to report progress.</param>
-        /// <returns>A <see cref="Task"/> representing the asynchronous operation.</returns>
+        /// <param name="progress">The <see cref="IProgress{Int32}" /> to report progress.</param>
+        /// <returns>A <see cref="Task" /> representing the asynchronous operation.</returns>
         public Task LoadContentAsync(IContentManagerAdapter contentManager, IProgress<int> progress)
         {
+            this.contentManager = contentManager;
+
             var loadLevelTask = this.level.LoadContentAsync(contentManager, progress);
 
             // Create a new SpriteBatch, which can be used to draw textures.
@@ -189,6 +200,8 @@ namespace TopDownShooter
         {
             this.players.ForEach(o => o.Update(gameTime));
             this.gameItems.ForEach(o => o.Update(gameTime));
+
+            this.camera2DAdapter.Position = this.focusedPlayer.Position;
             this.camera2DAdapter.LookAt(this.focusedPlayer.Position);
             this.leaderBoard.SetPlayers(this.players);
             this.gameItems.RemoveAll(o => o.IsPickedUp);
@@ -210,6 +223,37 @@ namespace TopDownShooter
         protected virtual void OnCompleted(CompletedEventArgs args)
         {
             this.Completed?.Invoke(this, args);
+        }
+
+        /// <summary>
+        /// Handles the <see cref="IGameObject.MessageReady" /> event.
+        /// </summary>
+        /// <param name="sender">The sender of the event.</param>
+        /// <param name="e">A <see cref="MessageEventArgs" /> that contains the event data.</param>
+        private void GameObjectMessageReady(object sender, MessageEventArgs e)
+        {
+            if (e.Message.MessageType == MessageType.DropCoins)
+            {
+                const int Range = 100;
+                var dropCoinsMessage = (DropCoinsMessage)e.Message;
+
+                var coins = this.gameItemFactory.SpawnRandomCoinItems(
+                    dropCoinsMessage.Count,
+                    this.collisionSystem,
+                    (int)dropCoinsMessage.Location.X - Range,
+                    (int)dropCoinsMessage.Location.X + Range,
+                    (int)dropCoinsMessage.Location.Y - Range,
+                    (int)dropCoinsMessage.Location.Y + Range,
+                    true);
+
+                foreach (var coin in coins)
+                {
+                    coin.Initialize();
+                    coin.LoadContent(this.contentManager);
+                }
+
+                this.gameItems.AddRange(coins);
+            }
         }
     }
 }

@@ -164,7 +164,7 @@ namespace TopDownShooter.Engine
         /// <param name="gameObject">The game object.</param>
         /// <param name="message">The message object.</param>
         /// <param name="gameTime">The game time.</param>
-        public void ReceiveMessage(IGameObject gameObject, ComponentMessage message, GameTime gameTime)
+        public void ReceiveMessage(IGameObject gameObject, Message message, GameTime gameTime)
         {
         }
 

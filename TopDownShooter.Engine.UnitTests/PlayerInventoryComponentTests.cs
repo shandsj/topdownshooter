@@ -30,8 +30,8 @@ namespace TopDownShooter.Engine.UnitTests
             var wasBroadcastFired = false;
 
             var mockPlayerObject = new Mock<IGameObject>();
-            mockPlayerObject.Setup(o => o.BroadcastMessage(It.IsAny<ComponentMessage>(), It.IsAny<GameTime>()))
-                .Callback<ComponentMessage, GameTime>((message, gameTime) =>
+            mockPlayerObject.Setup(o => o.BroadcastMessage(It.IsAny<Message>(), It.IsAny<GameTime>()))
+                .Callback<Message, GameTime>((message, gameTime) =>
                     {
                         wasBroadcastFired = true;
                         Assert.AreEqual(MessageType.ItemPickup, message.MessageType);
@@ -66,7 +66,7 @@ namespace TopDownShooter.Engine.UnitTests
 
             foreach (var gameObject in gameObjects)
             {
-                playerInventoryComponent.ReceiveMessage(new Mock<IGameObject>().Object, new ComponentMessage(MessageType.ItemPickup, gameObject), new Microsoft.Xna.Framework.GameTime());
+                playerInventoryComponent.ReceiveMessage(new Mock<IGameObject>().Object, new Message(MessageType.ItemPickup, gameObject), new Microsoft.Xna.Framework.GameTime());
             }
 
             Assert.AreEqual(1, gameObjects.Count(obj => (obj as IGameItem).IsPickedUp));
@@ -89,7 +89,7 @@ namespace TopDownShooter.Engine.UnitTests
                 });
 
             var playerInventoryComponent = new PlayerInventoryComponent(new Mock<ICollisionSystem>().Object);
-            playerInventoryComponent.ReceiveMessage(new Mock<IGameObject>().Object, new ComponentMessage(MessageType.ItemPickup, mockItem.Object), new Microsoft.Xna.Framework.GameTime());
+            playerInventoryComponent.ReceiveMessage(new Mock<IGameObject>().Object, new Message(MessageType.ItemPickup, mockItem.Object), new Microsoft.Xna.Framework.GameTime());
 
             Assert.AreEqual(true, isPickedUp);
         }

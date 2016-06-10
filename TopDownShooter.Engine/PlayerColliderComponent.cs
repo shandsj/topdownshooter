@@ -42,7 +42,7 @@ namespace TopDownShooter.Engine
                 {
                     // Allow players to pass through IGameItems that they can't pickup.
                     // See if anyone in the gameObject is interested in this item.
-                    gameObject.BroadcastMessage(new ComponentMessage(MessageType.ItemPickup, item), gameTime);
+                    gameObject.BroadcastMessage(new Message(MessageType.ItemPickup, item), gameTime);
                 }
 
                 var tile = otherObject as ITile;

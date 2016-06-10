@@ -24,8 +24,8 @@ namespace TopDownShooter.Engine.UnitTests.Controllers
         public void BroadcastsFireMessageWhenFireIsPressedAndUpdated()
         {
             var gameObject = new Mock<IGameObject>();
-            gameObject.Setup(go => go.BroadcastMessage(It.IsAny<ComponentMessage>(), It.IsAny<GameTime>()))
-                .Callback<ComponentMessage, GameTime>((message, gameTime) =>
+            gameObject.Setup(go => go.BroadcastMessage(It.IsAny<Message>(), It.IsAny<GameTime>()))
+                .Callback<Message, GameTime>((message, gameTime) =>
                     {
                         Assert.AreEqual(MessageType.Fire, message.MessageType);
                     });
@@ -33,7 +33,7 @@ namespace TopDownShooter.Engine.UnitTests.Controllers
             var uut = new TestInputControllerComponent();
             uut.Update(gameObject.Object, new GameTime());
 
-            gameObject.Verify(o => o.BroadcastMessage(It.IsAny<ComponentMessage>(), It.IsAny<GameTime>()), Times.AtLeastOnce);
+            gameObject.Verify(o => o.BroadcastMessage(It.IsAny<Message>(), It.IsAny<GameTime>()), Times.AtLeastOnce);
         }
     }
 }

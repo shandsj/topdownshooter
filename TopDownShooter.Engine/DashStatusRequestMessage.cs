@@ -9,7 +9,7 @@ namespace TopDownShooter.Engine
     /// <summary>
     /// Defines a message that requests a dash status of a player.
     /// </summary>
-    public class DashStatusRequestMessage : ComponentMessage
+    public class DashStatusRequestMessage : Message
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="DashStatusRequestMessage" /> class.

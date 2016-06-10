@@ -18,6 +18,8 @@ namespace TopDownShooter.Engine.Adapters
         /// </summary>
         private readonly ContentManager content;
 
+        private object sync = new object();
+
         /// <summary>
         /// Initializes a new instance of the <see cref="ContentManagerAdapter" /> class.
         /// </summary>
@@ -37,7 +39,10 @@ namespace TopDownShooter.Engine.Adapters
         /// <returns>The loaded asset.</returns>
         public T Load<T>(string assetName)
         {
-            return this.content.Load<T>(assetName);
+            lock (this.sync)
+            {
+                return this.content.Load<T>(assetName);
+            }
         }
 
         /// <summary>
@@ -45,7 +50,10 @@ namespace TopDownShooter.Engine.Adapters
         /// </summary>
         public void Unload()
         {
-            this.content.Unload();
+            lock (this.sync)
+            {
+                this.content.Unload();
+            }
         }
     }
 }

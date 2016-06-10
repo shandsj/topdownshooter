@@ -88,8 +88,9 @@ namespace TopDownShooter.Engine
         /// <param name="maxX">Maximum X coordinate</param>
         /// <param name="minY">Minimum Y coordiante</param>
         /// <param name="maxY">Maximum Y coordinate</param>
+        /// <param name="isImmuneToPickup">A value indicating whether the spawned coin items will be immune to pickup for a short time.</param>
         /// <returns>Collection of uninitalized <see cref="IEnumerable{IGameItem}"/></returns>
-        public IEnumerable<IGameItem> SpawnRandomCoinItems(int count, ICollisionSystem collisionSystem, int minX, int maxX, int minY, int maxY)
+        public IEnumerable<IGameItem> SpawnRandomCoinItems(int count, ICollisionSystem collisionSystem, int minX, int maxX, int minY, int maxY, bool isImmuneToPickup)
         {
             List<IGameItem> result = new List<IGameItem>();
 
@@ -98,7 +99,7 @@ namespace TopDownShooter.Engine
                 int x = (int)this.randomGenerator.NextDouble(minX, maxX);
                 int y = (int)this.randomGenerator.NextDouble(minY, maxY);
 
-                result.Add(this.CreateCoinItem(CollisionSystem.NextGameObjectId++, new Vector2(x, y), collisionSystem));
+                result.Add(this.CreateCoinItem(CollisionSystem.NextGameObjectId++, new Vector2(x, y), collisionSystem, isImmuneToPickup));
             }
 
             return result;
@@ -110,8 +111,9 @@ namespace TopDownShooter.Engine
         /// <param name="id">The game object identifier.</param>
         /// <param name="position">The position of the game object.</param>
         /// <param name="collisionSystem">The <see cref="ICollisionSystem" />.</param>
+        /// <param name="isImmuneToPickup">A value indicating whether the created coin item will be immune to pickup for a short time.</param>
         /// <returns>The created bullet item.</returns>
-        public IGameItem CreateCoinItem(int id, Vector2 position, ICollisionSystem collisionSystem)
+        public IGameItem CreateCoinItem(int id, Vector2 position, ICollisionSystem collisionSystem, bool isImmuneToPickup)
         {
             var components = new IComponent[]
             {
@@ -120,7 +122,7 @@ namespace TopDownShooter.Engine
                     new AnimationComponent("Coin", "SpriteSheets/Coin24", new FrameProperties(24, 24, TimeSpan.FromSeconds(0.001), 61)) { IsRendered = true, IsAnimating = true, IsLooping = true })
             };
 
-            return new CoinGameItem(id, position, collisionSystem, components);
+            return new CoinGameItem(id, position, collisionSystem, components, isImmuneToPickup);
         }
     }
 }

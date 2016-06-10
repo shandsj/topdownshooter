@@ -6,6 +6,7 @@
 
 namespace TopDownShooter.Engine
 {
+    using System;
     using System.Collections.Generic;
     using System.Linq;
     using Microsoft.Xna.Framework;
@@ -35,6 +36,11 @@ namespace TopDownShooter.Engine
             this.Id = id;
             this.Components = new List<IComponent>(components);
         }
+
+        /// <summary>
+        /// Raised when a message is ready.
+        /// </summary>
+        public event EventHandler<MessageEventArgs> MessageReady;
 
         /// <summary>
         /// Gets the bounds of the game object.
@@ -134,11 +140,16 @@ namespace TopDownShooter.Engine
         /// </summary>
         /// <param name="message">The message to broadcast.</param>
         /// <param name="gameTime">The game time.</param>
-        public virtual void BroadcastMessage(ComponentMessage message, GameTime gameTime)
+        public virtual void BroadcastMessage(Message message, GameTime gameTime)
         {
             foreach (var component in this.Components)
             {
                 component.ReceiveMessage(this, message, gameTime);
+            }
+
+            if (!message.IsHandled)
+            {
+                this.OnMessageReady(new MessageEventArgs(message, gameTime));
             }
         }
 
@@ -176,6 +187,15 @@ namespace TopDownShooter.Engine
         protected IEnumerable<TComponent> GetAll<TComponent>()
         {
             return this.Components.OfType<TComponent>();
+        }
+
+        /// <summary>
+        /// Raises the <see cref="MessageReady"/> event.
+        /// </summary>
+        /// <param name="e">A <see cref="MessageEventArgs"/> that contains the event data.</param>
+        protected virtual void OnMessageReady(MessageEventArgs e)
+        {
+            this.MessageReady?.Invoke(this, e);
         }
     }
 }

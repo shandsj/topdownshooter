@@ -36,6 +36,11 @@ namespace TopDownShooter.Engine
         /// <summary>
         /// Represents a dash status request.
         /// </summary>
-        DashStatusRequest
+        DashStatusRequest,
+
+        /// <summary>
+        /// Represents a drop coins message.
+        /// </summary>
+        DropCoins
     }
 }

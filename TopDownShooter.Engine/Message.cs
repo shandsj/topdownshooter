@@ -1,4 +1,4 @@
-﻿// <copyright file="ComponentMessage.cs" company="PlaceholderCompany">
+﻿// <copyright file="Message.cs" company="PlaceholderCompany">
 // Copyright (c) PlaceholderCompany. All rights reserved.
 // </copyright>
 
@@ -14,14 +14,14 @@ namespace TopDownShooter.Engine
     /// Message object that can detail what type of message it is
     /// and provide further optional details.
     /// </summary>
-    public class ComponentMessage
+    public class Message
     {
         /// <summary>
-        /// Initializes a new instance of the <see cref="ComponentMessage"/> class.
+        /// Initializes a new instance of the <see cref="Message"/> class.
         /// </summary>
         /// <param name="messageType">Message Type</param>
         /// <param name="messageDetails">Optional message details</param>
-        public ComponentMessage(MessageType messageType, object messageDetails = null)
+        public Message(MessageType messageType, object messageDetails = null)
         {
             this.MessageType = messageType;
             this.MessageDetails = messageDetails;
@@ -37,5 +37,10 @@ namespace TopDownShooter.Engine
         /// be used to detail more about the message.
         /// </summary>
         public object MessageDetails { get; private set; }
+
+        /// <summary>
+        /// Gets or sets a value indicating whether a component or game object handled this message.
+        /// </summary>
+        public bool IsHandled { get; set; }
     }
 }

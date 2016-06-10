@@ -91,36 +91,51 @@ namespace TopDownShooter.Engine.Inventory
         /// <param name="gameObject">The game object.</param>
         /// <param name="message">The message object.</param>
         /// <param name="gameTime">The game time.</param>
-        public override void ReceiveMessage(IGameObject gameObject, ComponentMessage message, GameTime gameTime)
+        public override void ReceiveMessage(IGameObject gameObject, Message message, GameTime gameTime)
         {
             base.ReceiveMessage(gameObject, message, gameTime);
 
-            if (message.MessageType == MessageType.Fire)
+            switch (message.MessageType)
             {
-                var bulletObject = this.Inventory.OfType<BulletGameItem>().FirstOrDefault();
-                if (bulletObject != null)
-                {
-                    // For now just forwarding it on to the bullet projectile generator component
-                    // so that we don't have to manage all the bullet items ourselves. Would this
-                    // be relegated to more of a global projectile component?
-                    this.bulletProjectileGeneratorComponent.ReceiveMessage(gameObject, message, gameTime);
-                    this.Inventory.Remove(bulletObject);
-                }
-            }
-            else if (message.MessageType == MessageType.ItemPickup)
-            {
-                IGameItem item = message.MessageDetails as IGameItem;
-
-                // can only have one bulllet item at a time in this inventory.
-                if (item != null)
-                {
-                    var isBullet = item as BulletGameItem != null;
-                    if ((isBullet && !this.Inventory.OfType<BulletGameItem>().Any())
-                        || !isBullet)
+                case MessageType.Fire:
+                    var bulletObject = this.Inventory.OfType<BulletGameItem>().FirstOrDefault();
+                    if (bulletObject != null)
                     {
-                        this.Inventory.Add(item.Pickup());
+                        // For now just forwarding it on to the bullet projectile generator component
+                        // so that we don't have to manage all the bullet items ourselves. Would this
+                        // be relegated to more of a global projectile component?
+                        this.bulletProjectileGeneratorComponent.ReceiveMessage(gameObject, message, gameTime);
+                        this.RemoveGameItem(bulletObject);
                     }
-                }
+
+                    break;
+
+                case MessageType.ItemPickup:
+                    IGameItem item = message.MessageDetails as IGameItem;
+
+                    // can only have one bulllet item at a time in this inventory.
+                    if (item != null)
+                    {
+                        var isBullet = item as BulletGameItem != null;
+                        if ((isBullet && !this.Inventory.OfType<BulletGameItem>().Any())
+                            || !isBullet)
+                        {
+                            this.AddGameItem(item.Pickup());
+                        }
+                    }
+
+                    break;
+
+                case MessageType.DropCoins:
+                    var dropCoinsMessage = (DropCoinsMessage)message;
+                    var coins = this.Inventory.OfType<CoinGameItem>();
+                    coins = coins.Take(dropCoinsMessage.Count);
+                    foreach (var coin in coins)
+                    {
+                        this.RemoveGameItem(coin);
+                    }
+
+                    break;
             }
         }
 

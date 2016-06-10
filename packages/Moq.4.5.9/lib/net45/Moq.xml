@@ -5523,13 +5523,13 @@
             <summary>Branch: master</summary>
         </member>
         <member name="F:ThisAssembly.Git.Commit">
-            <summary>Commit: 44b3fbc</summary>
+            <summary>Commit: 551aa86</summary>
         </member>
         <member name="F:ThisAssembly.Git.Sha">
-            <summary>Sha: 44b3fbc099d53ce1efc52922a4f6414a57a6426a</summary>
+            <summary>Sha: 551aa861145424ffc0e3c1301e0cd347c2c20150</summary>
         </member>
         <member name="F:ThisAssembly.Git.Commits">
-            <summary>Commits on top of base version: 8</summary>
+            <summary>Commits on top of base version: 9</summary>
         </member>
         <member name="F:ThisAssembly.Git.Tag">
             <summary>Tag: </summary>
@@ -5559,7 +5559,7 @@
             <summary>Minor: 5</summary>
         </member>
         <member name="F:ThisAssembly.Git.SemVer.Patch">
-            <summary>Patch: 8</summary>
+            <summary>Patch: 9</summary>
         </member>
         <member name="F:ThisAssembly.Git.SemVer.Label">
             <summary>Label: </summary>

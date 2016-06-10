@@ -95,7 +95,8 @@
     <Compile Include="Collisions\ICollisionSystem.cs" />
     <Compile Include="Collisions\SimpleColliderComponent.cs" />
     <Compile Include="CompletedEventArgs.cs" />
-    <Compile Include="ComponentMessage.cs" />
+    <Compile Include="DropCoinsMessage.cs" />
+    <Compile Include="Message.cs" />
     <Compile Include="Controllers\HumanInputControllerComponent.cs" />
     <Compile Include="Controllers\IInputController.cs" />
     <Compile Include="Controllers\InputControllerComponentBase.cs" />
@@ -131,6 +132,7 @@
     <Compile Include="Levels\TileCollection.cs" />
     <Compile Include="Levels\TileFactory.cs" />
     <Compile Include="Levels\TileInteractionType.cs" />
+    <Compile Include="MessageEventArgs.cs" />
     <Compile Include="MessageType.cs" />
     <Compile Include="Player.cs" />
     <Compile Include="PlayerColliderComponent.cs" />

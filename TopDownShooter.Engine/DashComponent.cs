@@ -50,6 +50,11 @@ namespace TopDownShooter.Engine
         public TimeSpan StartedTime { get; private set; }
 
         /// <summary>
+        /// Gets the cost of a dash.
+        /// </summary>
+        public int DashCost => 10;
+
+        /// <summary>
         /// Destroys the component.
         /// </summary>
         public void Destroy()
@@ -88,11 +93,11 @@ namespace TopDownShooter.Engine
         /// <param name="gameObject">The game object.</param>
         /// <param name="message">The message object.</param>
         /// <param name="gameTime">The game time.</param>
-        public void ReceiveMessage(IGameObject gameObject, ComponentMessage message, GameTime gameTime)
+        public void ReceiveMessage(IGameObject gameObject, Message message, GameTime gameTime)
         {
             if (message.MessageType == MessageType.Dash)
             {
-                this.TryStartDash(gameTime);
+                this.TryStartDash(gameObject, gameTime);
             }
 
             if (message.MessageType == MessageType.DashStatusRequest)
@@ -129,14 +134,16 @@ namespace TopDownShooter.Engine
         /// <summary>
         /// Attempts to start a dash at the specified game time.
         /// </summary>
+        /// <param name="gameObject">The game object.</param>
         /// <param name="gameTime">The game time.</param>
         /// <returns>True if the dash successfully started; false otherwise.</returns>
-        public bool TryStartDash(GameTime gameTime)
+        public bool TryStartDash(IGameObject gameObject, GameTime gameTime)
         {
             if (gameTime.TotalGameTime - this.CompletedTime > this.CooldownTime)
             {
                 this.StartedTime = gameTime.TotalGameTime;
                 this.CompletedTime = gameTime.TotalGameTime + this.ActiveTime;
+                gameObject.BroadcastMessage(new DropCoinsMessage(gameObject.Position, this.DashCost), gameTime);
                 return true;
             }
 

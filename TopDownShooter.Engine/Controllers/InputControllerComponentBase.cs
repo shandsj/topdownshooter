@@ -89,7 +89,7 @@ namespace TopDownShooter.Engine.Controllers
         /// <param name="gameObject">The game object.</param>
         /// <param name="message">The message object.</param>
         /// <param name="gameTime">The game time.</param>
-        public virtual void ReceiveMessage(IGameObject gameObject, ComponentMessage message, GameTime gameTime)
+        public virtual void ReceiveMessage(IGameObject gameObject, Message message, GameTime gameTime)
         {
         }
 
@@ -105,17 +105,17 @@ namespace TopDownShooter.Engine.Controllers
 
             if (gameObject.Velocity.Length() > 0)
             {
-                gameObject.BroadcastMessage(new ComponentMessage(MessageType.Movement, gameObject.Velocity), gameTime);
+                gameObject.BroadcastMessage(new Message(MessageType.Movement, gameObject.Velocity), gameTime);
             }
 
             if (this.Fire())
             {
-                gameObject.BroadcastMessage(new ComponentMessage(MessageType.Fire), gameTime);
+                gameObject.BroadcastMessage(new Message(MessageType.Fire), gameTime);
             }
 
             if (this.Dash())
             {
-                gameObject.BroadcastMessage(new ComponentMessage(MessageType.Dash), gameTime);
+                gameObject.BroadcastMessage(new Message(MessageType.Dash), gameTime);
             }
         }
 
