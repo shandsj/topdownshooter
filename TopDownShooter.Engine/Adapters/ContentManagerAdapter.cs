@@ -19,6 +19,13 @@ namespace TopDownShooter.Engine.Adapters
         private readonly ContentManager content;
 
         /// <summary>
+        /// Load lock access, if two seperate threads attempt to load an
+        /// asset at the same time, they can really stomp on each other
+        /// producing tearing artifacts. This is to keep that from happening.
+        /// </summary>
+        private readonly object synchronizationContext;
+
+        /// <summary>
         /// Initializes a new instance of the <see cref="ContentManagerAdapter" /> class.
         /// </summary>
         /// <param name="content">
@@ -26,6 +33,7 @@ namespace TopDownShooter.Engine.Adapters
         /// </param>
         public ContentManagerAdapter(ContentManager content)
         {
+            this.synchronizationContext = new object();
             this.content = content;
         }
 
@@ -37,7 +45,10 @@ namespace TopDownShooter.Engine.Adapters
         /// <returns>The loaded asset.</returns>
         public T Load<T>(string assetName)
         {
-            return this.content.Load<T>(assetName);
+            lock (this.synchronizationContext)
+            {
+                return this.content.Load<T>(assetName);
+            }
         }
 
         /// <summary>
