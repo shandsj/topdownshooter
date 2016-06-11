@@ -13,7 +13,7 @@ namespace TopDownShooter.Engine.UnitTests.Projectiles
     using TopDownShooter.Engine.Projectiles;
 
     /// <summary>
-    /// Contains unit tests for the <see cref="BulletProjectile" /> class.
+    /// Contains unit tests for the <see cref="LongRangeProjectile" /> class.
     /// </summary>
     [TestClass]
     public class BulletProjectileTests
@@ -24,7 +24,7 @@ namespace TopDownShooter.Engine.UnitTests.Projectiles
         [TestMethod]
         public void NormalizesVelocityVectorWhenConstructed()
         {
-            var uut = new BulletProjectile(42, 43, Vector2.Zero, new Vector2(0, 42), new Mock<ICollisionSystem>().Object, new IComponent[] { });
+            var uut = new LongRangeProjectile(42, 43, Vector2.Zero, new Vector2(0, 42), new Mock<ICollisionSystem>().Object, new IComponent[] { });
 
             Assert.AreEqual(50f, uut.Speed);
             Assert.AreEqual(new Vector2(0, 50), uut.Velocity);

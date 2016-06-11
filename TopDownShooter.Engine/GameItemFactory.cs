@@ -76,7 +76,7 @@ namespace TopDownShooter.Engine
                     new AnimationComponent("Bullet", "SpriteSheets/Bullet Item", new FrameProperties(100, 100, TimeSpan.MaxValue, 1)) { IsRendered = true })
             };
 
-            return new BulletGameItem(id, position, collisionSystem, components);
+            return new LongRangeGameItem(id, position, collisionSystem, components);
         }
 
         /// <summary>

@@ -10,6 +10,7 @@ namespace TopDownShooter.Engine
     using Microsoft.Xna.Framework;
     using MonoGame.Extended;
     using TopDownShooter.Engine.Adapters;
+    using TopDownShooter.Engine.Messages;
 
     /// <summary>
     /// Defines a dash component.

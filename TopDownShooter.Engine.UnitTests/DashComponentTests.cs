@@ -10,6 +10,7 @@ namespace TopDownShooter.Engine.UnitTests
     using Microsoft.VisualStudio.TestTools.UnitTesting;
     using Microsoft.Xna.Framework;
     using Moq;
+    using TopDownShooter.Engine.Messages;
 
     /// <summary>
     /// Contains unit tests for the <see cref="DashComponent" /> class.

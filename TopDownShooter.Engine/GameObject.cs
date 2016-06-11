@@ -11,6 +11,7 @@ namespace TopDownShooter.Engine
     using System.Linq;
     using Microsoft.Xna.Framework;
     using TopDownShooter.Engine.Adapters;
+    using TopDownShooter.Engine.Messages;
 
     /// <summary>
     /// Defines an entity.

@@ -19,6 +19,7 @@ namespace TopDownShooter
     using TopDownShooter.Engine.Controllers;
     using TopDownShooter.Engine.Inventory;
     using TopDownShooter.Engine.Levels;
+    using TopDownShooter.Engine.Messages;
 
     /// <summary>
     /// Defines the scene for the arena
@@ -136,7 +137,6 @@ namespace TopDownShooter
 
             int spawn = 1600;
 
-            // TODO: Uncomment when wall collision logic is finished
             for (int i = 0; i < 5; i++)
             {
                 spawn -= 200;

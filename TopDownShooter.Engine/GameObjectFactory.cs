@@ -26,15 +26,15 @@ namespace TopDownShooter.Engine
         /// <param name="direction">The diretion of the bullet, as a unit vector.</param>
         /// <param name="collisionSystem">The <see cref="ICollisionSystem" />.</param>
         /// <returns>The created bullet projectile.</returns>
-        public IGameObject CreateBulletProjectile(int id, int parentId, Vector2 position, Vector2 direction, ICollisionSystem collisionSystem)
+        public IGameObject CreateShortRangeProjectile(int id, int parentId, Vector2 position, Vector2 direction, ICollisionSystem collisionSystem)
         {
             var components = new IComponent[]
             {
-                new BulletProjectileColliderComponent(id, parentId, collisionSystem),
+                new ProjectileColliderComponent(id, parentId, collisionSystem),
                 new AnimationComponent("Bullet", "SpriteSheets/BulletProjectile", new FrameProperties(32, 32, TimeSpan.MaxValue, 1)) { IsRendered = true }
             };
 
-            return this.CreateBulletProjectile(id, parentId, position, direction, collisionSystem, components);
+            return this.CreateShortRangeProjectile(id, parentId, position, direction, collisionSystem, components);
         }
 
         /// <summary>
@@ -47,9 +47,44 @@ namespace TopDownShooter.Engine
         /// <param name="collisionSystem">The <see cref="ICollisionSystem" />.</param>
         /// <param name="components">The collection of components</param>
         /// <returns>The created bullet projectile.</returns>
-        public IGameObject CreateBulletProjectile(int id, int parentId, Vector2 position, Vector2 direction, ICollisionSystem collisionSystem, IEnumerable<IComponent> components)
+        public IGameObject CreateShortRangeProjectile(int id, int parentId, Vector2 position, Vector2 direction, ICollisionSystem collisionSystem, IEnumerable<IComponent> components)
         {
-            return new BulletProjectile(id, parentId, position, direction, collisionSystem, components);
+            return new ShortRangeProjectile(id, position, direction, collisionSystem, components);
+        }
+
+        /// <summary>
+        /// Creates a bullet projectile game object.
+        /// </summary>
+        /// <param name="id">The game object identifier.</param>
+        /// <param name="parentId">The parent game object identifier.</param>
+        /// <param name="position">The position of the game object.</param>
+        /// <param name="direction">The diretion of the bullet, as a unit vector.</param>
+        /// <param name="collisionSystem">The <see cref="ICollisionSystem" />.</param>
+        /// <returns>The created bullet projectile.</returns>
+        public IGameObject CreateLongRangeProjectile(int id, int parentId, Vector2 position, Vector2 direction, ICollisionSystem collisionSystem)
+        {
+            var components = new IComponent[]
+            {
+                new ProjectileColliderComponent(id, parentId, collisionSystem),
+                new AnimationComponent("Bullet", "SpriteSheets/BulletProjectile", new FrameProperties(32, 32, TimeSpan.MaxValue, 1)) { IsRendered = true }
+            };
+
+            return this.CreateLongRangeProjectile(id, parentId, position, direction, collisionSystem, components);
+        }
+
+        /// <summary>
+        /// Creates a bullet projectile game object.
+        /// </summary>
+        /// <param name="id">The game object identifier.</param>
+        /// <param name="parentId">The parent game object identifier.</param>
+        /// <param name="position">The position of the game object.</param>
+        /// <param name="direction">The diretion of the bullet, as a unit vector.</param>
+        /// <param name="collisionSystem">The <see cref="ICollisionSystem" />.</param>
+        /// <param name="components">The collection of components</param>
+        /// <returns>The created bullet projectile.</returns>
+        public IGameObject CreateLongRangeProjectile(int id, int parentId, Vector2 position, Vector2 direction, ICollisionSystem collisionSystem, IEnumerable<IComponent> components)
+        {
+            return new LongRangeProjectile(id, parentId, position, direction, collisionSystem, components);
         }
     }
 }

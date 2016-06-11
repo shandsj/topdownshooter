@@ -1,11 +1,12 @@
 // --------------------------------------------------------------------------------------------------------------------
-// <copyright file="BulletProjectile.cs" company="PlaceholderCompany">
+// <copyright file="ShortRangeProjectile.cs" company="PlaceholderCompany">
 // Copyright (c) PlaceholderCompany. All rights reserved.
 // </copyright>
 // --------------------------------------------------------------------------------------------------------------------
 
 namespace TopDownShooter.Engine.Projectiles
 {
+    using System;
     using System.Collections.Generic;
     using System.Linq;
     using Microsoft.Xna.Framework;
@@ -14,32 +15,19 @@ namespace TopDownShooter.Engine.Projectiles
     /// <summary>
     /// Defines a bullet projectile game object.
     /// </summary>
-    public class BulletProjectile : GameObject
+    public class ShortRangeProjectile : ProjectileBase
     {
-        private readonly IColliderComponent colliderComponent;
-
-        private readonly ICollisionSystem collisionSystem;
-
         /// <summary>
-        /// Initializes a new instance of the <see cref="BulletProjectile" /> class.
+        /// Initializes a new instance of the <see cref="ShortRangeProjectile"/> class.
         /// </summary>
         /// <param name="id">The game object identifier.</param>
         /// <param name="collisionSystem">The <see cref="ICollisionSystem" />.</param>
         /// <param name="components">The collection of components.</param>
-        /// <param name="parentId">The parent game object identifier.</param>
         /// <param name="position">The position of the game object.</param>
         /// <param name="direction">The direction of the bullet projectile, as a unit vector.</param>
-        public BulletProjectile(int id, int parentId, Vector2 position, Vector2 direction, ICollisionSystem collisionSystem, IEnumerable<IComponent> components)
-            : base(id, components)
+        public ShortRangeProjectile(int id, Vector2 position, Vector2 direction, ICollisionSystem collisionSystem, IEnumerable<IComponent> components)
+            : base(id, position, direction, collisionSystem, components)
         {
-            this.Position = position;
-            this.collisionSystem = collisionSystem;
-
-            direction.Normalize();
-            this.Velocity = direction * this.Speed;
-
-            this.colliderComponent = this.Components.OfType<IColliderComponent>().FirstOrDefault();
-            this.collisionSystem.Register(id, this, this.colliderComponent); // TODO: Make sure to unregister and destroy
         }
 
         /// <summary>
@@ -48,9 +36,9 @@ namespace TopDownShooter.Engine.Projectiles
         public override int Height => 32;
 
         /// <summary>
-        /// Gets the speed of the projectile.
+        /// Gets the speed of this projectile.
         /// </summary>
-        public float Speed => 50f;
+        public override float Speed => 25f;
 
         /// <summary>
         /// Gets the width of the game object.

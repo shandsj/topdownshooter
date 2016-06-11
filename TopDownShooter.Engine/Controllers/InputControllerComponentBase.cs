@@ -9,6 +9,8 @@ namespace TopDownShooter.Engine.Controllers
     using System;
     using Microsoft.Xna.Framework;
     using TopDownShooter.Engine.Adapters;
+    using TopDownShooter.Engine.Inventory;
+    using TopDownShooter.Engine.Messages;
 
     /// <summary>
     /// Base implementation for an <see cref="IInputController" />
@@ -116,7 +118,7 @@ namespace TopDownShooter.Engine.Controllers
 
             if (this.Fire())
             {
-                gameObject.BroadcastMessage(new Message(MessageType.Fire), gameTime);
+                gameObject.BroadcastMessage(new FireMessage(), gameTime);
             }
 
             if (this.Dash())

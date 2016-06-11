@@ -63,12 +63,12 @@
             </summary>
             <param name="args">A <see cref="T:TopDownShooter.Engine.CompletedEventArgs" /> that contains the event data.</param>
         </member>
-        <member name="M:TopDownShooter.ArenaScene.GameObjectMessageReady(System.Object,TopDownShooter.Engine.MessageEventArgs)">
+        <member name="M:TopDownShooter.ArenaScene.GameObjectMessageReady(System.Object,TopDownShooter.Engine.Messages.MessageEventArgs)">
             <summary>
             Handles the <see cref="E:TopDownShooter.Engine.IGameObject.MessageReady" /> event.
             </summary>
             <param name="sender">The sender of the event.</param>
-            <param name="e">A <see cref="T:TopDownShooter.Engine.MessageEventArgs" /> that contains the event data.</param>
+            <param name="e">A <see cref="T:TopDownShooter.Engine.Messages.MessageEventArgs" /> that contains the event data.</param>
         </member>
         <member name="T:TopDownShooter.Game1">
             <summary>

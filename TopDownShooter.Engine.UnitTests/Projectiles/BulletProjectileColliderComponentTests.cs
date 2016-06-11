@@ -13,7 +13,7 @@ namespace TopDownShooter.Engine.UnitTests.Projectiles
     using TopDownShooter.Engine.Projectiles;
 
     /// <summary>
-    /// Contains unit tests for the <see cref="BulletProjectileColliderComponent" /> class.
+    /// Contains unit tests for the <see cref="ProjectileColliderComponent" /> class.
     /// </summary>
     [TestClass]
     public class BulletProjectileColliderComponentTests
@@ -48,7 +48,7 @@ namespace TopDownShooter.Engine.UnitTests.Projectiles
             var otherCollider = new Mock<IColliderComponent>();
             otherCollider.Setup(c => c.GameObjectId).Returns(42);
 
-            var uut = new BulletProjectileColliderComponent(43, 44, collisionSystem.Object);
+            var uut = new ProjectileColliderComponent(43, 44, collisionSystem.Object);
 
             // Now set up the collision system to return the player constructed above.
             collisionSystem.Setup(cs => cs.GetGameObject(It.IsAny<int>())).Callback<int>(id => { Assert.AreEqual(42, id); }).Returns(player.Object);
@@ -75,7 +75,7 @@ namespace TopDownShooter.Engine.UnitTests.Projectiles
                     Assert.AreEqual(42, id);
                 });
 
-            var uut = new BulletProjectileColliderComponent(42, 43, collisionSystem.Object);
+            var uut = new ProjectileColliderComponent(42, 43, collisionSystem.Object);
             uut.Collide(new Mock<IColliderComponent>().Object, new Microsoft.Xna.Framework.GameTime());
             Assert.IsTrue(wasUnregisterCalled);
         }

@@ -13,6 +13,7 @@ namespace TopDownShooter.Engine.UnitTests
     using Moq;
     using TopDownShooter.Engine.Collisions;
     using TopDownShooter.Engine.Inventory;
+    using TopDownShooter.Engine.Messages;
 
     /// <summary>
     /// Tests Container for <see cref="PlayerInventoryComponent" />

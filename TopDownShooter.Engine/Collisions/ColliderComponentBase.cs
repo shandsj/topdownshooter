@@ -8,6 +8,7 @@ namespace TopDownShooter.Engine.Collisions
 {
     using Microsoft.Xna.Framework;
     using TopDownShooter.Engine.Adapters;
+    using TopDownShooter.Engine.Messages;
 
     /// <summary>
     /// Defines a rigid body component that will respond to collisions with other rigid bodies.

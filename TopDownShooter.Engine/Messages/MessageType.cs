@@ -4,7 +4,7 @@
 // </copyright>
 // --------------------------------------------------------------------------------------------------------------------
 
-namespace TopDownShooter.Engine
+namespace TopDownShooter.Engine.Messages
 {
     /// <summary>
     /// Defines the message types used to communicate between <see cref="IComponent" /> objects.

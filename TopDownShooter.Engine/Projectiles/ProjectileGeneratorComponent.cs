@@ -1,5 +1,5 @@
 // --------------------------------------------------------------------------------------------------------------------
-// <copyright file="BulletProjectileGeneratorComponent.cs" company="PlaceholderCompany">
+// <copyright file="ProjectileGeneratorComponent.cs" company="PlaceholderCompany">
 // Copyright (c) PlaceholderCompany. All rights reserved.
 // </copyright>
 // --------------------------------------------------------------------------------------------------------------------
@@ -12,13 +12,15 @@ namespace TopDownShooter.Engine.Projectiles
     using MonoGame.Extended;
     using TopDownShooter.Engine.Adapters;
     using TopDownShooter.Engine.Collisions;
+    using TopDownShooter.Engine.Inventory;
+    using TopDownShooter.Engine.Messages;
 
     /// <summary>
     /// Defines a component for generating bullet projectiles.
     /// </summary>
-    public class BulletProjectileGeneratorComponent : IComponent
+    public class ProjectileGeneratorComponent : IComponent
     {
-        private readonly List<IGameObject> bullets = new List<IGameObject>();
+        private readonly List<IGameObject> projectiles = new List<IGameObject>();
 
         private readonly ICollisionSystem collisionSystem;
 
@@ -33,20 +35,20 @@ namespace TopDownShooter.Engine.Projectiles
         private DateTime lastFireTime = DateTime.Now;
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="BulletProjectileGeneratorComponent" /> class.
+        /// Initializes a new instance of the <see cref="ProjectileGeneratorComponent" /> class.
         /// </summary>
         /// <param name="collisionSystem">The <see cref="ICollisionSystem" /> to use for bullet projectiles.</param>
-        public BulletProjectileGeneratorComponent(ICollisionSystem collisionSystem)
+        public ProjectileGeneratorComponent(ICollisionSystem collisionSystem)
             : this(collisionSystem, new GameObjectFactory())
         {
         }
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="BulletProjectileGeneratorComponent" /> class.
+        /// Initializes a new instance of the <see cref="ProjectileGeneratorComponent" /> class.
         /// </summary>
         /// <param name="collisionSystem">The <see cref="ICollisionSystem" /> to use for bullet projectiles.</param>
         /// <param name="factory">The <see cref="IGameObjectFactory" /> used to create bullet projectiles.</param>
-        internal BulletProjectileGeneratorComponent(ICollisionSystem collisionSystem, IGameObjectFactory factory)
+        internal ProjectileGeneratorComponent(ICollisionSystem collisionSystem, IGameObjectFactory factory)
         {
             this.collisionSystem = collisionSystem;
             this.factory = factory;
@@ -59,12 +61,12 @@ namespace TopDownShooter.Engine.Projectiles
         {
             this.isDestroyed = true;
 
-            foreach (var bullet in this.bullets)
+            foreach (var bullet in this.projectiles)
             {
                 bullet.Destroy();
             }
 
-            this.bullets.Clear();
+            this.projectiles.Clear();
         }
 
         /// <summary>
@@ -76,7 +78,7 @@ namespace TopDownShooter.Engine.Projectiles
         /// <param name="time">The game time.</param>
         public void Draw(IGameObject gameObject, ICamera2DAdapter camera, ISpriteBatchAdapter spriteBatch, GameTime time)
         {
-            foreach (var bullet in this.bullets)
+            foreach (var bullet in this.projectiles)
             {
                 bullet.Draw(camera, spriteBatch, time);
             }
@@ -113,19 +115,36 @@ namespace TopDownShooter.Engine.Projectiles
 
             if (message.MessageType == MessageType.Fire && DateTime.Now - this.lastFireTime > this.cooldownTime)
             {
-                var bullet = this.factory.CreateBulletProjectile(
-                    CollisionSystem.NextGameObjectId++,
-                    gameObject.Id,
-                    gameObject.Position,
-                    new Vector2(0, -1).Rotate(gameObject.Rotation),
-                    this.collisionSystem);
+                IGameObject projectile = null;
+                var fireMessage = (FireMessage)message;
+                switch (fireMessage.ProjectileType)
+                {
+                    case ProjectileType.ShortRange:
+                        projectile = this.factory.CreateShortRangeProjectile(
+                            CollisionSystem.NextGameObjectId++,
+                            gameObject.Id,
+                            gameObject.Position,
+                            new Vector2(0, -1).Rotate(gameObject.Rotation),
+                            this.collisionSystem);
+                        break;
 
-                bullet.Initialize();
-                bullet.LoadContent(this.contentManager);
+                    case ProjectileType.LongRange:
+                        projectile = this.factory.CreateLongRangeProjectile(
+                            CollisionSystem.NextGameObjectId++,
+                            gameObject.Id,
+                            gameObject.Position,
+                            new Vector2(0, -1).Rotate(gameObject.Rotation),
+                            this.collisionSystem);
+                        break;
+                }
 
-                this.bullets.Add(bullet);
-
-                this.lastFireTime = DateTime.Now;
+                if (projectile != null)
+                {
+                    projectile.Initialize();
+                    projectile.LoadContent(this.contentManager);
+                    this.projectiles.Add(projectile);
+                    this.lastFireTime = DateTime.Now;
+                }
             }
         }
 
@@ -136,9 +155,9 @@ namespace TopDownShooter.Engine.Projectiles
         /// <param name="gameTime">The game time.</param>
         public void Update(IGameObject gameObject, GameTime gameTime)
         {
-            foreach (var bullet in this.bullets)
+            foreach (var projectile in this.projectiles)
             {
-                bullet.Update(gameTime);
+                projectile.Update(gameTime);
             }
         }
     }

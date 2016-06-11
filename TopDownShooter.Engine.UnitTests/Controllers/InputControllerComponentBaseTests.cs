@@ -10,6 +10,7 @@ namespace TopDownShooter.Engine.UnitTests.Controllers
     using Microsoft.Xna.Framework;
     using Moq;
     using TopDownShooter.Engine.Controllers;
+    using TopDownShooter.Engine.Messages;
 
     /// <summary>
     /// Contains unit tests for the <see cref="InputControllerComponentBase" /> class.

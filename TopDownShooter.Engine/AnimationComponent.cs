@@ -10,6 +10,7 @@ namespace TopDownShooter.Engine
     using Microsoft.Xna.Framework;
     using Microsoft.Xna.Framework.Graphics;
     using TopDownShooter.Engine.Adapters;
+    using TopDownShooter.Engine.Messages;
 
     /// <summary>
     /// Defines an animation class.

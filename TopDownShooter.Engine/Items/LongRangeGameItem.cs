@@ -1,5 +1,5 @@
 ﻿// --------------------------------------------------------------------------------------------------------------------
-// <copyright file="BulletGameItem.cs" company="PlaceholderCompany">
+// <copyright file="LongRangeGameItem.cs" company="PlaceholderCompany">
 // Copyright (c) PlaceholderCompany. All rights reserved.
 // </copyright>
 // --------------------------------------------------------------------------------------------------------------------
@@ -11,9 +11,9 @@ namespace TopDownShooter.Engine.Items
     using TopDownShooter.Engine.Collisions;
 
     /// <summary>
-    /// Bullet Game item implementation
+    /// The long range game item implementation
     /// </summary>
-    public class BulletGameItem : GameItem
+    public class LongRangeGameItem : GameItem
     {
         private readonly ICollisionSystem collisionSystem;
 
@@ -22,13 +22,13 @@ namespace TopDownShooter.Engine.Items
         private IColliderComponent colliderComponent;
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="BulletGameItem" /> class.
+        /// Initializes a new instance of the <see cref="LongRangeGameItem" /> class.
         /// </summary>
         /// <param name="id">The game object identifier.</param>
         /// <param name="position">The position of the player.</param>
         /// <param name="collisionSystem">The <see cref="ICollisionSystem" />.</param>
         /// <param name="components">A collection of components.</param>
-        public BulletGameItem(int id, Vector2 position, ICollisionSystem collisionSystem, IEnumerable<IComponent> components)
+        public LongRangeGameItem(int id, Vector2 position, ICollisionSystem collisionSystem, IEnumerable<IComponent> components)
             : base(id, components)
         {
             this.Position = position;

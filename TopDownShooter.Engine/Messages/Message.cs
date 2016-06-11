@@ -2,14 +2,8 @@
 // Copyright (c) PlaceholderCompany. All rights reserved.
 // </copyright>
 
-namespace TopDownShooter.Engine
+namespace TopDownShooter.Engine.Messages
 {
-    using System;
-    using System.Collections.Generic;
-    using System.Linq;
-    using System.Text;
-    using System.Threading.Tasks;
-
     /// <summary>
     /// Message object that can detail what type of message it is
     /// and provide further optional details.

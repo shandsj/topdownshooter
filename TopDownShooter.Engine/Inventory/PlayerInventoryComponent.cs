@@ -13,6 +13,7 @@ namespace TopDownShooter.Engine.Inventory
     using TopDownShooter.Engine.Adapters;
     using TopDownShooter.Engine.Collisions;
     using TopDownShooter.Engine.Items;
+    using TopDownShooter.Engine.Messages;
     using TopDownShooter.Engine.Projectiles;
 
     /// <summary>
@@ -22,7 +23,7 @@ namespace TopDownShooter.Engine.Inventory
     {
         // For now just farming off fire requests to this, all the components that
         // could respond to fire events should be passed in
-        private readonly BulletProjectileGeneratorComponent bulletProjectileGeneratorComponent;
+        private readonly ProjectileGeneratorComponent projectileGeneratorComponent;
 
         private SpriteFont font;
 
@@ -35,8 +36,13 @@ namespace TopDownShooter.Engine.Inventory
         public PlayerInventoryComponent(ICollisionSystem collisionSystem)
         {
             this.itemCounts = new Dictionary<string, int>();
-            this.bulletProjectileGeneratorComponent = new BulletProjectileGeneratorComponent(collisionSystem);
+            this.projectileGeneratorComponent = new ProjectileGeneratorComponent(collisionSystem);
         }
+
+        /// <summary>
+        /// Gets the cost for firing a short range projectile.
+        /// </summary>
+        public int ShortRangeProjectileCost => 10;
 
         /// <summary>
         /// Draws the component with the specified game object and game time.
@@ -48,7 +54,7 @@ namespace TopDownShooter.Engine.Inventory
         public override void Draw(IGameObject gameObject, ICamera2DAdapter camera, ISpriteBatchAdapter spriteBatch, GameTime time)
         {
             base.Draw(gameObject, camera, spriteBatch, time);
-            this.bulletProjectileGeneratorComponent.Draw(gameObject, camera, spriteBatch, time);
+            this.projectileGeneratorComponent.Draw(gameObject, camera, spriteBatch, time);
 
             // TODO: Investigate how to make a HUD for the currently
             //       focused player. For now, don't draw if their name
@@ -80,7 +86,7 @@ namespace TopDownShooter.Engine.Inventory
         public override void LoadContent(IContentManagerAdapter contentManager)
         {
             base.LoadContent(contentManager);
-            this.bulletProjectileGeneratorComponent.LoadContent(contentManager);
+            this.projectileGeneratorComponent.LoadContent(contentManager);
 
             this.font = contentManager.Load<SpriteFont>("Fonts/PlayerName");
         }
@@ -98,17 +104,35 @@ namespace TopDownShooter.Engine.Inventory
             switch (message.MessageType)
             {
                 case MessageType.Fire:
-                    var bulletObject = this.Inventory.OfType<BulletGameItem>().FirstOrDefault();
-                    if (bulletObject != null)
+                {
+                    var gameItems = new List<IGameItem>();
+                    var projectileType = ProjectileType.Invalid;
+                    var gameItem = this.Inventory.OfType<LongRangeGameItem>().FirstOrDefault();
+                    if (gameItem != null)
+                    {
+                        projectileType = ProjectileType.LongRange;
+                        gameItems.Add(gameItem);
+                    }
+                    else if (this.Inventory.OfType<CoinGameItem>().Count() > this.ShortRangeProjectileCost)
+                    {
+                        projectileType = ProjectileType.ShortRange;
+                        var coinItems = this.Inventory.OfType<CoinGameItem>().Take(this.ShortRangeProjectileCost);
+                        gameItems.AddRange(coinItems);
+                    }
+
+                    if (projectileType != ProjectileType.Invalid)
                     {
                         // For now just forwarding it on to the bullet projectile generator component
                         // so that we don't have to manage all the bullet items ourselves. Would this
                         // be relegated to more of a global projectile component?
-                        this.bulletProjectileGeneratorComponent.ReceiveMessage(gameObject, message, gameTime);
-                        this.RemoveGameItem(bulletObject);
+                        var fireMessage = (FireMessage)message;
+                        fireMessage.ProjectileType = projectileType;
+                        this.projectileGeneratorComponent.ReceiveMessage(gameObject, message, gameTime);
+                        gameItems.ForEach(this.RemoveGameItem);
                     }
 
                     break;
+                }
 
                 case MessageType.ItemPickup:
                     IGameItem item = message.MessageDetails as IGameItem;
@@ -116,8 +140,8 @@ namespace TopDownShooter.Engine.Inventory
                     // can only have one bulllet item at a time in this inventory.
                     if (item != null)
                     {
-                        var isBullet = item as BulletGameItem != null;
-                        if ((isBullet && !this.Inventory.OfType<BulletGameItem>().Any())
+                        var isBullet = item as LongRangeGameItem != null;
+                        if ((isBullet && !this.Inventory.OfType<LongRangeGameItem>().Any())
                             || !isBullet)
                         {
                             this.AddGameItem(item.Pickup());
@@ -147,7 +171,7 @@ namespace TopDownShooter.Engine.Inventory
         public override void Update(IGameObject gameObject, GameTime gameTime)
         {
             base.Update(gameObject, gameTime);
-            this.bulletProjectileGeneratorComponent.Update(gameObject, gameTime);
+            this.projectileGeneratorComponent.Update(gameObject, gameTime);
 
             this.itemCounts = this.Inventory.GroupBy(obj => obj.Description)
                 .ToDictionary(group => group.Key, count => count.Count());

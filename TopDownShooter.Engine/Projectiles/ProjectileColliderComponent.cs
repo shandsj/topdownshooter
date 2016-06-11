@@ -1,5 +1,5 @@
 // --------------------------------------------------------------------------------------------------------------------
-// <copyright file="BulletProjectileColliderComponent.cs" company="PlaceholderCompany">
+// <copyright file="ProjectileColliderComponent.cs" company="PlaceholderCompany">
 // Copyright (c) PlaceholderCompany. All rights reserved.
 // </copyright>
 // --------------------------------------------------------------------------------------------------------------------
@@ -13,20 +13,20 @@ namespace TopDownShooter.Engine.Projectiles
     /// <summary>
     /// Defines a collider component for the bullet projectile.
     /// </summary>
-    public class BulletProjectileColliderComponent : SimpleColliderComponent
+    public class ProjectileColliderComponent : SimpleColliderComponent
     {
-        private IPlayer bulletParent;
+        private readonly IPlayer projectileParent;
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="BulletProjectileColliderComponent" /> class.
+        /// Initializes a new instance of the <see cref="ProjectileColliderComponent" /> class.
         /// </summary>
         /// <param name="gameObjectId">The parent game object identifier.</param>
-        /// <param name="bulletParentId">The bullet's parent game object identifier.</param>
+        /// <param name="projectileParentId">The projectile's parent game object identifier.</param>
         /// <param name="collisionSystem">The <see cref="ICollisionSystem" />.</param>
-        public BulletProjectileColliderComponent(int gameObjectId, int bulletParentId, ICollisionSystem collisionSystem)
+        public ProjectileColliderComponent(int gameObjectId, int projectileParentId, ICollisionSystem collisionSystem)
             : base(gameObjectId, collisionSystem)
         {
-            this.bulletParent = this.CollisionSystem.GetGameObject(bulletParentId) as IPlayer;
+            this.projectileParent = this.CollisionSystem.GetGameObject(projectileParentId) as IPlayer;
         }
 
         /// <summary>
@@ -36,19 +36,27 @@ namespace TopDownShooter.Engine.Projectiles
         /// <param name="gameTime">The game time.</param>
         public override void Collide(IColliderComponent other, GameTime gameTime)
         {
+            bool destroy = false;
             var otherGameObject = this.CollisionSystem.GetGameObject(other.GameObjectId);
+
             var player = otherGameObject as IPlayer;
-            if (player != null && player != this.bulletParent && player.Health > 0)
+            if (player != null && player != this.projectileParent && player.Health > 0)
             {
-                this.bulletParent.KillCount++;
+                this.projectileParent.KillCount++;
                 player.Health--;
-                this.CollisionSystem.Unregister(this.GameObjectId);
+                destroy = true;
             }
 
             var tile = otherGameObject as ITile;
             if (tile != null)
             {
-                this.CollisionSystem.Unregister(this.GameObjectId);
+                destroy = true;
+            }
+
+            if (destroy)
+            {
+                var gameObject = this.CollisionSystem.GetGameObject(this.GameObjectId);
+                gameObject?.Destroy();
             }
 
             base.Collide(other, gameTime);
