@@ -29,9 +29,14 @@ namespace TopDownShooter.Engine.Controllers
         }
 
         /// <summary>
-        /// Gets the direction vector.
+        /// Gets the rotation.
         /// </summary>
-        public abstract Vector2 Direction { get; }
+        public abstract float Rotation { get; }
+
+        /// <summary>
+        /// Gets the movement direction vector.
+        /// </summary>
+        public abstract Vector2 MovementDirection { get; }
 
         /// <summary>
         /// Destroys the component.
@@ -100,8 +105,9 @@ namespace TopDownShooter.Engine.Controllers
         /// <param name="gameTime">The game time.</param>
         public virtual void Update(IGameObject gameObject, GameTime gameTime)
         {
-            this.Direction.Normalize();
-            gameObject.Velocity = this.Direction * this.speed;
+            this.MovementDirection.Normalize();
+            gameObject.Velocity = this.MovementDirection * this.speed;
+            gameObject.Rotation = this.Rotation;
 
             if (gameObject.Velocity.Length() > 0)
             {

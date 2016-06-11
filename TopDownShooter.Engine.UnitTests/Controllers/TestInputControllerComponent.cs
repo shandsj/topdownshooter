@@ -15,9 +15,23 @@ namespace TopDownShooter.Engine.UnitTests.Controllers
     public class TestInputControllerComponent : InputControllerComponentBase
     {
         /// <summary>
-        /// Gets the direction vector.
+        /// Gets the movement direction vector.
         /// </summary>
-        public override Vector2 Direction { get; }
+        public override Vector2 MovementDirection { get; }
+
+        /// <summary>
+        /// Gets the rotation.
+        /// </summary>
+        public override float Rotation { get; }
+
+        /// <summary>
+        /// Gets a value indicating whether a dash was requested.
+        /// </summary>
+        /// <returns>True if the action was requested; false otherwise.</returns>
+        public override bool Dash()
+        {
+            return false;
+        }
 
         /// <summary>
         /// Destroys the component.
@@ -33,15 +47,6 @@ namespace TopDownShooter.Engine.UnitTests.Controllers
         public override bool Fire()
         {
             return true;
-        }
-
-        /// <summary>
-        /// Gets a value indicating whether a dash was requested.
-        /// </summary>
-        /// <returns>True if the action was requested; false otherwise.</returns>
-        public override bool Dash()
-        {
-            return false;
         }
 
         /// <summary>

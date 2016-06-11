@@ -3238,7 +3238,7 @@
         <member name="M:Moq.Mock`1.#ctor(System.Object[])">
             <summary>
 			Initializes an instance of the mock with <see cref="F:Moq.MockBehavior.Default">default behavior</see> and with
-			the given constructor arguments for the class. (Only valid when <typeparamref name="T" /> is a class)
+			the given constructor arguments for the class. (Only valid when T is a class)
 		</summary><remarks>
 			The mock will try to find the best match constructor given the constructor arguments, and invoke that
 			to initialize the instance. This applies only for classes, not interfaces.
@@ -5520,16 +5520,16 @@
             <summary>Provides access to the git information for the current assembly.</summary>
         </member>
         <member name="F:ThisAssembly.Git.Branch">
-            <summary>Branch: master</summary>
+            <summary>Branch: netcore</summary>
         </member>
         <member name="F:ThisAssembly.Git.Commit">
-            <summary>Commit: 551aa86</summary>
+            <summary>Commit: 605a096</summary>
         </member>
         <member name="F:ThisAssembly.Git.Sha">
-            <summary>Sha: 551aa861145424ffc0e3c1301e0cd347c2c20150</summary>
+            <summary>Sha: 605a096451ad23747be61789c106834d6b0e3119</summary>
         </member>
         <member name="F:ThisAssembly.Git.Commits">
-            <summary>Commits on top of base version: 9</summary>
+            <summary>Commits on top of base version: 25</summary>
         </member>
         <member name="F:ThisAssembly.Git.Tag">
             <summary>Tag: </summary>
@@ -5544,7 +5544,7 @@
             <summary>Major: 4</summary>
         </member>
         <member name="F:ThisAssembly.Git.BaseVersion.Minor">
-            <summary>Minor: 5</summary>
+            <summary>Minor: 6</summary>
         </member>
         <member name="F:ThisAssembly.Git.BaseVersion.Patch">
             <summary>Patch: 0</summary>
@@ -5556,16 +5556,16 @@
             <summary>Major: 4</summary>
         </member>
         <member name="F:ThisAssembly.Git.SemVer.Minor">
-            <summary>Minor: 5</summary>
+            <summary>Minor: 6</summary>
         </member>
         <member name="F:ThisAssembly.Git.SemVer.Patch">
-            <summary>Patch: 9</summary>
+            <summary>Patch: 25</summary>
         </member>
         <member name="F:ThisAssembly.Git.SemVer.Label">
-            <summary>Label: </summary>
+            <summary>Label: alpha</summary>
         </member>
         <member name="F:ThisAssembly.Git.SemVer.DashLabel">
-            <summary>Label with dash prefix: </summary>
+            <summary>Label with dash prefix: -alpha</summary>
         </member>
         <member name="F:ThisAssembly.Git.SemVer.Source">
             <summary>Source: File</summary>

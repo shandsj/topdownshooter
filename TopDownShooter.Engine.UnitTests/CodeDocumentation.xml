@@ -146,10 +146,21 @@
             Defines a test <see cref="T:TopDownShooter.Engine.Controllers.InputControllerComponentBase" /> class.
             </summary>
         </member>
-        <member name="P:TopDownShooter.Engine.UnitTests.Controllers.TestInputControllerComponent.Direction">
+        <member name="P:TopDownShooter.Engine.UnitTests.Controllers.TestInputControllerComponent.MovementDirection">
             <summary>
-            Gets the direction vector.
+            Gets the movement direction vector.
             </summary>
+        </member>
+        <member name="P:TopDownShooter.Engine.UnitTests.Controllers.TestInputControllerComponent.Rotation">
+            <summary>
+            Gets the rotation.
+            </summary>
+        </member>
+        <member name="M:TopDownShooter.Engine.UnitTests.Controllers.TestInputControllerComponent.Dash">
+            <summary>
+            Gets a value indicating whether a dash was requested.
+            </summary>
+            <returns>True if the action was requested; false otherwise.</returns>
         </member>
         <member name="M:TopDownShooter.Engine.UnitTests.Controllers.TestInputControllerComponent.Destroy">
             <summary>
@@ -159,12 +170,6 @@
         <member name="M:TopDownShooter.Engine.UnitTests.Controllers.TestInputControllerComponent.Fire">
             <summary>
             Gets a value indicating whether a fire was requested.
-            </summary>
-            <returns>True if the action was requested; false otherwise.</returns>
-        </member>
-        <member name="M:TopDownShooter.Engine.UnitTests.Controllers.TestInputControllerComponent.Dash">
-            <summary>
-            Gets a value indicating whether a dash was requested.
             </summary>
             <returns>True if the action was requested; false otherwise.</returns>
         </member>

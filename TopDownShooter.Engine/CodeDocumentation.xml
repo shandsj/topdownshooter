@@ -167,6 +167,13 @@
             The <see cref="T:Microsoft.Xna.Framework.Content.ContentManager" />.
             </summary>
         </member>
+        <member name="F:TopDownShooter.Engine.Adapters.ContentManagerAdapter.synchronizationContext">
+            <summary>
+            Load lock access, if two seperate threads attempt to load an
+            asset at the same time, they can really stomp on each other
+            producing tearing artifacts. This is to keep that from happening.
+            </summary>
+        </member>
         <member name="M:TopDownShooter.Engine.Adapters.ContentManagerAdapter.#ctor(Microsoft.Xna.Framework.Content.ContentManager)">
             <summary>
             Initializes a new instance of the <see cref="T:TopDownShooter.Engine.Adapters.ContentManagerAdapter" /> class.
@@ -1177,26 +1184,39 @@
             Herds Inputs...
             </summary>
         </member>
-        <member name="M:TopDownShooter.Engine.Controllers.HumanInputControllerComponent.#ctor">
+        <member name="M:TopDownShooter.Engine.Controllers.HumanInputControllerComponent.#ctor(TopDownShooter.Engine.Adapters.ICamera2DAdapter)">
             <summary>
             Initializes a new instance of the <see cref="T:TopDownShooter.Engine.Controllers.HumanInputControllerComponent" /> class.
             </summary>
+            <param name="camera">The camera.</param>
         </member>
-        <member name="M:TopDownShooter.Engine.Controllers.HumanInputControllerComponent.#ctor(TopDownShooter.Engine.Adapters.IKeyboardAdapter,TopDownShooter.Engine.Adapters.IMouseAdapter,TopDownShooter.Engine.Adapters.IGamePadAdapter)">
+        <member name="M:TopDownShooter.Engine.Controllers.HumanInputControllerComponent.#ctor(TopDownShooter.Engine.Adapters.ICamera2DAdapter,TopDownShooter.Engine.Adapters.IKeyboardAdapter,TopDownShooter.Engine.Adapters.IMouseAdapter,TopDownShooter.Engine.Adapters.IGamePadAdapter)">
             <summary>
             Initializes a new instance of the <see cref="T:TopDownShooter.Engine.Controllers.HumanInputControllerComponent" /> class.
             Creates a new <see cref="T:TopDownShooter.Engine.Controllers.HumanInputControllerComponent" /> that can be used to have a simple Composite for managing
             inputs among multiple devices.
             </summary>
+            <param name="camera">The camera.</param>
             <param name="keyboard">The <see cref="T:TopDownShooter.Engine.Adapters.IKeyboardAdapter" />.</param>
-            <param name="mouse">The <see cref="T:TopDownShooter.Engine.Adapters.IMouseAdapter"/>.</param>
-            <param name="gamePad">The <see cref="T:TopDownShooter.Engine.Adapters.IGamePadAdapter"/>.</param>
+            <param name="mouse">The <see cref="T:TopDownShooter.Engine.Adapters.IMouseAdapter" />.</param>
+            <param name="gamePad">The <see cref="T:TopDownShooter.Engine.Adapters.IGamePadAdapter" />.</param>
             <remarks>Internal for unit testing.</remarks>
         </member>
-        <member name="P:TopDownShooter.Engine.Controllers.HumanInputControllerComponent.Direction">
+        <member name="P:TopDownShooter.Engine.Controllers.HumanInputControllerComponent.MovementDirection">
             <summary>
-            Gets the direction vector.
+            Gets the movement direction.
             </summary>
+        </member>
+        <member name="P:TopDownShooter.Engine.Controllers.HumanInputControllerComponent.Rotation">
+            <summary>
+            Gets the rotation angle.
+            </summary>
+        </member>
+        <member name="M:TopDownShooter.Engine.Controllers.HumanInputControllerComponent.Dash">
+            <summary>
+            Gets a value indicating whether a dash was requested.
+            </summary>
+            <returns>True if the action was requested; false otherwise.</returns>
         </member>
         <member name="M:TopDownShooter.Engine.Controllers.HumanInputControllerComponent.Destroy">
             <summary>
@@ -1206,12 +1226,6 @@
         <member name="M:TopDownShooter.Engine.Controllers.HumanInputControllerComponent.Fire">
             <summary>
             Gets a value indicating whether a fire was requested.
-            </summary>
-            <returns>True if the action was requested; false otherwise.</returns>
-        </member>
-        <member name="M:TopDownShooter.Engine.Controllers.HumanInputControllerComponent.Dash">
-            <summary>
-            Gets a value indicating whether a dash was requested.
             </summary>
             <returns>True if the action was requested; false otherwise.</returns>
         </member>
@@ -1227,28 +1241,42 @@
             <param name="gameObject">The game object to update.</param>
             <param name="gameTime">The game time.</param>
         </member>
-        <member name="M:TopDownShooter.Engine.Controllers.HumanInputControllerComponent.GetDPadDirectionalVector(Microsoft.Xna.Framework.Input.GamePadDPad)">
+        <member name="M:TopDownShooter.Engine.Controllers.HumanInputControllerComponent.GetDPadMovementDirectionalVector(Microsoft.Xna.Framework.Input.GamePadDPad)">
             <summary>
             Gets the DPad directional vector.
             </summary>
-            <param name="dpad">The <see cref="T:Microsoft.Xna.Framework.Input.GamePadDPad"/>.</param>
+            <param name="dpad">The <see cref="T:Microsoft.Xna.Framework.Input.GamePadDPad" />.</param>
             <returns>The directional vector.</returns>
         </member>
-        <member name="M:TopDownShooter.Engine.Controllers.HumanInputControllerComponent.GetKeyboardDirectionalVector(Microsoft.Xna.Framework.Input.KeyboardState)">
+        <member name="M:TopDownShooter.Engine.Controllers.HumanInputControllerComponent.GetKeyboardMovementVector(System.Single,Microsoft.Xna.Framework.Input.KeyboardState)">
             <summary>
-            Gets the keyboard directional vector.
+            Gets the keyboard movement vector.
             </summary>
-            <param name="keyboardState">The <see cref="T:Microsoft.Xna.Framework.Input.KeyboardState"/>.</param>
+            <param name="angle">The rotation angle</param>
+            <param name="keyboardState">The <see cref="T:Microsoft.Xna.Framework.Input.KeyboardState" />.</param>
             <returns>The directional vector.</returns>
+        </member>
+        <member name="M:TopDownShooter.Engine.Controllers.HumanInputControllerComponent.GetMouseRotationAngle(Microsoft.Xna.Framework.Vector2,Microsoft.Xna.Framework.Input.MouseState)">
+            <summary>
+            Gets the mouse rotation angle.
+            </summary>
+            <param name="playerPosition">The player's position.</param>
+            <param name="mouseState">The mouse state.</param>
+            <returns>The rotation angle.</returns>
         </member>
         <member name="T:TopDownShooter.Engine.Controllers.IInputController">
             <summary>
             Simple Controller for requesting Movements
             </summary>
         </member>
-        <member name="P:TopDownShooter.Engine.Controllers.IInputController.Direction">
+        <member name="P:TopDownShooter.Engine.Controllers.IInputController.MovementDirection">
             <summary>
             Gets the direction vector.
+            </summary>
+        </member>
+        <member name="P:TopDownShooter.Engine.Controllers.IInputController.Rotation">
+            <summary>
+            Gets the rotation.
             </summary>
         </member>
         <member name="M:TopDownShooter.Engine.Controllers.IInputController.Fire">
@@ -1273,9 +1301,14 @@
             Finalizes an instance of the <see cref="T:TopDownShooter.Engine.Controllers.InputControllerComponentBase" /> class.
             </summary>
         </member>
-        <member name="P:TopDownShooter.Engine.Controllers.InputControllerComponentBase.Direction">
+        <member name="P:TopDownShooter.Engine.Controllers.InputControllerComponentBase.Rotation">
             <summary>
-            Gets the direction vector.
+            Gets the rotation.
+            </summary>
+        </member>
+        <member name="P:TopDownShooter.Engine.Controllers.InputControllerComponentBase.MovementDirection">
+            <summary>
+            Gets the movement direction vector.
             </summary>
         </member>
         <member name="M:TopDownShooter.Engine.Controllers.InputControllerComponentBase.Destroy">
@@ -1368,9 +1401,14 @@
             Finalizes an instance of the <see cref="T:TopDownShooter.Engine.Controllers.SimpleAiInputControllerComponent" /> class.
             </summary>
         </member>
-        <member name="P:TopDownShooter.Engine.Controllers.SimpleAiInputControllerComponent.Direction">
+        <member name="P:TopDownShooter.Engine.Controllers.SimpleAiInputControllerComponent.MovementDirection">
             <summary>
             Gets the direction vector.
+            </summary>
+        </member>
+        <member name="P:TopDownShooter.Engine.Controllers.SimpleAiInputControllerComponent.Rotation">
+            <summary>
+            Gets the rotation.
             </summary>
         </member>
         <member name="M:TopDownShooter.Engine.Controllers.SimpleAiInputControllerComponent.Destroy">
@@ -1912,6 +1950,11 @@
             Gets the identifier for this game object.
             </summary>
         </member>
+        <member name="P:TopDownShooter.Engine.GameObject.Rotation">
+            <summary>
+            Gets or sets the rotation of the game object.
+            </summary>
+        </member>
         <member name="P:TopDownShooter.Engine.GameObject.Position">
             <summary>
             Gets or sets the position of the entity.
@@ -2085,6 +2128,11 @@
         <member name="E:TopDownShooter.Engine.IGameObject.MessageReady">
             <summary>
             Raised when a message is ready.
+            </summary>
+        </member>
+        <member name="P:TopDownShooter.Engine.IGameObject.Rotation">
+            <summary>
+            Gets or sets the rotation of the game object.
             </summary>
         </member>
         <member name="P:TopDownShooter.Engine.IGameObject.Bounds">

@@ -58,6 +58,11 @@ namespace TopDownShooter.Engine
         public int Id { get; }
 
         /// <summary>
+        /// Gets or sets the rotation of the game object.
+        /// </summary>
+        public float Rotation { get; set; }
+
+        /// <summary>
         /// Gets or sets the position of the entity.
         /// </summary>
         public Vector2 Position { get; set; }

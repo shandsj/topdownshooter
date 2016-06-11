@@ -22,6 +22,11 @@ namespace TopDownShooter.Engine
         event EventHandler<MessageEventArgs> MessageReady;
 
         /// <summary>
+        /// Gets or sets the rotation of the game object.
+        /// </summary>
+       float Rotation { get; set; }
+
+        /// <summary>
         /// Gets the bounds of the game object.
         /// </summary>
         Rectangle Bounds { get; }
