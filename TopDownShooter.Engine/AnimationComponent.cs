@@ -189,6 +189,7 @@ namespace TopDownShooter.Engine
                 return;
             }
 
+            this.Rotation = gameObject.Rotation;
             if (gameTime.TotalGameTime - this.lastFrameIndexChangeTime >= this.FrameProperties.Duration)
             {
                 // Play the next frame in the SpriteSheet

@@ -31,6 +31,7 @@ namespace TopDownShooter
         {
             this.graphics = new GraphicsDeviceManager(this);
             this.Content.RootDirectory = "Content";
+            this.IsMouseVisible = true;
         }
 
         /// <summary>

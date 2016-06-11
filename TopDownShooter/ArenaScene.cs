@@ -120,7 +120,7 @@ namespace TopDownShooter
                 new IComponent[]
                 {
                     // Order matters for calls to update and draw
-                    new HumanInputControllerComponent(),
+                    new HumanInputControllerComponent(this.camera2DAdapter),
                     new DashComponent(),
                     new PlayerColliderComponent(focusedPlayerId, this.collisionSystem),
                     new AnimationComponentManager(

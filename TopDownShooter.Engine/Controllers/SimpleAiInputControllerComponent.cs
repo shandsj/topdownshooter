@@ -27,6 +27,8 @@ namespace TopDownShooter.Engine.Controllers
 
         private bool dash;
 
+        private float rotation;
+
         /// <summary>
         /// Initializes a new instance of the <see cref="SimpleAiInputControllerComponent" /> class.
         /// </summary>
@@ -48,7 +50,12 @@ namespace TopDownShooter.Engine.Controllers
         /// <summary>
         /// Gets the direction vector.
         /// </summary>
-        public override Vector2 Direction => this.direction;
+        public override Vector2 MovementDirection => this.direction;
+
+        /// <summary>
+        /// Gets the rotation.
+        /// </summary>
+        public override float Rotation => this.rotation;
 
         /// <summary>
         /// Destroys the component.
@@ -90,6 +97,14 @@ namespace TopDownShooter.Engine.Controllers
                         {
                             this.SleepRandomly();
                             this.direction = new Vector2((float)this.random.NextDouble(-1, 1), (float)this.random.NextDouble(-1, 1));
+                        }
+                    }),
+                                Task.Factory.StartNew(() =>
+                    {
+                        while (true)
+                        {
+                            this.SleepRandomly();
+                            this.rotation = (float)this.random.NextDouble(0, Math.PI * 2);
                         }
                     }),
                 Task.Factory.StartNew(() =>

@@ -16,7 +16,12 @@ namespace TopDownShooter.Engine.Controllers
         /// <summary>
         /// Gets the direction vector.
         /// </summary>
-        Vector2 Direction { get; }
+        Vector2 MovementDirection { get; }
+
+        /// <summary>
+        /// Gets the rotation.
+        /// </summary>
+        float Rotation { get; }
 
         /// <summary>
         /// Gets a value indicating whether a fire was requested.

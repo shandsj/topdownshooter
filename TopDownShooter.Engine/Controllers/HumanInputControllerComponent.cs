@@ -8,6 +8,7 @@ namespace TopDownShooter.Engine.Controllers
 {
     using Microsoft.Xna.Framework;
     using Microsoft.Xna.Framework.Input;
+    using MonoGame.Extended;
     using TopDownShooter.Engine.Adapters;
 
     /// <summary>
@@ -15,17 +16,26 @@ namespace TopDownShooter.Engine.Controllers
     /// </summary>
     public class HumanInputControllerComponent : InputControllerComponentBase
     {
-        private readonly IKeyboardAdapter keyboard;
-        private readonly IMouseAdapter mouse;
         private readonly IGamePadAdapter gamePad;
-        private bool fire = false;
-        private Vector2 direction;
+
+        private readonly IKeyboardAdapter keyboard;
+
+        private readonly IMouseAdapter mouse;
+
+        private readonly ICamera2DAdapter camera;
+
+        private bool fire;
+
+        private Vector2 movementDirection;
+
+        private float rotation;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="HumanInputControllerComponent" /> class.
         /// </summary>
-        public HumanInputControllerComponent()
-            : this(new KeyboardAdapter(), new MouseAdapter(), new GamePadAdapter())
+        /// <param name="camera">The camera.</param>
+        public HumanInputControllerComponent(ICamera2DAdapter camera)
+            : this(camera, new KeyboardAdapter(), new MouseAdapter(), new GamePadAdapter())
         {
         }
 
@@ -34,21 +44,37 @@ namespace TopDownShooter.Engine.Controllers
         /// Creates a new <see cref="HumanInputControllerComponent" /> that can be used to have a simple Composite for managing
         /// inputs among multiple devices.
         /// </summary>
+        /// <param name="camera">The camera.</param>
         /// <param name="keyboard">The <see cref="IKeyboardAdapter" />.</param>
-        /// <param name="mouse">The <see cref="IMouseAdapter"/>.</param>
-        /// <param name="gamePad">The <see cref="IGamePadAdapter"/>.</param>
+        /// <param name="mouse">The <see cref="IMouseAdapter" />.</param>
+        /// <param name="gamePad">The <see cref="IGamePadAdapter" />.</param>
         /// <remarks>Internal for unit testing.</remarks>
-        internal HumanInputControllerComponent(IKeyboardAdapter keyboard, IMouseAdapter mouse, IGamePadAdapter gamePad)
+        internal HumanInputControllerComponent(ICamera2DAdapter camera, IKeyboardAdapter keyboard, IMouseAdapter mouse, IGamePadAdapter gamePad)
         {
+            this.camera = camera;
             this.keyboard = keyboard;
             this.mouse = mouse;
             this.gamePad = gamePad;
         }
 
         /// <summary>
-        /// Gets the direction vector.
+        /// Gets the movement direction.
         /// </summary>
-        public override Vector2 Direction => this.direction;
+        public override Vector2 MovementDirection => this.movementDirection;
+
+        /// <summary>
+        /// Gets the rotation angle.
+        /// </summary>
+        public override float Rotation => this.rotation;
+
+        /// <summary>
+        /// Gets a value indicating whether a dash was requested.
+        /// </summary>
+        /// <returns>True if the action was requested; false otherwise.</returns>
+        public override bool Dash()
+        {
+            return this.mouse.GetState().RightButton == ButtonState.Pressed;
+        }
 
         /// <summary>
         /// Destroys the component.
@@ -67,15 +93,6 @@ namespace TopDownShooter.Engine.Controllers
         }
 
         /// <summary>
-        /// Gets a value indicating whether a dash was requested.
-        /// </summary>
-        /// <returns>True if the action was requested; false otherwise.</returns>
-        public override bool Dash()
-        {
-            return this.keyboard.GetState().IsKeyDown(Keys.LeftShift);
-        }
-
-        /// <summary>
         /// Initializes the component.
         /// </summary>
         public override void Initialize()
@@ -89,30 +106,32 @@ namespace TopDownShooter.Engine.Controllers
         /// <param name="gameTime">The game time.</param>
         public override void Update(IGameObject gameObject, GameTime gameTime)
         {
-            this.fire = this.mouse.GetState().LeftButton == ButtonState.Pressed;
+            var mouseState = this.mouse.GetState();
+            this.fire = mouseState.LeftButton == ButtonState.Pressed;
+            this.rotation = this.GetMouseRotationAngle(gameObject.Position, mouseState);
 
             var gamePadState = this.gamePad.GetState(PlayerIndex.One);
             var vector = gamePadState.ThumbSticks.Left;
             if (vector == Vector2.Zero)
             {
-                vector = this.GetDPadDirectionalVector(gamePadState.DPad);
+                vector = this.GetDPadMovementDirectionalVector(gamePadState.DPad);
             }
 
             if (vector == Vector2.Zero)
             {
-                vector = this.GetKeyboardDirectionalVector(this.keyboard.GetState());
+                vector = this.GetKeyboardMovementVector(this.rotation, this.keyboard.GetState());
             }
 
-            this.direction = vector;
+            this.movementDirection = vector;
             base.Update(gameObject, gameTime);
         }
 
         /// <summary>
         /// Gets the DPad directional vector.
         /// </summary>
-        /// <param name="dpad">The <see cref="GamePadDPad"/>.</param>
+        /// <param name="dpad">The <see cref="GamePadDPad" />.</param>
         /// <returns>The directional vector.</returns>
-        private Vector2 GetDPadDirectionalVector(GamePadDPad dpad)
+        private Vector2 GetDPadMovementDirectionalVector(GamePadDPad dpad)
         {
             int x = 0;
             int y = 0;
@@ -141,11 +160,12 @@ namespace TopDownShooter.Engine.Controllers
         }
 
         /// <summary>
-        /// Gets the keyboard directional vector.
+        /// Gets the keyboard movement vector.
         /// </summary>
-        /// <param name="keyboardState">The <see cref="KeyboardState"/>.</param>
+        /// <param name="angle">The rotation angle</param>
+        /// <param name="keyboardState">The <see cref="KeyboardState" />.</param>
         /// <returns>The directional vector.</returns>
-        private Vector2 GetKeyboardDirectionalVector(KeyboardState keyboardState)
+        private Vector2 GetKeyboardMovementVector(float angle, KeyboardState keyboardState)
         {
             int x = 0;
             int y = 0;
@@ -176,7 +196,18 @@ namespace TopDownShooter.Engine.Controllers
                 }
             }
 
-            return new Vector2(x, y);
+            return new Vector2(x, y).Rotate(angle);
+        }
+
+        /// <summary>
+        /// Gets the mouse rotation angle.
+        /// </summary>
+        /// <param name="playerPosition">The player's position.</param>
+        /// <param name="mouseState">The mouse state.</param>
+        /// <returns>The rotation angle.</returns>
+        private float GetMouseRotationAngle(Vector2 playerPosition, MouseState mouseState)
+        {
+            return (this.camera.ScreenToWorld(mouseState.Position.ToVector2()) - playerPosition).ToAngle();
         }
     }
 }
