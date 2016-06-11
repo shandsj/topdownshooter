@@ -9,6 +9,7 @@ namespace TopDownShooter.Engine.Projectiles
     using System;
     using System.Collections.Generic;
     using Microsoft.Xna.Framework;
+    using MonoGame.Extended;
     using TopDownShooter.Engine.Adapters;
     using TopDownShooter.Engine.Collisions;
 
@@ -112,7 +113,13 @@ namespace TopDownShooter.Engine.Projectiles
 
             if (message.MessageType == MessageType.Fire && DateTime.Now - this.lastFireTime > this.cooldownTime)
             {
-                var bullet = this.factory.CreateBulletProjectile(CollisionSystem.NextGameObjectId++, gameObject.Id, gameObject.Position, gameObject.Velocity, this.collisionSystem);
+                var bullet = this.factory.CreateBulletProjectile(
+                    CollisionSystem.NextGameObjectId++,
+                    gameObject.Id,
+                    gameObject.Position,
+                    new Vector2(0, -1).Rotate(gameObject.Rotation),
+                    this.collisionSystem);
+
                 bullet.Initialize();
                 bullet.LoadContent(this.contentManager);
 

@@ -8,6 +8,7 @@ namespace TopDownShooter.Engine
 {
     using System;
     using Microsoft.Xna.Framework;
+    using MonoGame.Extended;
     using TopDownShooter.Engine.Adapters;
 
     /// <summary>
@@ -116,6 +117,9 @@ namespace TopDownShooter.Engine
         {
             if (this.IsDashing(gameTime))
             {
+                var angle = gameObject.Velocity.ToAngle();
+                var northVelocity = gameObject.Velocity.Rotate(-angle);
+                gameObject.Velocity = northVelocity.Rotate(gameObject.Rotation);
                 gameObject.Velocity *= this.SpeedFactor;
             }
         }

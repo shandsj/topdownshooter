@@ -73,7 +73,7 @@ namespace TopDownShooter.Engine.Controllers
         /// <returns>True if the action was requested; false otherwise.</returns>
         public override bool Dash()
         {
-            return this.keyboard.GetState().IsKeyDown(Keys.LeftShift);
+            return this.mouse.GetState().RightButton == ButtonState.Pressed;
         }
 
         /// <summary>
