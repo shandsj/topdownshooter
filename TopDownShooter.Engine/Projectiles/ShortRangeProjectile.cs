@@ -31,6 +31,11 @@ namespace TopDownShooter.Engine.Projectiles
         }
 
         /// <summary>
+        /// Gets the maximum range of this projectile.
+        /// </summary>
+        public override int MaximumRange => 1000;
+
+        /// <summary>
         /// Gets the height of the game object.
         /// </summary>
         public override int Height => 32;

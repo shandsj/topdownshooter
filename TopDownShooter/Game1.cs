@@ -7,6 +7,7 @@
 namespace TopDownShooter
 {
     using Microsoft.Xna.Framework;
+    using Microsoft.Xna.Framework.Graphics;
     using Microsoft.Xna.Framework.Input;
     using TopDownShooter.Engine;
     using TopDownShooter.Engine.Adapters;
@@ -29,7 +30,15 @@ namespace TopDownShooter
         /// </summary>
         public Game1()
         {
-            this.graphics = new GraphicsDeviceManager(this);
+            this.graphics = new GraphicsDeviceManager(this)
+            {
+                PreferredBackBufferWidth = GraphicsAdapter.DefaultAdapter.CurrentDisplayMode.Width,
+                PreferredBackBufferHeight = GraphicsAdapter.DefaultAdapter.CurrentDisplayMode.Height,
+#if !DEBUG
+                IsFullScreen = true
+#endif
+            };
+
             this.Content.RootDirectory = "Content";
             this.IsMouseVisible = true;
         }

@@ -6,6 +6,7 @@
 
 namespace TopDownShooter.Engine.Projectiles
 {
+    using System;
     using System.Collections.Generic;
     using System.Linq;
     using Microsoft.Xna.Framework;
@@ -29,6 +30,11 @@ namespace TopDownShooter.Engine.Projectiles
             : base(id, position, direction, collisionSystem, components)
         {
         }
+
+        /// <summary>
+        /// Gets the maximum range of this projectile.
+        /// </summary>
+        public override int MaximumRange => 2000;
 
         /// <summary>
         /// Gets the speed of the projectile.

@@ -36,13 +36,22 @@ namespace TopDownShooter.Engine.Projectiles
             this.Position = position;
             this.direction = direction;
             this.collisionSystem = collisionSystem;
+
+            this.initialPosition = this.Position;
             this.colliderComponent = this.Components.OfType<IColliderComponent>().FirstOrDefault();
         }
+
+        private Vector2 initialPosition;
 
         /// <summary>
         /// Gets the speed of this projectile.
         /// </summary>
         public abstract float Speed { get; }
+
+        /// <summary>
+        /// Gets the maximum range of this projectile.
+        /// </summary>
+        public abstract int MaximumRange { get; }
 
         /// <summary>
         /// Destroyes the game object.
@@ -52,6 +61,20 @@ namespace TopDownShooter.Engine.Projectiles
             this.collisionSystem.Unregister(this.Id);
 
             base.Destroy();
+        }
+
+        /// <summary>
+        /// Updates the game object with the specified game time.
+        /// </summary>
+        /// <param name="gameTime">The game time.</param>
+        public override void Update(GameTime gameTime)
+        {
+            base.Update(gameTime);
+
+            if (Vector2.Distance(this.Position, this.initialPosition) > this.MaximumRange)
+            {
+                this.Destroy();
+            }
         }
 
         /// <summary>
