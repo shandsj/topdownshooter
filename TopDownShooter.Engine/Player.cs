@@ -8,6 +8,7 @@ namespace TopDownShooter.Engine
 {
     using System.Collections.Generic;
     using System.Linq;
+    using Messages;
     using Microsoft.Xna.Framework;
     using Microsoft.Xna.Framework.Graphics;
     using TopDownShooter.Engine.Adapters;
@@ -28,6 +29,10 @@ namespace TopDownShooter.Engine
 
         private bool hasCreatedDeathAnimation;
 
+        private ParticleGeneratorComponent particleGeneratorComponent;
+
+        private DashComponent dashComponent;
+
         /// <summary>
         /// Initializes a new instance of the <see cref="Player" /> class.
         /// </summary>
@@ -42,8 +47,10 @@ namespace TopDownShooter.Engine
 
             this.Position = position;
             this.collisionSystem = collisionSystem;
+            this.dashComponent = this.Components.OfType<DashComponent>().FirstOrDefault();
             this.animationComponentManager = this.Components.OfType<IAnimationComponentManager>().FirstOrDefault();
             this.colliderComponent = this.Components.OfType<IColliderComponent>().FirstOrDefault();
+            this.particleGeneratorComponent = this.Components.OfType<ParticleGeneratorComponent>().FirstOrDefault();
 
             this.collisionSystem.Register(id, this, this.colliderComponent);
         }
@@ -117,7 +124,7 @@ namespace TopDownShooter.Engine
         /// <param name="gameTime">The game time.</param>
         public override void Update(GameTime gameTime)
         {
-            base.Update(gameTime);
+            this.particleGeneratorComponent.IsEmitting = this.dashComponent.IsDashing(gameTime);
 
             if (this.hasCreatedDeathAnimation)
             {
@@ -141,6 +148,8 @@ namespace TopDownShooter.Engine
             {
                 this.animationComponentManager.Play("Walk");
             }
+
+            base.Update(gameTime);
         }
     }
 }

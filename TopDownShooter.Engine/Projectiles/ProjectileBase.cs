@@ -20,10 +20,12 @@ namespace TopDownShooter.Engine.Projectiles
 
         private readonly ICollisionSystem collisionSystem;
 
+        private readonly Vector2 initialPosition;
+
         private Vector2 direction;
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="ProjectileBase"/> class.
+        /// Initializes a new instance of the <see cref="ProjectileBase" /> class.
         /// </summary>
         /// <param name="id">The game object identifier.</param>
         /// <param name="collisionSystem">The <see cref="ICollisionSystem" />.</param>
@@ -41,17 +43,15 @@ namespace TopDownShooter.Engine.Projectiles
             this.colliderComponent = this.Components.OfType<IColliderComponent>().FirstOrDefault();
         }
 
-        private Vector2 initialPosition;
+        /// <summary>
+        /// Gets the maximum range of this projectile.
+        /// </summary>
+        public abstract int MaximumRange { get; }
 
         /// <summary>
         /// Gets the speed of this projectile.
         /// </summary>
         public abstract float Speed { get; }
-
-        /// <summary>
-        /// Gets the maximum range of this projectile.
-        /// </summary>
-        public abstract int MaximumRange { get; }
 
         /// <summary>
         /// Destroyes the game object.
@@ -61,6 +61,19 @@ namespace TopDownShooter.Engine.Projectiles
             this.collisionSystem.Unregister(this.Id);
 
             base.Destroy();
+        }
+
+        /// <summary>
+        /// Initializes the game object.
+        /// </summary>
+        public override void Initialize()
+        {
+            this.direction.Normalize();
+            this.Velocity = this.direction * this.Speed;
+
+            this.collisionSystem.Register(this.Id, this, this.colliderComponent);
+
+            base.Initialize();
         }
 
         /// <summary>
@@ -75,19 +88,6 @@ namespace TopDownShooter.Engine.Projectiles
             {
                 this.Destroy();
             }
-        }
-
-        /// <summary>
-        /// Initializes the game object.
-        /// </summary>
-        public override void Initialize()
-        {
-            this.direction.Normalize();
-            this.Velocity = this.direction * this.Speed;
-
-            this.collisionSystem.Register(this.Id, this, this.colliderComponent);
-
-            base.Initialize();
         }
     }
 }

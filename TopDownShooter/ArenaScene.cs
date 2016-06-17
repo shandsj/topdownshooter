@@ -124,6 +124,7 @@ namespace TopDownShooter
                     new HumanInputControllerComponent(this.camera2DAdapter),
                     new DashComponent(),
                     new PlayerColliderComponent(focusedPlayerId, this.collisionSystem),
+                    new ParticleGeneratorComponent(this.random, new[] { "Particles/circle" }, new[] { Color.Orange, Color.OrangeRed, Color.MonoGameOrange }) { MinimumVelocity = new Vector2(-2, -2), MaximumVelocity = new Vector2(2, 2) },
                     new AnimationComponentManager(
                         new AnimationComponent("Stand", "SpriteSheets/red-standing-still", new FrameProperties(200, 141, TimeSpan.MaxValue, 1)) { IsRendered = true },
                         new AnimationComponent("Walk", "SpriteSheets/red-walking", new FrameProperties(200, 143, TimeSpan.FromSeconds(.2), 1)) { IsLooping = true, IsAnimating = true },
@@ -150,6 +151,7 @@ namespace TopDownShooter
                         new SimpleAiInputControllerComponent(this.random),
                         new DashComponent(),
                         new PlayerColliderComponent(id, this.collisionSystem),
+                        new ParticleGeneratorComponent(this.random, new[] { "Particles/circle" }, new[] { Color.Orange, Color.OrangeRed, Color.MonoGameOrange }) { MinimumVelocity = new Vector2(-2, -2), MaximumVelocity = new Vector2(2, 2) },
                         new AnimationComponentManager(
                             new AnimationComponent("Stand", "SpriteSheets/red-standing-still", new FrameProperties(200, 141, TimeSpan.MaxValue, 1)) { IsRendered = true },
                             new AnimationComponent("Walk", "SpriteSheets/red-walking", new FrameProperties(200, 143, TimeSpan.FromSeconds(.2), 1)) { IsLooping = true, IsAnimating = true, IsRendered = true },
