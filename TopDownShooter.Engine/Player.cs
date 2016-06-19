@@ -140,6 +140,10 @@ namespace TopDownShooter.Engine
                 this.Components.Clear();
                 this.Components.Add(this.animationComponentManager);
             }
+            else if (this.dashComponent.IsDashing(gameTime))
+            {
+                this.animationComponentManager.Play("Dash");
+            }
             else if (this.Velocity.Equals(Vector2.Zero))
             {
                 this.animationComponentManager.Play("Stand");
