@@ -6,7 +6,9 @@
 
 namespace TopDownShooter
 {
+    using System;
     using System.Collections.Generic;
+    using System.Linq;
     using Microsoft.Xna.Framework;
     using Microsoft.Xna.Framework.Graphics;
     using TopDownShooter.Engine;
@@ -73,18 +75,20 @@ namespace TopDownShooter
         {
             base.Draw(camera, spriteBatch, gameTime);
 
-            int index = 0;
-            foreach (var player in this.players)
+            if (this.players.Any())
             {
-                var text = $"{player.Name} - {player.KillCount}";
-                var textSize = this.font.MeasureString(text);
-                spriteBatch.DrawString(
-                    this.font,
-                    text,
-                    new Vector2(spriteBatch.GraphicsDevice.Viewport.Width - textSize.X, (index * textSize.Y) + 10),
-                    Color.Black);
-
-                index++;
+                var count = Math.Min(10, this.players.Count);
+                for (int index = 0; index < count; index++)
+                {
+                    var player = this.players.ElementAt(index);
+                    var text = $"{player.Name} - {player.KillCount}";
+                    var textSize = this.font.MeasureString(text);
+                    spriteBatch.DrawString(
+                        this.font,
+                        text,
+                        new Vector2(spriteBatch.GraphicsDevice.Viewport.Width - textSize.X, (index * textSize.Y) + 10),
+                        Color.Black);
+                }
             }
         }
 

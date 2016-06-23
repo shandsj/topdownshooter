@@ -34,34 +34,35 @@ namespace TopDownShooter
         /// <param name="gameTime">The game time.</param>
         public override void Collide(IColliderComponent other, GameTime gameTime)
         {
-            var gameObject = this.CollisionSystem.GetGameObject(this.GameObjectId);
+            var player = this.CollisionSystem.GetGameObject(this.GameObjectId) as IPlayer;
             var otherObject = this.CollisionSystem.GetGameObject(other.GameObjectId);
 
-            if (gameObject != null && otherObject != null)
+            if (player != null && otherObject != null)
             {
                 var item = otherObject as IGameItem;
                 if (item != null)
                 {
                     // Allow players to pass through IGameItems that they can't pickup.
                     // See if anyone in the gameObject is interested in this item.
-                    gameObject.BroadcastMessage(new Message((int)MessageType.ItemPickup, item), gameTime);
+                    player.BroadcastMessage(new Message((int)MessageType.ItemPickup, item), gameTime);
                 }
 
                 var tile = otherObject as ITile;
                 if (tile != null && tile.TileInteractionType == TileInteractionType.Blocking)
                 {
                     // TODO: modify velocity correctly based on location of collided object
-                    gameObject.Velocity = new Vector2(0, 0);
+                    player.Velocity = new Vector2(0, 0);
                 }
 
-                var player = otherObject as IPlayer;
-                if (player != null)
+                var otherPlayer = otherObject as IPlayer;
+                if (otherPlayer != null)
                 {
                     var dashRequest = new DashStatusRequestMessage();
-                    gameObject.BroadcastMessage(dashRequest, gameTime);
-                    if (dashRequest.IsDashing)
+                    player.BroadcastMessage(dashRequest, gameTime);
+                    if (dashRequest.IsDashing && otherPlayer.Health > 0)
                     {
-                        player.Health--;
+                        player.KillCount++;
+                        otherPlayer.Health--;
                     }
                 }
             }

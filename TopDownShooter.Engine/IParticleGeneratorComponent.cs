@@ -1,10 +1,18 @@
+// --------------------------------------------------------------------------------------------------------------------
+// <copyright file="IParticleGeneratorComponent.cs" company="PlaceholderCompany">
+// Copyright (c) PlaceholderCompany. All rights reserved.
+// </copyright>
+// --------------------------------------------------------------------------------------------------------------------
+
 namespace TopDownShooter.Engine
 {
     using System;
     using System.Collections.Generic;
     using Microsoft.Xna.Framework;
-    using TopDownShooter.Engine.Adapters;
 
+    /// <summary>
+    /// Defines an interface for a particle generator component.
+    /// </summary>
     public interface IParticleGeneratorComponent : IComponent
     {
         /// <summary>

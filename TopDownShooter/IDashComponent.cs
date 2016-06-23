@@ -1,10 +1,18 @@
+// --------------------------------------------------------------------------------------------------------------------
+// <copyright file="IDashComponent.cs" company="PlaceholderCompany">
+// Copyright (c) PlaceholderCompany. All rights reserved.
+// </copyright>
+// --------------------------------------------------------------------------------------------------------------------
+
 namespace TopDownShooter
 {
     using System;
     using Microsoft.Xna.Framework;
     using TopDownShooter.Engine;
-    using TopDownShooter.Engine.Adapters;
 
+    /// <summary>
+    /// Defines an interface for a dash component.
+    /// </summary>
     public interface IDashComponent : IComponent
     {
         /// <summary>
@@ -23,6 +31,11 @@ namespace TopDownShooter
         TimeSpan CooldownTime { get; }
 
         /// <summary>
+        /// Gets the cost of a dash.
+        /// </summary>
+        int DashCost { get; }
+
+        /// <summary>
         /// Gets the value affecting the velocity vector during the dash.
         /// </summary>
         float SpeedFactor { get; }
@@ -31,11 +44,6 @@ namespace TopDownShooter
         /// Gets the time the last dash started.
         /// </summary>
         TimeSpan StartedTime { get; }
-
-        /// <summary>
-        /// Gets the cost of a dash.
-        /// </summary>
-        int DashCost { get; }
 
         /// <summary>
         /// Gets a value indicating whether the component is dashing at the specified game time.

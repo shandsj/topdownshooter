@@ -497,6 +497,11 @@
             <param name="components">The collection of components</param>
             <returns>The created bullet projectile.</returns>
         </member>
+        <member name="T:TopDownShooter.IDashComponent">
+            <summary>
+            Defines an interface for a dash component.
+            </summary>
+        </member>
         <member name="P:TopDownShooter.IDashComponent.ActiveTime">
             <summary>
             Gets the amount of time the dash is active.
@@ -512,6 +517,11 @@
             Gets the cooldown time.
             </summary>
         </member>
+        <member name="P:TopDownShooter.IDashComponent.DashCost">
+            <summary>
+            Gets the cost of a dash.
+            </summary>
+        </member>
         <member name="P:TopDownShooter.IDashComponent.SpeedFactor">
             <summary>
             Gets the value affecting the velocity vector during the dash.
@@ -520,11 +530,6 @@
         <member name="P:TopDownShooter.IDashComponent.StartedTime">
             <summary>
             Gets the time the last dash started.
-            </summary>
-        </member>
-        <member name="P:TopDownShooter.IDashComponent.DashCost">
-            <summary>
-            Gets the cost of a dash.
             </summary>
         </member>
         <member name="M:TopDownShooter.IDashComponent.IsDashing(Microsoft.Xna.Framework.GameTime)">

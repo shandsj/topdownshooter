@@ -13,6 +13,7 @@ namespace TopDownShooter
     using TopDownShooter.Engine;
     using TopDownShooter.Engine.Adapters;
     using TopDownShooter.Engine.Collisions;
+    using TopDownShooter.Messages;
 
     /// <summary>
     /// Simple player class.
@@ -27,7 +28,7 @@ namespace TopDownShooter
 
         private SpriteFont font;
 
-        private bool hasCreatedDeathAnimation;
+        private bool hasDied;
 
         private IParticleGeneratorComponent particleGeneratorComponent;
 
@@ -126,15 +127,16 @@ namespace TopDownShooter
         {
             this.particleGeneratorComponent.IsEmitting = this.dashComponent.IsDashing(gameTime);
 
-            if (this.hasCreatedDeathAnimation)
+            if (this.hasDied)
             {
                 return;
             }
 
-            if (this.Health == 0 && !this.hasCreatedDeathAnimation)
+            if (this.Health == 0 && !this.hasDied)
             {
+                this.hasDied = true;
+
                 this.Velocity = new Vector2(0, 0);
-                this.hasCreatedDeathAnimation = true;
                 this.animationComponentManager.Play("Death");
 
                 this.Components.Clear();

@@ -101,77 +101,6 @@ namespace TopDownShooter
         /// </summary>
         public void Initialize()
         {
-            this.level = new Level(CollisionSystem.NextGameObjectId++, this.collisionSystem, new TmxMapAdapter(new TmxMap("Content/TmxFiles/DefaultLevel.tmx")));
-            this.level.Initialize();
-
-            this.players = new List<Player>();
-            this.gameItems = new List<IGameItem>();
-            this.gameItems.AddRange(this.gameItemFactory.SpawnRandomCoinItems(1000, this.collisionSystem, 100, 1500, 100, 1500, false));
-            this.gameItems.AddRange(this.gameItemFactory.SpawnRandomBulletItems(100, this.collisionSystem, 1500, 3000, 1500, 3000));
-
-            this.camera2DAdapter = new Camera2DAdapter(new Camera2D(this.graphicsDevice) { Zoom = .5f });
-            this.leaderBoard = new LeaderBoard(CollisionSystem.NextGameObjectId++);
-            this.leaderBoard.Initialize();
-
-#pragma warning disable SA1118 // Parameter must not span multiple lines
-            var focusedPlayerId = CollisionSystem.NextGameObjectId++;
-            this.focusedPlayer = new Player(
-                focusedPlayerId,
-                new Vector2(1600, 1600),
-                this.collisionSystem,
-                new IComponent[]
-                {
-                    // Order matters for calls to update and draw
-                    new HumanInputControllerComponent(this.camera2DAdapter),
-                    new DashComponent(),
-                    new PlayerColliderComponent(focusedPlayerId, this.collisionSystem),
-                    new ParticleGeneratorComponent(this.random, new[] { "Particles/circle" }, new[] { Color.Orange, Color.OrangeRed, Color.MonoGameOrange }) { MinimumVelocity = new Vector2(-2, -2), MaximumVelocity = new Vector2(2, 2) },
-                    new AnimationComponentManager(
-                        new AnimationComponent("Dash", "hoodieguy", new FrameProperties(76, 140, TimeSpan.FromSeconds(.1), 2)) { IsLooping = true },
-                        new AnimationComponent("Stand", "SpriteSheets/red-standing-still", new FrameProperties(200, 141, TimeSpan.MaxValue, 1)) { IsRendered = true },
-                        new AnimationComponent("Walk", "SpriteSheets/red-walking", new FrameProperties(200, 143, TimeSpan.FromSeconds(.2), 1)) { IsLooping = true, IsAnimating = true },
-                        new AnimationComponent("Death", "hoodieguyOnFire", new FrameProperties(76, 140, TimeSpan.FromSeconds(.1), 2)) { IsLooping = true }),
-                    new PlayerInventoryComponent(this.collisionSystem),
-                    new DebugComponent(Color.Red, 2)
-                });
-
-            this.focusedPlayer.Name = $"Player {focusedPlayerId}";
-            this.players.Add(this.focusedPlayer);
-
-            int spawn = 1600;
-
-            for (int i = 0; i < 5; i++)
-            {
-                spawn -= 200;
-                var id = CollisionSystem.NextGameObjectId++;
-                var player = new Player(
-                    id,
-                    new Vector2(spawn, spawn),
-                    this.collisionSystem,
-                    new IComponent[]
-                    {
-                        new SimpleAiInputControllerComponent(this.random),
-                        new DashComponent(),
-                        new PlayerColliderComponent(id, this.collisionSystem),
-                        new ParticleGeneratorComponent(this.random, new[] { "Particles/circle" }, new[] { Color.Orange, Color.OrangeRed, Color.MonoGameOrange }) { MinimumVelocity = new Vector2(-2, -2), MaximumVelocity = new Vector2(2, 2) },
-                        new AnimationComponentManager(
-                            new AnimationComponent("Dash", "hoodieguy", new FrameProperties(76, 140, TimeSpan.FromSeconds(.1), 2)) { IsLooping = true },
-                            new AnimationComponent("Stand", "SpriteSheets/red-standing-still", new FrameProperties(200, 141, TimeSpan.MaxValue, 1)) { IsRendered = true },
-                            new AnimationComponent("Walk", "SpriteSheets/red-walking", new FrameProperties(200, 143, TimeSpan.FromSeconds(.2), 1)) { IsLooping = true, IsAnimating = true, IsRendered = true },
-                            new AnimationComponent("Death", "hoodieguyOnFire", new FrameProperties(76, 140, TimeSpan.FromSeconds(.1), 2)) { IsLooping = true }),
-                        new PlayerInventoryComponent(this.collisionSystem)
-                    });
-                player.Name = $"Ai Player {id}";
-                this.players.Add(player);
-            }
-#pragma warning restore SA1118
-
-            this.players.ForEach(player =>
-                {
-                    player.Initialize();
-                    player.MessageReady += this.GameObjectMessageReady;
-                });
-            this.gameItems.ForEach(item => item.Initialize());
         }
 
         /// <summary>
@@ -184,17 +113,92 @@ namespace TopDownShooter
         {
             this.contentManager = contentManager;
 
-            var loadLevelTask = this.level.LoadContentAsync(contentManager, progress);
+            return Task.Run(async () =>
+                {
+                    this.level = new Level(CollisionSystem.NextGameObjectId++, this.collisionSystem, new TmxMapAdapter(new TmxMap("Content/TmxFiles/DefaultLevel.tmx")));
+                    this.level.Initialize();
 
-            // Create a new SpriteBatch, which can be used to draw textures.
-            this.worldSpriteBatch = new SpriteBatchAdapter(new SpriteBatch(this.graphicsDevice));
-            this.screenSpriteBatch = new SpriteBatchAdapter(new SpriteBatch(this.graphicsDevice));
+                    this.players = new List<Player>();
+                    this.gameItems = new List<IGameItem>();
+                    this.gameItems.AddRange(this.gameItemFactory.SpawnRandomCoinItems(1000, this.collisionSystem, 100, 1500, 100, 1500, false));
+                    this.gameItems.AddRange(this.gameItemFactory.SpawnRandomBulletItems(100, this.collisionSystem, 1500, 3000, 1500, 3000));
 
-            this.players.ForEach(player => player.LoadContent(contentManager));
-            this.gameItems.ForEach(item => item.LoadContent(contentManager));
-            this.leaderBoard.LoadContent(contentManager);
+                    this.camera2DAdapter = new Camera2DAdapter(new Camera2D(this.graphicsDevice) { Zoom = .5f });
+                    this.leaderBoard = new LeaderBoard(CollisionSystem.NextGameObjectId++);
+                    this.leaderBoard.Initialize();
 
-            return loadLevelTask;
+                    int minimumSpawnLocation = -2000;
+                    int maximumSpawnLocation = 2000;
+
+#pragma warning disable SA1118 // Parameter must not span multiple lines
+                    var focusedPlayerId = CollisionSystem.NextGameObjectId++;
+                    this.focusedPlayer = new Player(
+                        focusedPlayerId,
+                        new Vector2(this.random.Next(minimumSpawnLocation, maximumSpawnLocation), this.random.Next(minimumSpawnLocation, maximumSpawnLocation)),
+                        this.collisionSystem,
+                        new IComponent[]
+                        {
+                            // Order matters for calls to update and draw
+                            new HumanInputControllerComponent(this.camera2DAdapter),
+                            new DashComponent(),
+                            new PlayerColliderComponent(focusedPlayerId, this.collisionSystem),
+                            new ParticleGeneratorComponent(this.random, new[] { "Particles/circle" }, new[] { Color.Orange, Color.OrangeRed, Color.MonoGameOrange }) { MinimumVelocity = new Vector2(-2, -2), MaximumVelocity = new Vector2(2, 2) },
+                            new AnimationComponentManager(
+                                new AnimationComponent("Dash", "hoodieguy", new FrameProperties(76, 140, TimeSpan.FromSeconds(.1), 2)) { IsLooping = true },
+                                new AnimationComponent("Stand", "SpriteSheets/red-standing-still", new FrameProperties(200, 141, TimeSpan.MaxValue, 1)) { IsRendered = true },
+                                new AnimationComponent("Walk", "SpriteSheets/red-walking", new FrameProperties(200, 143, TimeSpan.FromSeconds(.2), 1)) { IsLooping = true, IsAnimating = true },
+                                new AnimationComponent("Death", "hoodieguyOnFire", new FrameProperties(76, 140, TimeSpan.FromSeconds(.1), 2)) { IsLooping = true }),
+                            new PlayerInventoryComponent(this.collisionSystem),
+                            new DebugComponent(Color.Red, 2)
+                        });
+
+                    this.focusedPlayer.Name = $"Player {focusedPlayerId}";
+                    this.players.Add(this.focusedPlayer);
+
+                    var playerCount = this.random.Next(8, 10);
+                    for (int i = 0; i < playerCount; i++)
+                    {
+                        var id = CollisionSystem.NextGameObjectId++;
+                        var player = new Player(
+                            id,
+                            new Vector2(this.random.Next(minimumSpawnLocation, maximumSpawnLocation), this.random.Next(minimumSpawnLocation, maximumSpawnLocation)),
+                            this.collisionSystem,
+                            new IComponent[]
+                            {
+                                new SimpleAiInputControllerComponent(this.random),
+                                new DashComponent(),
+                                new PlayerColliderComponent(id, this.collisionSystem),
+                                new ParticleGeneratorComponent(this.random, new[] { "Particles/circle" }, new[] { Color.Orange, Color.OrangeRed, Color.MonoGameOrange }) { MinimumVelocity = new Vector2(-2, -2), MaximumVelocity = new Vector2(2, 2) },
+                                new AnimationComponentManager(
+                                    new AnimationComponent("Dash", "hoodieguy", new FrameProperties(76, 140, TimeSpan.FromSeconds(.1), 2)) { IsLooping = true },
+                                    new AnimationComponent("Stand", "SpriteSheets/red-standing-still", new FrameProperties(200, 141, TimeSpan.MaxValue, 1)) { IsRendered = true },
+                                    new AnimationComponent("Walk", "SpriteSheets/red-walking", new FrameProperties(200, 143, TimeSpan.FromSeconds(.2), 1)) { IsLooping = true, IsAnimating = true, IsRendered = true },
+                                    new AnimationComponent("Death", "hoodieguyOnFire", new FrameProperties(76, 140, TimeSpan.FromSeconds(.1), 2)) { IsLooping = true }),
+                                new PlayerInventoryComponent(this.collisionSystem)
+                            });
+                        player.Name = $"Ai Player {id}";
+                        this.players.Add(player);
+                    }
+#pragma warning restore SA1118
+
+                    this.players.ForEach(player =>
+                        {
+                            player.Initialize();
+                            player.MessageReady += this.GameObjectMessageReady;
+                        });
+                    this.gameItems.ForEach(item => item.Initialize());
+
+                    // Create a new SpriteBatch, which can be used to draw textures.
+                    this.worldSpriteBatch = new SpriteBatchAdapter(new SpriteBatch(this.graphicsDevice));
+                    this.screenSpriteBatch = new SpriteBatchAdapter(new SpriteBatch(this.graphicsDevice));
+
+                    this.players.ForEach(player => player.LoadContent(contentManager));
+                    this.gameItems.ForEach(item => item.LoadContent(contentManager));
+                    this.leaderBoard.LoadContent(contentManager);
+
+                    await this.level.LoadContentAsync(contentManager, progress);
+                    progress.Report(100);
+                });
         }
 
         /// <summary>

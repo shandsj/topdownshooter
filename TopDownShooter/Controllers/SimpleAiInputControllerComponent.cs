@@ -96,16 +96,16 @@ namespace TopDownShooter.Controllers
                     {
                         while (true)
                         {
-                            this.SleepRandomly();
                             this.direction = new Vector2((float)this.random.NextDouble(-1, 1), (float)this.random.NextDouble(-1, 1));
+                            this.SleepRandomly();
                         }
                     }),
                                 Task.Factory.StartNew(() =>
                     {
                         while (true)
                         {
-                            this.SleepRandomly();
                             this.rotation = (float)this.random.NextDouble(0, Math.PI * 2);
+                            this.SleepRandomly();
                         }
                     }),
                 Task.Factory.StartNew(() =>
