@@ -43,6 +43,11 @@ namespace TopDownShooter.Messages
         /// <summary>
         /// Represents a drop coins message.
         /// </summary>
-        DropCoins
+        DropCoins,
+
+        /// <summary>
+        /// Represents an inventory request message.
+        /// </summary>
+        InventoryRequest
     }
 }

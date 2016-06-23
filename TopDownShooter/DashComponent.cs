@@ -145,15 +145,23 @@ namespace TopDownShooter
         /// <returns>True if the dash successfully started; false otherwise.</returns>
         public bool TryStartDash(IGameObject gameObject, GameTime gameTime)
         {
-            if (gameTime.TotalGameTime - this.CompletedTime > this.CooldownTime)
+            if (gameTime.TotalGameTime - this.CompletedTime <= this.CooldownTime)
             {
-                this.StartedTime = gameTime.TotalGameTime;
-                this.CompletedTime = gameTime.TotalGameTime + this.ActiveTime;
-                gameObject.BroadcastMessage(new DropCoinsMessage(gameObject.Position, this.DashCost), gameTime);
-                return true;
+                return false;
             }
 
-            return false;
+            var inventoryRequest = new InventoryRequestMessage();
+            gameObject.BroadcastMessage(inventoryRequest, gameTime);
+
+            if (inventoryRequest.CoinCount < this.DashCost)
+            {
+                return false;
+            }
+
+            this.StartedTime = gameTime.TotalGameTime;
+            this.CompletedTime = gameTime.TotalGameTime + this.ActiveTime;
+            gameObject.BroadcastMessage(new DropCoinsMessage(gameObject.Position, this.DashCost), gameTime);
+            return true;
         }
     }
 }

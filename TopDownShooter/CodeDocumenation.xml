@@ -1004,6 +1004,26 @@
             Gets or sets the projectile type.
             </summary>
         </member>
+        <member name="T:TopDownShooter.Messages.InventoryRequestMessage">
+            <summary>
+            Defines an inventory request message.
+            </summary>
+        </member>
+        <member name="M:TopDownShooter.Messages.InventoryRequestMessage.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:TopDownShooter.Messages.InventoryRequestMessage" /> class.
+            </summary>
+        </member>
+        <member name="P:TopDownShooter.Messages.InventoryRequestMessage.CoinCount">
+            <summary>
+            Gets or sets the number of coins in the message.
+            </summary>
+        </member>
+        <member name="P:TopDownShooter.Messages.InventoryRequestMessage.LongRangeProjectileCoint">
+            <summary>
+            Gets or sets the number of long range projectiles in the message.
+            </summary>
+        </member>
         <member name="T:TopDownShooter.Messages.MessageType">
             <summary>
             Defines the message types used to communicate between <see cref="T:TopDownShooter.Engine.IComponent" /> objects.
@@ -1039,6 +1059,11 @@
         <member name="F:TopDownShooter.Messages.MessageType.DropCoins">
             <summary>
             Represents a drop coins message.
+            </summary>
+        </member>
+        <member name="F:TopDownShooter.Messages.MessageType.InventoryRequest">
+            <summary>
+            Represents an inventory request message.
             </summary>
         </member>
         <member name="T:TopDownShooter.Player">

@@ -95,6 +95,7 @@
     <Compile Include="Messages\DashStatusRequestMessage.cs" />
     <Compile Include="Messages\DropCoinsMessage.cs" />
     <Compile Include="Messages\FireMessage.cs" />
+    <Compile Include="Messages\InventoryRequestMessage.cs" />
     <Compile Include="Messages\MessageType.cs" />
     <Compile Include="Player.cs" />
     <Compile Include="PlayerColliderComponent.cs" />

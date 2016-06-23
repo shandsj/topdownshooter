@@ -104,6 +104,13 @@ namespace TopDownShooter.Inventory
 
             switch ((MessageType)message.MessageType)
             {
+                case MessageType.InventoryRequest:
+                    var inventoryRequest = (InventoryRequestMessage)message;
+                    inventoryRequest.CoinCount = this.Inventory.OfType<CoinGameItem>().Count();
+                    inventoryRequest.LongRangeProjectileCoint = this.Inventory.OfType<LongRangeGameItem>().Count();
+                    inventoryRequest.IsHandled = true;
+                    break;
+
                 case MessageType.Fire:
                 {
                     var gameItems = new List<IGameItem>();
