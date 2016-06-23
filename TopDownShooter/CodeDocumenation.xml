@@ -972,6 +972,12 @@
             Defines a message to notify a game object to drop coins.
             </summary>
         </member>
+        <member name="M:TopDownShooter.Messages.DropCoinsMessage.#ctor(Microsoft.Xna.Framework.Vector2)">
+            <summary>
+            Initializes a new instance of the <see cref="T:TopDownShooter.Messages.DropCoinsMessage" /> class.
+            </summary>
+            <param name="location">The location where the coin drop should occur.</param>
+        </member>
         <member name="M:TopDownShooter.Messages.DropCoinsMessage.#ctor(Microsoft.Xna.Framework.Vector2,System.Int32)">
             <summary>
             Initializes a new instance of the <see cref="T:TopDownShooter.Messages.DropCoinsMessage" /> class.
@@ -981,7 +987,7 @@
         </member>
         <member name="P:TopDownShooter.Messages.DropCoinsMessage.Count">
             <summary>
-            Gets the number of coins to drop.
+            Gets or sets the number of coins to drop.
             </summary>
         </member>
         <member name="P:TopDownShooter.Messages.DropCoinsMessage.Location">

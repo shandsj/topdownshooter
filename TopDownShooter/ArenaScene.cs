@@ -243,7 +243,7 @@ namespace TopDownShooter
         {
             if ((MessageType)e.Message.MessageType == MessageType.DropCoins)
             {
-                const int Range = 100;
+                const int Range = 200;
                 var dropCoinsMessage = (DropCoinsMessage)e.Message;
 
                 var coins = this.gameItemFactory.SpawnRandomCoinItems(

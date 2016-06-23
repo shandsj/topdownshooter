@@ -136,6 +136,8 @@ namespace TopDownShooter
             {
                 this.hasDied = true;
 
+                this.BroadcastMessage(new DropCoinsMessage(this.Position), gameTime);
+
                 this.Velocity = new Vector2(0, 0);
                 this.animationComponentManager.Play("Death");
 

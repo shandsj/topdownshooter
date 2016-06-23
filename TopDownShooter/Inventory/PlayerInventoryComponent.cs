@@ -161,6 +161,11 @@ namespace TopDownShooter.Inventory
                 case MessageType.DropCoins:
                     var dropCoinsMessage = (DropCoinsMessage)message;
                     var coins = this.Inventory.OfType<CoinGameItem>();
+                    if (dropCoinsMessage.Count == int.MaxValue)
+                    {
+                        dropCoinsMessage.Count = coins.Count();
+                    }
+
                     coins = coins.Take(dropCoinsMessage.Count);
                     foreach (var coin in coins)
                     {

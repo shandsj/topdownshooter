@@ -18,6 +18,15 @@ namespace TopDownShooter.Messages
         /// Initializes a new instance of the <see cref="DropCoinsMessage" /> class.
         /// </summary>
         /// <param name="location">The location where the coin drop should occur.</param>
+        public DropCoinsMessage(Vector2 location)
+            : this(location, int.MaxValue)
+        {
+        }
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="DropCoinsMessage" /> class.
+        /// </summary>
+        /// <param name="location">The location where the coin drop should occur.</param>
         /// <param name="count">The number of coins to drop.</param>
         public DropCoinsMessage(Vector2 location, int count)
             : base((int)Messages.MessageType.DropCoins)
@@ -27,9 +36,9 @@ namespace TopDownShooter.Messages
         }
 
         /// <summary>
-        /// Gets the number of coins to drop.
+        /// Gets or sets the number of coins to drop.
         /// </summary>
-        public int Count { get; private set; }
+        public int Count { get; set; }
 
         /// <summary>
         /// Gets the location where the coin drop should occur.
