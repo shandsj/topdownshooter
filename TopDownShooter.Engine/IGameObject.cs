@@ -10,7 +10,6 @@ namespace TopDownShooter.Engine
     using System.Collections.Generic;
     using Microsoft.Xna.Framework;
     using TopDownShooter.Engine.Adapters;
-    using TopDownShooter.Engine.Messages;
 
     /// <summary>
     /// Defines an interface for a game object.

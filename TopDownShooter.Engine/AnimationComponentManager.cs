@@ -12,7 +12,6 @@ namespace TopDownShooter.Engine
     using Microsoft.Xna.Framework;
     using Microsoft.Xna.Framework.Graphics;
     using TopDownShooter.Engine.Adapters;
-    using TopDownShooter.Engine.Messages;
 
     /// <summary>
     /// Implementation for the <see cref="IAnimationComponentManager"/>
@@ -132,11 +131,6 @@ namespace TopDownShooter.Engine
         /// <param name="gameTime">The game time.</param>
         public void ReceiveMessage(IGameObject gameObject, Message message, GameTime gameTime)
         {
-            if (message.MessageType == MessageType.Movement)
-            {
-                Vector2 vector = (Vector2)message.MessageDetails;
-                this.currentAnimationComponent.Rotation = (float)Math.Atan2(vector.Y, vector.X) + (float)(Math.PI / 2);
-            }
         }
 
         /// <summary>
@@ -154,6 +148,7 @@ namespace TopDownShooter.Engine
         /// <param name="gameTime">The game time.</param>
         public void Update(IGameObject gameObject, GameTime gameTime)
         {
+            this.currentAnimationComponent.Rotation = gameObject.Rotation;
             this.currentAnimationComponent?.Update(gameObject, gameTime);
         }
 

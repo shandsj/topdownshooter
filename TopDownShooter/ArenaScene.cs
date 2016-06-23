@@ -13,13 +13,14 @@ namespace TopDownShooter
     using Microsoft.Xna.Framework.Graphics;
     using MonoGame.Extended;
     using TiledSharp;
+    using TopDownShooter.Controllers;
     using TopDownShooter.Engine;
     using TopDownShooter.Engine.Adapters;
     using TopDownShooter.Engine.Collisions;
-    using TopDownShooter.Engine.Controllers;
-    using TopDownShooter.Engine.Inventory;
     using TopDownShooter.Engine.Levels;
-    using TopDownShooter.Engine.Messages;
+    using TopDownShooter.Inventory;
+    using TopDownShooter.Items;
+    using TopDownShooter.Messages;
 
     /// <summary>
     /// Defines the scene for the arena
@@ -236,7 +237,7 @@ namespace TopDownShooter
         /// <param name="e">A <see cref="MessageEventArgs" /> that contains the event data.</param>
         private void GameObjectMessageReady(object sender, MessageEventArgs e)
         {
-            if (e.Message.MessageType == MessageType.DropCoins)
+            if ((MessageType)e.Message.MessageType == MessageType.DropCoins)
             {
                 const int Range = 100;
                 var dropCoinsMessage = (DropCoinsMessage)e.Message;

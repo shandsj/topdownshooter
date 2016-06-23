@@ -14,12 +14,11 @@ namespace TopDownShooter.Engine
     using Microsoft.Xna.Framework.Graphics;
     using TopDownShooter.Engine.Adapters;
     using TopDownShooter.Engine.Collisions;
-    using TopDownShooter.Engine.Messages;
 
     /// <summary>
     /// Defines a particle generator component.
     /// </summary>
-    public class ParticleGeneratorComponent : IComponent
+    public class ParticleGeneratorComponent : IComponent, IParticleGeneratorComponent
     {
         private readonly List<Particle> particles;
 
