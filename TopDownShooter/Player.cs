@@ -69,7 +69,7 @@ namespace TopDownShooter
         /// <summary>
         /// Gets the height of the game object.
         /// </summary>
-        public override int Height => this.animationComponentManager.FrameProperties.Height;
+        public override int Height => 130;
 
         /// <summary>
         /// Gets or sets the number of kills this player has performed.
@@ -89,7 +89,7 @@ namespace TopDownShooter
         /// <summary>
         /// Gets the width of the game object.
         /// </summary>
-        public override int Width => this.animationComponentManager.FrameProperties.Width;
+        public override int Width => 190;
 
         /// <summary>
         /// Draws the game object with the specified sprite batch adapter and game time.

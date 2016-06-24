@@ -102,6 +102,7 @@
     <Compile Include="Collisions\IColliderComponent.cs" />
     <Compile Include="Collisions\ICollisionSystem.cs" />
     <Compile Include="Collisions\SimpleColliderComponent.cs" />
+    <Compile Include="Collisions\SpatialTable.cs" />
     <Compile Include="CompletedEventArgs.cs" />
     <Compile Include="DebugComponent.cs" />
     <Compile Include="Extensions.cs" />

@@ -51,5 +51,11 @@ namespace TopDownShooter.Engine.Collisions
         /// </summary>
         /// <param name="id">The identifier of the game object.</param>
         void Unregister(int id);
+
+        /// <summary>
+        /// Updates the collision system.
+        /// </summary>
+        /// <param name="gameTime">The game time.</param>
+        void Update(GameTime gameTime);
     }
 }

@@ -197,7 +197,7 @@ namespace TopDownShooter.Controllers
                 }
             }
 
-            return new Vector2(x, y).Rotate(angle);
+            return new Vector2(x, y); ////.Rotate(angle); Add the rotate to go back to weird controls.
         }
 
         /// <summary>

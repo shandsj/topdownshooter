@@ -120,21 +120,22 @@ namespace TopDownShooter
 
                     this.players = new List<Player>();
                     this.gameItems = new List<IGameItem>();
-                    this.gameItems.AddRange(this.gameItemFactory.SpawnRandomCoinItems(1000, this.collisionSystem, 100, 1500, 100, 1500, false));
-                    this.gameItems.AddRange(this.gameItemFactory.SpawnRandomBulletItems(100, this.collisionSystem, 1500, 3000, 1500, 3000));
+
+                    int minimumSpawnLocation = -20000;
+                    int maximumSpawnLocation = 20000;
+                    this.gameItems.AddRange(this.gameItemFactory.SpawnRandomCoinItems(1000, this.collisionSystem, minimumSpawnLocation, maximumSpawnLocation, minimumSpawnLocation, maximumSpawnLocation, false));
+                    this.gameItems.AddRange(this.gameItemFactory.SpawnRandomBulletItems(100, this.collisionSystem, minimumSpawnLocation, maximumSpawnLocation, minimumSpawnLocation, maximumSpawnLocation));
 
                     this.camera2DAdapter = new Camera2DAdapter(new Camera2D(this.graphicsDevice) { Zoom = .5f });
                     this.leaderBoard = new LeaderBoard(CollisionSystem.NextGameObjectId++);
                     this.leaderBoard.Initialize();
 
-                    int minimumSpawnLocation = -2000;
-                    int maximumSpawnLocation = 2000;
-
 #pragma warning disable SA1118 // Parameter must not span multiple lines
                     var focusedPlayerId = CollisionSystem.NextGameObjectId++;
                     this.focusedPlayer = new Player(
                         focusedPlayerId,
-                        new Vector2(this.random.Next(minimumSpawnLocation, maximumSpawnLocation), this.random.Next(minimumSpawnLocation, maximumSpawnLocation)),
+                        ////new Vector2(this.random.Next(minimumSpawnLocation, maximumSpawnLocation), this.random.Next(minimumSpawnLocation, maximumSpawnLocation)),
+                        new Vector2(0, 0),
                         this.collisionSystem,
                         new IComponent[]
                         {
@@ -155,7 +156,7 @@ namespace TopDownShooter
                     this.focusedPlayer.Name = $"Player {focusedPlayerId}";
                     this.players.Add(this.focusedPlayer);
 
-                    var playerCount = this.random.Next(8, 10);
+                    var playerCount = this.random.Next(300, 500);
                     for (int i = 0; i < playerCount; i++)
                     {
                         var id = CollisionSystem.NextGameObjectId++;
@@ -207,6 +208,7 @@ namespace TopDownShooter
         /// <param name="gameTime">The game time.</param>
         public void Update(GameTime gameTime)
         {
+            this.collisionSystem.Update(gameTime);
             this.players.ForEach(o => o.Update(gameTime));
             this.gameItems.ForEach(o => o.Update(gameTime));
 

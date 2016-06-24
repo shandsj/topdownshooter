@@ -6,6 +6,7 @@
 
 namespace TopDownShooter.Engine.Collisions
 {
+    using System;
     using System.Collections.Generic;
     using System.Linq;
     using Microsoft.Xna.Framework;
@@ -17,6 +18,8 @@ namespace TopDownShooter.Engine.Collisions
     {
         private readonly Dictionary<int, IColliderComponent> colliders = new Dictionary<int, IColliderComponent>();
         private readonly Dictionary<int, IGameObject> gameObjects = new Dictionary<int, IGameObject>();
+
+        private SpatialTable spatialTable = new SpatialTable(50000, 50000, 500);
 
         static CollisionSystem()
         {
@@ -46,12 +49,34 @@ namespace TopDownShooter.Engine.Collisions
         /// <param name="gameTime">The game time.</param>
         public void CheckCollisions(IColliderComponent collider, GameTime gameTime)
         {
-            foreach (var other in this.Colliders)
+            var gameObject = this.GetGameObject(collider.GameObjectId);
+            if (gameObject != null)
             {
-                if (other != collider && collider.IsCollision(other))
+                var nearbyGameObjects = this.spatialTable.GetNearby(gameObject);
+                foreach (var nearby in nearbyGameObjects)
                 {
-                    collider.Collide(other, gameTime);
+                    IColliderComponent other;
+                    if (this.colliders.TryGetValue(nearby.Id, out other))
+                    {
+                        if (other != collider && collider.IsCollision(other))
+                        {
+                            collider.Collide(other, gameTime);
+                        }
+                    }
                 }
+            }
+        }
+
+        /// <summary>
+        /// Updates the collision system.
+        /// </summary>
+        /// <param name="gameTime">The game time.</param>
+        public void Update(GameTime gameTime)
+        {
+            this.spatialTable.Clear();
+            foreach (var gameObject in this.gameObjects.Values)
+            {
+                this.spatialTable.Register(gameObject);
             }
         }
 

@@ -90,6 +90,12 @@ namespace TopDownShooter
                         Color.Black);
                 }
             }
+
+            spriteBatch.DrawString(
+                this.font,
+                ((int)(1 / gameTime.ElapsedGameTime.TotalSeconds)).ToString(),
+                new Vector2(spriteBatch.GraphicsDevice.Viewport.Width - 100, spriteBatch.GraphicsDevice.Viewport.Height - 100),
+                Color.Black);
         }
 
         /// <summary>

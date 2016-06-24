@@ -85,32 +85,32 @@ namespace TopDownShooter.Engine.Levels
         /// <param name="gameTime">The game time.</param>
         public override void Draw(ICamera2DAdapter camera, ISpriteBatchAdapter spriteBatch, GameTime gameTime)
         {
-            // Calculate the tile sizes in the current camera view based off zoom level.
-            var scaledTileWidth = (int)(this.map.TileWidth * camera.Zoom);
-            var scaledTileHeight = (int)(this.map.TileHeight * camera.Zoom);
+            ////// Calculate the tile sizes in the current camera view based off zoom level.
+            ////var scaledTileWidth = (int)(this.map.TileWidth * camera.Zoom);
+            ////var scaledTileHeight = (int)(this.map.TileHeight * camera.Zoom);
 
-            // Calculate the bounds we will use to draw tiles from. We will go a tile extra
-            // just to make sure the entire screen is covered in tiles.
-            var boundWidth = camera.GetBoundingRectangle().Width + scaledTileWidth;
-            var boundHeight = camera.GetBoundingRectangle().Height + scaledTileHeight;
+            ////// Calculate the bounds we will use to draw tiles from. We will go a tile extra
+            ////// just to make sure the entire screen is covered in tiles.
+            ////var boundWidth = camera.GetBoundingRectangle().Width + scaledTileWidth;
+            ////var boundHeight = camera.GetBoundingRectangle().Height + scaledTileHeight;
 
-            for (int i = 0; i < boundWidth; i += scaledTileWidth)
-            {
-                for (int j = 0; j < boundHeight; j += scaledTileHeight)
-                {
-                    // Grab the world coordinates of the current iteration, and then figure out the nearest tile coordinates.
-                    var worldCoordinates = camera.ScreenToWorld(i, j);
-                    var nearestTileLocation = new Vector2(
-                        (int)worldCoordinates.X / this.map.TileWidth * this.map.TileWidth,
-                        (int)worldCoordinates.Y / this.map.TileHeight * this.map.TileHeight);
+            ////for (int i = 0; i < boundWidth; i += scaledTileWidth)
+            ////{
+            ////    for (int j = 0; j < boundHeight; j += scaledTileHeight)
+            ////    {
+            ////        // Grab the world coordinates of the current iteration, and then figure out the nearest tile coordinates.
+            ////        var worldCoordinates = camera.ScreenToWorld(i, j);
+            ////        var nearestTileLocation = new Vector2(
+            ////            (int)worldCoordinates.X / this.map.TileWidth * this.map.TileWidth,
+            ////            (int)worldCoordinates.Y / this.map.TileHeight * this.map.TileHeight);
 
-                    // Get the tile and render it!
-                    var tile = this.tileCollection.GetTile(nearestTileLocation);
-                    tile?.Draw(camera, spriteBatch, gameTime);
-                }
-            }
+            ////        // Get the tile and render it!
+            ////        var tile = this.tileCollection.GetTile(nearestTileLocation);
+            ////        tile?.Draw(camera, spriteBatch, gameTime);
+            ////    }
+            ////}
 
-            base.Draw(camera, spriteBatch, gameTime);
+            ////base.Draw(camera, spriteBatch, gameTime);
         }
 
         /// <summary>
