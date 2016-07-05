@@ -6,9 +6,11 @@
 
 namespace TopDownShooter.Engine
 {
+    using System;
     using System.Collections.Generic;
     using System.Linq;
     using Microsoft.Xna.Framework;
+    using MonoGame.Extended;
     using TopDownShooter.Engine.Collisions;
 
     /// <summary>
@@ -70,6 +72,7 @@ namespace TopDownShooter.Engine
         {
             this.direction.Normalize();
             this.Velocity = this.direction * this.Speed;
+            this.Rotation = this.direction.ToAngle();
 
             this.collisionSystem.Register(this.Id, this, this.colliderComponent);
 
