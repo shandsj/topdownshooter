@@ -253,7 +253,7 @@
 /processorParam:TextureFormat=Color
 /build:SpriteSheets/PlayerStanding.png
 
-#begin SpriteSheets\Walking.png
+#begin SpriteSheets/PlayerWalking.png
 /importer:TextureImporter
 /processor:TextureProcessor
 /processorParam:ColorKeyColor=255,0,255,255
@@ -263,5 +263,5 @@
 /processorParam:ResizeToPowerOfTwo=False
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
-/build:SpriteSheets\Walking.png
+/build:SpriteSheets/PlayerWalking.png
 
