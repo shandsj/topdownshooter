@@ -77,7 +77,7 @@ namespace TopDownShooter
         internal TitleScene(GraphicsDevice graphicsDevice, IMouseAdapter mouse)
         {
             this.graphicsDevice = graphicsDevice;
-            this.camera2DAdapter = new Camera2DAdapter(new Camera2D(this.graphicsDevice) { Zoom = .5f });
+            this.camera2DAdapter = new Camera2DAdapter(new OrthographicCamera(this.graphicsDevice) { Zoom = .5f });
             this.mouse = mouse;
         }
 

@@ -15,13 +15,13 @@ namespace TopDownShooter.Engine.Adapters
     /// </summary>
     public class Camera2DAdapter : ICamera2DAdapter
     {
-        private readonly Camera2D camera;
+        private readonly OrthographicCamera camera;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="Camera2DAdapter"/> class.
         /// </summary>
-        /// <param name="camera">The <see cref="Camera2D"/>.</param>
-        public Camera2DAdapter(Camera2D camera)
+        /// <param name="camera">The <see cref="OrthographicCamera"/>.</param>
+        public Camera2DAdapter(OrthographicCamera camera)
         {
             this.camera = camera;
         }
@@ -167,7 +167,7 @@ namespace TopDownShooter.Engine.Adapters
         /// <returns>The bounding rectangle</returns>
         public RectangleF GetBoundingRectangle()
         {
-            return this.camera.GetBoundingRectangle();
+            return this.camera.BoundingRectangle;
         }
 
         /// <summary>

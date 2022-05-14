@@ -8,6 +8,7 @@ namespace TopDownShooter.Engine.Adapters
 {
     using Microsoft.Xna.Framework;
     using Microsoft.Xna.Framework.Graphics;
+    using MonoGame.Extended;
     using MonoGame.Extended.Shapes;
 
     /// <summary>

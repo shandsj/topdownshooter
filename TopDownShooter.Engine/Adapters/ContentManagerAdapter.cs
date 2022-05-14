@@ -47,7 +47,7 @@ namespace TopDownShooter.Engine.Adapters
         {
             lock (this.synchronizationContext)
             {
-                return this.content.Load<T>(assetName);
+                return this.content.LoadLocalized<T>(assetName);
             }
         }
 

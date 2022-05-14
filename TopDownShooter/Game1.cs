@@ -71,7 +71,7 @@ namespace TopDownShooter
 
             // This operation is meant to be performed asynchronously so the preload can happen.
 #pragma warning disable CS4014 // Because this call is not awaited, execution of the current method continues before the call is completed
-            this.sceneController.PreloadAsync(arenaScene);
+            await this.sceneController.PreloadAsync(arenaScene);
 #pragma warning restore CS4014 // Because this call is not awaited, execution of the current method continues before the call is completed
 
             var titleScene = new TitleScene(this.GraphicsDevice);

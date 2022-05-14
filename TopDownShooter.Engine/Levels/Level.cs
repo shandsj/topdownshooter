@@ -199,7 +199,7 @@ namespace TopDownShooter.Engine.Levels
                 bool isBlocking = false;
                 if (tileSet.Tiles.Count > 0)
                 {
-                    var tileSetTile = tileSet.Tiles.FirstOrDefault(t => t.Id == index);
+                    var tileSetTile = tileSet.Tiles[index];
                     if (tileSetTile != null)
                     {
                         string isBlockingValue;

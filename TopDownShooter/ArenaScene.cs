@@ -126,7 +126,7 @@ namespace TopDownShooter
                     this.gameItems.AddRange(this.gameItemFactory.SpawnRandomCoinItems(1000, this.collisionSystem, minimumSpawnLocation, maximumSpawnLocation, minimumSpawnLocation, maximumSpawnLocation, false));
                     this.gameItems.AddRange(this.gameItemFactory.SpawnRandomBulletItems(100, this.collisionSystem, minimumSpawnLocation, maximumSpawnLocation, minimumSpawnLocation, maximumSpawnLocation));
 
-                    this.camera2DAdapter = new Camera2DAdapter(new Camera2D(this.graphicsDevice) { Zoom = .5f });
+                    this.camera2DAdapter = new Camera2DAdapter(new OrthographicCamera(this.graphicsDevice) { Zoom = .5f });
                     this.leaderBoard = new LeaderBoard(CollisionSystem.NextGameObjectId++);
                     this.leaderBoard.Initialize();
 
